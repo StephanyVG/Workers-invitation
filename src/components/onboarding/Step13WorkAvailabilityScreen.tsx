@@ -81,6 +81,9 @@ export const Step13WorkAvailabilityScreen: React.FC = () => {
           <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">
             {language === 'es' ? '¿Cuándo puedes trabajar en EE. UU.?' : 'When can you work in the U.S.?'}
           </h2>
+          <p className="font-['Inter',sans-serif] font-normal text-[14px] sm:text-[15px] leading-[22px] text-[#525252]">
+            {language === 'es' ? 'Puedes elegir más de 1 opción' : 'You can choose more than 1 option'}
+          </p>
         </div>
 
         {/* Options Cards List - Matching Figma 1:4733 selected styling with centered text */}
