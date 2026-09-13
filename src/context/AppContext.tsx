@@ -41,6 +41,7 @@ export type AppTab =
   | 'step9_part2_intro'
   | 'step10_visa_preference'
   | 'step11_work_skills'
+  | 'step11_h2b_work_skills'
   | 'step12_physical_limitations'
   | 'step13_work_availability'
   | 'welcome_offer'

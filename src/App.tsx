@@ -44,6 +44,7 @@ import { Step8FamilyUSScreen } from './components/onboarding/Step8FamilyUSScreen
 import { Step9Part2IntroScreen } from './components/onboarding/Step9Part2IntroScreen';
 import { Step10VisaPreferenceScreen } from './components/onboarding/Step10VisaPreferenceScreen';
 import { Step11WorkSkillsScreen } from './components/onboarding/Step11WorkSkillsScreen';
+import { Step11H2BWorkSkillsScreen } from './components/onboarding/Step11H2BWorkSkillsScreen';
 import { Step12PhysicalLimitationsScreen } from './components/onboarding/Step12PhysicalLimitationsScreen';
 import { Step13WorkAvailabilityScreen } from './components/onboarding/Step13WorkAvailabilityScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
@@ -90,6 +91,7 @@ const MainContent: React.FC = () => {
     'step9_part2_intro',
     'step10_visa_preference',
     'step11_work_skills',
+    'step11_h2b_work_skills',
     'step12_physical_limitations',
     'step13_work_availability',
     'job_offer_detail'
@@ -136,6 +138,7 @@ const MainContent: React.FC = () => {
         {currentTab === 'step9_part2_intro' && <Step9Part2IntroScreen />}
         {currentTab === 'step10_visa_preference' && <Step10VisaPreferenceScreen />}
         {currentTab === 'step11_work_skills' && <Step11WorkSkillsScreen />}
+        {currentTab === 'step11_h2b_work_skills' && <Step11H2BWorkSkillsScreen />}
         {currentTab === 'step12_physical_limitations' && <Step12PhysicalLimitationsScreen />}
         {currentTab === 'step13_work_availability' && <Step13WorkAvailabilityScreen />}
         {currentTab === 'job_offer_detail' && <JobOfferDetailScreen />}

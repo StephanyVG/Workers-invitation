@@ -90,34 +90,45 @@ export const Step13WorkAvailabilityScreen: React.FC = () => {
         <div className="space-y-3 pt-1 w-full">
           {options.map((opt) => {
             const isChecked = selectedMonths.includes(opt.id);
+            const isAllYearSelected = selectedMonths.includes('all_year');
+            const isDisabled = isAllYearSelected && opt.id !== 'all_year';
+
             return (
               <div
                 key={opt.id}
-                onClick={() => toggleMonth(opt.id)}
-                className={`w-full min-h-[56px] py-[12px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none active:scale-[0.99] ${
-                  isChecked
-                    ? 'bg-[#0045ff] text-white shadow-[-2px_0px_12px_8px_rgba(0,56,208,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#171717]'
+                onClick={() => !isDisabled && toggleMonth(opt.id)}
+                className={`w-full min-h-[56px] py-[12px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all select-none ${
+                  isDisabled
+                    ? 'bg-[#e5e5e5] border border-[#d4d4d4] text-[#737373] opacity-60 cursor-not-allowed'
+                    : isChecked
+                    ? 'bg-[#0045ff] text-white shadow-[-2px_0px_12px_8px_rgba(0,56,208,0.18)] scale-[1.01] cursor-pointer active:scale-[0.99]'
+                    : 'bg-white border border-[#e5e5e5] text-[#171717] cursor-pointer active:scale-[0.99]'
                 }`}
                 data-node-id={isChecked ? '1:4408' : undefined}
               >
                 {/* Checkbox Icon on Left */}
                 <div className="absolute left-[16px] flex items-center justify-center">
-                  <div
-                    className={`size-[24px] rounded-[6px] flex items-center justify-center transition-all ${
-                      isChecked ? 'bg-white text-[#0045ff]' : 'border-2 border-[#d4d4d4] bg-white'
-                    }`}
-                  >
-                    {isChecked && (
-                      <span className="material-symbols-outlined text-[18px] font-bold">check</span>
-                    )}
-                  </div>
+                  {isDisabled ? (
+                    <div className="size-[24px] rounded-[6px] bg-[#a3a3a3] text-white flex items-center justify-center">
+                      <span className="material-symbols-outlined text-[18px] font-bold">remove</span>
+                    </div>
+                  ) : (
+                    <div
+                      className={`size-[24px] rounded-[6px] flex items-center justify-center transition-all ${
+                        isChecked ? 'bg-white text-[#0045ff]' : 'border-2 border-[#d4d4d4] bg-white'
+                      }`}
+                    >
+                      {isChecked && (
+                        <span className="material-symbols-outlined text-[18px] font-bold">check</span>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Centered Option Label */}
                 <span
                   className={`font-['DM_Sans',sans-serif] font-medium text-[18px] sm:text-[20px] leading-[26px] sm:leading-[28px] text-center tracking-[-0.08px] px-8 ${
-                    isChecked ? 'text-white' : 'text-[#171717]'
+                    isDisabled ? 'text-[#737373]' : isChecked ? 'text-white' : 'text-[#171717]'
                   }`}
                 >
                   {language === 'es' ? opt.labelEs : opt.labelEn}

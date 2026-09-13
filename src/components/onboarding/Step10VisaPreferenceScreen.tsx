@@ -6,7 +6,11 @@ export const Step10VisaPreferenceScreen: React.FC = () => {
   const [selectedVisa, setSelectedVisa] = useState<'h2a' | 'h2b' | null>(null);
 
   const handleContinue = () => {
-    setCurrentTab('step11_work_skills');
+    if (selectedVisa === 'h2b') {
+      setCurrentTab('step11_h2b_work_skills');
+    } else {
+      setCurrentTab('step11_work_skills');
+    }
   };
 
   const handleBack = () => {
