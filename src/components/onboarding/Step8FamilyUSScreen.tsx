@@ -108,7 +108,7 @@ export const Step8FamilyUSScreen: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] space-y-6 text-left">
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] pb-[32px] space-y-6 text-left">
         {/* Screen Header Titles */}
         <div className="space-y-2">
           <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">
@@ -289,8 +289,8 @@ export const Step8FamilyUSScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Sticky Bottom Action Bar */}
-      <div className="bg-[#fafafa] border-t border-[#e5e5e5] p-[16px] w-full flex flex-col items-center gap-3 sticky bottom-0 z-20">
+      {/* Fixed Bottom Action Bar */}
+      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-3">
         <button
           onClick={handleComplete}
           className="w-full min-h-[44px] h-[44px] px-4 py-[10px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"

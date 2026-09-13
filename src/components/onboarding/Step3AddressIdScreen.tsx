@@ -48,9 +48,9 @@ export const Step3AddressIdScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Scrollable Form Content */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] space-y-6">
-        {/* Title and Description (Figma 1:4072) */}
+      {/* Main Scroll Content */}
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] pb-[32px] space-y-6">
+        {/* Title and Question */}
         <div className="text-left space-y-2 w-full">
           <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#171717] tracking-[-0.096px]">
             {language === 'es'
@@ -64,11 +64,11 @@ export const Step3AddressIdScreen: React.FC = () => {
           </p>
         </div>
 
-        {/* Form Fields (Figma 1:4074 to 1:4078) */}
+        {/* Form Fields */}
         <div className="space-y-4 w-full pt-1">
           {/* Field 1: Street */}
           <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Calle y número' : 'Street address'}
             </label>
             <input
@@ -81,7 +81,7 @@ export const Step3AddressIdScreen: React.FC = () => {
 
           {/* Field 2: Neighborhood */}
           <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Colonia o barrio' : 'Neighborhood'}
             </label>
             <input
@@ -94,7 +94,7 @@ export const Step3AddressIdScreen: React.FC = () => {
 
           {/* Field 3: City */}
           <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Ciudad o municipio' : 'City'}
             </label>
             <input
@@ -107,7 +107,7 @@ export const Step3AddressIdScreen: React.FC = () => {
 
           {/* Field 4: State */}
           <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Estado o provincia' : 'State / Province'}
             </label>
             <input
@@ -120,7 +120,7 @@ export const Step3AddressIdScreen: React.FC = () => {
 
           {/* Field 5: Postal Code */}
           <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Código postal' : 'Postal code'}
             </label>
             <input
@@ -133,7 +133,7 @@ export const Step3AddressIdScreen: React.FC = () => {
 
           {/* Field 6: National ID / CURP */}
           <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Número de identificación oficial (CURP / DNI)' : 'National ID number'}
             </label>
             <input
@@ -146,8 +146,8 @@ export const Step3AddressIdScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Sticky Bottom Action Bar */}
-      <div className="bg-[#fafafa] border-t border-[#e5e5e5] p-[16px] w-full flex flex-col items-center sticky bottom-0 z-20">
+      {/* Fixed Bottom Action Bar */}
+      <div className="fixed-bottom-bar w-full flex flex-col items-center">
         <button
           onClick={handleContinue}
           className="w-full min-h-[44px] h-[44px] px-4 py-[10px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"

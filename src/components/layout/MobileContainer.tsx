@@ -25,9 +25,9 @@ export const MobileContainer: React.FC<MobileContainerProps> = ({ children }) =>
 
   return (
     <div className="w-full h-full min-h-screen min-h-[100dvh] bg-slate-950 sm:bg-slate-900 flex flex-col items-center justify-center font-sans overflow-hidden sm:p-4">
-      {/* Standard Mobile Frame (375px width x 812px height with Dynamic Viewport Height) */}
+      {/* Standard Mobile Frame (Minimum 360px width x 820px height reference with Dynamic Viewport Height) */}
       <div 
-        className="w-full max-w-[375px] sm:w-[375px] h-full sm:h-[812px] max-h-[100dvh] sm:max-h-[calc(100dvh-2rem)] bg-[#f5f5f5] sm:rounded-[36px] sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col relative sm:border-[4px] sm:border-slate-800 transition-all"
+        className="w-full sm:w-[375px] sm:min-w-[360px] sm:max-w-[430px] h-full sm:h-[820px] sm:min-h-[820px] max-h-[100dvh] sm:max-h-[calc(100dvh-2rem)] bg-[#fafafa] sm:rounded-[36px] sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col relative sm:border-[4px] sm:border-slate-800 transition-all"
         style={{
           height: 'calc(var(--vh, 1vh) * 100)'
         }}

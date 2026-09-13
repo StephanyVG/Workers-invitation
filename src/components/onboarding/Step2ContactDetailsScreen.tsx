@@ -49,7 +49,7 @@ export const Step2ContactDetailsScreen: React.FC = () => {
       </div>
 
       {/* Main Scrollable Form Content */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] space-y-6">
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] pb-[32px] space-y-6">
         {/* Title and Description (Figma 1:3973) */}
         <div className="text-left space-y-2 w-full">
           <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#171717] tracking-[-0.096px]">
@@ -59,91 +59,101 @@ export const Step2ContactDetailsScreen: React.FC = () => {
           </h2>
           <p className="font-['DM_Sans',sans-serif] font-normal text-[15px] leading-[22px] text-[#525252] tracking-[-0.064px]">
             {language === 'es'
-              ? 'Necesitaremos estos datos para ponernos en contacto contigo y enviarte actualizaciones de tu proceso de visa.'
-              : 'We will need these contact details to update you on your visa application process.'}
+              ? 'Esto ayuda a garantizar que podamos comunicarnos contigo en caso de cualquier novedad sobre tus solicitudes.'
+              : 'This helps ensure we can reach you for any updates regarding your applications.'}
           </p>
         </div>
 
-        {/* Form Fields (Figma 1:3974 to 1:3979) */}
-        <div className="space-y-4 w-full pt-1">
-          {/* Field 1: Mobile Phone */}
-          <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
-              {language === 'es' ? 'Teléfono celular' : 'Mobile Phone'}
+        {/* Contact Form Cards */}
+        <div className="space-y-4 text-left w-full">
+          {/* Mobile Phone Field */}
+          <div className="flex flex-col gap-1.5 w-full text-left">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
+              {language === 'es' ? 'Teléfono móvil' : 'Mobile Phone'}
             </label>
             <input
               type="tel"
               value={mobilePhone}
               onChange={(e) => setMobilePhone(e.target.value)}
-              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[12px] font-['Inter',sans-serif] font-normal text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
+              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
             />
           </div>
 
-          {/* Field 2: Alternative Phone */}
-          <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
+          {/* Alternative Phone Field */}
+          <div className="flex flex-col gap-1.5 w-full text-left">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Teléfono alternativo (opcional)' : 'Alternative Phone (optional)'}
             </label>
             <input
               type="tel"
               value={altPhone}
               onChange={(e) => setAltPhone(e.target.value)}
-              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[12px] font-['Inter',sans-serif] font-normal text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
+              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
             />
           </div>
 
-          {/* Field 3: Email */}
-          <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
-              {language === 'es' ? 'Correo electrónico' : 'Email address'}
+          {/* Email Address Field */}
+          <div className="flex flex-col gap-1.5 w-full text-left">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
+              {language === 'es' ? 'Correo electrónico' : 'Email Address'}
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[12px] font-['Inter',sans-serif] font-normal text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
+              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
             />
           </div>
 
-          {/* Field 4: Emergency Contact Name */}
-          <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
-              {language === 'es' ? 'Nombre de contacto de emergencia' : 'Emergency contact name'}
+          {/* Section Divider / Title for Emergency Contact */}
+          <div className="pt-2">
+            <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#171717]">
+              {language === 'es' ? 'Contacto de emergencia' : 'Emergency Contact'}
+            </h3>
+          </div>
+
+          {/* Emergency Contact Name */}
+          <div className="flex flex-col gap-1.5 w-full text-left">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
+              {language === 'es' ? 'Nombre completo del contacto' : 'Full Name of Contact'}
             </label>
             <input
               type="text"
               value={emergencyName}
               onChange={(e) => setEmergencyName(e.target.value)}
-              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[12px] font-['Inter',sans-serif] font-normal text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
+              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
             />
           </div>
 
-          {/* Field 5: Emergency Contact Phone */}
-          <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
-              {language === 'es' ? 'Teléfono de contacto de emergencia' : 'Emergency contact phone'}
+          {/* Emergency Contact Phone */}
+          <div className="flex flex-col gap-1.5 w-full text-left">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
+              {language === 'es' ? 'Teléfono del contacto' : 'Contact Phone'}
             </label>
             <input
               type="tel"
               value={emergencyPhone}
               onChange={(e) => setEmergencyPhone(e.target.value)}
-              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[12px] font-['Inter',sans-serif] font-normal text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
+              className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs"
             />
           </div>
 
-          {/* Field 6: Relationship */}
-          <div className="flex flex-col gap-1 w-full text-left">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px] pl-0.5">
-              {language === 'es' ? 'Parentesco' : 'Relationship'}
+          {/* Relationship Selector */}
+          <div className="flex flex-col gap-1.5 w-full text-left">
+            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
+              {language === 'es' ? 'Relación' : 'Relationship'}
             </label>
             <div className="relative w-full">
               <select
                 value={relationship}
                 onChange={(e) => setRelationship(e.target.value)}
-                className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[12px] pr-[36px] font-['Inter',sans-serif] font-normal text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full appearance-none shadow-2xs cursor-pointer"
+                className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] pr-[36px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full appearance-none shadow-2xs cursor-pointer"
               >
                 <option value={language === 'es' ? 'Esposa' : 'Wife'}>
-                  {language === 'es' ? 'Esposa / Cónyuge' : 'Wife / Spouse'}
+                  {language === 'es' ? 'Esposa' : 'Wife'}
+                </option>
+                <option value={language === 'es' ? 'Esposo' : 'Husband'}>
+                  {language === 'es' ? 'Esposo' : 'Husband'}
                 </option>
                 <option value={language === 'es' ? 'Madre' : 'Mother'}>
                   {language === 'es' ? 'Madre' : 'Mother'}
@@ -166,8 +176,8 @@ export const Step2ContactDetailsScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Sticky Bottom Action Bar */}
-      <div className="bg-[#fafafa] border-t border-[#e5e5e5] p-[16px] w-full flex flex-col items-center sticky bottom-0 z-20">
+      {/* Fixed Bottom Action Bar */}
+      <div className="fixed-bottom-bar w-full flex flex-col items-center">
         <button
           onClick={handleContinue}
           className="w-full min-h-[44px] h-[44px] px-4 py-[10px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"

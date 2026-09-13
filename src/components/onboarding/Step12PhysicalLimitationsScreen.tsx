@@ -165,7 +165,7 @@ export const Step12PhysicalLimitationsScreen: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] space-y-6 text-left">
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] pb-[32px] space-y-6 text-left">
         {/* Screen Header Titles */}
         <div className="space-y-2 text-center">
           <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">

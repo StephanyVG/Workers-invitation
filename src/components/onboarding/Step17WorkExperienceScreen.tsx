@@ -64,7 +64,7 @@ export const Step17WorkExperienceScreen: React.FC = () => {
       </div>
 
       {/* Main Scrollable Content */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] space-y-5 text-left min-h-0">
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] pb-[32px] space-y-5 text-left min-h-0">
         {/* Screen Header Titles */}
         <div className="space-y-1 text-center">
           <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">

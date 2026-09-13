@@ -84,7 +84,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
       </div>
 
       {/* Main Scrollable Content */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] space-y-5">
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] pb-[32px] space-y-5">
         {/* Questions Cards List matching Figma 463:26252 */}
         <div className="space-y-4 w-full">
           {/* Question 1 */}
@@ -838,7 +838,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
       </div>
 
       {/* Sticky Bottom Action Bar */}
-      <div className="bg-[#fafafa] border-t border-[#e5e5e5] p-[16px] w-full flex flex-col items-center sticky bottom-0 z-20">
+      <div className="fixed-bottom-bar w-full flex flex-col items-center">
         <button
           onClick={handleComplete}
           className="w-full min-h-[44px] h-[44px] px-4 py-[10px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
