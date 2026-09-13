@@ -79,6 +79,8 @@ interface AppContextType {
   setIsFullPhoneView: React.Dispatch<React.SetStateAction<boolean>>;
   selectedJobForDetail: JobOffer | null;
   setSelectedJobForDetail: (job: JobOffer | null) => void;
+  selectedVisaType: 'h2a' | 'h2b';
+  setSelectedVisaType: (visa: 'h2a' | 'h2b') => void;
   triggerConfetti: () => void;
 }
 
@@ -250,6 +252,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     );
   };
 
+  const [selectedVisaType, setSelectedVisaType] = useState<'h2a' | 'h2b'>('h2a');
+
   return (
     <AppContext.Provider
       value={{
@@ -277,6 +281,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsFullPhoneView,
         selectedJobForDetail,
         setSelectedJobForDetail,
+        selectedVisaType,
+        setSelectedVisaType,
         triggerConfetti
       }}
     >

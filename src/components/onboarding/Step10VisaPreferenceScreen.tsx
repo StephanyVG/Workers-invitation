@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const Step10VisaPreferenceScreen: React.FC = () => {
-  const { language, setCurrentTab } = useApp();
-  const [selectedVisa, setSelectedVisa] = useState<'h2a' | 'h2b' | null>(null);
+  const { language, setCurrentTab, selectedVisaType, setSelectedVisaType } = useApp();
 
   const handleContinue = () => {
-    if (selectedVisa === 'h2b') {
+    if (selectedVisaType === 'h2b') {
       setCurrentTab('step11_h2b_work_skills');
     } else {
       setCurrentTab('step11_work_skills');
@@ -73,11 +72,11 @@ export const Step10VisaPreferenceScreen: React.FC = () => {
         {/* Options Cards - Matching Figma 1:4733 selected styling with centered text */}
         <div className="space-y-3.5 pt-2 w-full">
           {options.map((opt) => {
-            const isSelected = selectedVisa === opt.id;
+            const isSelected = selectedVisaType === opt.id;
             return (
               <div
                 key={opt.id}
-                onClick={() => setSelectedVisa(opt.id as 'h2a' | 'h2b')}
+                onClick={() => setSelectedVisaType(opt.id as 'h2a' | 'h2b')}
                 className={`w-full min-h-[64px] py-[14px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none active:scale-[0.99] ${
                   isSelected
                     ? 'bg-[#0045ff] text-white shadow-[-2px_0px_12px_8px_rgba(0,56,208,0.18)] scale-[1.01]'

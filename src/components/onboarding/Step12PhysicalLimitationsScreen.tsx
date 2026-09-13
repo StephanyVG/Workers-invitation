@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const Step12PhysicalLimitationsScreen: React.FC = () => {
-  const { language, setCurrentTab } = useApp();
+  const { language, setCurrentTab, selectedVisaType } = useApp();
 
   const [physicalLimits, setPhysicalLimits] = useState<string[]>([]);
   const [standingLimits, setStandingLimits] = useState<string[]>([]);
@@ -13,7 +13,11 @@ export const Step12PhysicalLimitationsScreen: React.FC = () => {
   };
 
   const handleBack = () => {
-    setCurrentTab('step11_work_skills');
+    if (selectedVisaType === 'h2b') {
+      setCurrentTab('step11_h2b_work_skills');
+    } else {
+      setCurrentTab('step11_work_skills');
+    }
   };
 
   const toggleLimit = (
