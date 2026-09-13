@@ -51,6 +51,9 @@ import { Step14Part3IntroScreen } from './components/onboarding/Step14Part3Intro
 import { Step15EducationLevelScreen } from './components/onboarding/Step15EducationLevelScreen';
 import { Step16EnglishLevelScreen } from './components/onboarding/Step16EnglishLevelScreen';
 import { Step17WorkExperienceScreen } from './components/onboarding/Step17WorkExperienceScreen';
+import { Step18Part4IntroScreen } from './components/onboarding/Step18Part4IntroScreen';
+import { Step19SocialInfoScreen } from './components/onboarding/Step19SocialInfoScreen';
+import { Step20HealthSafetyScreen } from './components/onboarding/Step20HealthSafetyScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
 
@@ -102,6 +105,9 @@ const MainContent: React.FC = () => {
     'step15_education_level',
     'step16_english_level',
     'step17_work_experience',
+    'step18_part4_intro',
+    'step19_social_info',
+    'step20_health_safety',
     'job_offer_detail'
   ].includes(currentTab);
 
@@ -153,6 +159,9 @@ const MainContent: React.FC = () => {
         {currentTab === 'step15_education_level' && <Step15EducationLevelScreen />}
         {currentTab === 'step16_english_level' && <Step16EnglishLevelScreen />}
         {currentTab === 'step17_work_experience' && <Step17WorkExperienceScreen />}
+        {currentTab === 'step18_part4_intro' && <Step18Part4IntroScreen />}
+        {currentTab === 'step19_social_info' && <Step19SocialInfoScreen />}
+        {currentTab === 'step20_health_safety' && <Step20HealthSafetyScreen />}
         {currentTab === 'job_offer_detail' && <JobOfferDetailScreen />}
 
         {/* Worker Portal Views */}

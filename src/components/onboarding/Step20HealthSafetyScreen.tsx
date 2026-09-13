@@ -1,0 +1,284 @@
+import React, { useState } from 'react';
+import { useApp } from '../../context/AppContext';
+
+export const Step20HealthSafetyScreen: React.FC = () => {
+  const { setCurrentTab, setShowWelcomeModal, triggerConfetti, language } = useApp();
+
+  // 1. Contagious disease state
+  const [contagiousDisease, setContagiousDisease] = useState<'yes' | 'no' | null>(null);
+  const [contagiousDetails, setContagiousDetails] = useState<string>('');
+
+  // 2. Dangerous physical/mental illness state
+  const [dangerousIllness, setDangerousIllness] = useState<'yes' | 'no' | null>(null);
+  const [illnessDetails, setIllnessDetails] = useState<string>('');
+
+  // 3. Drug addiction state
+  const [drugAddiction, setDrugAddiction] = useState<'yes' | 'no' | null>(null);
+  const [drugDetails, setDrugDetails] = useState<string>('');
+
+  const toggleOption = (current: 'yes' | 'no' | null, setter: (val: 'yes' | 'no' | null) => void, choice: 'yes' | 'no') => {
+    if (current === choice) {
+      setter(null);
+    } else {
+      setter(choice);
+    }
+  };
+
+  const handleCompletePart4 = () => {
+    triggerConfetti();
+    setShowWelcomeModal(true);
+    setCurrentTab('home');
+  };
+
+  const handleBack = () => {
+    setCurrentTab('step19_social_info');
+  };
+
+  return (
+    <div
+      className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none h-full min-h-0"
+      data-node-id="1:5415"
+    >
+      {/* Top Header Bar & Progress */}
+      <div className="w-full bg-[#fafafa] border-b border-[#e5e5e5] flex flex-col shrink-0 sticky top-0 z-20">
+        <div className="px-[16px] py-[12px] flex items-center justify-between w-full">
+          <button
+            onClick={handleBack}
+            className="size-[40px] rounded-full bg-white border border-[#e5e5e5] flex items-center justify-center text-[#171717] hover:bg-[#f5f5f5] active:scale-95 transition-all cursor-pointer shadow-2xs"
+            aria-label="Back"
+          >
+            <span className="material-symbols-outlined text-[20px]">arrow_back</span>
+          </button>
+
+          <span className="font-['Inter',sans-serif] font-semibold text-[15px] text-[#0038d0]">
+            {language === 'es' ? 'Preguntas Finales' : 'Final Questions'}
+          </span>
+
+          <div className="w-[40px]" />
+        </div>
+
+        {/* Step Progress Bar (Part 4 Step 2 of 2 - 100% complete) */}
+        <div className="w-full h-[4px] bg-[#e5e5e5]">
+          <div className="h-full bg-[#0038d0] transition-all duration-300 w-[100%]" />
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[20px] max-w-md mx-auto w-full flex flex-col gap-5">
+        {/* Screen Title */}
+        <div className="w-full">
+          <h1 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#171717] tracking-[-0.32px]">
+            {language === 'es' ? 'Salud y Seguridad' : 'Health and Safety'}
+          </h1>
+        </div>
+
+        {/* Question 1: Contagious Disease */}
+        <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs flex flex-col gap-4" data-node-id="1:5416">
+          <div className="flex flex-col gap-1.5">
+            <h2 className="font-['Inter',sans-serif] font-bold text-[16px] leading-[22px] text-[#171717]">
+              {language === 'es'
+                ? '¿Tienes alguna enfermedad grave que pueda contagiar a otros, como tuberculosis?'
+                : 'Do you have a serious disease that could spread to others, like tuberculosis?'}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 w-full">
+            <button
+              type="button"
+              onClick={() => toggleOption(contagiousDisease, setContagiousDisease, 'yes')}
+              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
+                contagiousDisease === 'yes'
+                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
+                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
+              }`}
+            >
+              {language === 'es' ? 'Sí' : 'Yes'}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => toggleOption(contagiousDisease, setContagiousDisease, 'no')}
+              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
+                contagiousDisease === 'no'
+                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
+                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
+              }`}
+            >
+              No
+            </button>
+          </div>
+
+          {contagiousDisease === 'yes' && (
+            <div className="bg-[#f9fafb] border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-3 animate-fadeIn mt-1">
+              <h3 className="font-['Inter',sans-serif] font-bold text-[15px] text-[#171717]">
+                {language === 'es' ? 'Detalles adicionales' : 'Additional details'}
+              </h3>
+              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#525252]">
+                {language === 'es'
+                  ? 'Por favor proporciona más información sobre tu situación.'
+                  : 'Please provide more information about your situation.'}
+              </p>
+              <div className="flex flex-col gap-1.5 pt-1">
+                <label className="font-['Inter',sans-serif] font-medium text-[13px] text-[#171717]">
+                  {language === 'es' ? 'Escribe aquí' : 'Write here'}
+                </label>
+                <textarea
+                  value={contagiousDetails}
+                  onChange={(e) => setContagiousDetails(e.target.value)}
+                  rows={3}
+                  placeholder={language === 'es' ? 'Describe tu situación aquí...' : 'Describe your situation here...'}
+                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] resize-none"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Question 2: Dangerous Mental or Physical Illness */}
+        <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs flex flex-col gap-4" data-node-id="1:5420">
+          <div className="flex flex-col gap-1.5">
+            <h2 className="font-['Inter',sans-serif] font-bold text-[16px] leading-[22px] text-[#171717]">
+              {language === 'es'
+                ? '¿Tienes alguna enfermedad física o mental que pueda ser peligrosa para ti o para otros?'
+                : 'Do you have any physical or mental illness that could be dangerous to yourself or others?'}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 w-full">
+            <button
+              type="button"
+              onClick={() => toggleOption(dangerousIllness, setDangerousIllness, 'yes')}
+              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
+                dangerousIllness === 'yes'
+                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
+                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
+              }`}
+            >
+              {language === 'es' ? 'Sí' : 'Yes'}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => toggleOption(dangerousIllness, setDangerousIllness, 'no')}
+              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
+                dangerousIllness === 'no'
+                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
+                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
+              }`}
+            >
+              No
+            </button>
+          </div>
+
+          {dangerousIllness === 'yes' && (
+            <div className="bg-[#f9fafb] border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-3 animate-fadeIn mt-1">
+              <h3 className="font-['Inter',sans-serif] font-bold text-[15px] text-[#171717]">
+                {language === 'es' ? 'Detalles adicionales' : 'Additional details'}
+              </h3>
+              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#525252]">
+                {language === 'es'
+                  ? 'Por favor proporciona más información sobre tu situación.'
+                  : 'Please provide more information about your situation.'}
+              </p>
+              <div className="flex flex-col gap-1.5 pt-1">
+                <label className="font-['Inter',sans-serif] font-medium text-[13px] text-[#171717]">
+                  {language === 'es' ? 'Escribe aquí' : 'Write here'}
+                </label>
+                <textarea
+                  value={illnessDetails}
+                  onChange={(e) => setIllnessDetails(e.target.value)}
+                  rows={3}
+                  placeholder={language === 'es' ? 'Describe tu situación aquí...' : 'Describe your situation here...'}
+                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] resize-none"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Question 3: Drug Addiction */}
+        <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs flex flex-col gap-4" data-node-id="1:5424">
+          <div className="flex flex-col gap-1.5">
+            <h2 className="font-['Inter',sans-serif] font-bold text-[16px] leading-[22px] text-[#171717]">
+              {language === 'es'
+                ? '¿Alguna vez has tenido adicción a las drogas?'
+                : 'Have you ever been addicted to drugs?'}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 w-full">
+            <button
+              type="button"
+              onClick={() => toggleOption(drugAddiction, setDrugAddiction, 'yes')}
+              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
+                drugAddiction === 'yes'
+                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
+                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
+              }`}
+            >
+              {language === 'es' ? 'Sí' : 'Yes'}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => toggleOption(drugAddiction, setDrugAddiction, 'no')}
+              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
+                drugAddiction === 'no'
+                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
+                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
+              }`}
+            >
+              No
+            </button>
+          </div>
+
+          {drugAddiction === 'yes' && (
+            <div className="bg-[#f9fafb] border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-3 animate-fadeIn mt-1">
+              <h3 className="font-['Inter',sans-serif] font-bold text-[15px] text-[#171717]">
+                {language === 'es' ? 'Detalles adicionales' : 'Additional details'}
+              </h3>
+              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#525252]">
+                {language === 'es'
+                  ? 'Por favor proporciona más información sobre tu situación.'
+                  : 'Please provide more information about your situation.'}
+              </p>
+              <div className="flex flex-col gap-1.5 pt-1">
+                <label className="font-['Inter',sans-serif] font-medium text-[13px] text-[#171717]">
+                  {language === 'es' ? 'Escribe aquí' : 'Write here'}
+                </label>
+                <textarea
+                  value={drugDetails}
+                  onChange={(e) => setDrugDetails(e.target.value)}
+                  rows={3}
+                  placeholder={language === 'es' ? 'Describe tu situación aquí...' : 'Describe your situation here...'}
+                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] resize-none"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Fixed Bottom Action Bar */}
+      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-3">
+        <button
+          onClick={handleCompletePart4}
+          className="w-full min-h-[56px] h-auto px-4 py-[16px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+        >
+          <span>{language === 'es' ? 'Seleccionar para continuar' : 'Select to Continue'}</span>
+          <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleCompletePart4}
+          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] hover:underline cursor-pointer py-1"
+        >
+          {language === 'es' ? 'Guardar y continuar más tarde' : 'Save and Continue Later'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Step20HealthSafetyScreen;

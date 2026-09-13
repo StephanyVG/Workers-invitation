@@ -25,9 +25,7 @@ export const Step17WorkExperienceScreen: React.FC = () => {
   const [dontRememberPhone, setDontRememberPhone] = useState<boolean>(false);
 
   const handleCompletePart3 = () => {
-    triggerConfetti();
-    setShowWelcomeModal(true);
-    setCurrentTab('home');
+    setCurrentTab('step18_part4_intro');
   };
 
   const handleBack = () => {
