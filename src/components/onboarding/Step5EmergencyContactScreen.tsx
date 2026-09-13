@@ -66,10 +66,10 @@ export const Step5EmergencyContactScreen: React.FC = () => {
       <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[28px] space-y-6 text-left">
         {/* Screen Header Titles */}
         <div className="space-y-2">
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">
+          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#171717] tracking-[-0.1px]">
             {language === 'es' ? 'Contacto de emergencia' : 'Emergency Contact'}
           </h2>
-          <p className="font-['Inter',sans-serif] font-normal text-[15px] leading-[22px] text-[#525252]">
+          <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
             {language === 'es'
               ? 'Si te sucede algo mientras estás trabajando en EE. UU., ¿a quién debería llamar tu empleador?'
               : 'If something happens to you while you are working in the US, who should your employer call?'}

@@ -52,12 +52,12 @@ export const Step3AddressIdScreen: React.FC = () => {
       <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] pb-[32px] space-y-6">
         {/* Title and Question */}
         <div className="text-left space-y-2 w-full">
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#171717] tracking-[-0.096px]">
+          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#171717] tracking-[-0.096px]">
             {language === 'es'
               ? 'Ingresa tu dirección de domicilio y número de identificación'
               : 'Please enter your home address and ID number'}
           </h2>
-          <p className="font-['DM_Sans',sans-serif] font-normal text-[15px] leading-[22px] text-[#525252] tracking-[-0.064px]">
+          <p className="font-['DM_Sans',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252] tracking-[-0.064px]">
             {language === 'es'
               ? 'Esta información es requerida para la verificación legal y emisión de tu contrato de trabajo.'
               : 'This info is required for official legal verification and contract issue.'}

@@ -111,10 +111,10 @@ export const Step8FamilyUSScreen: React.FC = () => {
       <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] pb-[32px] space-y-6 text-left">
         {/* Screen Header Titles */}
         <div className="space-y-2">
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">
+          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#171717] tracking-[-0.1px]">
             {language === 'es' ? 'Familiares en los EE. UU.' : 'Family in the US'}
           </h2>
-          <p className="font-['Inter',sans-serif] font-normal text-[14px] sm:text-[15px] leading-[22px] text-[#525252]">
+          <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
             {language === 'es'
               ? 'Selecciona las opciones que correspondan. Si no tienes familia en EE. UU., puedes seleccionar ninguno.'
               : "Select any that apply to you. If you don't have family in the U.S., you can just select none."}

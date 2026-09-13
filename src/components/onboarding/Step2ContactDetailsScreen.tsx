@@ -52,12 +52,12 @@ export const Step2ContactDetailsScreen: React.FC = () => {
       <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] pb-[32px] space-y-6">
         {/* Title and Description (Figma 1:3973) */}
         <div className="text-left space-y-2 w-full">
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#171717] tracking-[-0.096px]">
+          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#171717] tracking-[-0.096px]">
             {language === 'es'
               ? 'Proporciona tus datos de contacto personal'
               : 'Provide your personal contact details'}
           </h2>
-          <p className="font-['DM_Sans',sans-serif] font-normal text-[15px] leading-[22px] text-[#525252] tracking-[-0.064px]">
+          <p className="font-['DM_Sans',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252] tracking-[-0.064px]">
             {language === 'es'
               ? 'Esto ayuda a garantizar que podamos comunicarnos contigo en caso de cualquier novedad sobre tus solicitudes.'
               : 'This helps ensure we can reach you for any updates regarding your applications.'}

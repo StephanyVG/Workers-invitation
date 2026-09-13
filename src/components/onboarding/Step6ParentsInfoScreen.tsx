@@ -65,10 +65,10 @@ export const Step6ParentsInfoScreen: React.FC = () => {
       <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] space-y-7 text-left min-h-0">
         {/* Screen Header Titles */}
         <div className="space-y-2">
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">
+          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#171717] tracking-[-0.1px]">
             {language === 'es' ? 'Información de padre y madre' : 'Father and mother information'}
           </h2>
-          <p className="font-['Inter',sans-serif] font-normal text-[14px] sm:text-[15px] leading-[22px] text-[#525252]">
+          <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
             {language === 'es'
               ? "Llena solo la información que tengas. Si no sabes una respuesta, selecciona 'No lo sé' para continuar."
               : "Fill in only the information you have. If you don't know an answer, select 'I don't know' to continue."}

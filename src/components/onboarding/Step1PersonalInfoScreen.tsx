@@ -44,10 +44,10 @@ export const Step1PersonalInfoScreen: React.FC = () => {
 
           {/* Title and Question (Figma 1:7627) */}
           <div className="w-full text-left mb-6">
-            <h1 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] tracking-[-0.096px] mb-2">
+            <h1 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#0038d0] tracking-[-0.096px] mb-2">
               {language === 'es' ? 'Paso 1: Información personal' : 'Step 1: Personal Information'}
             </h1>
-            <p className="font-['DM_Sans',sans-serif] font-normal text-[16px] leading-[22px] text-[#0a0a0a] tracking-[-0.064px]">
+            <p className="font-['DM_Sans',sans-serif] font-normal text-[16px] leading-[24px] text-[#0a0a0a] tracking-[-0.064px]">
               {language === 'es'
                 ? 'Este paso inicial trata sobre recopilar tus datos básicos.'
                 : 'This initial step is all about gathering your basic details.'}
