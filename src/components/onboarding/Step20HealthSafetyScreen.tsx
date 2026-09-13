@@ -34,6 +34,12 @@ export const Step20HealthSafetyScreen: React.FC = () => {
     setCurrentTab('step19_social_info');
   };
 
+  const getOptionButtonClass = (isSelected: boolean) => {
+    return isSelected
+      ? 'bg-[#0045ff] text-white rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff] h-[48px] transition-all cursor-pointer flex items-center justify-center'
+      : 'bg-white border border-[#d4d4d4] text-[#171717] rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] hover:border-[#0045ff] h-[48px] transition-all cursor-pointer flex items-center justify-center';
+  };
+
   return (
     <div
       className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none h-full min-h-0"
@@ -64,7 +70,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[20px] max-w-md mx-auto w-full flex flex-col gap-5">
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[20px] max-w-md mx-auto w-full flex flex-col gap-6">
         {/* Screen Title */}
         <div className="w-full">
           <h1 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#171717] tracking-[-0.32px]">
@@ -74,23 +80,19 @@ export const Step20HealthSafetyScreen: React.FC = () => {
 
         {/* Question 1: Contagious Disease */}
         <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs flex flex-col gap-4" data-node-id="1:5416">
-          <div className="flex flex-col gap-1.5">
-            <h2 className="font-['Inter',sans-serif] font-bold text-[16px] leading-[22px] text-[#171717]">
+          <div className="flex flex-col gap-2">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Tienes alguna enfermedad grave que pueda contagiar a otros, como tuberculosis?'
                 : 'Do you have a serious disease that could spread to others, like tuberculosis?'}
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 w-full">
+          <div className="grid grid-cols-2 gap-3 w-full" data-node-id="1:6251">
             <button
               type="button"
               onClick={() => toggleOption(contagiousDisease, setContagiousDisease, 'yes')}
-              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
-                contagiousDisease === 'yes'
-                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
-                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
-              }`}
+              className={getOptionButtonClass(contagiousDisease === 'yes')}
             >
               {language === 'es' ? 'Sí' : 'Yes'}
             </button>
@@ -98,11 +100,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
             <button
               type="button"
               onClick={() => toggleOption(contagiousDisease, setContagiousDisease, 'no')}
-              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
-                contagiousDisease === 'no'
-                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
-                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
-              }`}
+              className={getOptionButtonClass(contagiousDisease === 'no')}
             >
               No
             </button>
@@ -110,16 +108,16 @@ export const Step20HealthSafetyScreen: React.FC = () => {
 
           {contagiousDisease === 'yes' && (
             <div className="bg-[#f9fafb] border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-3 animate-fadeIn mt-1">
-              <h3 className="font-['Inter',sans-serif] font-bold text-[15px] text-[#171717]">
+              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] leading-[24px] text-[#171717]">
                 {language === 'es' ? 'Detalles adicionales' : 'Additional details'}
               </h3>
-              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#525252]">
+              <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
                 {language === 'es'
                   ? 'Por favor proporciona más información sobre tu situación.'
                   : 'Please provide more information about your situation.'}
               </p>
               <div className="flex flex-col gap-1.5 pt-1">
-                <label className="font-['Inter',sans-serif] font-medium text-[13px] text-[#171717]">
+                <label className="font-['Inter',sans-serif] font-medium text-[14px] text-[#171717]">
                   {language === 'es' ? 'Escribe aquí' : 'Write here'}
                 </label>
                 <textarea
@@ -127,7 +125,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
                   onChange={(e) => setContagiousDetails(e.target.value)}
                   rows={3}
                   placeholder={language === 'es' ? 'Describe tu situación aquí...' : 'Describe your situation here...'}
-                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] resize-none"
+                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[15px] text-[#171717] focus:outline-none focus:border-[#0045ff] resize-none"
                 />
               </div>
             </div>
@@ -136,8 +134,8 @@ export const Step20HealthSafetyScreen: React.FC = () => {
 
         {/* Question 2: Dangerous Mental or Physical Illness */}
         <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs flex flex-col gap-4" data-node-id="1:5420">
-          <div className="flex flex-col gap-1.5">
-            <h2 className="font-['Inter',sans-serif] font-bold text-[16px] leading-[22px] text-[#171717]">
+          <div className="flex flex-col gap-2">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Tienes alguna enfermedad física o mental que pueda ser peligrosa para ti o para otros?'
                 : 'Do you have any physical or mental illness that could be dangerous to yourself or others?'}
@@ -148,11 +146,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
             <button
               type="button"
               onClick={() => toggleOption(dangerousIllness, setDangerousIllness, 'yes')}
-              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
-                dangerousIllness === 'yes'
-                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
-                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
-              }`}
+              className={getOptionButtonClass(dangerousIllness === 'yes')}
             >
               {language === 'es' ? 'Sí' : 'Yes'}
             </button>
@@ -160,11 +154,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
             <button
               type="button"
               onClick={() => toggleOption(dangerousIllness, setDangerousIllness, 'no')}
-              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
-                dangerousIllness === 'no'
-                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
-                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
-              }`}
+              className={getOptionButtonClass(dangerousIllness === 'no')}
             >
               No
             </button>
@@ -172,16 +162,16 @@ export const Step20HealthSafetyScreen: React.FC = () => {
 
           {dangerousIllness === 'yes' && (
             <div className="bg-[#f9fafb] border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-3 animate-fadeIn mt-1">
-              <h3 className="font-['Inter',sans-serif] font-bold text-[15px] text-[#171717]">
+              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] leading-[24px] text-[#171717]">
                 {language === 'es' ? 'Detalles adicionales' : 'Additional details'}
               </h3>
-              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#525252]">
+              <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
                 {language === 'es'
                   ? 'Por favor proporciona más información sobre tu situación.'
                   : 'Please provide more information about your situation.'}
               </p>
               <div className="flex flex-col gap-1.5 pt-1">
-                <label className="font-['Inter',sans-serif] font-medium text-[13px] text-[#171717]">
+                <label className="font-['Inter',sans-serif] font-medium text-[14px] text-[#171717]">
                   {language === 'es' ? 'Escribe aquí' : 'Write here'}
                 </label>
                 <textarea
@@ -189,7 +179,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
                   onChange={(e) => setIllnessDetails(e.target.value)}
                   rows={3}
                   placeholder={language === 'es' ? 'Describe tu situación aquí...' : 'Describe your situation here...'}
-                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] resize-none"
+                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[15px] text-[#171717] focus:outline-none focus:border-[#0045ff] resize-none"
                 />
               </div>
             </div>
@@ -198,8 +188,8 @@ export const Step20HealthSafetyScreen: React.FC = () => {
 
         {/* Question 3: Drug Addiction */}
         <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs flex flex-col gap-4" data-node-id="1:5424">
-          <div className="flex flex-col gap-1.5">
-            <h2 className="font-['Inter',sans-serif] font-bold text-[16px] leading-[22px] text-[#171717]">
+          <div className="flex flex-col gap-2">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Alguna vez has tenido adicción a las drogas?'
                 : 'Have you ever been addicted to drugs?'}
@@ -210,11 +200,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
             <button
               type="button"
               onClick={() => toggleOption(drugAddiction, setDrugAddiction, 'yes')}
-              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
-                drugAddiction === 'yes'
-                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
-                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
-              }`}
+              className={getOptionButtonClass(drugAddiction === 'yes')}
             >
               {language === 'es' ? 'Sí' : 'Yes'}
             </button>
@@ -222,11 +208,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
             <button
               type="button"
               onClick={() => toggleOption(drugAddiction, setDrugAddiction, 'no')}
-              className={`h-[48px] rounded-[12px] font-['Inter',sans-serif] font-semibold text-[15px] transition-all cursor-pointer flex items-center justify-center ${
-                drugAddiction === 'no'
-                  ? 'bg-[#0038d0] text-white shadow-md border border-[#0038d0]'
-                  : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0038d0]'
-              }`}
+              className={getOptionButtonClass(drugAddiction === 'no')}
             >
               No
             </button>
@@ -234,16 +216,16 @@ export const Step20HealthSafetyScreen: React.FC = () => {
 
           {drugAddiction === 'yes' && (
             <div className="bg-[#f9fafb] border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-3 animate-fadeIn mt-1">
-              <h3 className="font-['Inter',sans-serif] font-bold text-[15px] text-[#171717]">
+              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] leading-[24px] text-[#171717]">
                 {language === 'es' ? 'Detalles adicionales' : 'Additional details'}
               </h3>
-              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#525252]">
+              <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
                 {language === 'es'
                   ? 'Por favor proporciona más información sobre tu situación.'
                   : 'Please provide more information about your situation.'}
               </p>
               <div className="flex flex-col gap-1.5 pt-1">
-                <label className="font-['Inter',sans-serif] font-medium text-[13px] text-[#171717]">
+                <label className="font-['Inter',sans-serif] font-medium text-[14px] text-[#171717]">
                   {language === 'es' ? 'Escribe aquí' : 'Write here'}
                 </label>
                 <textarea
@@ -251,7 +233,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
                   onChange={(e) => setDrugDetails(e.target.value)}
                   rows={3}
                   placeholder={language === 'es' ? 'Describe tu situación aquí...' : 'Describe your situation here...'}
-                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[14px] text-[#171717] focus:outline-none focus:border-[#0038d0] resize-none"
+                  className="bg-white border border-[#e5e5e5] rounded-[8px] p-[12px] font-['Inter',sans-serif] text-[15px] text-[#171717] focus:outline-none focus:border-[#0045ff] resize-none"
                 />
               </div>
             </div>
