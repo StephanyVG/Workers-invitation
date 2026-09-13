@@ -74,7 +74,7 @@ export const Step16EnglishLevelScreen: React.FC = () => {
       <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[28px] pb-[32px] space-y-6 text-left min-h-0">
         {/* Screen Header Titles */}
         <div className="space-y-2 text-center">
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">
+          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#171717] tracking-[-0.1px]">
             {language === 'es' ? '¿Qué tan bien hablas inglés?' : 'How well do you speak English?'}
           </h2>
         </div>
