@@ -121,10 +121,10 @@ export const Step7MaritalStatusScreen: React.FC = () => {
               <React.Fragment key={opt.id}>
                 <div
                   onClick={() => setSelectedStatus((prev) => (prev === opt.id ? null : opt.id))}
-                  className={`w-full min-h-[56px] py-[12px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none active:scale-[0.99] ${
+                  className={`w-full min-h-[56px] py-[12px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none ${
                     isSelected
-                      ? 'bg-[#0045ff] text-white shadow-[-2px_0px_12px_8px_rgba(0,56,208,0.18)] scale-[1.01]'
-                      : 'bg-white border border-[#e5e5e5] text-[#171717]'
+                      ? 'bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                      : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
                   }`}
                   data-node-id={isSelected ? "1:4733" : undefined}
                 >

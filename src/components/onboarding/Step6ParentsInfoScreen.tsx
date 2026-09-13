@@ -166,7 +166,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
 
           {/* Is father in the US? */}
           <div className="flex flex-col gap-2.5 w-full min-w-0 pt-1">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
+            <label className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717]">
               {language === 'es' ? '¿Tu padre está en los Estados Unidos?' : 'Is your father in the United States?'}
             </label>
             <div className="flex items-center gap-6 pt-0.5">
@@ -314,7 +314,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
 
           {/* Is mother in the US? */}
           <div className="flex flex-col gap-2.5 w-full min-w-0 pt-1">
-            <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
+            <label className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717]">
               {language === 'es' ? '¿Tu madre está en los Estados Unidos?' : 'Is your mother in the United States?'}
             </label>
             <div className="flex items-center gap-6 pt-0.5">

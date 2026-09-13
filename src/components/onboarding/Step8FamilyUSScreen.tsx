@@ -133,10 +133,10 @@ export const Step8FamilyUSScreen: React.FC = () => {
                 {/* Option Container Item */}
                 <div
                   onClick={() => toggleOption(opt.id)}
-                  className={`w-full min-h-[64px] py-[14px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none active:scale-[0.99] ${
+                  className={`w-full min-h-[64px] py-[14px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none ${
                     isChecked
-                      ? 'bg-[#0045ff] text-white shadow-[-2px_0px_12px_8px_rgba(0,56,208,0.18)] scale-[1.01]'
-                      : 'bg-white border border-[#e5e5e5] text-[#171717]'
+                      ? 'bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                      : 'bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
                   }`}
                   data-node-id={isChecked ? '1:4733' : undefined}
                 >

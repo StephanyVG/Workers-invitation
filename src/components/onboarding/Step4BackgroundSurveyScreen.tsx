@@ -96,32 +96,30 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
         {/* Questions Cards List matching Figma 463:26252 */}
         <div className="space-y-4 w-full">
           {/* Question 1 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Eres ciudadano de otro país?'
                 : 'Are you a citizen of another country?'}
-            </p>
+            </h2>
             <div className="flex gap-3 w-full">
               <button
                 type="button"
                 onClick={() => toggleYesNo(q1, setQ1, 'yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q1 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q1 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
                 onClick={() => toggleYesNo(q1, setQ1, 'no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q1 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q1 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -276,32 +274,30 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 2 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Eres residente permanente de otro país?'
                 : 'Are you a permanent resident of another country?'}
-            </p>
+            </h2>
             <div className="flex gap-3 w-full">
               <button
                 type="button"
                 onClick={() => toggleYesNo(q2, setQ2, 'yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q2 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q2 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
                 onClick={() => toggleYesNo(q2, setQ2, 'no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q2 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q2 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -314,7 +310,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
                 data-node-id="I463:27183;4207:6807"
               >
                 {/* Section Title */}
-                <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#171717] tracking-[-0.072px]">
+                <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] leading-[24px] text-[#171717] tracking-[-0.072px]">
                   {language === 'es' ? 'Detalles de otra residencia' : 'Other residency details'}
                 </h3>
 
@@ -384,32 +380,30 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 3 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Has estado alguna vez en los EE. UU.?'
                 : 'Have you ever been to the U.S.?'}
-            </p>
+            </h2>
             <div className="flex gap-3 w-full">
               <button
                 type="button"
                 onClick={() => toggleYesNo(q3, setQ3, 'yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q3 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q3 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
                 onClick={() => toggleYesNo(q3, setQ3, 'no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q3 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q3 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -423,10 +417,10 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
               >
                 {/* Section Header */}
                 <div className="space-y-1">
-                  <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#171717] tracking-[-0.072px]">
+                  <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] leading-[24px] text-[#171717] tracking-[-0.072px]">
                     {language === 'es' ? 'Información de la estancia' : 'Stay Information'}
                   </h3>
-                  <p className="font-['DM_Sans',sans-serif] font-normal text-[15px] leading-[22px] text-[#525252] tracking-[-0.064px]">
+                  <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
                     {language === 'es'
                       ? 'Por favor proporciona información sobre tu última estancia en los EE. UU.'
                       : 'Please provide information about your last stay in the U.S.'}
@@ -489,14 +483,14 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 4 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <div>
-              <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <div className="space-y-2">
+              <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
                 {language === 'es'
                   ? '¿Se te ha otorgado alguna vez una visa de EE. UU.?'
                   : 'Have you ever been granted a U.S. visa?'}
-              </p>
-              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#737373] mt-1">
+              </h2>
+              <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
                 {language === 'es'
                   ? 'Selecciona SÍ si alguna vez has tenido una visa H2 o de turista.'
                   : 'Select YES if you have ever had an H2 or tourist visa.'}
@@ -506,22 +500,20 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
               <button
                 type="button"
                 onClick={() => toggleYesNo(q4, setQ4, 'yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q4 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q4 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
                 onClick={() => toggleYesNo(q4, setQ4, 'no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q4 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q4 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -562,14 +554,14 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 5 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <div>
-              <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <div className="space-y-2">
+              <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
                 {language === 'es'
                   ? '¿Estás solicitando el mismo tipo de visa nuevamente?'
                   : 'Are you applying for the same type of visa again?'}
-              </p>
-              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#737373] mt-1">
+              </h2>
+              <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
                 {language === 'es'
                   ? 'Selecciona SÍ si alguna vez has trabajado con una visa H2.'
                   : 'Select YES if you have ever worked on an H2 visa.'}
@@ -579,22 +571,20 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
               <button
                 type="button"
                 onClick={() => toggleYesNo(q5, setQ5, 'yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q5 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q5 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
                 onClick={() => toggleYesNo(q5, setQ5, 'no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q5 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                className={q5 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -602,32 +592,30 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 6 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Has dado tus huellas dactilares en una cita consular para tu visa?'
                 : 'Have you given your fingerprints at a consular appointment for your visa?'}
-            </p>
+            </h2>
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ6('yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q6 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q6, setQ6, 'yes')}
+                className={q6 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
-                onClick={() => setQ6('no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q6 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q6, setQ6, 'no')}
+                className={q6 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -635,32 +623,30 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 7 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Alguna vez perdiste o te robaron tu visa de EE. UU.?'
                 : 'Has your U.S. visa ever been lost or stolen?'}
-            </p>
+            </h2>
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ7('yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q7 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q7, setQ7, 'yes')}
+                className={q7 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
-                onClick={() => setQ7('no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q7 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q7, setQ7, 'no')}
+                className={q7 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -668,32 +654,30 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 8 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Alguien ha solicitado alguna vez una Green Card de EE. UU. para ti?'
                 : 'Has anyone ever applied for a U.S. green card for you?'}
-            </p>
+            </h2>
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ8('yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q8 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q8, setQ8, 'yes')}
+                className={q8 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
-                onClick={() => setQ8('no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q8 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q8, setQ8, 'no')}
+                className={q8 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -701,45 +685,42 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 9 - 3 Stacked Options */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Alguien ha solicitado una Green Card por ti?'
                 : 'Has anyone ever applied for a U.S. green card for you?'}
-            </p>
+            </h2>
             <div className="flex flex-col gap-2.5 w-full">
               <button
                 type="button"
-                onClick={() => setQ9('no')}
-                className={`w-full min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q9 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => setQ9(q9 === 'no' ? null : 'no')}
+                className={q9 === 'no'
+                  ? 'w-full min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'w-full min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
 
               <button
                 type="button"
-                onClick={() => setQ9('family')}
-                className={`w-full min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q9 === 'family'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => setQ9(q9 === 'family' ? null : 'family')}
+                className={q9 === 'family'
+                  ? 'w-full min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'w-full min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí, un familiar' : 'Yes, Family member'}
               </button>
 
               <button
                 type="button"
-                onClick={() => setQ9('agent')}
-                className={`w-full min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q9 === 'agent'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => setQ9(q9 === 'agent' ? null : 'agent')}
+                className={q9 === 'agent'
+                  ? 'w-full min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'w-full min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí, agente / empleador' : 'Yes, Agent/Employer'}
               </button>
@@ -747,32 +728,30 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 10 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es'
                 ? '¿Alguna vez te han denegado una visa de EE. UU. (incluyendo turista o H2) o la entrada en la frontera?'
                 : 'Have you ever been denied a U.S. visa (including tourist or H2 visa) or been denied entry to the U.S. at the border?'}
-            </p>
+            </h2>
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ10('yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q10 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q10, setQ10, 'yes')}
+                className={q10 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
-                onClick={() => setQ10('no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q10 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q10, setQ10, 'no')}
+                className={q10 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
@@ -780,14 +759,14 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
           </div>
 
           {/* Question 11 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 shadow-2xs space-y-3.5 text-left">
-            <div>
-              <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717]">
+          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
+            <div className="space-y-2">
+              <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
                 {language === 'es'
                   ? '¿Alguna vez has tenido una licencia de conducir de los EE. UU.?'
                   : "Have you ever had a US driver's license?"}
-              </p>
-              <p className="font-['Inter',sans-serif] font-normal text-[13px] leading-[18px] text-[#737373] mt-1">
+              </h2>
+              <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
                 {language === 'es'
                   ? 'Si seleccionas "SÍ" deberás agregar el número de licencia.'
                   : 'If you select "YES" you need to add the driver\'s license number'}
@@ -796,23 +775,21 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ11('yes')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q11 === 'yes'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q11, setQ11, 'yes')}
+                className={q11 === 'yes'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 {language === 'es' ? 'Sí' : 'Yes'}
               </button>
               <button
                 type="button"
-                onClick={() => setQ11('no')}
-                className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
-                  q11 === 'no'
-                    ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
-                    : 'bg-white border border-[#e5e5e5] text-[#262626] font-medium active:scale-[0.98]'
-                }`}
+                onClick={() => toggleYesNo(q11, setQ11, 'no')}
+                className={q11 === 'no'
+                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
+                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
+                }
               >
                 No
               </button>
