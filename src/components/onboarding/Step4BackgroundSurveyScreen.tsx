@@ -54,6 +54,14 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
     setCurrentTab('step3_address_id');
   };
 
+  const toggleYesNo = (
+    currentVal: 'yes' | 'no' | null,
+    setVal: React.Dispatch<React.SetStateAction<'yes' | 'no' | null>>,
+    target: 'yes' | 'no'
+  ) => {
+    setVal(currentVal === target ? null : target);
+  };
+
   return (
     <div
       className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none"
@@ -97,7 +105,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ1('yes')}
+                onClick={() => toggleYesNo(q1, setQ1, 'yes')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q1 === 'yes'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -108,7 +116,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setQ1('no')}
+                onClick={() => toggleYesNo(q1, setQ1, 'no')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q1 === 'no'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -277,7 +285,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ2('yes')}
+                onClick={() => toggleYesNo(q2, setQ2, 'yes')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q2 === 'yes'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -288,7 +296,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setQ2('no')}
+                onClick={() => toggleYesNo(q2, setQ2, 'no')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q2 === 'no'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -385,7 +393,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ3('yes')}
+                onClick={() => toggleYesNo(q3, setQ3, 'yes')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q3 === 'yes'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -396,7 +404,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setQ3('no')}
+                onClick={() => toggleYesNo(q3, setQ3, 'no')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q3 === 'no'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -497,7 +505,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ4('yes')}
+                onClick={() => toggleYesNo(q4, setQ4, 'yes')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q4 === 'yes'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -508,7 +516,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setQ4('no')}
+                onClick={() => toggleYesNo(q4, setQ4, 'no')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q4 === 'no'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -570,7 +578,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
             <div className="flex gap-3 w-full">
               <button
                 type="button"
-                onClick={() => setQ5('yes')}
+                onClick={() => toggleYesNo(q5, setQ5, 'yes')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q5 === 'yes'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'
@@ -581,7 +589,7 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setQ5('no')}
+                onClick={() => toggleYesNo(q5, setQ5, 'no')}
                 className={`flex-1 min-h-[46px] px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer ${
                   q5 === 'no'
                     ? 'bg-[#0045ff] text-white font-semibold shadow-[-2px_0px_8px_8px_rgba(4,71,255,0.18)] scale-[1.01]'

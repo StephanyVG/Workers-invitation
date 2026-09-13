@@ -33,21 +33,31 @@
   input, select, textarea, button {
     box-sizing: border-box !important;
     max-width: 100% !important;
+    min-width: 0 !important;
   }
 
-  /* Date inputs formatting for mobile Safari & Chrome */
-  input[type="date"] {
-    min-width: 0;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
+  /* Strict Date inputs formatting for WebKit, Safari & Chrome mobile viewports */
+  input[type="date"],
+  input[type="month"],
+  input[type="datetime-local"] {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    line-height: normal !important;
   }
 
   input[type="date"]::-webkit-date-and-time-value {
     text-align: left;
     margin: 0;
+    line-height: normal;
   }
 
   /* Hide default native browser calendar icon on date inputs */

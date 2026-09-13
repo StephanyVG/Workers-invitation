@@ -86,7 +86,7 @@ export const Step16EnglishLevelScreen: React.FC = () => {
             return (
               <div
                 key={opt.id}
-                onClick={() => setSelectedEnglish(opt.id)}
+                onClick={() => setSelectedEnglish((prev) => (prev === opt.id ? null : opt.id))}
                 className={`w-full min-h-[64px] py-[14px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none active:scale-[0.99] ${
                   isSelected
                     ? 'bg-[#0045ff] text-white shadow-[-2px_0px_12px_8px_rgba(0,56,208,0.18)] scale-[1.01]'

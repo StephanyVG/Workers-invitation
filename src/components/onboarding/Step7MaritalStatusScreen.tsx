@@ -120,7 +120,7 @@ export const Step7MaritalStatusScreen: React.FC = () => {
             return (
               <React.Fragment key={opt.id}>
                 <div
-                  onClick={() => setSelectedStatus(opt.id)}
+                  onClick={() => setSelectedStatus((prev) => (prev === opt.id ? null : opt.id))}
                   className={`w-full min-h-[56px] py-[12px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none active:scale-[0.99] ${
                     isSelected
                       ? 'bg-[#0045ff] text-white shadow-[-2px_0px_12px_8px_rgba(0,56,208,0.18)] scale-[1.01]'

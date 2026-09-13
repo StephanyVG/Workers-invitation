@@ -3,11 +3,15 @@ import { useApp } from '../../context/AppContext';
 
 export const Step10VisaPreferenceScreen: React.FC = () => {
   const { language, setCurrentTab, selectedVisaType, setSelectedVisaType } = useApp();
-  const [selectedVisa, setSelectedVisa] = useState<'h2a' | 'h2b'>(selectedVisaType || 'h2a');
+  const [selectedVisa, setSelectedVisa] = useState<'h2a' | 'h2b' | null>(selectedVisaType || 'h2a');
 
   const handleSelectVisa = (visa: 'h2a' | 'h2b') => {
-    setSelectedVisa(visa);
-    setSelectedVisaType(visa);
+    if (selectedVisa === visa) {
+      setSelectedVisa(null);
+    } else {
+      setSelectedVisa(visa);
+      setSelectedVisaType(visa);
+    }
   };
 
   const handleContinue = () => {
