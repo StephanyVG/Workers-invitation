@@ -32,6 +32,42 @@ export const Step7MaritalStatusScreen: React.FC = () => {
     { id: 'other', labelEs: 'Otro', labelEn: 'Other' }
   ];
 
+  const getSpouseDetailsTitle = (status: MaritalStatusOption | null, lang: 'es' | 'en') => {
+    if (lang === 'es') {
+      switch (status) {
+        case 'married':
+          return 'Ingresa los detalles de la persona con la que estás casado(a)';
+        case 'civil_union':
+          return 'Ingresa los detalles de la persona con la que estás en unión libre';
+        case 'divorced':
+          return 'Ingresa los detalles de la persona con la que estuviste casada';
+        case 'widowed':
+          return 'Ingresa los detalles de la persona con la que estuviste casada';
+        case 'legally_separated':
+          return 'Ingresa los detalles de la persona de la que estás separado(a) legalmente';
+        case 'other':
+        default:
+          return 'Ingresa los detalles de la persona';
+      }
+    } else {
+      switch (status) {
+        case 'married':
+          return 'Enter the details of the person you are married to';
+        case 'civil_union':
+          return 'Enter the details of the person you are in a civil union with';
+        case 'divorced':
+          return 'Enter the details of the person you were married to';
+        case 'widowed':
+          return 'Enter the details of your late spouse';
+        case 'legally_separated':
+          return 'Enter the details of the person you are legally separated from';
+        case 'other':
+        default:
+          return 'Enter the details of the person';
+      }
+    }
+  };
+
   return (
     <div
       className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none"
@@ -122,9 +158,7 @@ export const Step7MaritalStatusScreen: React.FC = () => {
                     data-node-id="1:4819"
                   >
                     <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#171717]">
-                      {language === 'es'
-                        ? 'Ingresa los detalles de la persona con la que estás casado(a)'
-                        : 'Enter the details of the person you are married to'}
+                      {getSpouseDetailsTitle(selectedStatus, language)}
                     </h3>
 
                     {/* Field 1: Full Name */}
