@@ -144,8 +144,8 @@ export const Step11H2BWorkSkillsScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Sticky Bottom Action Bar */}
-      <div className="bg-[#fafafa] border-t border-[#e5e5e5] p-[16px] w-full flex flex-col items-center gap-3 sticky bottom-0 z-20">
+      {/* Fixed Bottom Action Bar */}
+      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-3">
         <button
           onClick={handleContinue}
           className="w-full min-h-[44px] h-[44px] px-4 py-[10px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"

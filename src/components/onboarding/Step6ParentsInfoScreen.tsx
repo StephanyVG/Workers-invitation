@@ -34,11 +34,11 @@ export const Step6ParentsInfoScreen: React.FC = () => {
 
   return (
     <div
-      className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none"
+      className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none h-full min-h-0"
       data-node-id="1:4511"
     >
       {/* Top Header Bar & Progress */}
-      <div className="w-full bg-[#fafafa] border-b border-[#e5e5e5] flex flex-col sticky top-0 z-20">
+      <div className="w-full bg-[#fafafa] border-b border-[#e5e5e5] flex flex-col shrink-0 sticky top-0 z-20">
         <div className="px-[16px] py-[12px] flex items-center justify-between w-full">
           <button
             onClick={handleBack}
@@ -62,7 +62,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] space-y-7 text-left">
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[24px] space-y-7 text-left min-h-0">
         {/* Screen Header Titles */}
         <div className="space-y-2">
           <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">
@@ -76,13 +76,13 @@ export const Step6ParentsInfoScreen: React.FC = () => {
         </div>
 
         {/* Section 1: Father's Information */}
-        <div className="space-y-4 pt-1">
+        <div className="space-y-4 pt-1 w-full">
           <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[20px] leading-[26px] text-[#171717]">
             {language === 'es' ? 'Información del padre' : "Father's information"}
           </h3>
 
           {/* Father Family Name */}
-          <div className="flex flex-col gap-1.5 w-full">
+          <div className="flex flex-col gap-1.5 w-full min-w-0">
             <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Apellido del padre' : 'Family Name'}
             </label>
@@ -92,7 +92,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
               value={fatherLastName}
               onChange={(e) => setFatherLastName(e.target.value)}
               placeholder={language === 'es' ? 'Ingresa el apellido' : 'Enter the family name'}
-              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] placeholder-[#737373] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs ${
+              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] placeholder-[#737373] focus:outline-none focus:border-[#0038d0] transition-colors w-full max-w-full min-w-0 box-border shadow-2xs ${
                 fatherLastNameUnknown ? 'bg-[#f5f5f5] opacity-60 cursor-not-allowed' : ''
               }`}
             />
@@ -101,7 +101,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
                 type="checkbox"
                 checked={fatherLastNameUnknown}
                 onChange={(e) => setFatherLastNameUnknown(e.target.checked)}
-                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer"
+                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer shrink-0"
               />
               <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#0038d0]">
                 {language === 'es' ? 'No lo sé' : "I don't know"}
@@ -110,7 +110,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
           </div>
 
           {/* Father First Name */}
-          <div className="flex flex-col gap-1.5 w-full">
+          <div className="flex flex-col gap-1.5 w-full min-w-0">
             <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Nombre del padre' : 'First Name'}
             </label>
@@ -119,8 +119,8 @@ export const Step6ParentsInfoScreen: React.FC = () => {
               disabled={fatherFirstNameUnknown}
               value={fatherFirstName}
               onChange={(e) => setFatherFirstName(e.target.value)}
-              placeholder={language === 'es' ? 'Ingresa el nombre' : 'Enter the family name'}
-              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] placeholder-[#737373] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs ${
+              placeholder={language === 'es' ? 'Ingresa el nombre' : 'Enter the first name'}
+              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] placeholder-[#737373] focus:outline-none focus:border-[#0038d0] transition-colors w-full max-w-full min-w-0 box-border shadow-2xs ${
                 fatherFirstNameUnknown ? 'bg-[#f5f5f5] opacity-60 cursor-not-allowed' : ''
               }`}
             />
@@ -129,7 +129,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
                 type="checkbox"
                 checked={fatherFirstNameUnknown}
                 onChange={(e) => setFatherFirstNameUnknown(e.target.checked)}
-                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer"
+                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer shrink-0"
               />
               <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#0038d0]">
                 {language === 'es' ? 'No lo sé' : "I don't know"}
@@ -138,7 +138,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
           </div>
 
           {/* Father Date of Birth */}
-          <div className="flex flex-col gap-1.5 w-full">
+          <div className="flex flex-col gap-1.5 w-full min-w-0">
             <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Fecha de nacimiento del padre' : "Father's Date of Birth"}
             </label>
@@ -147,7 +147,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
               disabled={fatherDobUnknown}
               value={fatherDob}
               onChange={(e) => setFatherDob(e.target.value)}
-              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs cursor-pointer ${
+              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] min-h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full max-w-full min-w-0 box-border shadow-2xs cursor-pointer ${
                 fatherDobUnknown ? 'bg-[#f5f5f5] opacity-60 cursor-not-allowed' : ''
               }`}
             />
@@ -156,7 +156,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
                 type="checkbox"
                 checked={fatherDobUnknown}
                 onChange={(e) => setFatherDobUnknown(e.target.checked)}
-                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer"
+                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer shrink-0"
               />
               <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#0038d0]">
                 {language === 'es' ? 'No recuerdo la fecha' : "I don't remember the date"}
@@ -165,7 +165,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
           </div>
 
           {/* Is father in the US? */}
-          <div className="flex flex-col gap-2.5 w-full pt-1">
+          <div className="flex flex-col gap-2.5 w-full min-w-0 pt-1">
             <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? '¿Tu padre está en los Estados Unidos?' : 'Is your father in the United States?'}
             </label>
@@ -197,15 +197,15 @@ export const Step6ParentsInfoScreen: React.FC = () => {
 
             {/* Conditional Dropdown when Yes (Figma 1506:30961) */}
             {fatherInUs === 'yes' && (
-              <div className="flex flex-col gap-1.5 w-full pt-2 animate-fadeIn" data-node-id="1506:30961">
+              <div className="flex flex-col gap-1.5 w-full min-w-0 pt-2 animate-fadeIn" data-node-id="1506:30961">
                 <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
                   {language === 'es' ? 'Elegir estado legal' : 'Choose legal status'}
                 </label>
-                <div className="relative w-full">
+                <div className="relative w-full min-w-0">
                   <select
                     value={fatherLegalStatus}
                     onChange={(e) => setFatherLegalStatus(e.target.value)}
-                    className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] pr-[36px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full appearance-none shadow-2xs cursor-pointer"
+                    className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] pr-[36px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full max-w-full min-w-0 box-border appearance-none shadow-2xs cursor-pointer"
                   >
                     <option value="Nonimmigrant">{language === 'es' ? 'No inmigrante' : 'Nonimmigrant'}</option>
                     <option value="Citizen">{language === 'es' ? 'Ciudadano' : 'Citizen'}</option>
@@ -224,13 +224,13 @@ export const Step6ParentsInfoScreen: React.FC = () => {
         <hr className="border-[#e5e5e5] my-4" />
 
         {/* Section 2: Mother's Information */}
-        <div className="space-y-4 pt-1">
+        <div className="space-y-4 pt-1 w-full">
           <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[20px] leading-[26px] text-[#171717]">
             {language === 'es' ? 'Información de la madre' : "Mother's information"}
           </h3>
 
           {/* Mother Family Name */}
-          <div className="flex flex-col gap-1.5 w-full">
+          <div className="flex flex-col gap-1.5 w-full min-w-0">
             <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Apellido de la madre' : 'Family Name'}
             </label>
@@ -240,7 +240,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
               value={motherLastName}
               onChange={(e) => setMotherLastName(e.target.value)}
               placeholder={language === 'es' ? 'Ingresa el apellido' : 'Enter the family name'}
-              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] placeholder-[#737373] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs ${
+              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] placeholder-[#737373] focus:outline-none focus:border-[#0038d0] transition-colors w-full max-w-full min-w-0 box-border shadow-2xs ${
                 motherLastNameUnknown ? 'bg-[#f5f5f5] opacity-60 cursor-not-allowed' : ''
               }`}
             />
@@ -249,7 +249,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
                 type="checkbox"
                 checked={motherLastNameUnknown}
                 onChange={(e) => setMotherLastNameUnknown(e.target.checked)}
-                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer"
+                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer shrink-0"
               />
               <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#0038d0]">
                 {language === 'es' ? 'No lo sé' : "I don't know"}
@@ -258,7 +258,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
           </div>
 
           {/* Mother First Name */}
-          <div className="flex flex-col gap-1.5 w-full">
+          <div className="flex flex-col gap-1.5 w-full min-w-0">
             <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? 'Nombre de la madre' : 'First Name'}
             </label>
@@ -268,7 +268,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
               value={motherFirstName}
               onChange={(e) => setMotherFirstName(e.target.value)}
               placeholder={language === 'es' ? 'Ingresa el nombre' : 'Enter the first name'}
-              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] placeholder-[#737373] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs ${
+              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] placeholder-[#737373] focus:outline-none focus:border-[#0038d0] transition-colors w-full max-w-full min-w-0 box-border shadow-2xs ${
                 motherFirstNameUnknown ? 'bg-[#f5f5f5] opacity-60 cursor-not-allowed' : ''
               }`}
             />
@@ -277,7 +277,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
                 type="checkbox"
                 checked={motherFirstNameUnknown}
                 onChange={(e) => setMotherFirstNameUnknown(e.target.checked)}
-                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer"
+                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer shrink-0"
               />
               <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#0038d0]">
                 {language === 'es' ? 'No lo sé' : "I don't know"}
@@ -286,16 +286,16 @@ export const Step6ParentsInfoScreen: React.FC = () => {
           </div>
 
           {/* Mother Date of Birth */}
-          <div className="flex flex-col gap-1.5 w-full">
+          <div className="flex flex-col gap-1.5 w-full min-w-0">
             <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
-              {language === 'es' ? 'Fecha de nacimiento de la madre' : "Father's Date of Birth"}
+              {language === 'es' ? 'Fecha de nacimiento de la madre' : "Mother's Date of Birth"}
             </label>
             <input
               type="date"
               disabled={motherDobUnknown}
               value={motherDob}
               onChange={(e) => setMotherDob(e.target.value)}
-              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full shadow-2xs cursor-pointer ${
+              className={`bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] min-h-[44px] px-[14px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full max-w-full min-w-0 box-border shadow-2xs cursor-pointer ${
                 motherDobUnknown ? 'bg-[#f5f5f5] opacity-60 cursor-not-allowed' : ''
               }`}
             />
@@ -304,7 +304,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
                 type="checkbox"
                 checked={motherDobUnknown}
                 onChange={(e) => setMotherDobUnknown(e.target.checked)}
-                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer"
+                className="size-[18px] rounded border-[#737373] text-[#0038d0] focus:ring-0 cursor-pointer shrink-0"
               />
               <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#0038d0]">
                 {language === 'es' ? 'No recuerdo la fecha' : "I don't remember the date"}
@@ -313,7 +313,7 @@ export const Step6ParentsInfoScreen: React.FC = () => {
           </div>
 
           {/* Is mother in the US? */}
-          <div className="flex flex-col gap-2.5 w-full pt-1">
+          <div className="flex flex-col gap-2.5 w-full min-w-0 pt-1">
             <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
               {language === 'es' ? '¿Tu madre está en los Estados Unidos?' : 'Is your mother in the United States?'}
             </label>
@@ -345,15 +345,15 @@ export const Step6ParentsInfoScreen: React.FC = () => {
 
             {/* Conditional Dropdown when Yes (Figma 1506:30961) */}
             {motherInUs === 'yes' && (
-              <div className="flex flex-col gap-1.5 w-full pt-2 animate-fadeIn" data-node-id="1506:30961">
+              <div className="flex flex-col gap-1.5 w-full min-w-0 pt-2 animate-fadeIn" data-node-id="1506:30961">
                 <label className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#171717]">
                   {language === 'es' ? 'Elegir estado legal' : 'Choose legal status'}
                 </label>
-                <div className="relative w-full">
+                <div className="relative w-full min-w-0">
                   <select
                     value={motherLegalStatus}
                     onChange={(e) => setMotherLegalStatus(e.target.value)}
-                    className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] pr-[36px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full appearance-none shadow-2xs cursor-pointer"
+                    className="bg-white border border-[#e5e5e5] rounded-[8px] h-[44px] px-[14px] pr-[36px] font-['Inter',sans-serif] font-normal text-[15px] text-[#171717] focus:outline-none focus:border-[#0038d0] transition-colors w-full max-w-full min-w-0 box-border appearance-none shadow-2xs cursor-pointer"
                   >
                     <option value="Nonimmigrant">{language === 'es' ? 'No inmigrante' : 'Nonimmigrant'}</option>
                     <option value="Citizen">{language === 'es' ? 'Ciudadano' : 'Citizen'}</option>
@@ -370,8 +370,8 @@ export const Step6ParentsInfoScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Sticky Bottom Action Bar */}
-      <div className="bg-[#fafafa] border-t border-[#e5e5e5] p-[16px] w-full flex flex-col items-center sticky bottom-0 z-20">
+      {/* Fixed Bottom Action Bar */}
+      <div className="fixed-bottom-bar w-full flex flex-col items-center">
         <button
           onClick={handleContinue}
           className="w-full min-h-[44px] h-[44px] px-4 py-[10px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"

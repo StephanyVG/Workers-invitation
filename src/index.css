@@ -29,6 +29,27 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
+  /* Universal Form Input & Select Container Fitting */
+  input, select, textarea, button {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+  }
+
+  /* Date inputs formatting for mobile Safari & Chrome */
+  input[type="date"] {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  input[type="date"]::-webkit-date-and-time-value {
+    text-align: left;
+    margin: 0;
+  }
+
   /* Hide default native browser calendar icon on date inputs */
   input[type="date"]::-webkit-calendar-picker-indicator,
   input[type="date"]::-webkit-inner-spin-button {
@@ -109,6 +130,19 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 4px;
+}
+
+/* Fixed Bottom Action Bar for Mobile Browsers & Safe Areas */
+.fixed-bottom-bar {
+  background-color: #fafafa;
+  border-top: 1px solid #e5e5e5;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 14px;
+  padding-bottom: max(16px, calc(12px + env(safe-area-inset-bottom, 0px)));
+  flex-shrink: 0;
+  z-index: 30;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
 }
 
 /* Pulse animation for current stage */
