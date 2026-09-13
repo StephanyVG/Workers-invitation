@@ -25,9 +25,7 @@ export const Step20HealthSafetyScreen: React.FC = () => {
   };
 
   const handleCompletePart4 = () => {
-    triggerConfetti();
-    setShowWelcomeModal(true);
-    setCurrentTab('home');
+    setCurrentTab('step21_criminal_history');
   };
 
   const handleBack = () => {

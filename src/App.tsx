@@ -54,6 +54,11 @@ import { Step17WorkExperienceScreen } from './components/onboarding/Step17WorkEx
 import { Step18Part4IntroScreen } from './components/onboarding/Step18Part4IntroScreen';
 import { Step19SocialInfoScreen } from './components/onboarding/Step19SocialInfoScreen';
 import { Step20HealthSafetyScreen } from './components/onboarding/Step20HealthSafetyScreen';
+import { Step21CriminalHistoryScreen } from './components/onboarding/Step21CriminalHistoryScreen';
+import { Step22SecurityTerrorismScreen } from './components/onboarding/Step22SecurityTerrorismScreen';
+import { Step23HumanRightsScreen } from './components/onboarding/Step23HumanRightsScreen';
+import { Step24ImmigrationLegalScreen } from './components/onboarding/Step24ImmigrationLegalScreen';
+import { Step25FinalReviewScreen } from './components/onboarding/Step25FinalReviewScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
 
@@ -162,6 +167,11 @@ const MainContent: React.FC = () => {
         {currentTab === 'step18_part4_intro' && <Step18Part4IntroScreen />}
         {currentTab === 'step19_social_info' && <Step19SocialInfoScreen />}
         {currentTab === 'step20_health_safety' && <Step20HealthSafetyScreen />}
+        {currentTab === 'step21_criminal_history' && <Step21CriminalHistoryScreen />}
+        {currentTab === 'step22_security_terrorism' && <Step22SecurityTerrorismScreen />}
+        {currentTab === 'step23_human_rights' && <Step23HumanRightsScreen />}
+        {currentTab === 'step24_immigration_legal' && <Step24ImmigrationLegalScreen />}
+        {currentTab === 'step25_final_review' && <Step25FinalReviewScreen />}
         {currentTab === 'job_offer_detail' && <JobOfferDetailScreen />}
 
         {/* Worker Portal Views */}
