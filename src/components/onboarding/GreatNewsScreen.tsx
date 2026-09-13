@@ -32,7 +32,7 @@ export const GreatNewsScreen: React.FC = () => {
 
         {/* Official Zipmi Horizontal Logo */}
         <img
-          src="/Logo horizontal.png"
+          src="/Logo Horizontal.svg"
           alt="Zipmi"
           className="h-8 sm:h-9 w-auto object-contain my-3"
         />

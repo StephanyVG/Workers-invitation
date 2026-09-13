@@ -44,7 +44,7 @@ export const PhoneAuthScreen: React.FC = () => {
         {/* Logo and Titles */}
         <div className="flex flex-col items-center text-center gap-3 w-full mb-8">
           <img
-            src="/Logo horizontal.png"
+            src="/Logo Horizontal.svg"
             alt="Zipmi"
             className="h-7 sm:h-8 w-auto object-contain mb-2"
           />

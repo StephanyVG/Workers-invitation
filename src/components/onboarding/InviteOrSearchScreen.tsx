@@ -39,7 +39,7 @@ export const InviteOrSearchScreen: React.FC = () => {
         <div className="flex flex-col items-center text-center gap-5 w-full my-auto">
           {/* Official Zipmi Horizontal Logo */}
           <img
-            src="/Logo horizontal.png"
+            src="/Logo Horizontal.svg"
             alt="Zipmi"
             className="h-7 sm:h-8 w-auto object-contain mb-1"
           />

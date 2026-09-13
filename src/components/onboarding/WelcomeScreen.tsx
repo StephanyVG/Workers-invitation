@@ -21,7 +21,7 @@ export const WelcomeScreen: React.FC = () => {
       <div className="flex flex-col items-center text-center gap-2 w-full">
         {/* Official Zipmi Horizontal Logo */}
         <img
-          src="/Logo horizontal.png"
+          src="/Logo Horizontal.svg"
           alt="Zipmi"
           className="h-7 sm:h-8 w-auto object-contain mb-1"
         />
