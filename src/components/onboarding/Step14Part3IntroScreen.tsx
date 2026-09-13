@@ -14,12 +14,13 @@ export const Step14Part3IntroScreen: React.FC = () => {
 
   return (
     <div
-      className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none h-full min-h-0"
+      className="bg-[#fafafa] flex-1 w-full h-full flex flex-col justify-between overflow-hidden relative select-none animate-slide-right min-h-0"
       data-node-id="1:5317"
     >
-      {/* Top Header & Illustration Container */}
-      <div className="w-full flex flex-col items-center">
-        <div className="w-full bg-gradient-to-b from-[#e6ecff] via-[#f0f4ff] to-[#fafafa] pt-4 pb-6 px-4 flex flex-col items-center justify-center relative">
+      {/* Scrollable Content Container */}
+      <div className="flex-1 overflow-y-auto custom-scrollbar flex flex-col">
+        {/* Top Header & Illustration Container */}
+        <div className="w-full bg-gradient-to-b from-[#d8e3ff] via-[#d8e3ff]/50 to-transparent pt-6 pb-6 px-4 flex flex-col items-center justify-center relative">
           {/* Back Button */}
           <button
             onClick={handleBack}
@@ -29,16 +30,18 @@ export const Step14Part3IntroScreen: React.FC = () => {
             <span className="material-symbols-outlined text-[24px]">arrow_back</span>
           </button>
 
-          {/* Book and Pencil Illustration */}
-          <div className="my-4 flex items-center justify-center size-[120px] bg-white rounded-full p-4 shadow-sm border border-[#d8e3ff]">
-            <span className="material-symbols-outlined text-[64px] text-[#0038d0]">
-              menu_book
-            </span>
+          {/* Part 3 SVG Illustration */}
+          <div className="w-full flex items-center justify-center px-4 my-2">
+            <img
+              src="/part 3.svg"
+              alt="Part 3: Work and Education"
+              className="w-full max-w-[260px] sm:max-w-[300px] h-auto max-h-[220px] object-contain block select-none mx-auto"
+            />
           </div>
         </div>
 
         {/* Content Section */}
-        <div className="px-[20px] py-[16px] space-y-4 text-left w-full">
+        <div className="px-[20px] py-[20px] pb-[32px] space-y-4 text-left w-full">
           <h1 className="font-['DM_Sans',sans-serif] font-semibold text-[26px] sm:text-[28px] leading-[34px] text-[#0038d0] tracking-[-0.1px]">
             {language === 'es' ? 'Parte 3: Trabajo y Educación' : 'Part 3: Work and Education'}
           </h1>
