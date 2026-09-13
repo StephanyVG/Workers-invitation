@@ -3,9 +3,17 @@ import { useApp } from '../../context/AppContext';
 
 export const Step10VisaPreferenceScreen: React.FC = () => {
   const { language, setCurrentTab, selectedVisaType, setSelectedVisaType } = useApp();
+  const [selectedVisa, setSelectedVisa] = useState<'h2a' | 'h2b'>(selectedVisaType || 'h2a');
+
+  const handleSelectVisa = (visa: 'h2a' | 'h2b') => {
+    setSelectedVisa(visa);
+    setSelectedVisaType(visa);
+  };
 
   const handleContinue = () => {
-    if (selectedVisaType === 'h2b') {
+    const targetVisa = selectedVisa || selectedVisaType || 'h2a';
+    setSelectedVisaType(targetVisa);
+    if (targetVisa === 'h2b') {
       setCurrentTab('step11_h2b_work_skills');
     } else {
       setCurrentTab('step11_work_skills');
@@ -31,11 +39,11 @@ export const Step10VisaPreferenceScreen: React.FC = () => {
 
   return (
     <div
-      className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none"
+      className="bg-[#fafafa] flex-1 w-full flex flex-col justify-between overflow-hidden animate-slide-right relative select-none h-full min-h-0"
       data-node-id="1:4135"
     >
       {/* Top Header Bar & Progress */}
-      <div className="w-full bg-[#fafafa] border-b border-[#e5e5e5] flex flex-col sticky top-0 z-20">
+      <div className="w-full bg-[#fafafa] border-b border-[#e5e5e5] flex flex-col shrink-0 sticky top-0 z-20">
         <div className="px-[16px] py-[12px] flex items-center justify-between w-full">
           <button
             onClick={handleBack}
@@ -59,7 +67,7 @@ export const Step10VisaPreferenceScreen: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[28px] space-y-6 text-left">
+      <div className="flex-1 overflow-y-auto custom-scrollbar px-[20px] py-[28px] space-y-6 text-left min-h-0">
         {/* Screen Header Titles */}
         <div className="space-y-2 text-center">
           <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[22px] sm:text-[24px] leading-[30px] text-[#171717] tracking-[-0.1px]">
@@ -72,11 +80,11 @@ export const Step10VisaPreferenceScreen: React.FC = () => {
         {/* Options Cards - Matching Figma 1:4733 selected styling with centered text */}
         <div className="space-y-3.5 pt-2 w-full">
           {options.map((opt) => {
-            const isSelected = selectedVisaType === opt.id;
+            const isSelected = selectedVisa === opt.id;
             return (
               <div
                 key={opt.id}
-                onClick={() => setSelectedVisaType(opt.id as 'h2a' | 'h2b')}
+                onClick={() => handleSelectVisa(opt.id as 'h2a' | 'h2b')}
                 className={`w-full min-h-[64px] py-[14px] px-[16px] rounded-[12px] relative flex items-center justify-center transition-all cursor-pointer select-none active:scale-[0.99] ${
                   isSelected
                     ? 'bg-[#0045ff] text-white shadow-[-2px_0px_12px_8px_rgba(0,56,208,0.18)] scale-[1.01]'

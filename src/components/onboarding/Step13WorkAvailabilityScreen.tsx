@@ -21,8 +21,7 @@ export const Step13WorkAvailabilityScreen: React.FC = () => {
   };
 
   const handleCompletePart2 = () => {
-    setShowWelcomeModal(true);
-    setCurrentTab('home');
+    setCurrentTab('step14_part3_intro');
   };
 
   const handleBack = () => {

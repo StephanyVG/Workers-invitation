@@ -47,6 +47,10 @@ import { Step11WorkSkillsScreen } from './components/onboarding/Step11WorkSkills
 import { Step11H2BWorkSkillsScreen } from './components/onboarding/Step11H2BWorkSkillsScreen';
 import { Step12PhysicalLimitationsScreen } from './components/onboarding/Step12PhysicalLimitationsScreen';
 import { Step13WorkAvailabilityScreen } from './components/onboarding/Step13WorkAvailabilityScreen';
+import { Step14Part3IntroScreen } from './components/onboarding/Step14Part3IntroScreen';
+import { Step15EducationLevelScreen } from './components/onboarding/Step15EducationLevelScreen';
+import { Step16EnglishLevelScreen } from './components/onboarding/Step16EnglishLevelScreen';
+import { Step17WorkExperienceScreen } from './components/onboarding/Step17WorkExperienceScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
 
@@ -94,6 +98,10 @@ const MainContent: React.FC = () => {
     'step11_h2b_work_skills',
     'step12_physical_limitations',
     'step13_work_availability',
+    'step14_part3_intro',
+    'step15_education_level',
+    'step16_english_level',
+    'step17_work_experience',
     'job_offer_detail'
   ].includes(currentTab);
 
@@ -141,6 +149,10 @@ const MainContent: React.FC = () => {
         {currentTab === 'step11_h2b_work_skills' && <Step11H2BWorkSkillsScreen />}
         {currentTab === 'step12_physical_limitations' && <Step12PhysicalLimitationsScreen />}
         {currentTab === 'step13_work_availability' && <Step13WorkAvailabilityScreen />}
+        {currentTab === 'step14_part3_intro' && <Step14Part3IntroScreen />}
+        {currentTab === 'step15_education_level' && <Step15EducationLevelScreen />}
+        {currentTab === 'step16_english_level' && <Step16EnglishLevelScreen />}
+        {currentTab === 'step17_work_experience' && <Step17WorkExperienceScreen />}
         {currentTab === 'job_offer_detail' && <JobOfferDetailScreen />}
 
         {/* Worker Portal Views */}
