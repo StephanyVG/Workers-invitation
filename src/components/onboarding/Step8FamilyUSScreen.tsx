@@ -293,7 +293,7 @@ export const Step8FamilyUSScreen: React.FC = () => {
       <div className="fixed-bottom-bar w-full flex flex-col items-center gap-3">
         <button
           onClick={handleComplete}
-          className="w-full min-h-[44px] h-[44px] px-4 py-[10px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+          className="w-full min-h-[56px] h-auto px-4 py-[16px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
         >
           <span>{language === 'es' ? 'Continuar a la Parte 2' : 'Continue to Part 2'}</span>
           <span className="material-symbols-outlined text-[20px]">arrow_forward</span>

@@ -129,7 +129,7 @@ export const VisaPathBottomSheet: React.FC<VisaPathBottomSheetProps> = ({
               if (isAgreed) onConfirm();
             }}
             disabled={!isAgreed}
-            className={`w-full min-h-[44px] px-4 py-[10px] rounded-full font-['Inter',sans-serif] font-semibold text-base leading-[22px] text-center shadow-[0px_1px_2px_rgba(0,0,0,0.09)] transition-all duration-150 ${
+            className={`w-full min-h-[56px] h-auto px-4 py-[16px] rounded-full font-['Inter',sans-serif] font-semibold text-base leading-[22px] text-center shadow-[0px_1px_2px_rgba(0,0,0,0.09)] transition-all duration-150 ${
               isAgreed
                 ? 'bg-[#0038d0] text-[#f5f5f5] cursor-pointer active:scale-[0.98]'
                 : 'bg-[#e5e5e5] text-[#737373] cursor-not-allowed opacity-80'

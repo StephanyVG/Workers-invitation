@@ -148,11 +148,25 @@
   border-top: 1px solid #e5e5e5;
   padding-left: 16px;
   padding-right: 16px;
-  padding-top: 14px;
-  padding-bottom: max(16px, calc(12px + env(safe-area-inset-bottom, 0px)));
+  padding-top: 16px;
+  padding-bottom: max(16px, calc(16px + env(safe-area-inset-bottom, 0px)));
   flex-shrink: 0;
   z-index: 30;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.fixed-bottom-bar button {
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  min-height: 56px !important;
+  height: auto !important;
+}
+
+.fixed-bottom-bar button.hover\:underline,
+.fixed-bottom-bar button.text-\[\#0038d0\]:not(.bg-\[\#0038d0\]) {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  min-height: auto !important;
 }
 
 /* Pulse animation for current stage */
