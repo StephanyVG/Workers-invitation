@@ -18,11 +18,11 @@ export const SplashScreen: React.FC = () => {
       data-node-id="3645:34617"
     >
       <div className="flex flex-col items-center gap-4 animate-fadeIn">
-        {/* Official Zipmi Horizontal Logo */}
+        {/* Official Zipmi Vertical Logo */}
         <img
-          src="/Logo horizontal.png"
+          src="/Logo vertical.png"
           alt="Zipmi"
-          className="h-10 sm:h-12 w-auto object-contain animate-scale-up"
+          className="h-32 sm:h-40 w-auto object-contain animate-scale-up"
         />
       </div>
     </div>
