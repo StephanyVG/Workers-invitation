@@ -83,19 +83,19 @@ export const WelcomeOfferModal: React.FC = () => {
         {modalStep === 1 ? (
           /* Step 1: Figma Node 631:28510 - Confirmation Modal with OK button */
           <div className="w-full flex flex-col items-center" data-node-id="631:28510">
-            {/* Top Image Frame (393:30993) - Height 209px */}
+            {/* Top Image Frame (393:30993) - Height 209px with centered BubbleZip */}
             <div
               className="w-full h-[209px] bg-[#d8e3ff] relative overflow-hidden flex items-center justify-center"
               data-node-id="393:30993"
             >
-              {/* BubbleZip Illustration Graphic (393:30997) */}
+              {/* Centered BubbleZip Graphic (393:30997) */}
               <img
                 src="/BubbleZip.svg"
                 alt="BubbleZip"
-                className="size-[110px] object-contain relative z-10"
+                className="w-[120px] h-[120px] object-contain relative z-10 mx-auto my-auto"
                 data-node-id="393:30997"
               />
-              {/* Decorative Circle Accents */}
+              {/* Decorative Accent Dots */}
               <div className="absolute size-4 bg-[#0038d0]/20 rounded-full top-6 left-12" />
               <div className="absolute size-5 bg-[#0038d0]/30 rounded-full top-10 right-10" />
               <div className="absolute size-3 bg-[#0038d0]/20 rounded-full bottom-8 left-16" />
@@ -141,9 +141,9 @@ export const WelcomeOfferModal: React.FC = () => {
             </div>
           </div>
         ) : (
-          /* Step 2: Figma Node 631:28539 - Offer Modal with "View job" button */
+          /* Step 2: Figma Node 631:28539 - Offer Modal with Centered JobCard 2 */
           <div className="w-full flex flex-col items-center" data-node-id="631:28539">
-            {/* Top Image Frame (341:32242) with JobCard2.svg (504:55870) */}
+            {/* Top Image Frame (341:32242) with Centered JobCard 2 (504:55870 - width 148, height 164) */}
             <div
               className="w-full h-[209px] bg-[#d8e3ff] relative overflow-hidden flex items-center justify-center"
               data-node-id="341:32242"
@@ -151,7 +151,7 @@ export const WelcomeOfferModal: React.FC = () => {
               <img
                 src="/JobCard2.svg"
                 alt="JobCard 2 Banner"
-                className="w-full h-full object-cover block"
+                className="w-[148px] h-[164px] object-contain block mx-auto my-auto shadow-md rounded-[12px]"
                 data-node-id="504:55870"
               />
             </div>
@@ -167,8 +167,8 @@ export const WelcomeOfferModal: React.FC = () => {
                 {/* Questions / Subtitle Text (341:32258 / 341:32259) */}
                 <p className="font-['Inter',sans-serif] font-normal text-[14px] leading-[20px] text-[#525252]" data-node-id="341:32259">
                   {language === 'es'
-                    ? 'Un empleador de EE.UU. ha revisado tu perfil y te ha enviado una propuesta. Haz clic abajo para ver los detalles.'
-                    : 'A U.S. employer has reviewed your profile and sent you a proposal. Click below to view the details.'}
+                    ? 'Un empleador de EE.UU. ha revisado tu perfil y te ha enviado una propuesta de trabajo. Revisa los detalles ahora.'
+                    : 'A U.S. employer has reviewed your profile and sent you a job proposal. View details now.'}
                 </p>
               </div>
 
