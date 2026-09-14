@@ -43,7 +43,7 @@ export const HomeView: React.FC = () => {
 
       {/* Heading Container: "Tus ofertas" + "Mostrando 0 invitaciones" (Figma node 631:28543) */}
       <div className="w-full flex items-baseline justify-between px-1 mb-4" data-node-id="631:28543">
-        <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] text-[#0038d0] tracking-tight">
+        <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] tracking-tight">
           {language === 'es' ? 'Tus ofertas' : 'Your offers'}
         </h2>
         <span className="font-['Inter',sans-serif] font-normal text-[13px] text-[#525252]">
@@ -70,7 +70,7 @@ export const HomeView: React.FC = () => {
           <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] text-[#171717] leading-[24px]" data-node-id="631:28558">
             {language === 'es' ? 'Esperando ofertas' : 'Waiting for offers'}
           </h3>
-          <p className="font-['Inter',sans-serif] font-normal text-[14px] leading-[22px] text-[#737373]" data-node-id="631:28559">
+          <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#737373]" data-node-id="631:28559">
             {language === 'es'
               ? 'Estamos esperando a que las empresas te envíen ofertas. Podrás verlas aquí.'
               : 'We are waiting for companies to send you offers. You will be able to see them here.'}

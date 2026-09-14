@@ -149,13 +149,13 @@ export const TermsOfServiceScreen: React.FC = () => {
             {/* Body Container (390:32501) - Height 275px */}
             <div className="w-full p-5 flex flex-col justify-between text-left space-y-4" data-node-id="390:32501">
               <div className="space-y-3" data-node-id="390:32502">
-                {/* Title (390:32503) */}
-                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] leading-[28px] text-[#0038d0] tracking-tight" data-node-id="390:32503">
+                {/* Title (390:32503) - 28px bold */}
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] tracking-tight" data-node-id="390:32503">
                   {language === 'es' ? '¡Código verificado!' : 'Code verified!'}
                 </h2>
 
-                {/* Questions Text Block (390:32504 / 390:32505) */}
-                <div className="space-y-2 font-['Inter',sans-serif] font-normal text-[14px] leading-[20px] text-[#525252]" data-node-id="390:32504">
+                {/* Questions Text Block (390:32504 / 390:32505) - 16px font */}
+                <div className="space-y-2 font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]" data-node-id="390:32504">
                   <p data-node-id="390:32505">
                     {language === 'es'
                       ? 'Tu empleador ha registrado tu invitación para el proceso de visa H-2. Completa tu información para continuar.'

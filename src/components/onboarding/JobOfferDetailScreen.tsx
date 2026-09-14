@@ -75,7 +75,7 @@ export const JobOfferDetailScreen: React.FC = () => {
         <div className="p-4 space-y-6 text-left font-['Inter',sans-serif]">
           {/* Job Summary Section (631:28606) */}
           <div className="space-y-1.5" data-node-id="631:28606">
-            <h1 className="font-['DM_Sans',sans-serif] font-bold text-[22px] leading-[28px] text-[#171717]" data-node-id="631:28608">
+            <h1 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#171717]" data-node-id="631:28608">
               {currentJob.title}
             </h1>
             <p className="font-semibold text-[15px] text-[#0038d0]" data-node-id="631:28609">

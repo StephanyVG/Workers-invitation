@@ -88,16 +88,16 @@ export const WelcomeOfferModal: React.FC = () => {
               <div className="absolute size-4 bg-[#0038d0]/25 rounded-full bottom-10 right-14" />
             </div>
 
-            {/* Body Container (390:32501) - Height 275px */}
+            {/* Body Container (390:32501) */}
             <div className="w-full p-5 flex flex-col justify-between text-left space-y-4" data-node-id="390:32501">
               <div className="space-y-3" data-node-id="390:32502">
-                {/* Title (390:32503) */}
-                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] leading-[28px] text-[#0038d0] tracking-tight" data-node-id="390:32503">
+                {/* Title (390:32503) - 28px bold title */}
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] tracking-tight" data-node-id="390:32503">
                   {language === 'es' ? '¡Perfil listo para revisión!' : 'Profile ready for review!'}
                 </h2>
 
-                {/* Questions Text Block (390:32504) */}
-                <div className="space-y-2 font-['Inter',sans-serif] font-normal text-[14px] leading-[20px] text-[#525252]" data-node-id="390:32504">
+                {/* Questions Text Block (390:32504) - 16px content */}
+                <div className="space-y-2 font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]" data-node-id="390:32504">
                   <p data-node-id="390:32505">
                     {language === 'es'
                       ? 'Tu información se ha guardado exitosamente.'
@@ -145,13 +145,13 @@ export const WelcomeOfferModal: React.FC = () => {
             {/* Container Frame (341:32255) */}
             <div className="w-full p-5 flex flex-col justify-between text-left space-y-4" data-node-id="341:32255">
               <div className="space-y-2" data-node-id="341:32256">
-                {/* Title (341:32257) */}
-                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] leading-[28px] text-[#0038d0] tracking-tight" data-node-id="341:32257">
-                  {language === 'es' ? '¡Tienes una oferta de trabajo!' : 'You have a job offer!'}
+                {/* Title (341:32257) - 28px bold title */}
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] tracking-tight" data-node-id="341:32257">
+                  {language === 'es' ? '¡Tienes una oferta de trabajo!' : 'You have job invitations!'}
                 </h2>
 
-                {/* Questions / Subtitle Text (341:32258 / 341:32259) */}
-                <p className="font-['Inter',sans-serif] font-normal text-[14px] leading-[20px] text-[#525252]" data-node-id="341:32259">
+                {/* Subtitle Text (341:32258 / 341:32259) - 16px content */}
+                <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]" data-node-id="341:32259">
                   {language === 'es'
                     ? 'Un empleador de EE.UU. ha revisado tu perfil y te ha enviado una propuesta de trabajo. Revisa los detalles ahora.'
                     : 'A U.S. employer has reviewed your profile and sent you a job proposal. View details now.'}
