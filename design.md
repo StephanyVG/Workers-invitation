@@ -86,7 +86,7 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 2. **Finalización de Perfil (`Step25FinalReviewScreen.tsx`)**:
    - Al seleccionar el botón **¡Todo listo!**, se redirige a la vista Principal (`HomeView.tsx`, Nodo Figma `631:28540`).
 3. **Pantalla Principal / Empty State (Nodo Figma `631:28540` / `631:28544`)**:
-   - Renderiza el contenedor de invitaciones vacías con la ilustración `/BubbleZip.svg`, título **"Esperando ofertas"** y descripción *"Estamos esperando a que las empresas te envíen ofertas de trabajo. Te notificaremos en cuanto recibas una."*.
+   - Renderiza la pantalla principal vacía con título **"Todo está listo"** / **"Everything is ready"** (`font-semibold text-[18px] text-[#171717]`) y descripción *"Estamos esperando a que las empresas te envíen ofertas. Podrás verlas aquí."* / *"We are waiting for companies to send you offers. You will be able to see them here."* (`text-[14px] text-[#737373]`).
 4. **Secuencia de Modales de Invitación**:
    - **Modal 1 (Nodo Figma `631:28510`)**: Se presenta de forma inmediata sobre la pantalla Principal. Título *"¡Hola, [Nombre]!"* (`text-[24px] font-semibold text-[#0038d0]`). Mensajes: *"Las empresas te enviarán ofertas aquí."* (16px semibold), *"Te ayudaremos. Paso a paso."* (16px regular), y *"¡Revisa esta página todos los días para ver nuevas ofertas!"* (18px semibold). Botón **Okay**.
    - **Transición**: Al presionar **Okay**, el Modal 1 se cierra y despliega inmediatamente el **Modal 2 (Nodo Figma `631:28539`)**.
