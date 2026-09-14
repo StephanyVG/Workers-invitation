@@ -94,6 +94,8 @@ interface AppContextType {
   setSelectedJobForDetail: (job: JobOffer | null) => void;
   selectedVisaType: 'h2a' | 'h2b';
   setSelectedVisaType: (visa: 'h2a' | 'h2b') => void;
+  onboardingPath: 'invite' | 'search' | null;
+  setOnboardingPath: (path: 'invite' | 'search' | null) => void;
   triggerConfetti: () => void;
 }
 
@@ -266,6 +268,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const [selectedVisaType, setSelectedVisaType] = useState<'h2a' | 'h2b'>('h2a');
+  const [onboardingPath, setOnboardingPath] = useState<'invite' | 'search' | null>(() => {
+    const saved = localStorage.getItem('zipmi_onboarding_path');
+    return (saved as 'invite' | 'search') || null;
+  });
+
+  useEffect(() => {
+    if (onboardingPath) {
+      localStorage.setItem('zipmi_onboarding_path', onboardingPath);
+    } else {
+      localStorage.removeItem('zipmi_onboarding_path');
+    }
+  }, [onboardingPath]);
 
   return (
     <AppContext.Provider
@@ -296,6 +310,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setSelectedJobForDetail,
         selectedVisaType,
         setSelectedVisaType,
+        onboardingPath,
+        setOnboardingPath,
         triggerConfetti
       }}
     >

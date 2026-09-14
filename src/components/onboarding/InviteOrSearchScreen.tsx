@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const InviteOrSearchScreen: React.FC = () => {
-  const { language, setCurrentTab } = useApp();
+  const { language, setCurrentTab, setOnboardingPath } = useApp();
 
   const [selectedOption, setSelectedOption] = useState<'invite' | 'search' | null>(null);
 
   const handleSelectOption = (option: 'invite' | 'search') => {
     setSelectedOption(option);
+    setOnboardingPath(option);
     setTimeout(() => {
       if (option === 'invite') {
         setCurrentTab('employer_code');

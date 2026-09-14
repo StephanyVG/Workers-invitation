@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { VisaPathBottomSheet } from './VisaPathBottomSheet';
 
 export const TermsOfServiceScreen: React.FC = () => {
-  const { language, setCurrentTab, updateWorker } = useApp();
+  const { language, setCurrentTab, updateWorker, onboardingPath } = useApp();
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState<boolean>(false);
   const [showVisaBottomSheet, setShowVisaBottomSheet] = useState<boolean>(false);
   const [showInviteModal, setShowInviteModal] = useState<boolean>(false);
@@ -25,7 +25,13 @@ export const TermsOfServiceScreen: React.FC = () => {
 
   const handleInviteModalContinue = () => {
     setShowInviteModal(false);
-    setCurrentTab('h2_intro');
+    if (onboardingPath === 'invite') {
+      // Path 1 (Tengo un código de invitación): Skip profile creation wizard completely & go straight to Home
+      setCurrentTab('home');
+    } else {
+      // Path 2 (Busco trabajo): Proceed to eligibility bot and profile wizard steps
+      setCurrentTab('h2_intro');
+    }
   };
 
   return (

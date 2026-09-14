@@ -72,28 +72,28 @@ Documento de estándares de diseño e interfaz para la aplicación **Zipmi Worke
 La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente delimitados:
 
 ### Flujo 1: Tengo un Código de Invitación ("I have an invitation code")
-1. **Verificación SMS / Código**: El usuario ingresa su código de invitación recibido por el empleador.
+1. **Verificación SMS / Código**: El usuario selecciona "Tengo un código de invitación" e ingresa su código enviado por el empleador.
 2. **Términos de Servicio (`TermsOfServiceScreen.tsx`)**:
    - Al aceptar los términos y presionar **Continuar**, se abre el Bottom Sheet "¡Importante! El camino hacia tu visa" (`VisaPathBottomSheet.tsx`).
 3. **Modal "¡Código verificado!" (Nodo Figma `3654:9349`)**:
    - Al presionar **Continuar** en el Bottom Sheet, se muestra el modal `3654:9349`.
    - **Ilustración**: Muestra la imagen `/BubbleZip.svg` (120px x 120px) centrada en un banner superior azul (`bg-[#d8e3ff]`, alto 209px).
-   - **Título**: "¡Código verificado!" (`text-[22px] font-bold text-[#0038d0]`).
-   - **Texto**: "Tu empleador ha registrado tu invitación para el proceso de visa H-2. Completa tu información para continuar." (`text-[14px]`).
-   - **Acción**: Al presionar el botón **Continuar**, redirige directamente a la pantalla de introducción H-2 (`h2_intro`).
+   - **Título**: "¡Código verificado!" (`text-[28px] font-bold text-[#0038d0]`).
+   - **Texto**: "Tu empleador ha registrado tu invitación para el proceso de visa H-2. Completa tu información para continuar." (`text-[16px]`).
+   - **Acción**: Al presionar el botón **Continuar**, **redirige directamente a la pantalla Principal (`HomeView.tsx`)**. **NO pasa por la pantalla de "Comencemos" ni por ningún paso de creación de perfil (Pasos 1 al 25) ni por el bot de elegibilidad.**
 
 ---
 
 ### Flujo 2: Busco Trabajo ("I'm looking for work")
-1. **Creación de Perfil**: El usuario completa los pasos 1 a 25 del wizard de registro.
+1. **Chat de Elegibilidad y Creación de Perfil**: El usuario selecciona "Busco trabajo", completa el bot de elegibilidad y los pasos 1 a 25 del wizard de información personal ("Comencemos" en adelante).
 2. **Finalización de Perfil (`Step25FinalReviewScreen.tsx`)**:
    - Al seleccionar el botón **¡Todo listo!**, se redirige a la vista Principal (`HomeView.tsx`, Nodo Figma `631:28540`).
 3. **Pantalla Principal / Empty State (Nodo Figma `631:28540` / `631:28544`)**:
    - Renderiza el contenedor de invitaciones vacías con la ilustración `/BubbleZip.svg`, título **"Esperando ofertas"** y descripción *"Estamos esperando a que las empresas te envíen ofertas de trabajo. Te notificaremos en cuanto recibas una."*.
 4. **Secuencia de Modales de Invitación**:
-   - **Modal 1 (Nodo Figma `631:28510`)**: Se presenta de forma inmediata sobre la pantalla Principal. Título "¡Tu perfil está listo!" y botón **OK**.
+   - **Modal 1 (Nodo Figma `631:28510`)**: Se presenta de forma inmediata sobre la pantalla Principal. Título "¡Perfil listo para revisión!" (`text-[28px] font-bold text-[#0038d0]`) y contenido a `16px`. Botón **OK**.
    - **Transición**: Al presionar **OK**, el Modal 1 se cierra y despliega inmediatamente el **Modal 2 (Nodo Figma `631:28539`)**.
-   - **Modal 2 (Nodo Figma `631:28539`)**: Título "¡Tienes ofertas de trabajo!" / "You have job invitations!". Contiene la imagen `/JobCard2.svg` (148px x 164px) perfectamente centrada en la parte superior. Botón **Ver trabajo** / **View job**.
+   - **Modal 2 (Nodo Figma `631:28539`)**: Título "¡Tienes ofertas de trabajo!" / "You have job invitations!" (`text-[28px] font-bold text-[#0038d0]`) y contenido a `16px`. Contiene la imagen `/JobCard2.svg` (148px x 164px) perfectamente centrada en la parte superior. Botón **Ver trabajo** / **View job**.
 5. **Pantalla de Detalle de Oferta (`JobOfferDetailScreen.tsx`, Nodo Figma `631:28603`)**:
    - Al seleccionar **Ver trabajo**, se redirige a la vista de detalle de oferta (Nodo `631:28603`), con banner superior de la empresa, métricas principales (sueldo, ubicación, fechas), requisitos de visa y botones para Aceptar / Rechazar oferta.
 
