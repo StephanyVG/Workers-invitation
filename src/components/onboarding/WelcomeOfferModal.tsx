@@ -143,14 +143,14 @@ export const WelcomeOfferModal: React.FC = () => {
         ) : (
           /* Step 2: Figma Node 631:28539 - Offer Modal with "View job" button */
           <div className="w-full flex flex-col items-center" data-node-id="631:28539">
-            {/* Top Image Frame (341:32242) with JobCard 2 (504:55870) */}
+            {/* Top Image Frame (341:32242) with JobCard2.svg (504:55870) */}
             <div
               className="w-full h-[209px] bg-[#d8e3ff] relative overflow-hidden flex items-center justify-center"
               data-node-id="341:32242"
             >
               <img
-                src="/modal.svg"
-                alt="Job Card 2 Banner"
+                src="/JobCard2.svg"
+                alt="JobCard 2 Banner"
                 className="w-full h-full object-cover block"
                 data-node-id="504:55870"
               />

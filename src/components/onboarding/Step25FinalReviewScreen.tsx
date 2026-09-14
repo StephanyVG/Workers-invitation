@@ -5,7 +5,8 @@ export const Step25FinalReviewScreen: React.FC = () => {
   const { language, setCurrentTab, setShowWelcomeModal } = useApp();
 
   const handleAllSet = () => {
-    setCurrentTab('step26_finished_profile');
+    setShowWelcomeModal(true);
+    setCurrentTab('home');
   };
 
   const handleEditPart = (part: 1 | 2 | 3 | 4) => {
