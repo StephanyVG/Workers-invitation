@@ -61,7 +61,7 @@ export const WelcomeOfferModal: React.FC = () => {
       onClick={() => handleDismiss()}
       data-node-id={modalStep === 1 ? '631:28510' : '631:28539'}
     >
-      {/* Modal Container with Smooth Scale & Slide Animation */}
+      {/* Modal Container (Figma nodes 631:28510 / 631:28539 - Width 334px) */}
       <div
         className={`w-full max-w-[334px] bg-white rounded-[24px] shadow-2xl overflow-hidden flex flex-col items-center border border-slate-100 relative z-10 transition-all duration-300 cubic-bezier(0.16, 1, 0.3, 1) transform ${
           isVisible
@@ -71,10 +71,10 @@ export const WelcomeOfferModal: React.FC = () => {
         onClick={(e) => e.stopPropagation()}
         data-node-id={modalStep === 1 ? '631:28510' : '631:28539'}
       >
-        {/* Top-Left Close Button */}
+        {/* Top Close Button (container btn 542:44899) */}
         <button
           onClick={handleDismiss}
-          className="absolute top-3 left-3 z-20 bg-white/80 backdrop-blur-xs text-[#171717] rounded-full size-8 flex items-center justify-center shadow-sm active:scale-90 transition-transform cursor-pointer"
+          className="absolute top-3 left-3 z-20 bg-white/80 backdrop-blur-xs text-[#171717] rounded-full size-9 flex items-center justify-center shadow-sm active:scale-90 transition-transform cursor-pointer"
           aria-label="Cerrar"
         >
           <span className="material-symbols-outlined text-[20px]">close</span>
@@ -82,62 +82,101 @@ export const WelcomeOfferModal: React.FC = () => {
 
         {modalStep === 1 ? (
           /* Step 1: Figma Node 631:28510 - Confirmation Modal with OK button */
-          <div className="w-full p-6 flex flex-col items-center text-center space-y-4 pt-8" data-node-id="631:28510">
-            {/* Header Icon / Graphic Area */}
-            <div className="size-[64px] bg-[#d8e3ff] rounded-full flex items-center justify-center text-[#0038d0] mb-1">
-              <span className="material-symbols-outlined text-[36px]">check_circle</span>
+          <div className="w-full flex flex-col items-center" data-node-id="631:28510">
+            {/* Top Image Frame (393:30993) - Height 209px */}
+            <div
+              className="w-full h-[209px] bg-[#d8e3ff] relative overflow-hidden flex items-center justify-center"
+              data-node-id="393:30993"
+            >
+              {/* BubbleZip Illustration Graphic (393:30997) */}
+              <img
+                src="/BubbleZip.svg"
+                alt="BubbleZip"
+                className="size-[110px] object-contain relative z-10"
+                data-node-id="393:30997"
+              />
+              {/* Decorative Circle Accents */}
+              <div className="absolute size-4 bg-[#0038d0]/20 rounded-full top-6 left-12" />
+              <div className="absolute size-5 bg-[#0038d0]/30 rounded-full top-10 right-10" />
+              <div className="absolute size-3 bg-[#0038d0]/20 rounded-full bottom-8 left-16" />
+              <div className="absolute size-4 bg-[#0038d0]/25 rounded-full bottom-10 right-14" />
             </div>
 
-            {/* Title */}
-            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] sm:text-[24px] leading-[30px] text-[#0038d0] tracking-tight">
-              {language === 'es' ? '¡Perfil listo!' : 'Profile ready!'}
-            </h2>
+            {/* Body Container (390:32501) - Height 275px */}
+            <div className="w-full p-5 flex flex-col justify-between text-left space-y-4" data-node-id="390:32501">
+              <div className="space-y-3" data-node-id="390:32502">
+                {/* Title (390:32503) */}
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] leading-[28px] text-[#0038d0] tracking-tight" data-node-id="390:32503">
+                  {language === 'es' ? '¡Perfil listo para revisión!' : 'Profile ready for review!'}
+                </h2>
 
-            {/* Subtitle Message */}
-            <p className="font-['Inter',sans-serif] font-normal text-[15px] leading-[22px] text-[#525252]">
-              {language === 'es'
-                ? 'Tu información ha sido guardada. Tu perfil ahora está visible para empleadores verificados de EE.UU.'
-                : 'Your info has been saved. Your profile is now visible to verified U.S. employers.'}
-            </p>
+                {/* Questions Text Block (390:32504) */}
+                <div className="space-y-2 font-['Inter',sans-serif] font-normal text-[14px] leading-[20px] text-[#525252]" data-node-id="390:32504">
+                  <p data-node-id="390:32505">
+                    {language === 'es'
+                      ? 'Tu información se ha guardado exitosamente.'
+                      : 'Your information has been successfully saved.'}
+                  </p>
+                  <p data-node-id="390:32506">
+                    {language === 'es'
+                      ? 'Las empresas verificadas de EE.UU. podrán revisar tu perfil.'
+                      : 'Verified U.S. employers will be able to review your profile.'}
+                  </p>
+                  <p data-node-id="390:32507">
+                    {language === 'es'
+                      ? 'Te notificaremos en cuanto recibas una oferta H-2.'
+                      : 'We will notify you as soon as you receive an H-2 offer.'}
+                  </p>
+                </div>
+              </div>
 
-            {/* Primary Action Button: OK */}
-            <div className="w-full pt-2">
+              {/* Primary Button OK (390:32508) */}
               <button
                 onClick={handleStep1Ok}
-                className="w-full min-h-[44px] px-5 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] shadow-md flex items-center justify-center transition-all duration-150 cursor-pointer"
+                className="w-full h-[44px] min-h-[44px] px-5 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] shadow-md flex items-center justify-center transition-all duration-150 cursor-pointer"
+                data-node-id="390:32508"
               >
                 <span>OK</span>
               </button>
             </div>
           </div>
         ) : (
-          /* Step 2: Figma Node 631:28539 - Offer Modal with "View job" / "Ver trabajo" button */
-          <div className="w-full flex flex-col items-center text-center" data-node-id="631:28539">
-            {/* Top Banner Header Graphic */}
-            <div className="w-full bg-[#d8e3ff] relative overflow-hidden flex items-center justify-center">
+          /* Step 2: Figma Node 631:28539 - Offer Modal with "View job" button */
+          <div className="w-full flex flex-col items-center" data-node-id="631:28539">
+            {/* Top Image Frame (341:32242) with JobCard 2 (504:55870) */}
+            <div
+              className="w-full h-[209px] bg-[#d8e3ff] relative overflow-hidden flex items-center justify-center"
+              data-node-id="341:32242"
+            >
               <img
                 src="/modal.svg"
-                alt="Zipmi Offer Modal"
-                className="w-full h-auto object-cover block"
+                alt="Job Card 2 Banner"
+                className="w-full h-full object-cover block"
+                data-node-id="504:55870"
               />
             </div>
 
-            {/* Body Content */}
-            <div className="w-full p-6 flex flex-col items-center text-center">
-              <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] sm:text-[24px] leading-[30px] text-[#0038d0] mb-2 tracking-tight">
-                {language === 'es' ? '¡Bienvenido a Zipmi!' : 'Welcome to Zipmi!'}
-              </h2>
+            {/* Container Frame (341:32255) */}
+            <div className="w-full p-5 flex flex-col justify-between text-left space-y-4" data-node-id="341:32255">
+              <div className="space-y-2" data-node-id="341:32256">
+                {/* Title (341:32257) */}
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] leading-[28px] text-[#0038d0] tracking-tight" data-node-id="341:32257">
+                  {language === 'es' ? '¡Tienes una oferta de trabajo!' : 'You have a job offer!'}
+                </h2>
 
-              <p className="font-['Inter',sans-serif] font-normal text-[15px] leading-[22px] text-[#525252] mb-6">
-                {language === 'es'
-                  ? '¡Excelentes noticias! Tienes una nueva oferta de trabajo esperándote.'
-                  : 'Great news! You have a new job offer waiting for you.'}
-              </p>
+                {/* Questions / Subtitle Text (341:32258 / 341:32259) */}
+                <p className="font-['Inter',sans-serif] font-normal text-[14px] leading-[20px] text-[#525252]" data-node-id="341:32259">
+                  {language === 'es'
+                    ? 'Un empleador de EE.UU. ha revisado tu perfil y te ha enviado una propuesta. Haz clic abajo para ver los detalles.'
+                    : 'A U.S. employer has reviewed your profile and sent you a proposal. Click below to view the details.'}
+                </p>
+              </div>
 
-              {/* Action Button: "View job" / "Ver trabajo" */}
+              {/* Primary Button: View job (341:32262) */}
               <button
                 onClick={handleViewJob}
-                className="w-full min-h-[44px] px-5 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] shadow-md flex items-center justify-center transition-all duration-150 cursor-pointer"
+                className="w-full h-[44px] min-h-[44px] px-5 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] shadow-md flex items-center justify-center transition-all duration-150 cursor-pointer"
+                data-node-id="341:32262"
               >
                 <span>{language === 'es' ? 'Ver trabajo' : 'View job'}</span>
               </button>

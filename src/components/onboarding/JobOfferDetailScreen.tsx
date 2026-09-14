@@ -2,9 +2,9 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const JobOfferDetailScreen: React.FC = () => {
-  const { language, setCurrentTab, updateWorker, triggerConfetti, addToast, jobs } = useApp();
+  const { language, setCurrentTab, updateWorker, triggerConfetti, addToast, jobs, selectedJobForDetail } = useApp();
 
-  const currentJob = jobs[0] || {
+  const currentJob = selectedJobForDetail || jobs[0] || {
     id: '1',
     companyName: 'Acme Company, Inc.',
     title: 'Marketing Intern / Trabajador Agrícola',
@@ -42,142 +42,146 @@ export const JobOfferDetailScreen: React.FC = () => {
 
   return (
     <div
-      className="bg-[#fafafa] overflow-hidden flex-1 w-full flex flex-col justify-between animate-slide-right relative"
+      className="bg-[#fafafa] overflow-hidden flex-1 w-full flex flex-col justify-between animate-slide-right relative h-full min-h-0"
       data-node-id="631:28603"
     >
-      {/* Header Bar (Figma node 2003:40005) */}
-      <div
-        className="w-full bg-[#fafafa] flex items-center justify-between px-[16px] py-[12px] sticky top-0 z-20"
-        data-node-id="2003:40005"
-      >
+      {/* Top Floating Header & Back Icon Button (631:28678) */}
+      <div className="absolute top-4 left-4 z-20" data-node-id="631:28678">
         <button
           onClick={() => setCurrentTab('home')}
-          className="bg-white border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-xs active:scale-90 transition-all duration-150 cursor-pointer"
+          className="bg-white/90 backdrop-blur-xs border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-md active:scale-90 transition-all duration-150 cursor-pointer"
           aria-label="Regresar"
         >
           <span className="material-symbols-outlined text-[24px]">arrow_back</span>
         </button>
-        <h1
-          className="font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-[#0038d0] text-center"
-          data-node-id="I2003:40005;3490:907"
-        >
-          {language === 'es' ? 'Oferta de trabajo' : 'Job Offer'}
-        </h1>
-        <div className="size-[44px]"></div>
       </div>
 
-      {/* Document View Area (Figma node 2003:40006) - Scrollable PDF/Paper Document Preview */}
-      <div
-        className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[12px] flex flex-col items-center gap-[16px]"
-        data-node-id="2003:40006"
-      >
-        {/* Paper Document Sheet (Figma nodes 2003:40007 / 2003:40008) */}
-        <div
-          className="w-full bg-white rounded-[12px] shadow-[1px_1px_6px_2px_rgba(0,0,0,0.05)] border border-[#e5e5e5] p-6 text-left font-['Inter',sans-serif] space-y-4"
-          data-node-id="2003:40007"
-        >
-          {/* Document Title Header */}
-          <div className="text-center pb-4 border-b border-[#e5e5e5]">
-            <h2 className="font-serif italic font-bold text-[20px] text-[#171717] tracking-tight mb-1">
-              Sample Job Offer Letter
-            </h2>
-            <h3 className="font-['Inter',sans-serif] font-bold text-[16px] text-[#171717]">
-              Acme Company, Inc.
-            </h3>
-            <p className="text-[12px] text-[#525252]">
-              123 Easy Street, Lafayette, LA 70504
+      {/* Main Scrollable View Content (631:28605) */}
+      <div className="flex-1 overflow-y-auto custom-scrollbar flex flex-col" data-node-id="631:28605">
+        {/* Top Job Banner Image (631:28604) - Height 154px */}
+        <div className="w-full h-[154px] bg-slate-200 relative shrink-0" data-node-id="631:28604">
+          <img
+            src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800&auto=format&fit=crop&q=80"
+            alt="Job Offer Banner"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+          <span className="absolute bottom-3 left-4 bg-black/60 backdrop-blur-xs text-white text-[12px] font-semibold px-2.5 py-1 rounded-md font-['Inter',sans-serif]">
+            H-2A 2026
+          </span>
+        </div>
+
+        {/* Job Content Body */}
+        <div className="p-4 space-y-6 text-left font-['Inter',sans-serif]">
+          {/* Job Summary Section (631:28606) */}
+          <div className="space-y-1.5" data-node-id="631:28606">
+            <h1 className="font-['DM_Sans',sans-serif] font-bold text-[22px] leading-[28px] text-[#171717]" data-node-id="631:28608">
+              {currentJob.title}
+            </h1>
+            <p className="font-semibold text-[15px] text-[#0038d0]" data-node-id="631:28609">
+              {currentJob.companyName}
             </p>
-            <p className="text-[11px] text-[#737373]">
-              (Tel) (000) 000-0000 (Fax) (000) 000-0000
+            <p className="text-[13px] text-[#525252] flex items-center gap-1" data-node-id="631:28610">
+              <span className="material-symbols-outlined text-[16px]">location_on</span>
+              <span>{currentJob.location}</span>
             </p>
           </div>
 
-          {/* Letter Body Meta Details */}
-          <div className="text-[12px] leading-[18px] text-[#262626] space-y-2">
-            <p>
-              <span className="font-semibold">Date:</span> September 12, 2026
-            </p>
-            <p>
-              <span className="font-semibold">To:</span> Office of International Affairs
-            </p>
-            <p>
-              <span className="italic underline">Candidate</span> has been selected for employment with our company since October 2026.
-            </p>
+          {/* Divider Line (631:28611) */}
+          <div className="border-t border-[#e5e5e5]" data-node-id="631:28611" />
 
-            <div className="space-y-1 pt-2">
-              <p>
-                <span className="font-bold">Physical location of job:</span> 123 Easy Street / Lafayette, LA 70504
-              </p>
-              <p>
-                <span className="font-bold">Number of hours worked per week:</span> 40 hours / week
-              </p>
-              <p>
-                <span className="font-bold">Job title:</span> Agricultural Operator / Marketing Intern
-              </p>
-              <p>
-                <span className="font-bold">Job duties:</span> Assist with harvesting, packing, crop inspection, equipment maintenance, and log reporting.
-              </p>
-              <p>
-                <span className="font-bold">Name of Supervisor:</span> John Smith
-              </p>
-              <p>
-                <span className="font-bold">Supervisor's Contact Phone:</span> (000) 000-0000
-              </p>
-              <p>
-                <span className="font-bold">Supervisor's E-Mail:</span> jsmith@yahoo.com
-              </p>
-              <p>
-                <span className="font-bold">E-Verify Number:</span> 0000000
-              </p>
-              <p>
-                <span className="font-bold">EIN:</span> 00-0000000
-              </p>
-            </div>
-
-            <div className="pt-3 border-t border-[#f0f0f0]">
-              <p className="font-bold mb-1">Explain how employment is related to study / experience:</p>
-              <p className="text-[11px] text-[#525252] italic">
-                Direct agricultural equipment operation and quality verification for certified H-2A seasonal program.
-              </p>
-            </div>
-
-            <p className="pt-2">
-              Should you need further information, please do not hesitate to contact me directly.
-            </p>
-
-            {/* Signature Block */}
-            <div className="pt-4 space-y-1">
-              <p>Sincerely,</p>
-              <div className="font-serif italic font-semibold text-[15px] text-[#0038d0] py-1">
-                John Smith
+          {/* Job Details Frame (631:28612) */}
+          <div className="space-y-6" data-node-id="631:28612">
+            {/* Job Info Row 3-Columns (631:28613) */}
+            <div className="grid grid-cols-3 gap-2 bg-white border border-[#e5e5e5] rounded-[16px] p-3 shadow-2xs" data-node-id="631:28613">
+              <div className="text-center space-y-0.5" data-node-id="631:28614">
+                <span className="text-[11px] font-medium text-[#737373] uppercase tracking-wider block" data-node-id="631:28616">
+                  {language === 'es' ? 'Período' : 'Period'}
+                </span>
+                <span className="text-[13px] font-bold text-[#171717] block truncate" data-node-id="631:28617">
+                  {currentJob.duration}
+                </span>
               </div>
-              <p className="font-semibold text-[#171717]">John Smith</p>
-              <p className="text-[11px] text-[#525252]">President</p>
-              <p className="text-[11px] text-[#525252]">Acme Company, Inc.</p>
+
+              <div className="text-center space-y-0.5 border-x border-[#f0f0f0] px-1" data-node-id="631:28618">
+                <span className="text-[11px] font-medium text-[#737373] uppercase tracking-wider block" data-node-id="631:28620">
+                  {language === 'es' ? 'Pago' : 'Pay rate'}
+                </span>
+                <span className="text-[13px] font-bold text-[#0038d0] block truncate" data-node-id="631:28621">
+                  {currentJob.payRate}
+                </span>
+              </div>
+
+              <div className="text-center space-y-0.5" data-node-id="631:28622">
+                <span className="text-[11px] font-medium text-[#737373] uppercase tracking-wider block" data-node-id="631:28624">
+                  {language === 'es' ? 'Ubicación' : 'Location'}
+                </span>
+                <span className="text-[13px] font-bold text-[#171717] block truncate" data-node-id="631:28625">
+                  Lafayette, LA
+                </span>
+              </div>
+            </div>
+
+            {/* Job Description Container (631:28626) */}
+            <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 space-y-2 shadow-2xs" data-node-id="631:28626">
+              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[16px] text-[#171717]" data-node-id="631:28629">
+                {language === 'es' ? 'Descripción del trabajo' : 'Job Description'}
+              </h3>
+              <p className="text-[14px] leading-[20px] text-[#525252]" data-node-id="631:28630">
+                {language === 'es'
+                  ? 'Operador agrícola para recolección, empaque, inspección de cultivos y mantenimiento de equipos en huerto certificado H-2A.'
+                  : 'Agricultural operator for harvesting, packing, crop inspection, and equipment maintenance in certified H-2A orchard.'}
+              </p>
+            </div>
+
+            {/* Job Requirements Container (631:28631) */}
+            <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-4 space-y-3 shadow-2xs" data-node-id="631:28631">
+              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[16px] text-[#171717]" data-node-id="631:28632">
+                {language === 'es' ? 'Requisitos del puesto' : 'Job Requirements'}
+              </h3>
+
+              <div className="space-y-2.5 text-[13px] text-[#262626]" data-node-id="631:28633">
+                <div className="flex items-center justify-between border-b border-[#f5f5f5] pb-2">
+                  <span className="text-[#737373]">{language === 'es' ? 'Horas semanales:' : 'Weekly hours:'}</span>
+                  <span className="font-semibold text-[#171717]">40 hrs / semana</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-[#f5f5f5] pb-2">
+                  <span className="text-[#737373]">{language === 'es' ? 'Experiencia previa:' : 'Experience needed:'}</span>
+                  <span className="font-semibold text-[#171717]">3 meses en agricultura</span>
+                </div>
+                <div className="flex items-center justify-between border-b border-[#f5f5f5] pb-2">
+                  <span className="text-[#737373]">{language === 'es' ? 'Alojamiento incluido:' : 'Housing included:'}</span>
+                  <span className="font-semibold text-emerald-600">Sí (Sin costo)</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[#737373]">{language === 'es' ? 'Transporte reembolsado:' : 'Travel reimbursed:'}</span>
+                  <span className="font-semibold text-emerald-600">Sí</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Container (Figma node 2003:40013) */}
+      {/* Footer Container (631:28673 / 631:28674) */}
       <div
-        className="w-full bg-[#fafafa] border-t border-[#e5e5e5] px-[16px] pt-[12px] pb-[16px] flex flex-col gap-[12px] shrink-0"
-        data-node-id="2003:40013"
+        className="w-full bg-white border-t border-[#e5e5e5] px-4 pt-3 pb-4 flex flex-col gap-2 shrink-0 shadow-lg z-20"
+        data-node-id="631:28673"
       >
-        {/* Accept Button (Figma node 2003:40015) - Clean blue pill button, no icon */}
+        {/* Primary Button: Accept job offer (631:28675) */}
         <button
           onClick={handleAcceptOffer}
-          className="w-full h-[44px] min-h-[44px] px-[16px] py-[10px] bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-[0px_1px_2px_rgba(0,0,0,0.09)] transition-all duration-150 cursor-pointer flex items-center justify-center"
-          data-node-id="2003:40015"
+          className="w-full h-[44px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-md transition-all duration-150 cursor-pointer flex items-center justify-center"
+          data-node-id="631:28675"
         >
           {language === 'es' ? 'Aceptar oferta de trabajo' : 'Accept job offer'}
         </button>
 
-        {/* Decline Button (Figma node 2003:40016) - Pomegranate Red #c7290e */}
+        {/* Ghost/Secondary Button: Decline job offer (631:28676) */}
         <button
           onClick={handleDeclineOffer}
-          className="w-full h-[44px] py-[10px] text-center font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-[#c7290e] active:scale-95 transition-all duration-150 cursor-pointer flex items-center justify-center rounded-[100px]"
-          data-node-id="2003:40016"
+          className="w-full h-[40px] text-center font-['Inter',sans-serif] font-semibold text-[15px] leading-[20px] text-[#c7290e] active:scale-95 transition-all duration-150 cursor-pointer flex items-center justify-center rounded-full"
+          data-node-id="631:28676"
         >
           {language === 'es' ? 'No quiero esta oferta' : "I don't want this job"}
         </button>
@@ -185,4 +189,3 @@ export const JobOfferDetailScreen: React.FC = () => {
     </div>
   );
 };
-

@@ -4,20 +4,18 @@ import { useApp } from '../context/AppContext';
 export const HomeView: React.FC = () => {
   const { worker, jobs, language, setCurrentTab, setSelectedJobForDetail } = useApp();
 
-  const mainJob = jobs[0]; // Huertos Scot Marks & Co. / Sunnydale Orchards Farm
-  const secondJob = jobs[1]; // Agro Fincas Gutters Landscaping
-
   const workerFirstName = worker.fullName.split(' ')[0] || 'Guadalupe';
+  const hasAcceptedOffer = worker.status === 'entrevista' || worker.appliedJobId;
 
   return (
     <div
-      className="flex-1 flex flex-col bg-[#fafafa] overflow-y-auto custom-scrollbar px-[24px] pb-[40px] pt-0 space-y-5 animate-fade-in relative"
+      className="flex-1 flex flex-col bg-[#fafafa] overflow-y-auto custom-scrollbar px-[24px] pb-[40px] pt-0 space-y-5 animate-fade-in relative h-full min-h-0"
       data-node-id="631:28540"
     >
-      {/* Fixed Sticky Top Header Row (Figma node 1997:39858) */}
+      {/* Fixed Sticky Top Header Row (Figma node 631:28541 / 1080:12450) */}
       <div
         className="sticky top-0 z-30 bg-[#fafafa] w-[calc(100%+48px)] -mx-[24px] px-[24px] py-3.5 border-b border-[#e5e5e5] flex items-center justify-between shadow-2xs mb-2"
-        data-node-id="1997:39858"
+        data-node-id="1080:12450"
       >
         <div className="flex items-center gap-3">
           {worker.photoUrl ? (
@@ -45,151 +43,82 @@ export const HomeView: React.FC = () => {
         </button>
       </div>
 
-      {/* Heading Container: "Your offers" + "Showing 2 invitations" (Figma node 1997:39860) */}
-      <div className="w-full flex items-baseline justify-between px-1" data-node-id="1997:39860">
-        <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] text-[#0038d0] tracking-tight" data-node-id="1997:39861">
+      {/* Heading Container: "Tus ofertas" + "Mostrando invitaciones" (Figma node 631:28543) */}
+      <div className="w-full flex items-baseline justify-between px-1" data-node-id="631:28543">
+        <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] text-[#0038d0] tracking-tight">
           {language === 'es' ? 'Tus ofertas' : 'Your offers'}
         </h2>
-        <span className="font-['Inter',sans-serif] font-normal text-[13px] text-[#525252]" data-node-id="1997:39862">
-          {language === 'es' ? 'Mostrando 2 invitaciones' : 'Showing 2 invitations'}
+        <span className="font-['Inter',sans-serif] font-normal text-[13px] text-[#525252]">
+          {hasAcceptedOffer
+            ? (language === 'es' ? 'Mostrando 1 oferta activa' : 'Showing 1 active offer')
+            : (language === 'es' ? 'Mostrando 0 invitaciones' : 'Showing 0 invitations')}
         </span>
       </div>
 
-      {/* Job Card 1 - Main Offer (Figma node 1997:39863) */}
-      <div className="w-full shadow-sm rounded-[20px] overflow-hidden border border-[#e5e5e5] bg-white transition-all" data-node-id="1997:39863">
-        {/* Top Header Pill - Green Banner */}
-        <div className="bg-[#0e8a37] py-2 px-4 text-center" data-node-id="1997:39864">
-          <span className="font-['DM_Sans',sans-serif] font-bold text-[14px] text-white tracking-wide uppercase" data-node-id="1997:39865">
-            {language === 'es' ? '¡Tienes una oferta!' : 'You have an offer!'}
-          </span>
-        </div>
-
-        {/* Card Content Area */}
-        <div className="p-4 space-y-4" data-node-id="1997:39866">
-          {/* Job Preview Banner Image */}
-          <div className="w-full h-[110px] rounded-[14px] overflow-hidden bg-slate-100 relative" data-node-id="1997:39867">
+      {/* Figma Node 631:28544 - Invitations Container (Empty / Waiting State as per Figma Node 631:28540) */}
+      {!hasAcceptedOffer ? (
+        <div
+          className="w-full bg-white rounded-[24px] border border-[#e5e5e5] p-6 flex flex-col items-center justify-center text-center shadow-xs my-auto py-10 space-y-4"
+          data-node-id="631:28544"
+        >
+          {/* Group 8451 & Decorative Graphic Elements */}
+          <div className="relative w-[180px] h-[140px] flex items-center justify-center mb-2" data-node-id="631:28546">
             <img
-              src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=600&auto=format&fit=crop&q=80"
-              alt="Orchard Farm"
-              className="w-full h-full object-cover"
-              data-node-id="1997:39868"
+              src="/BubbleZip.svg"
+              alt="Zipmi waiting"
+              className="w-full h-full object-contain"
             />
-            <span className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium px-2 py-0.5 rounded-md font-['Inter',sans-serif]">
-              H-2A 2026
+          </div>
+
+          {/* Headline & Description (Figma Nodes 631:28558 / 631:28559) */}
+          <div className="space-y-2 max-w-[280px]" data-node-id="631:28557">
+            <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] text-[#171717] leading-[24px]" data-node-id="631:28558">
+              {language === 'es' ? 'Esperando ofertas' : 'Waiting for offers'}
+            </h3>
+            <p className="font-['Inter',sans-serif] font-normal text-[14px] leading-[20px] text-[#737373]" data-node-id="631:28559">
+              {language === 'es'
+                ? 'Estamos esperando a que las empresas te envíen ofertas. Podrás verlas aquí.'
+                : 'We are waiting for companies to send you offers. You will be able to see them here.'}
+            </p>
+          </div>
+        </div>
+      ) : (
+        /* Accepted Offer Card View */
+        <div className="w-full shadow-sm rounded-[20px] overflow-hidden border border-[#e5e5e5] bg-white transition-all">
+          <div className="bg-[#0e8a37] py-2 px-4 text-center">
+            <span className="font-['DM_Sans',sans-serif] font-bold text-[14px] text-white tracking-wide uppercase">
+              {language === 'es' ? '¡Oferta en proceso!' : 'Offer in progress!'}
             </span>
           </div>
-
-          {/* Job Title & Employer */}
-          <div className="space-y-1" data-node-id="1997:39870">
-            <h3 className="font-['DM_Sans',sans-serif] font-bold text-[17px] text-[#171717] leading-[22px]" data-node-id="1997:39872">
-              {mainJob.title}
-            </h3>
-            <p className="font-['Inter',sans-serif] font-normal text-[13px] text-[#737373]" data-node-id="1997:39874">
-              {mainJob.companyName}
-            </p>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-[#f0f0f0]" data-node-id="1997:39875"></div>
-
-          {/* 3 Column Info Section */}
-          <div className="grid grid-cols-3 gap-2 font-['Inter',sans-serif]" data-node-id="1997:39876">
-            <div data-node-id="1997:39877">
-              <span className="text-[11px] font-medium text-[#737373] block" data-node-id="1997:39879">
-                {language === 'es' ? 'Período' : 'Period'}
-              </span>
-              <span className="text-[13px] font-semibold text-[#171717] block truncate" data-node-id="1997:39880">
-                {mainJob.duration}
-              </span>
+          <div className="p-4 space-y-4">
+            <div className="w-full h-[110px] rounded-[14px] overflow-hidden bg-slate-100 relative">
+              <img
+                src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=600&auto=format&fit=crop&q=80"
+                alt="Orchard Farm"
+                className="w-full h-full object-cover"
+              />
             </div>
-
-            <div data-node-id="1997:39881">
-              <span className="text-[11px] font-medium text-[#737373] block" data-node-id="1997:39883">
-                {language === 'es' ? 'Pago' : 'Pay rate'}
-              </span>
-              <span className="text-[13px] font-semibold text-[#0038d0] block truncate" data-node-id="1997:39884">
-                {mainJob.payRate}
-              </span>
+            <div className="space-y-1">
+              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[17px] text-[#171717] leading-[22px]">
+                {jobs[0]?.title || 'Marketing Intern / Trabajador Agrícola'}
+              </h3>
+              <p className="font-['Inter',sans-serif] font-normal text-[13px] text-[#737373]">
+                {jobs[0]?.companyName || 'Acme Company, Inc.'}
+              </p>
             </div>
-
-            <div data-node-id="1997:39885">
-              <span className="text-[11px] font-medium text-[#737373] block" data-node-id="1997:39887">
-                {language === 'es' ? 'Ubicación' : 'City, State'}
-              </span>
-              <span className="text-[13px] font-semibold text-[#171717] block truncate" data-node-id="1997:39888">
-                {mainJob.location}
-              </span>
-            </div>
+            <button
+              onClick={() => {
+                setSelectedJobForDetail(jobs[0]);
+                setCurrentTab('job_offer_detail');
+              }}
+              className="w-full min-h-[44px] px-4 py-[10px] bg-[#0038d0] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[15px] leading-[20px] text-center shadow-sm active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{language === 'es' ? 'Ver contrato completo' : 'View full contract'}</span>
+              <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+            </button>
           </div>
-
-          {/* Received Timestamp */}
-          <p className="font-['Inter',sans-serif] font-normal text-[12px] text-[#737373]" data-node-id="1997:39889">
-            {language === 'es' ? 'Recibido hace 1 día' : 'Received 1 day ago'}
-          </p>
-
-          {/* CTA Button */}
-          <button
-            onClick={() => {
-              setSelectedJobForDetail(mainJob);
-              setCurrentTab('job_offer_detail');
-            }}
-            className="w-full min-h-[44px] px-4 py-[10px] bg-[#0038d0] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[15px] leading-[20px] text-center shadow-sm active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2"
-            data-node-id="1997:39890"
-          >
-            <span>{language === 'es' ? 'Ver contrato completo' : 'View full contract'}</span>
-            <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-          </button>
         </div>
-      </div>
-
-      {/* Job Card 2 - Second Invitation (Figma node 1997:39891) */}
-      <div className="w-full shadow-sm rounded-[20px] overflow-hidden border border-[#e5e5e5] bg-white transition-all mb-6" data-node-id="1997:39891">
-        {/* Top Header Pill - Amber Banner */}
-        <div className="bg-[#fbbf24] py-2 px-4 text-center" data-node-id="1997:39893">
-          <span className="font-['DM_Sans',sans-serif] font-bold text-[14px] text-[#78350f] tracking-wide uppercase" data-node-id="1997:39894">
-            {language === 'es' ? '¡Mira esta nueva oferta!' : 'See this new offer!'}
-          </span>
-        </div>
-
-        {/* Card Content Area */}
-        <div className="p-4 space-y-4" data-node-id="1997:39895">
-          {/* Job Banner Image */}
-          <div className="w-full h-[100px] rounded-[14px] overflow-hidden bg-slate-100 relative" data-node-id="1997:39896">
-            <img
-              src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop&q=80"
-              alt="Berry Farm"
-              className="w-full h-full object-cover"
-              data-node-id="1997:39897"
-            />
-          </div>
-
-          {/* Job Title & Employer */}
-          <div className="space-y-1" data-node-id="1997:39898">
-            <h3 className="font-['DM_Sans',sans-serif] font-bold text-[16px] text-[#171717] leading-[22px]" data-node-id="1997:39900">
-              {secondJob ? secondJob.title : 'Cuidado y Empaque de Berries'}
-            </h3>
-            <p className="font-['Inter',sans-serif] font-normal text-[13px] text-[#737373]" data-node-id="1997:39903">
-              {secondJob ? secondJob.companyName : 'Agro Fincas Gutters Landscaping'}
-            </p>
-            <p className="font-['Inter',sans-serif] font-normal text-[12px] text-[#737373] pt-1" data-node-id="1997:39904">
-              {language === 'es' ? 'Recibido hace 3 días' : 'Received 3 days ago'}
-            </p>
-          </div>
-
-          {/* CTA Button */}
-          <button
-            onClick={() => {
-              if (secondJob) setSelectedJobForDetail(secondJob);
-              setCurrentTab('job_offer_detail');
-            }}
-            className="w-full min-h-[44px] px-4 py-[10px] bg-[#0038d0] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[15px] leading-[20px] text-center shadow-sm active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2"
-            data-node-id="1997:39905"
-          >
-            <span>{language === 'es' ? 'Ver contrato completo' : 'View full contract'}</span>
-            <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
