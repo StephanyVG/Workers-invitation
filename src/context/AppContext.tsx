@@ -112,7 +112,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : INITIAL_DOCUMENTS;
   });
 
-  const [currentTab, setCurrentTab] = useState<AppTab>('splash');
+  const [currentTab, setCurrentTab] = useState<AppTab>(() => {
+    // URL query check: ?reset=true resets flow to splash immediately
+    if (typeof window !== 'undefined' && window.location.search.includes('reset')) {
+      localStorage.removeItem('zipmi_current_tab');
+      localStorage.removeItem('zipmi_onboarding_path');
+      return 'splash';
+    }
+    const savedTab = localStorage.getItem('zipmi_current_tab');
+    return (savedTab as AppTab) || 'splash';
+  });
 
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(() => {
     const saved = localStorage.getItem('zipmi_show_welcome_modal');
@@ -133,7 +142,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.setItem('zipmi_worker_docs', JSON.stringify(documents));
   }, [documents]);
 
-
+  useEffect(() => {
+    localStorage.setItem('zipmi_current_tab', currentTab);
+  }, [currentTab]);
 
   useEffect(() => {
     localStorage.setItem('zipmi_show_welcome_modal', String(showWelcomeModal));
@@ -255,14 +266,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.removeItem('zipmi_worker_profile');
     localStorage.removeItem('zipmi_worker_docs');
     localStorage.removeItem('zipmi_show_welcome_modal');
+    localStorage.removeItem('zipmi_current_tab');
+    localStorage.removeItem('zipmi_onboarding_path');
     setWorker(INITIAL_WORKER_PROFILE);
     setDocuments(INITIAL_DOCUMENTS);
+    setOnboardingPath(null);
     setCurrentTab('splash');
     setShowWelcomeModal(false);
     setSelectedJobForDetail(null);
     addToast(
-      language === 'es' ? 'Demostración Reiniciada' : 'Demo Reset',
-      language === 'es' ? 'Los datos se restauraron al flujo inicial.' : 'Data restored to initial onboarding flow.',
+      language === 'es' ? 'Flujo Reiniciado al Inicio' : 'Flow Reset to Start',
+      language === 'es' ? 'Regresaste a la pantalla inicial de bienvenida.' : 'Returned to initial welcome screen.',
       'info'
     );
   };

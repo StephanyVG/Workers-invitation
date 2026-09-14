@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { ToastContainer } from '../ui/ToastContainer';
+import { useApp } from '../../context/AppContext';
 
 interface MobileContainerProps {
   children: React.ReactNode;
 }
 
 export const MobileContainer: React.FC<MobileContainerProps> = ({ children }) => {
+  const { resetDemoData } = useApp();
+
   useEffect(() => {
     // Dynamic Viewport Height calculation for cross-browser & mobile browser toolbar resilience
     const updateDVH = () => {
@@ -24,7 +27,17 @@ export const MobileContainer: React.FC<MobileContainerProps> = ({ children }) =>
   }, []);
 
   return (
-    <div className="w-full h-full min-h-screen min-h-[100dvh] bg-slate-950 sm:bg-slate-900 flex flex-col items-center justify-center font-sans overflow-hidden sm:p-4">
+    <div className="w-full h-full min-h-screen min-h-[100dvh] bg-slate-950 sm:bg-slate-900 flex flex-col items-center justify-center font-sans overflow-hidden sm:p-4 relative">
+      {/* Dev Reset Floating Button (top right corner of page) */}
+      <button
+        onClick={resetDemoData}
+        className="fixed top-3 right-3 z-50 bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 hover:text-[#0038d0] hover:border-[#0038d0] px-3 py-1.5 rounded-full font-['Inter',sans-serif] font-medium text-xs shadow-lg flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 select-none"
+        title="Reiniciar flujo desde el inicio (Splash)"
+      >
+        <span className="material-symbols-outlined text-[16px]">refresh</span>
+        <span>Reiniciar flujo</span>
+      </button>
+
       {/* Standard Mobile Frame (Minimum 360px width x 820px height reference with Dynamic Viewport Height) */}
       <div 
         className="w-full sm:w-[375px] sm:min-w-[360px] sm:max-w-[430px] h-full sm:h-[820px] sm:min-h-[820px] max-h-[100dvh] sm:max-h-[calc(100dvh-2rem)] bg-[#fafafa] sm:rounded-[36px] sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col relative sm:border-[4px] sm:border-slate-800 transition-all"
