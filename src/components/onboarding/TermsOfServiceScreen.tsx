@@ -3,9 +3,10 @@ import { useApp } from '../../context/AppContext';
 import { VisaPathBottomSheet } from './VisaPathBottomSheet';
 
 export const TermsOfServiceScreen: React.FC = () => {
-  const { language, setCurrentTab, updateWorker, setShowWelcomeModal } = useApp();
+  const { language, setCurrentTab, updateWorker } = useApp();
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState<boolean>(false);
   const [showVisaBottomSheet, setShowVisaBottomSheet] = useState<boolean>(false);
+  const [showInviteModal, setShowInviteModal] = useState<boolean>(false);
 
   const handleContinueTerms = () => {
     if (!hasAcceptedTerms) return;
@@ -13,10 +14,17 @@ export const TermsOfServiceScreen: React.FC = () => {
   };
 
   const handleConfirmVisaSheet = () => {
+    setShowVisaBottomSheet(false);
     updateWorker({
       status: 'revision_documentos',
       hasSignedContract: false
     });
+    // Open Modal Node 3654:9349 for Path 1 (Invitation code flow)
+    setShowInviteModal(true);
+  };
+
+  const handleInviteModalContinue = () => {
+    setShowInviteModal(false);
     setCurrentTab('h2_intro');
   };
 
@@ -108,7 +116,66 @@ export const TermsOfServiceScreen: React.FC = () => {
         onClose={() => setShowVisaBottomSheet(false)}
         onConfirm={handleConfirmVisaSheet}
       />
+
+      {/* Figma Node 3654:9349 Modal (Path 1: Invitation Code Path) */}
+      {showInviteModal && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center px-4 py-8 animate-fadeIn"
+          data-node-id="3654:9349"
+        >
+          <div
+            className="w-full max-w-[334px] bg-white rounded-[24px] shadow-2xl overflow-hidden flex flex-col items-center border border-slate-100 relative z-10 animate-scaleUp"
+            data-node-id="3654:9349"
+          >
+            {/* Top Image Frame (393:30993) - Height 209px with centered BubbleZip */}
+            <div
+              className="w-full h-[209px] bg-[#d8e3ff] relative overflow-hidden flex items-center justify-center"
+              data-node-id="393:30993"
+            >
+              {/* Centered BubbleZip Graphic (393:30997) */}
+              <img
+                src="/BubbleZip.svg"
+                alt="BubbleZip"
+                className="w-[120px] h-[120px] object-contain relative z-10 mx-auto my-auto"
+                data-node-id="393:30997"
+              />
+              {/* Decorative Accent Dots */}
+              <div className="absolute size-4 bg-[#0038d0]/20 rounded-full top-6 left-12" />
+              <div className="absolute size-5 bg-[#0038d0]/30 rounded-full top-10 right-10" />
+              <div className="absolute size-3 bg-[#0038d0]/20 rounded-full bottom-8 left-16" />
+              <div className="absolute size-4 bg-[#0038d0]/25 rounded-full bottom-10 right-14" />
+            </div>
+
+            {/* Body Container (390:32501) - Height 275px */}
+            <div className="w-full p-5 flex flex-col justify-between text-left space-y-4" data-node-id="390:32501">
+              <div className="space-y-3" data-node-id="390:32502">
+                {/* Title (390:32503) */}
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[22px] leading-[28px] text-[#0038d0] tracking-tight" data-node-id="390:32503">
+                  {language === 'es' ? '¡Código verificado!' : 'Code verified!'}
+                </h2>
+
+                {/* Questions Text Block (390:32504 / 390:32505) */}
+                <div className="space-y-2 font-['Inter',sans-serif] font-normal text-[14px] leading-[20px] text-[#525252]" data-node-id="390:32504">
+                  <p data-node-id="390:32505">
+                    {language === 'es'
+                      ? 'Tu empleador ha registrado tu invitación para el proceso de visa H-2. Completa tu información para continuar.'
+                      : 'Your employer has registered your invitation for the H-2 visa process. Complete your information to continue.'}
+                  </p>
+                </div>
+              </div>
+
+              {/* Primary Button (390:32508) */}
+              <button
+                onClick={handleInviteModalContinue}
+                className="w-full h-[44px] min-h-[44px] px-5 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] shadow-md flex items-center justify-center transition-all duration-150 cursor-pointer"
+                data-node-id="390:32508"
+              >
+                <span>{language === 'es' ? 'Continuar' : 'Continue'}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
-
