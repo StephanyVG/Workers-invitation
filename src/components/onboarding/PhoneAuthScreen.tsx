@@ -48,10 +48,10 @@ export const PhoneAuthScreen: React.FC = () => {
             alt="Zipmi"
             className="h-7 sm:h-8 w-auto object-contain mb-2"
           />
-          <h2 className="font-['DM_Sans',sans-serif] font-bold text-2xl sm:text-[28px] text-[#0038d0] leading-[36px] tracking-tight">
+          <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] text-[#0038d0] leading-[36px] tracking-tight">
             {language === 'es' ? 'Comienza con tu número de teléfono' : 'Start with your phone number'}
           </h2>
-          <p className="font-['Inter',sans-serif] font-normal text-[14px] leading-[22px] text-[#525252]">
+          <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]">
             {language === 'es'
               ? 'Ingresa tu número de teléfono para iniciar sesión'
               : 'Enter your phone number to log in'}

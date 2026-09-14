@@ -74,10 +74,10 @@ export const OtpVerifyScreen: React.FC = () => {
 
         {/* Title and Subtitle */}
         <div className="flex flex-col items-center text-center gap-3 w-full mb-8">
-          <h2 className="font-['DM_Sans',sans-serif] font-bold text-2xl sm:text-[28px] text-[#0038d0] leading-[36px] tracking-tight">
+          <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] text-[#0038d0] leading-[36px] tracking-tight">
             {language === 'es' ? 'Ingresa el código de verificación' : 'Enter the verification code'}
           </h2>
-          <div className="font-['Inter',sans-serif] font-normal text-[14px] leading-[22px] text-[#525252] space-y-0.5">
+          <div className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252] space-y-0.5">
             <p>
               {language === 'es'
                 ? 'Hemos enviado un código de verificación de 6 dígitos a tu teléfono:'

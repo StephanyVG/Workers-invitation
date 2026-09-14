@@ -93,10 +93,10 @@ export const EnterCodeScreen: React.FC = () => {
 
         {/* Title + Subtitle */}
         <div className="flex flex-col gap-3 text-center w-full">
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-2xl sm:text-[28px] text-[#0038d0] leading-snug sm:leading-[36px] tracking-[-0.112px]">
+          <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] text-[#0038d0] leading-[36px] tracking-[-0.112px]">
             {language === 'es' ? 'Solo un paso más para comenzar' : 'Just one more step to get started'}
           </h2>
-          <p className="font-['Inter',sans-serif] font-normal text-sm sm:text-[15px] text-[#262626] leading-relaxed tracking-[-0.032px]">
+          <p className="font-['Inter',sans-serif] font-normal text-[16px] text-[#525252] leading-[24px] tracking-[-0.032px]">
             {language === 'es'
               ? 'Te enviamos un mensaje con 6 números al teléfono: +522218563245. Por favor escríbelos abajo.'
               : 'We sent you a message with 6 numbers to the phone: +522218563245. Please write them below.'}
