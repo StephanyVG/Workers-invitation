@@ -66,7 +66,7 @@ export const Step24ImmigrationLegalScreen: React.FC = () => {
       {/* Main Scrollable Content */}
       <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[24px] space-y-6 min-h-0 text-left">
         {/* Section Title */}
-        <h1 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px] text-center my-2">
+        <h1 className="font-['DM_Sans',sans-serif] font-bold text-[24px] leading-[32px] text-[#171717] tracking-[-0.096px] text-center my-2">
           {language === 'es' ? 'Immigración y asuntos legales' : 'Immigration and Legal Issues'}
         </h1>
 

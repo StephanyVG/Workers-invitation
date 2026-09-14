@@ -120,8 +120,8 @@ export const Step19SocialInfoScreen: React.FC = () => {
       {/* Main Content Area */}
       <div className="flex-1 overflow-y-auto custom-scrollbar px-[16px] py-[20px] max-w-md mx-auto w-full flex flex-col gap-6">
         {/* Screen Title */}
-        <div className="w-full">
-          <h1 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#171717] tracking-[-0.32px]">
+        <div className="w-full text-center">
+          <h1 className="font-['DM_Sans',sans-serif] font-bold text-[24px] leading-[32px] text-[#171717] tracking-[-0.096px] text-center my-2">
             {language === 'es' ? 'Información social' : 'Social information'}
           </h1>
         </div>

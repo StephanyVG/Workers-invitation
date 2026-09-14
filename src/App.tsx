@@ -113,6 +113,11 @@ const MainContent: React.FC = () => {
     'step18_part4_intro',
     'step19_social_info',
     'step20_health_safety',
+    'step21_criminal_history',
+    'step22_security_terrorism',
+    'step23_human_rights',
+    'step24_immigration_legal',
+    'step25_final_review',
     'job_offer_detail'
   ].includes(currentTab);
 
