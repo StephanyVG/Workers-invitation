@@ -29,13 +29,10 @@ export const PushNotificationBanner: React.FC = () => {
 
   return (
     <div
-      className="fixed top-[68px] left-1/2 -translate-x-1/2 z-50 w-[calc(100%-32px)] max-w-[340px] animate-slide-down pointer-events-auto"
+      onClick={handleBannerClick}
+      className="absolute top-[60px] left-1/2 z-50 w-[calc(100%-32px)] max-w-[345px] animate-push-move-in pointer-events-auto bg-[#e7f6ff] border border-[#b0deff] rounded-[16px] p-[16px] flex gap-[12px] items-start shadow-xl cursor-pointer active:scale-[0.99] transition-transform"
       data-node-id="1004:4817"
     >
-      <div
-        onClick={handleBannerClick}
-        className="w-full bg-[#e7f6ff] border border-[#b0deff] rounded-[16px] p-[16px] flex gap-[12px] items-start shadow-xl cursor-pointer active:scale-[0.99] transition-transform"
-      >
         {/* Left Zipmi Icon */}
         <div className="size-[28px] shrink-0 relative flex items-center justify-center">
           <img
@@ -75,7 +72,6 @@ export const PushNotificationBanner: React.FC = () => {
             className="size-[16px] object-contain opacity-70 hover:opacity-100"
           />
         </button>
-      </div>
     </div>
   );
 };

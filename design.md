@@ -141,10 +141,10 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
    - Título: `"Aún no hay mensajes"` (`es`) / `"No Messages yet"` (`en`) (`text-[18px] font-semibold text-[#171717]`).
    - Subtítulo: *"Verás los nuevos mensajes de los empleadores en esta sección."* / *"You'll see new messages from employers in this section."* (`text-[14px] text-[#737373]`).
 11. **Notificación Push In-App (`PushNotificationBanner.tsx`, Nodo Figma `1004:4817`)**:
-    - Banner flotante ubicado inmediatamente debajo de la barra superior del encabezado (`top-[68px]`, centrado horizontalmente) con fondo azul suave (`#E7F6FF`), badge de logo Zipmi, texto de invitación a entrevista y botón de cierre.
-    - Animación de entrada de arriba hacia abajo (`animate-slide-down`) sin overlay oscuro de fondo.
-    - Temporizador automático de 8 segundos y opción de descarte manual.
-    - Al hacer clic en el banner se navega directamente a la pantalla de **Horarios Disponibles** (`available_times`).
+    - Banner flotante posicionado de forma absoluta dentro del contenedor del teléfono (`absolute top-[60px]`, centrado horizontalmente sobre/debajo del header del saludo `"¡Hola, Guadalupe!"`).
+    - Animación de entrada Move-In dedicada de arriba hacia abajo (`.animate-push-move-in` con `@keyframes pushNotificationMoveIn`) sin overlay de fondo.
+    - Temporizador automático de 8 segundos y botón de descarte por papelera.
+    - Al hacer clic en la tarjeta se navega a **Horarios Disponibles** (`available_times`).
 12. **Página Dedicada de Notificaciones (`NotificationsView.tsx`)**:
     - Vista dedicada que abre al presionar el botón circular de campana de notificaciones en el encabezado superior.
     - Lista interactiva de notificaciones (entrevistas, invitaciones a empleo).
