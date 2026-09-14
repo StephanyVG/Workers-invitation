@@ -104,5 +104,4 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 | Modal Perfil Listo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28510` | Botón OK, secuencia inicial |
 | Modal Oferta Trabajo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28539` | `/JobCard2.svg` (148x164px centrado) |
 | Detalle de Oferta | `src/components/jobs/JobOfferDetailScreen.tsx` | `631:28603` | Header imagen, resumen 3 columnas, H-2A/H-2B |
-| Modal Código Verificado | `src/components/onboarding/TermsOfServiceScreen.tsx` | `3654:9349` | `/BubbleZip.svg`, flujo 1 "I have invitation code" |
 | Bottom Sheet Visa | `src/components/onboarding/VisaPathBottomSheet.tsx` | - | ¡Importante! El camino hacia tu visa |
