@@ -45,7 +45,7 @@ export const Step26FinishedProfileScreen: React.FC = () => {
       <div className="flex-1 px-[24px] py-[24px] space-y-6 text-left overflow-y-auto custom-scrollbar">
         <div className="space-y-4">
           {/* Title */}
-          <h1 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] tracking-[-0.28px]">
+          <h1 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] tracking-[-0.28px]">
             {language === 'es' ? '¡Has terminado tu perfil!' : 'You’ve finished your profile!'}
           </h1>
 

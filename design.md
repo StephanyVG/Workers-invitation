@@ -52,3 +52,15 @@ Documento de estándares de diseño e interfaz para la aplicación **Zipmi Worke
 - **Barra de Navegación Fija**:
   - La barra de navegación inferior (`Navbar`, nodo Figma `1997:39906`) y las barras de encabezado principales deben mantenerse **fijas** (`fixed` / `sticky`), evitando que hagan scroll con el contenido.
   - El elemento activo en la barra inferior utiliza la cápsula redondeada azul claro (`bg-[#c2e7ff]`), texto `#0045ff` y el icono de Material Design relleno.
+
+---
+
+## 5. Estándares de Tipografía para Títulos de Pantalla
+
+- **Pantallas Iniciales (Previas y durante el Bot)**:
+  - Títulos principales: **28px bold** (`font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px]`).
+  - Títulos de sección/preguntas sobre opciones: **18px bold** (`font-['DM_Sans',sans-serif] font-bold text-[18px] leading-[24px]`).
+  - Descripciones y contenidos en tarjetas/inputs: **16px** (`font-['Inter',sans-serif] font-normal text-[16px] leading-[24px]`).
+
+- **Pantallas Posteriores al Bot (Chat Wizard de Elegibilidad)**:
+  - Todos los títulos principales de pantalla después del bot deben ser de exactamente **24px en semibold** (`font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px]`).

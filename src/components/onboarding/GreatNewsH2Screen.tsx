@@ -25,7 +25,7 @@ export const GreatNewsH2Screen: React.FC = () => {
         </div>
 
         {/* Title (Figma 3:65280) */}
-        <h2 className="font-['DM_Sans',sans-serif] font-bold text-[26px] sm:text-[30px] leading-[34px] sm:leading-[40px] text-[#0038d0] tracking-tight text-left w-full mb-3">
+        <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] tracking-tight text-left w-full mb-3">
           {language === 'es'
             ? '¡Excelentes noticias! Aquí puedes buscar empleos con visa H2.'
             : 'Great news! You can look for H2 visa jobs here.'}
