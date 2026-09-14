@@ -134,6 +134,12 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
    - Ilustración central de icono de calendario con sombra en el suelo y partículas circulares flotantes.
    - Título: `"Aún no hay eventos"` (`es`) / `"No Events yet"` (`en`) (`text-[18px] font-semibold text-[#171717]`).
    - Subtítulo: *"Verás los nuevos eventos de los empleadores en esta sección."* / *"You'll see new events from employers in this section."* (`text-[14px] text-[#737373]`).
+10. **Sección de Mensajes / Empty State (`JobsView.tsx`, Nodo Figma `3677:70564`)**:
+   - Pestaña de navegación etiquetada como **"Employer"** (icono `chat_bubble_outline`).
+   - Encabezado superior con título `"Mensajes"` / `"Messages"` (`text-[24px] font-semibold text-[#0038d0]`).
+   - Ilustración central de globos de conversación (`0444_Chat_7`, `/assets/messages_empty/imgChat31.png`) con sombra en el suelo e iconos circulares flotantes.
+   - Título: `"Aún no hay mensajes"` (`es`) / `"No Messages yet"` (`en`) (`text-[18px] font-semibold text-[#171717]`).
+   - Subtítulo: *"Verás los nuevos mensajes de los empleadores en esta sección."* / *"You'll see new messages from employers in this section."* (`text-[14px] text-[#737373]`).
 
 ---
 
@@ -149,4 +155,5 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 | Confirmación Oferta | `src/components/onboarding/ConfirmationScreen.tsx` | `631:28567` | Thumbs Up, All set!, Regresar a invitaciones |
 | Empty State Documentos | `src/views/DocumentsView.tsx` | `2023:45431` | Ilustración documento/perfil, No documents yet |
 | Empty State Calendario | `src/views/CalendarView.tsx` | `3675:70238` | Ilustración calendario, No Events yet |
+| Empty State Mensajes | `src/views/JobsView.tsx` | `3677:70564` | Ilustración burbujas chat, No Messages yet |
 | Bottom Sheet Visa | `src/components/onboarding/VisaPathBottomSheet.tsx` | - | ¡Importante! El camino hacia tu visa |
