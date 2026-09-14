@@ -140,9 +140,10 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
    - Ilustración central de globos de conversación (`0444_Chat_7`, `/assets/messages_empty/imgChat31.png`) con sombra en el suelo e iconos circulares flotantes.
    - Título: `"Aún no hay mensajes"` (`es`) / `"No Messages yet"` (`en`) (`text-[18px] font-semibold text-[#171717]`).
    - Subtítulo: *"Verás los nuevos mensajes de los empleadores en esta sección."* / *"You'll see new messages from employers in this section."* (`text-[14px] text-[#737373]`).
-11. **Notificación Push In-App Centrada (`PushNotificationBanner.tsx`, Nodo Figma `1004:4817`)**:
-    - Banner flotante en el **centro** de la pantalla (`fixed inset-0 flex items-center justify-center`) con fondo azul suave (`#E7F6FF`), badge de logo Zipmi, texto de invitación a entrevista y botón de cierre.
-    - Temporizador automático de 8 segundos y backdrop semi-transparente.
+11. **Notificación Push In-App (`PushNotificationBanner.tsx`, Nodo Figma `1004:4817`)**:
+    - Banner flotante ubicado inmediatamente debajo de la barra superior del encabezado (`top-[68px]`, centrado horizontalmente) con fondo azul suave (`#E7F6FF`), badge de logo Zipmi, texto de invitación a entrevista y botón de cierre.
+    - Animación de entrada de arriba hacia abajo (`animate-slide-down`) sin overlay oscuro de fondo.
+    - Temporizador automático de 8 segundos y opción de descarte manual.
     - Al hacer clic en el banner se navega directamente a la pantalla de **Horarios Disponibles** (`available_times`).
 12. **Página Dedicada de Notificaciones (`NotificationsView.tsx`)**:
     - Vista dedicada que abre al presionar el botón circular de campana de notificaciones en el encabezado superior.
