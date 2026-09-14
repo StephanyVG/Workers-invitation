@@ -64,6 +64,8 @@ import { Step26FinishedProfileScreen } from './components/onboarding/Step26Finis
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
 import { ConfirmationScreen } from './components/onboarding/ConfirmationScreen';
+import { AvailableTimesView } from './views/AvailableTimesView';
+import { PushNotificationBanner } from './components/PushNotificationBanner';
 
 const MainContent: React.FC = () => {
   const { currentTab, showWelcomeModal } = useApp();
@@ -188,11 +190,15 @@ const MainContent: React.FC = () => {
 
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}
+        {currentTab === 'available_times' && <AvailableTimesView />}
         {currentTab === 'jobs' && <JobsView />}
         {currentTab === 'calendar' && <CalendarView />}
         {(currentTab === 'documents' || currentTab === 'profile') && <DocumentsView />}
         {currentTab === 'apply_wizard' && <MultiStepRegistration />}
       </div>
+
+      {/* Push Notification Banner Overlay */}
+      {!isOnboardingTab && <PushNotificationBanner />}
 
       {/* Bottom Nav Bar (hidden on onboarding & apply wizard) */}
       {!isOnboardingTab && <BottomNavigation />}

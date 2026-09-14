@@ -140,6 +140,22 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
    - Ilustración central de globos de conversación (`0444_Chat_7`, `/assets/messages_empty/imgChat31.png`) con sombra en el suelo e iconos circulares flotantes.
    - Título: `"Aún no hay mensajes"` (`es`) / `"No Messages yet"` (`en`) (`text-[18px] font-semibold text-[#171717]`).
    - Subtítulo: *"Verás los nuevos mensajes de los empleadores en esta sección."* / *"You'll see new messages from employers in this section."* (`text-[14px] text-[#737373]`).
+11. **Notificación Push In-App (`PushNotificationBanner.tsx`, Nodo Figma `1004:4817`)**:
+    - Banner flotante en la parte superior con fondo azul suave (`#E7F6FF`), badge de logo Zipmi, texto de invitación a entrevista de Sunnydale Orchards y botón de papelera/cierre.
+    - Temporizador configurable de al menos 8 segundos de visualización automática o cierre manual.
+    - Re-activable al pulsar el botón circular de campana de notificaciones en el encabezado superior.
+    - Al hacer clic en el cuerpo de la notificación se navega directamente a la pantalla de **Horarios Disponibles** (`available_times`).
+12. **Pantalla de Horarios Disponibles (`AvailableTimesView.tsx`, Nodo Figma `1004:4515`)**:
+    - Encabezado con botón de regreso y título `"Horarios Disponibles"` / `"Available Times"` (`#0038D0`).
+    - Selector de mes (`"Abril, 2025"` / `"April, 2025"`) con flechas de navegación.
+    - Selector horizontal de días con píldoras seleccionables (`Jue 07` seleccionado con fondo azul `#0045FF`).
+    - Lista de opciones de horarios en formato radio (`13:00 hrs - 14:00 hrs`, `14:00 hrs - 15:00 hrs`, `15:00 hrs - 16:00 hrs`).
+    - Botón primario `"Elegir este horario"` / `"Choose This Time"` y botón ghost rojo `"No quiero este trabajo"` / `"I don't want this job"`.
+13. **Home Actualizado con Invitación a Entrevista (`HomeView.tsx`, Nodo Figma `1004:5204`)**:
+    - Encabezado superior con saludo `"¡Hola, Guadalupe!"` / `"Hi, Guadalupe!"` y botón de notificación activo.
+    - Encabezado `"Invitaciones de trabajo"` / `"Job Invitations"` con contador `"Mostrando 2 invitaciones"`.
+    - **Tarjeta 1**: Banner azul `"¡Programa tu entrevista!"` / `"Schedule your interview"`, datos de la granja Sunnydale Orchards, imagen de huerto de manzanas, resumen en 3 columnas y botón `"Elegir horario"` / `"Pick a Time"`.
+    - **Tarjeta 2**: Banner amarillo `"¡Nueva invitación a empleo!"` / `"New job invitation!"`, datos del puesto y botón `"Ver empleo"` / `"View Job"`.
 
 ---
 
@@ -147,8 +163,11 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 
 | Componente | Archivo | Nodo Figma | Descripción / Activos |
 | :--- | :--- | :--- | :--- |
-| Empty State Home | `src/components/home/HomeView.tsx` | `631:28540` | `/BubbleZip.svg`, contenedor `631:28544` |
-| Home con Invitaciones | `src/components/home/HomeView.tsx` | `631:28431` | Tarjetas Entrevista pendiente y Nueva invitación |
+| Empty State Home | `src/views/HomeView.tsx` | `631:28540` | `/BubbleZip.svg`, contenedor `631:28544` |
+| Home con Invitaciones | `src/views/HomeView.tsx` | `631:28431` | Tarjetas Entrevista pendiente y Nueva invitación |
+| Home Actualizado Entrevista | `src/views/HomeView.tsx` | `1004:5204` | Tarjeta Schedule your interview con botón Pick a Time |
+| Notificación Push In-App | `src/components/PushNotificationBanner.tsx` | `1004:4817` | Banner push flotante 8s con re-disparo mediante campana |
+| Horarios Disponibles | `src/views/AvailableTimesView.tsx` | `1004:4515` | Selector de fechas (Abril 2025) y slots de horas |
 | Modal Perfil Listo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28510` | Botón OK, secuencia inicial |
 | Modal Oferta Trabajo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28539` | `/JobCard2.svg` (148x164px centrado) |
 | Detalle de Oferta | `src/components/jobs/JobOfferDetailScreen.tsx` | `631:28603` | Header imagen, resumen 3 columnas, H-2A/H-2B, i18n |

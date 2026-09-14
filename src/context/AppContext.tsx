@@ -60,6 +60,7 @@ export type AppTab =
   | 'welcome_offer'
   | 'job_offer_detail'
   | 'offer_accepted_confirmation'
+  | 'available_times'
   | 'home'
   | 'jobs'
   | 'calendar'
@@ -77,6 +78,9 @@ interface AppContextType {
   setCurrentTab: (tab: AppTab) => void;
   showWelcomeModal: boolean;
   setShowWelcomeModal: (show: boolean) => void;
+  showPushBanner: boolean;
+  setShowPushBanner: React.Dispatch<React.SetStateAction<boolean>>;
+  triggerPushBanner: () => void;
   language: AppLanguage;
   setLanguage: (lang: AppLanguage) => void;
   toasts: ToastMessage[];
@@ -129,6 +133,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const saved = localStorage.getItem('zipmi_show_welcome_modal');
     return saved === 'true';
   });
+
+  const [showPushBanner, setShowPushBanner] = useState<boolean>(true);
+
+  const triggerPushBanner = () => {
+    setShowPushBanner(true);
+  };
 
   const [language, setLanguage] = useState<AppLanguage>('es');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -307,6 +317,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentTab,
         showWelcomeModal,
         setShowWelcomeModal,
+        showPushBanner,
+        setShowPushBanner,
+        triggerPushBanner,
         language,
         setLanguage,
         toasts,
