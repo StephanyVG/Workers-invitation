@@ -26,15 +26,15 @@ export const WelcomeScreen: React.FC = () => {
           className="h-7 sm:h-8 w-auto object-contain mb-1"
         />
 
-        <p className="font-['DM_Sans',sans-serif] font-semibold text-lg sm:text-[22px] text-[#0038d0] leading-snug tracking-[-0.096px]">
+        <h1 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] tracking-[-0.112px]">
           {language === 'es'
             ? 'Te ayudamos a obtener tu visa H-2, paso a paso'
             : 'We help you get your H-2 visa, step by step'}
-        </p>
+        </h1>
 
-        <h2 className="font-['DM_Sans',sans-serif] font-semibold text-xl sm:text-[26px] text-[#171717] leading-snug tracking-[-0.112px] pt-1">
+        <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252] pt-1">
           {language === 'es' ? '¿Has usado Zipmi antes?' : 'Have you used Zipmi before?'}
-        </h2>
+        </p>
       </div>
 
       {/* Action Selection Group (Full width bounded by 24px padding) */}

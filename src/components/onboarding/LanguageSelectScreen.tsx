@@ -42,11 +42,11 @@ export const LanguageSelectScreen: React.FC = () => {
 
           {/* Title and Subtitle */}
           <div className="space-y-2 mb-6 w-full">
-            <h2 className="font-['DM_Sans',sans-serif] font-semibold text-2xl sm:text-[28px] text-[#0038d0] leading-snug sm:leading-[36px] tracking-[-0.112px]">
+            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] tracking-[-0.112px]">
               {language === 'es' ? 'Zipmi habla tu idioma' : 'Zipmi speaks your language'}
             </h2>
 
-            <p className="font-['Inter',sans-serif] font-normal text-sm sm:text-[15px] text-[#262626] leading-relaxed tracking-[-0.032px]">
+            <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252] tracking-[-0.032px]">
               {language === 'es'
                 ? 'Selecciona el idioma en el que quieres que nos comuniquemos contigo.'
                 : 'Select the language you want us to communicate with you.'}
