@@ -1,221 +1,86 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useApp } from '../context/AppContext';
-import { DocumentInfo } from '../types';
-import { 
-  FileText, 
-  CheckCircle2, 
-  Clock, 
-  AlertCircle, 
-  Plus, 
-  Camera, 
-  Upload, 
-  X, 
-  ShieldCheck,
-  Eye
-} from 'lucide-react';
+
+const imgLayer9 = "/assets/documents_empty/imgLayer9.svg";
+const imgLayer3 = "/assets/documents_empty/imgLayer3.svg";
+const imgEllipse311 = "/assets/documents_empty/imgEllipse311.svg";
+const imgEllipse317 = "/assets/documents_empty/imgEllipse317.svg";
+const imgEllipse318 = "/assets/documents_empty/imgEllipse318.svg";
+const imgEllipse319 = "/assets/documents_empty/imgEllipse319.svg";
+const imgEllipse316 = "/assets/documents_empty/imgEllipse316.svg";
 
 export const DocumentsView: React.FC = () => {
-  const { documents, uploadDocument, addToast } = useApp();
-
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
-  const [newDocTitle, setNewDocTitle] = useState<string>('');
-  const [selectedCategory, setSelectedCategory] = useState<DocumentInfo['category']>('identificacion');
-  const [viewingDoc, setViewingDoc] = useState<DocumentInfo | null>(null);
-
-  const handleSimulatedUpload = () => {
-    if (!newDocTitle.trim()) {
-      addToast('Nombre de Documento', 'Escribe de qué documento se trata (ej. Credencial de Elector).', 'warning');
-      return;
-    }
-    uploadDocument(newDocTitle, selectedCategory);
-    setNewDocTitle('');
-    setIsUploadModalOpen(false);
-  };
-
-  const getStatusBadge = (status: DocumentInfo['status']) => {
-    switch (status) {
-      case 'valid':
-        return (
-          <span className="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-full flex items-center gap-1">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-            Al Día (Válido)
-          </span>
-        );
-      case 'reviewing':
-        return (
-          <span className="text-[11px] font-bold text-sky-800 bg-sky-100 px-2.5 py-1 rounded-full flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5 text-sky-600" />
-            En Revisión
-          </span>
-        );
-      case 'expiring':
-        return (
-          <span className="text-[11px] font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full flex items-center gap-1">
-            <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
-            Revisión Pendiente
-          </span>
-        );
-      default:
-        return (
-          <span className="text-[11px] font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full">
-            Falta Subir
-          </span>
-        );
-    }
-  };
+  const { language } = useApp();
 
   return (
-    <div className="flex-1 flex flex-col bg-slate-50 overflow-y-auto custom-scrollbar p-4 space-y-4">
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <div>
-          <h2 className="text-xl font-extrabold text-slate-900 leading-tight">
-            Mis Papeles y Documentos
-          </h2>
-          <p className="text-xs text-slate-600 mt-1">
-            Aquí están guardados de forma segura los papeles que necesitas para trabajar.
-          </p>
-        </div>
-
-        <button
-          onClick={() => setIsUploadModalOpen(true)}
-          className="p-3 bg-sky-600 hover:bg-sky-700 active:scale-95 text-white font-bold text-xs rounded-2xl shadow-md flex items-center gap-1.5 transition-all shrink-0"
+    <div
+      className="bg-[#fafafa] flex-1 w-full flex flex-col items-center justify-between overflow-hidden animate-fade-in relative h-full min-h-0 select-none"
+      data-node-id="2023:45431"
+    >
+      {/* Sticky Top Header (2023:45524) */}
+      <div
+        className="w-full bg-white px-4 py-3 border-b border-[#e5e5e5] flex items-center justify-center shrink-0 shadow-2xs z-20"
+        data-node-id="2023:45524"
+      >
+        <h1
+          className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] text-center tracking-[-0.096px]"
+          data-node-id="I2023:45524;3490:907"
         >
-          <Plus className="w-4 h-4" />
-          <span className="hidden sm:inline">Subir Papel</span>
-        </button>
+          {language === 'es' ? 'Documentos' : 'Documents'}
+        </h1>
       </div>
 
-      {/* Security note */}
-      <div className="bg-sky-50 p-3.5 rounded-2xl border border-sky-100 flex items-center gap-3">
-        <ShieldCheck className="w-5 h-5 text-sky-600 shrink-0" />
-        <p className="text-xs text-sky-900 leading-tight">
-          Tus archivos están <strong>encriptados y seguros</strong>. Nadie más los puede ver sin tu permiso.
-        </p>
-      </div>
-
-      {/* Documents List */}
-      <div className="space-y-3">
-        {documents.map((doc: DocumentInfo) => (
-          <div
-            key={doc.id}
-            className="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm flex items-start justify-between gap-3 hover:border-sky-300 transition-all"
-          >
-            <div className="flex items-start gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
-                <FileText className="w-5 h-5" />
+      {/* Main Empty State Content Container (2023:45434 / 2023:45533) */}
+      <div
+        className="flex-1 flex flex-col items-center justify-center px-4 py-8 w-full my-auto"
+        data-node-id="2023:45434"
+      >
+        <div className="h-[309px] w-[328px] relative flex flex-col items-center justify-center" data-node-id="2023:45533">
+          {/* Document & Profile Badge Illustration (2023:45576) */}
+          <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 overflow-clip size-[100px] top-[calc(50%-67.5px)]" data-node-id="2023:45576">
+            <div className="absolute contents inset-[10.15%_17.35%_10.13%_17.35%]" data-node-id="2023:45577">
+              <div className="absolute inset-[12.34%_19.16%_12.38%_18.04%]" data-node-id="2023:45578">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgLayer9} />
               </div>
-
-              <div>
-                <h4 className="text-sm font-extrabold text-slate-900">{doc.title}</h4>
-                <p className="text-xs text-slate-500 mt-0.5">{doc.subtitle}</p>
-                <span className="text-[10px] text-slate-400 mt-1 block">Actualizado: {doc.updatedAt}</span>
+              <div className="absolute inset-[10.15%_17.35%_10.13%_17.35%]" data-node-id="2023:45581">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgLayer3} />
               </div>
-            </div>
-
-            <div className="flex flex-col items-end gap-2 shrink-0">
-              {getStatusBadge(doc.status)}
-              <button
-                onClick={() => setViewingDoc(doc)}
-                className="text-xs text-sky-600 font-bold hover:underline flex items-center gap-1 mt-1"
-              >
-                <Eye className="w-3.5 h-3.5" />
-                Ver
-              </button>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Upload Document Modal */}
-      {isUploadModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white rounded-3xl p-5 w-full max-w-xs shadow-2xl border border-slate-100 flex flex-col space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-              <h3 className="text-base font-extrabold text-slate-900">Agregar un Nuevo Papel</h3>
-              <button onClick={() => setIsUploadModalOpen(false)} className="text-slate-400 hover:text-slate-700">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+          {/* Headline & Description (2023:45566) */}
+          <div className="-translate-x-1/2 absolute flex flex-col gap-3 items-center left-1/2 top-[154.5px] w-[296px] text-center" data-node-id="2023:45566">
+            <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#171717]" data-node-id="2023:45567">
+              {language === 'es' ? 'Aún no hay documentos' : 'No documents yet'}
+            </h3>
+            <p className="font-['Inter',sans-serif] font-normal text-[14px] leading-[22px] text-[#737373] text-center" data-node-id="2023:45568">
+              {language === 'es'
+                ? 'Tus documentos aparecerán en este espacio. Podrás revisarlos a lo largo de tu proceso.'
+                : 'Your documents will appear in this space. You can review them throughout your process'}
+            </p>
+          </div>
 
-            <div className="space-y-3">
-              <div>
-                <label className="text-xs font-bold text-slate-800 block mb-1">Nombre del Documento</label>
-                <input
-                  type="text"
-                  value={newDocTitle}
-                  onChange={(e) => setNewDocTitle(e.target.value)}
-                  placeholder="Ej: Acta de Nacimiento / INE"
-                  className="w-full p-3 text-sm bg-slate-50 border border-slate-300 rounded-xl outline-none focus:border-sky-500 focus:bg-white"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-slate-800 block mb-1">Tipo de Documento</label>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value as any)}
-                  className="w-full p-3 text-sm bg-slate-50 border border-slate-300 rounded-xl outline-none focus:border-sky-500 font-medium"
-                >
-                  <option value="identificacion">Identificación Oficial</option>
-                  <option value="passport">Pasaporte</option>
-                  <option value="visa">Visa o Solicitud</option>
-                  <option value="contrato">Contrato Firmado</option>
-                </select>
-              </div>
-
-              <div className="p-4 bg-sky-50 border-2 border-dashed border-sky-300 rounded-2xl flex flex-col items-center justify-center text-center cursor-pointer hover:bg-sky-100/50 transition-all">
-                <Camera className="w-8 h-8 text-sky-600 mb-1" />
-                <span className="text-xs font-bold text-sky-900">Tomar foto con la cámara</span>
-                <span className="text-[11px] text-sky-700 mt-0.5">o seleccionar archivo del teléfono</span>
-              </div>
-            </div>
-
-            <div className="flex gap-2 pt-2">
-              <button
-                onClick={() => setIsUploadModalOpen(false)}
-                className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={handleSimulatedUpload}
-                className="flex-1 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-1"
-              >
-                <Upload className="w-3.5 h-3.5" />
-                Guardar Papel
-              </button>
-            </div>
+          {/* Ground Shadow & Floating Accent Circles */}
+          <div className="-translate-x-1/2 absolute h-[9px] left-[calc(50%-0.5px)] top-[139px] w-[117px]" data-node-id="2023:45569">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse311} />
+          </div>
+          <div className="absolute inset-[8.09%_26.22%_87.06%_69.21%]" data-node-id="2023:45570">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse317} />
+          </div>
+          <div className="absolute inset-[33.66%_73.17%_63.11%_23.78%]" data-node-id="2023:45571">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse318} />
+          </div>
+          <div className="absolute inset-[34.95%_26.83%_61.49%_69.82%]" data-node-id="2023:45572">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse319} />
+          </div>
+          <div className="absolute inset-[15.86%_67.99%_80.58%_28.66%]" data-node-id="2023:45573">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse319} />
+          </div>
+          <div className="absolute left-[163px] size-[16px] top-[17px]" data-node-id="2023:45574">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse316} />
           </div>
         </div>
-      )}
-
-      {/* View Document Modal */}
-      {viewingDoc && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white rounded-3xl p-5 w-full max-w-xs shadow-2xl border border-slate-100 flex flex-col items-center text-center space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center">
-              <FileText className="w-6 h-6" />
-            </div>
-
-            <div>
-              <h3 className="text-base font-extrabold text-slate-900">{viewingDoc.title}</h3>
-              <p className="text-xs text-slate-500 mt-1">{viewingDoc.subtitle}</p>
-            </div>
-
-            <div className="w-full h-32 bg-slate-100 rounded-2xl border border-slate-200 flex items-center justify-center text-slate-400 text-xs font-medium">
-              [Vista previa del documento en alta resolución]
-            </div>
-
-            <button
-              onClick={() => setViewingDoc(null)}
-              className="w-full py-2.5 bg-slate-900 text-white font-bold text-xs rounded-xl hover:bg-slate-800"
-            >
-              Cerrar Vista
-            </button>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

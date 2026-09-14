@@ -7,7 +7,7 @@ export const BottomNavigation: React.FC = () => {
   const expiringCount = documents.filter((d) => d.status === 'expiring' || d.status === 'missing').length;
 
   interface TabItem {
-    id: 'home' | 'jobs' | 'documents' | 'profile';
+    id: 'home' | 'jobs' | 'calendar' | 'documents' | 'profile';
     labelEs: string;
     labelEn: string;
     icon: string;
@@ -17,8 +17,8 @@ export const BottomNavigation: React.FC = () => {
   const tabs: TabItem[] = [
     { id: 'home', labelEs: 'Home', labelEn: 'Home', icon: 'home' },
     { id: 'jobs', labelEs: 'Employer', labelEn: 'Employer', icon: 'chat_bubble_outline' },
-    { id: 'documents', labelEs: 'Calendar', labelEn: 'Calendar', icon: 'calendar_today', badge: expiringCount },
-    { id: 'profile', labelEs: 'Documentos', labelEn: 'Documents', icon: 'folder' },
+    { id: 'calendar', labelEs: 'Calendar', labelEn: 'Calendar', icon: 'calendar_today' },
+    { id: 'documents', labelEs: 'Documentos', labelEn: 'Documents', icon: 'folder' },
   ];
 
   if (currentTab === 'apply_wizard') {

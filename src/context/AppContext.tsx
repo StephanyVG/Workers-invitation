@@ -62,6 +62,7 @@ export type AppTab =
   | 'offer_accepted_confirmation'
   | 'home'
   | 'jobs'
+  | 'calendar'
   | 'documents'
   | 'profile'
   | 'apply_wizard';

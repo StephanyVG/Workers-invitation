@@ -122,12 +122,18 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
    - Título de Sección: `"Invitaciones de trabajo"` / `"Job Invitations"` y contador *"Mostrando 2 invitaciones"*.
    - **Tarjeta 1 (Entrevista pendiente)**: Badge superior `bg-[#d4d4d4]` `"Entrevista pendiente"` / `"Interview Pending"`, banner de imagen, título de vacante, empresa, 3 columnas (Período, Tarifa pago, Ubicación) y fecha de recepción.
    - **Tarjeta 2 (Nueva invitación)**: Badge superior `bg-[#ffd16e]` `"¡Nueva invitación de trabajo!"` / `"New job invitation!"`, banner de imagen, título de vacante, empresa, fecha y botón **Ver trabajo** / **View Job**.
-8. **Sección de Documentos / Empty State (`ProfileView.tsx`, Nodo Figma `2023:45431`)**:
+8. **Sección de Documentos / Empty State (`DocumentsView.tsx`, Nodo Figma `2023:45431`)**:
    - Pestaña de navegación etiquetada como **"Documentos"** (`es`) / **"Documents"** (`en`) (icono `folder`).
    - Encabezado superior con título `"Documentos"` / `"Documents"` (`text-[24px] font-semibold text-[#0038d0]`).
    - Ilustración central de documento/perfil con sombra en el suelo e iconos circulares flotantes.
    - Título: `"Aún no hay documentos"` (`es`) / `"No documents yet"` (`en`) (`text-[18px] font-semibold text-[#171717]`).
    - Subtítulo: *"Tus documentos aparecerán en este espacio. Podrás revisarlos a lo largo de tu proceso."* / *"Your documents will appear in this space. You can review them throughout your process"* (`text-[14px] text-[#737373]`).
+9. **Sección de Calendario / Empty State (`CalendarView.tsx`, Nodo Figma `3675:70238`)**:
+   - Pestaña de navegación etiquetada como **"Calendar"** (`es` / `en`) (icono `calendar_today`).
+   - Encabezado superior con título `"Calendario"` / `"Calendar"` (`text-[24px] font-semibold text-[#0038d0]`).
+   - Ilustración central de icono de calendario con sombra en el suelo y partículas circulares flotantes.
+   - Título: `"Aún no hay eventos"` (`es`) / `"No Events yet"` (`en`) (`text-[18px] font-semibold text-[#171717]`).
+   - Subtítulo: *"Verás los nuevos eventos de los empleadores en esta sección."* / *"You'll see new events from employers in this section."* (`text-[14px] text-[#737373]`).
 
 ---
 
@@ -141,5 +147,6 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 | Modal Oferta Trabajo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28539` | `/JobCard2.svg` (148x164px centrado) |
 | Detalle de Oferta | `src/components/jobs/JobOfferDetailScreen.tsx` | `631:28603` | Header imagen, resumen 3 columnas, H-2A/H-2B, i18n |
 | Confirmación Oferta | `src/components/onboarding/ConfirmationScreen.tsx` | `631:28567` | Thumbs Up, All set!, Regresar a invitaciones |
-| Empty State Documentos | `src/views/ProfileView.tsx` | `2023:45431` | Ilustración documento/perfil, No documents yet |
+| Empty State Documentos | `src/views/DocumentsView.tsx` | `2023:45431` | Ilustración documento/perfil, No documents yet |
+| Empty State Calendario | `src/views/CalendarView.tsx` | `3675:70238` | Ilustración calendario, No Events yet |
 | Bottom Sheet Visa | `src/components/onboarding/VisaPathBottomSheet.tsx` | - | ¡Importante! El camino hacia tu visa |

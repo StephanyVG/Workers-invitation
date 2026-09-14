@@ -6,6 +6,7 @@ import { HomeView } from './views/HomeView';
 import { JobsView } from './views/JobsView';
 import { DocumentsView } from './views/DocumentsView';
 import { ProfileView } from './views/ProfileView';
+import { CalendarView } from './views/CalendarView';
 import { MultiStepRegistration } from './components/workflow/MultiStepRegistration';
 import { SplashScreen } from './components/onboarding/SplashScreen';
 import { LanguageSelectScreen } from './components/onboarding/LanguageSelectScreen';
@@ -188,8 +189,8 @@ const MainContent: React.FC = () => {
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}
         {currentTab === 'jobs' && <JobsView />}
-        {currentTab === 'documents' && <DocumentsView />}
-        {currentTab === 'profile' && <ProfileView />}
+        {currentTab === 'calendar' && <CalendarView />}
+        {(currentTab === 'documents' || currentTab === 'profile') && <DocumentsView />}
         {currentTab === 'apply_wizard' && <MultiStepRegistration />}
       </div>
 
