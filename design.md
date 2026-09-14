@@ -88,9 +88,9 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 3. **Pantalla Principal / Empty State (Nodo Figma `631:28540` / `631:28544`)**:
    - Renderiza el contenedor de invitaciones vacías con la ilustración `/BubbleZip.svg`, título **"Esperando ofertas"** y descripción *"Estamos esperando a que las empresas te envíen ofertas de trabajo. Te notificaremos en cuanto recibas una."*.
 4. **Secuencia de Modales de Invitación**:
-   - **Modal 1 (Nodo Figma `631:28510`)**: Se presenta de forma inmediata sobre la pantalla Principal. Título "¡Perfil listo para revisión!" (`text-[28px] font-bold text-[#0038d0]`) y contenido a `16px`. Botón **OK**.
-   - **Transición**: Al presionar **OK**, el Modal 1 se cierra y despliega inmediatamente el **Modal 2 (Nodo Figma `631:28539`)**.
-   - **Modal 2 (Nodo Figma `631:28539`)**: Título "¡Tienes ofertas de trabajo!" / "You have job invitations!" (`text-[28px] font-bold text-[#0038d0]`) y contenido a `16px`. Contiene la imagen `/JobCard2.svg` (148px x 164px) perfectamente centrada en la parte superior. Botón **Ver trabajo** / **View job**.
+   - **Modal 1 (Nodo Figma `631:28510`)**: Se presenta de forma inmediata sobre la pantalla Principal. Título *"¡Hola, [Nombre]!"* (`text-[24px] font-semibold text-[#0038d0]`). Mensajes: *"Las empresas te enviarán ofertas aquí."* (16px semibold), *"Te ayudaremos. Paso a paso."* (16px regular), y *"¡Revisa esta página todos los días para ver nuevas ofertas!"* (18px semibold). Botón **Okay**.
+   - **Transición**: Al presionar **Okay**, el Modal 1 se cierra y despliega inmediatamente el **Modal 2 (Nodo Figma `631:28539`)**.
+   - **Modal 2 (Nodo Figma `631:28539`)**: Título *"¡Tienes ofertas de trabajo!"* / *"You have job invitations!"* (`text-[28px] font-semibold text-[#0038d0]`) y mensaje *"Mira el trabajo y decide si lo quieres."* (`text-[16px] regular`). Contiene la imagen `/JobCard2.svg` (148px x 164px) perfectamente centrada en el banner superior. Botón **Ver trabajo** / **View Job**.
 5. **Pantalla de Detalle de Oferta (`JobOfferDetailScreen.tsx`, Nodo Figma `631:28603`)**:
    - Al seleccionar **Ver trabajo**, se redirige a la vista de detalle de oferta (Nodo `631:28603`), con banner superior de la empresa, métricas principales (sueldo, ubicación, fechas), requisitos de visa y botones para Aceptar / Rechazar oferta.
 

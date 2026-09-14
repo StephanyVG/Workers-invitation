@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const WelcomeOfferModal: React.FC = () => {
-  const { language, setCurrentTab, setShowWelcomeModal } = useApp();
+  const { language, setCurrentTab, setShowWelcomeModal, worker } = useApp();
   const [modalStep, setModalStep] = useState<1 | 2>(1); // 1 = Node 631:28510 (OK modal), 2 = Node 631:28539 (View job modal)
   const [isAnimatingOut, setIsAnimatingOut] = useState<boolean>(false);
+
+  const workerFirstName = worker?.fullName?.split(' ')[0] || 'Guadalupe';
 
   const handleStep1Ok = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -91,27 +93,27 @@ export const WelcomeOfferModal: React.FC = () => {
             {/* Body Container (390:32501) */}
             <div className="w-full p-5 flex flex-col justify-between text-left space-y-4" data-node-id="390:32501">
               <div className="space-y-3" data-node-id="390:32502">
-                {/* Title (390:32503) - 28px bold title */}
-                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] tracking-tight" data-node-id="390:32503">
-                  {language === 'es' ? '¡Perfil listo para revisión!' : 'Profile ready for review!'}
+                {/* Title (390:32503) - DM Sans SemiBold 24px */}
+                <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] tracking-[-0.096px]" data-node-id="390:32503">
+                  {language === 'es' ? `¡Hola, ${workerFirstName}!` : `Hi, ${workerFirstName}!`}
                 </h2>
 
-                {/* Questions Text Block (390:32504) - 16px content */}
-                <div className="space-y-2 font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]" data-node-id="390:32504">
-                  <p data-node-id="390:32505">
+                {/* Questions Text Block (390:32504) - Exact Figma node 631:28510 copy */}
+                <div className="space-y-3 font-['Inter',sans-serif] text-[#0a0a0a]" data-node-id="390:32504">
+                  <p className="font-semibold text-[16px] leading-[22px]" data-node-id="390:32505">
                     {language === 'es'
-                      ? 'Tu información se ha guardado exitosamente.'
-                      : 'Your information has been successfully saved.'}
+                      ? 'Las empresas te enviarán ofertas aquí.'
+                      : 'Employers will send you jobs here.'}
                   </p>
-                  <p data-node-id="390:32506">
+                  <p className="font-normal text-[16px] leading-[22px] tracking-[-0.032px]" data-node-id="390:32506">
                     {language === 'es'
-                      ? 'Las empresas verificadas de EE.UU. podrán revisar tu perfil.'
-                      : 'Verified U.S. employers will be able to review your profile.'}
+                      ? 'Te ayudaremos. Paso a paso.'
+                      : 'We will help you. Step by step.'}
                   </p>
-                  <p data-node-id="390:32507">
+                  <p className="font-semibold text-[18px] leading-[24px]" data-node-id="390:32507">
                     {language === 'es'
-                      ? 'Te notificaremos en cuanto recibas una oferta H-2.'
-                      : 'We will notify you as soon as you receive an H-2 offer.'}
+                      ? '¡Revisa esta página todos los días para ver nuevas ofertas!'
+                      : 'Check this page every day for new offers!'}
                   </p>
                 </div>
               </div>
@@ -122,7 +124,7 @@ export const WelcomeOfferModal: React.FC = () => {
                 className="w-full h-[44px] min-h-[44px] px-5 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] shadow-md flex items-center justify-center transition-all duration-150 cursor-pointer"
                 data-node-id="390:32508"
               >
-                <span>OK</span>
+                <span>{language === 'es' ? 'Okay' : 'Okay'}</span>
               </button>
             </div>
           </div>
@@ -145,16 +147,16 @@ export const WelcomeOfferModal: React.FC = () => {
             {/* Container Frame (341:32255) */}
             <div className="w-full p-5 flex flex-col justify-between text-left space-y-4" data-node-id="341:32255">
               <div className="space-y-2" data-node-id="341:32256">
-                {/* Title (341:32257) - 28px bold title */}
-                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] tracking-tight" data-node-id="341:32257">
-                  {language === 'es' ? '¡Tienes una oferta de trabajo!' : 'You have job invitations!'}
+                {/* Title (341:32257) - 28px semibold */}
+                <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#0038d0] tracking-[-0.112px]" data-node-id="341:32257">
+                  {language === 'es' ? '¡Tienes ofertas de trabajo!' : 'You have job invitations!'}
                 </h2>
 
                 {/* Subtitle Text (341:32258 / 341:32259) - 16px content */}
-                <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[24px] text-[#525252]" data-node-id="341:32259">
+                <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[22px] text-[#0a0a0a] tracking-[-0.032px]" data-node-id="341:32259">
                   {language === 'es'
-                    ? 'Un empleador de EE.UU. ha revisado tu perfil y te ha enviado una propuesta de trabajo. Revisa los detalles ahora.'
-                    : 'A U.S. employer has reviewed your profile and sent you a job proposal. View details now.'}
+                    ? 'Mira el trabajo y decide si lo quieres.'
+                    : 'See the job and decide if you want it.'}
                 </p>
               </div>
 
@@ -164,7 +166,7 @@ export const WelcomeOfferModal: React.FC = () => {
                 className="w-full h-[44px] min-h-[44px] px-5 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] shadow-md flex items-center justify-center transition-all duration-150 cursor-pointer"
                 data-node-id="341:32262"
               >
-                <span>{language === 'es' ? 'Ver trabajo' : 'View job'}</span>
+                <span>{language === 'es' ? 'Ver trabajo' : 'View Job'}</span>
               </button>
             </div>
           </div>
