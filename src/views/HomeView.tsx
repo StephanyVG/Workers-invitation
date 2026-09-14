@@ -2,20 +2,33 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 
 export const HomeView: React.FC = () => {
-  const { worker, language, setCurrentTab, triggerPushBanner } = useApp();
+  const { worker, language, setCurrentTab, scheduledInterview, addToast } = useApp();
   const workerFirstName = worker.fullName.split(' ')[0] || 'Guadalupe';
 
-  const hasInvitations = true; // Always show invitations view with Figma Node 1004:5204 layout
+  const isScheduled = !!scheduledInterview;
+  const interviewDate = scheduledInterview?.date || '11 Apr';
+  const interviewTime = scheduledInterview?.time || '12:00 - 13:00';
+  const interviewFarm = scheduledInterview?.farm || 'Sunnydale Orchards Farm';
+
+  const handleJoinCall = () => {
+    addToast(
+      language === 'es' ? 'Conectando a la videollamada...' : 'Joining video meeting...',
+      language === 'es'
+        ? 'Iniciando sala virtual con Sunnydale Orchards Farm.'
+        : 'Starting virtual room with Sunnydale Orchards Farm.',
+      'info'
+    );
+  };
 
   return (
     <div
-      className="flex-1 flex flex-col bg-[#f5f5f5] overflow-y-auto custom-scrollbar px-[24px] pb-[40px] pt-0 animate-fade-in relative h-full min-h-0"
-      data-node-id="1004:5204"
+      className="flex-1 flex flex-col bg-[#f5f5f5] overflow-y-auto custom-scrollbar px-[24px] pb-[40px] pt-0 animate-fade-in relative h-full min-h-0 text-left font-['Inter',sans-serif]"
+      data-node-id="1004:5285"
     >
-      {/* Sticky Top Header Row (Figma node 1080:13901 / 1004:5205) */}
+      {/* Sticky Top Header Row (1080:13943 / 1004:5286) */}
       <div
         className="sticky top-0 z-30 bg-white w-[calc(100%+48px)] -mx-[24px] px-[24px] py-3 border-b border-[#e5e5e5] flex items-center justify-between shadow-2xs mb-6"
-        data-node-id="1080:13901"
+        data-node-id="1080:13943"
       >
         <div className="flex items-center gap-3">
           {worker.photoUrl ? (
@@ -34,7 +47,7 @@ export const HomeView: React.FC = () => {
           </h1>
         </div>
 
-        {/* Circular Bell Button - Opens Notifications Page */}
+        {/* Circular Bell Button - Opens Dedicated Notifications View */}
         <button
           onClick={() => setCurrentTab('notifications')}
           className="bg-white border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-sm active:scale-95 transition-transform cursor-pointer relative"
@@ -46,37 +59,84 @@ export const HomeView: React.FC = () => {
         </button>
       </div>
 
-      {hasInvitations && (
-        /* Job Invitations View (Figma Node 1004:5204 / 631:28431) */
-        <div className="flex-1 flex flex-col space-y-4" data-node-id="1004:5207">
-          {/* Heading Container (1590:21537) */}
-          <div className="flex items-center justify-between w-full" data-node-id="1590:21537">
-            <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#171717] tracking-[-0.096px]" data-node-id="1590:21538">
+      <div className="flex-1 flex flex-col space-y-[24px]" data-node-id="1004:5288">
+        {/* Section 1: Upcoming Appointments (Figma Node 1004:5289) */}
+        <div
+          className="bg-white border border-[#e5e5e5] rounded-[24px] p-[16px] space-y-[16px] shadow-sm"
+          data-node-id="1004:5289"
+        >
+          <h2
+            className="font-['DM_Sans',sans-serif] font-semibold text-[20px] leading-[28px] text-[#0038d0] tracking-[-0.08px]"
+            data-node-id="1004:5292"
+          >
+            {language === 'es' ? 'Próximas Citas' : 'Upcoming Appointments'}
+          </h2>
+
+          {/* Event Card (1004:5293) */}
+          <div
+            className="border border-[#e5e5e5] rounded-[8px] p-[16px] pl-[8px] flex gap-[12px] items-center"
+            data-node-id="1004:5293"
+          >
+            <div className="bg-[#2874ff] w-[3px] rounded-[12px] self-stretch shrink-0" data-node-id="1004:5294" />
+
+            <div className="flex-1 flex flex-col gap-[16px]" data-node-id="1004:5295">
+              <div className="flex flex-col gap-[8px]" data-node-id="1004:5296">
+                <div className="flex items-center justify-between" data-node-id="1004:5297">
+                  <span className="font-semibold text-[16px] text-[#171717]">
+                    {interviewDate}
+                  </span>
+                  <span className="font-normal text-[14px] text-[#404040]">
+                    {interviewTime}
+                  </span>
+                </div>
+                <p className="font-semibold text-[14px] leading-[18px] text-[#171717] tracking-[-0.028px]">
+                  {language === 'es'
+                    ? `Entrevista con ${interviewFarm}`
+                    : `Interview with ${interviewFarm}`}
+                </p>
+              </div>
+
+              {/* Join Action Button */}
+              <button
+                onClick={handleJoinCall}
+                className="bg-[#d3efff] hover:bg-[#b0deff] text-[#0045ff] rounded-full h-[32px] px-[12px] flex items-center justify-center gap-[6px] font-semibold text-[12px] leading-[16px] cursor-pointer active:scale-[0.98] transition-all shadow-xs w-full"
+                data-node-id="1004:5302"
+              >
+                <span className="material-symbols-outlined text-[18px]">videocam</span>
+                <span>{language === 'es' ? 'Unirse' : 'Join'}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Section 2: Job Invitations List (Figma Node 1399:29003) */}
+        <div className="space-y-[16px]">
+          <div className="flex items-center justify-between w-full" data-node-id="1399:29003">
+            <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#171717] tracking-[-0.096px]">
               {language === 'es' ? 'Invitaciones de trabajo' : 'Job Invitations'}
             </h2>
-            <span className="font-['Inter',sans-serif] font-normal text-[12px] text-[#404040] tracking-[-0.048px]" data-node-id="1590:21539">
+            <span className="font-normal text-[12px] text-[#404040] tracking-[-0.048px]">
               {language === 'es' ? 'Mostrando 2 invitaciones' : 'Showing 2 invitations'}
             </span>
           </div>
 
-          {/* Invitations Container */}
           <div className="space-y-6 w-full">
-            {/* Card 1: Schedule your interview (1004:5211) */}
+            {/* Card 1: Your interview was scheduled (Figma Node 1008:2674) */}
             <div
               className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm flex flex-col text-left font-['Inter',sans-serif]"
-              data-node-id="1004:5211"
+              data-node-id="1008:2674"
             >
-              {/* Header Blue Badge (1004:5212) */}
-              <div className="bg-[#b0deff] py-2 px-4 text-center" data-node-id="1004:5212">
-                <span className="font-semibold text-[16px] leading-[22px] text-[#0038d0]" data-node-id="1004:5213">
-                  {language === 'es' ? '¡Programa tu entrevista!' : 'Schedule your interview'}
+              {/* Header Purple Badge (1008:2675) */}
+              <div className="bg-[#9e89c6] py-2 px-4 text-center" data-node-id="1008:2675">
+                <span className="font-semibold text-[16px] leading-[22px] text-white" data-node-id="1008:2676">
+                  {language === 'es' ? 'Tu entrevista fue programada' : 'Your interview was scheduled'}
                 </span>
               </div>
 
               {/* Card Body */}
-              <div className="p-4 space-y-4" data-node-id="1004:5214">
-                {/* Job Cover Image (1004:5216) */}
-                <div className="w-full h-[68px] rounded-[8px] overflow-hidden relative" data-node-id="1004:5216">
+              <div className="p-4 space-y-4" data-node-id="1008:2677">
+                {/* Cover Image */}
+                <div className="w-full h-[68px] rounded-[8px] overflow-hidden relative" data-node-id="1008:2679">
                   <img
                     src="/assets/home_updated/apples_cover.png"
                     alt="Sunnydale Orchards farm"
@@ -89,81 +149,72 @@ export const HomeView: React.FC = () => {
                 </div>
 
                 {/* Job Title & Farm */}
-                <div className="space-y-1" data-node-id="1004:5218">
-                  <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#262626] tracking-[-0.072px]" data-node-id="1004:5220">
+                <div className="space-y-1" data-node-id="1008:2681">
+                  <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#262626] tracking-[-0.072px]">
                     {language === 'es'
                       ? 'Coordinador de Manejo Integrado de Plagas y Conservación de Polinizadores'
                       : 'Integrated Pest Management and Pollinator Conservation Coordinator'}
                   </h3>
-                  <p className="font-normal text-[14px] leading-[18px] text-[#525252]" data-node-id="1004:5222">
+                  <p className="font-normal text-[14px] leading-[18px] text-[#525252]">
                     {language === 'es' ? 'Granja Sunnydale Orchards' : 'Sunnydale Orchards Farm'}
                   </p>
                 </div>
 
                 {/* Divider Line */}
-                <div className="border-t border-[#e5e5e5]" data-node-id="1004:5223" />
+                <div className="border-t border-[#e5e5e5]" data-node-id="1008:2686" />
 
                 {/* 3 Columns Job Summary */}
-                <div className="flex items-start justify-between text-left" data-node-id="1004:5224">
-                  <div className="flex-1 space-y-1" data-node-id="1004:5225">
-                    <p className="font-normal text-[14px] text-[#525252]" data-node-id="1004:5227">
+                <div className="flex items-start justify-between text-left" data-node-id="1008:2687">
+                  <div className="flex-1 space-y-1">
+                    <p className="font-normal text-[14px] text-[#525252]">
                       {language === 'es' ? 'Período' : 'Period'}
                     </p>
-                    <p className="font-semibold text-[14px] text-[#171717]" data-node-id="1004:5228">
+                    <p className="font-semibold text-[14px] text-[#171717]">
                       {language === 'es' ? '1 años' : '1 years'}
                     </p>
                   </div>
 
-                  <div className="flex-1 space-y-1 text-center" data-node-id="1004:5229">
-                    <p className="font-normal text-[14px] text-[#525252]" data-node-id="1004:5231">
+                  <div className="flex-1 space-y-1 text-center">
+                    <p className="font-normal text-[14px] text-[#525252]">
                       {language === 'es' ? 'Tarifa pago' : 'Pay rate'}
                     </p>
-                    <p className="font-semibold text-[14px] text-[#171717]" data-node-id="1004:5232">
+                    <p className="font-semibold text-[14px] text-[#171717]">
                       12 USD
                     </p>
                   </div>
 
-                  <div className="flex-1 space-y-1 text-right" data-node-id="1004:5233">
-                    <p className="font-normal text-[14px] text-[#525252]" data-node-id="1004:5235">
+                  <div className="flex-1 space-y-1 text-right">
+                    <p className="font-normal text-[14px] text-[#525252]">
                       {language === 'es' ? 'Ciudad, Estado' : 'City, State'}
                     </p>
-                    <p className="font-semibold text-[14px] text-[#171717]" data-node-id="1004:5236">
+                    <p className="font-semibold text-[14px] text-[#171717]">
                       Texas
                     </p>
                   </div>
                 </div>
 
-                <p className="font-normal text-[12px] text-[#737373]" data-node-id="1004:5237">
+                <p className="font-normal text-[12px] text-[#737373]">
                   {language === 'es' ? 'Recibido hace 1 día' : 'Received 1 day ago'}
                 </p>
-
-                {/* Primary Button: Pick a Time */}
-                <button
-                  onClick={() => setCurrentTab('available_times')}
-                  className="w-full h-[44px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] text-white rounded-full font-semibold text-[16px] leading-[22px] text-center shadow-md active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center"
-                  data-node-id="1004:5238"
-                >
-                  {language === 'es' ? 'Elegir horario' : 'Pick a Time'}
-                </button>
               </div>
             </div>
 
-            {/* Card 2: New Job Invitation (1004:5239) */}
+            {/* Card 2: New Job Invitation (Figma Node 1004:5334) */}
             <div
               className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm flex flex-col text-left font-['Inter',sans-serif]"
-              data-node-id="1004:5239"
+              data-node-id="1004:5334"
             >
               {/* Header Badge */}
-              <div className="bg-[#ffd16e] py-2 px-4 text-center" data-node-id="1004:5240">
-                <span className="font-semibold text-[16px] leading-[22px] text-[#813d0d]" data-node-id="1004:5241">
+              <div className="bg-[#ffd16e] py-2 px-4 text-center">
+                <span className="font-semibold text-[16px] leading-[22px] text-[#813d0d]">
                   {language === 'es' ? '¡Nueva invitación a empleo!' : 'New job invitation!'}
                 </span>
               </div>
 
               {/* Card Body */}
-              <div className="p-4 space-y-4" data-node-id="1004:5242">
-                {/* Job Cover Image */}
-                <div className="w-full h-[68px] rounded-[8px] overflow-hidden relative" data-node-id="1004:5244">
+              <div className="p-4 space-y-4">
+                {/* Cover Image */}
+                <div className="w-full h-[68px] rounded-[8px] overflow-hidden relative">
                   <img
                     src="/assets/home_updated/apples_cover.png"
                     alt="Sunnydale Orchards farm"
@@ -176,17 +227,17 @@ export const HomeView: React.FC = () => {
                 </div>
 
                 {/* Job Title & Farm */}
-                <div className="space-y-2" data-node-id="1004:5245">
-                  <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#262626] tracking-[-0.072px]" data-node-id="1004:5247">
+                <div className="space-y-2">
+                  <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#262626] tracking-[-0.072px]">
                     {language === 'es'
                       ? 'Coordinador de Manejo Integrado de Plagas y Conservación de Polinizadores'
                       : 'Integrated Pest Management and Pollinator Conservation Coordinator'}
                   </h3>
                   <div className="space-y-1">
-                    <p className="font-medium text-[14px] leading-[18px] text-[#171717]" data-node-id="1004:5250">
+                    <p className="font-medium text-[14px] leading-[18px] text-[#171717]">
                       {language === 'es' ? 'Granja Sunnydale Orchards' : 'Sunnydale Orchards Farm'}
                     </p>
-                    <p className="font-normal text-[12px] text-[#737373]" data-node-id="1004:5251">
+                    <p className="font-normal text-[12px] text-[#737373]">
                       {language === 'es' ? 'Recibido hace 1 día' : 'Received 1 day ago'}
                     </p>
                   </div>
@@ -196,7 +247,6 @@ export const HomeView: React.FC = () => {
                 <button
                   onClick={() => setCurrentTab('job_offer_detail')}
                   className="w-full h-[44px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] text-white rounded-full font-semibold text-[16px] leading-[22px] text-center shadow-md active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center"
-                  data-node-id="1004:5252"
                 >
                   {language === 'es' ? 'Ver empleo' : 'View Job'}
                 </button>
@@ -204,7 +254,7 @@ export const HomeView: React.FC = () => {
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

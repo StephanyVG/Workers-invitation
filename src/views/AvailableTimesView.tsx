@@ -51,7 +51,7 @@ const MONTHS_DATA: MonthData[] = [
 ];
 
 export const AvailableTimesView: React.FC = () => {
-  const { language, setCurrentTab, addToast, triggerConfetti } = useApp();
+  const { language, setCurrentTab, addToast, triggerConfetti, setScheduledInterview } = useApp();
   const [monthIndex, setMonthIndex] = useState<number>(1); // Default to April 2025 (index 1)
   const currentMonth = MONTHS_DATA[monthIndex] || MONTHS_DATA[1];
 
@@ -89,6 +89,12 @@ export const AvailableTimesView: React.FC = () => {
 
   const handleConfirmTime = () => {
     if (!selectedTimeSlot) return;
+    const formattedDate = `${selectedDate} ${currentMonth.nameEn.split(',')[0].slice(0, 3)}`;
+    setScheduledInterview({
+      date: formattedDate,
+      time: selectedTimeSlot,
+      farm: 'Sunnydale Orchards Farm'
+    });
     triggerConfetti();
     addToast(
       language === 'es' ? '¡Entrevista Programada!' : 'Interview Scheduled!',
@@ -97,7 +103,7 @@ export const AvailableTimesView: React.FC = () => {
         : `Selected time: ${activeDayObj.day} ${selectedDate} ${currentMonth.nameEn.split(',')[0]}, ${selectedTimeSlot}`,
       'success'
     );
-    setCurrentTab('home');
+    setCurrentTab('interview_scheduled_confirmation');
   };
 
   const handleDeclineJob = () => {

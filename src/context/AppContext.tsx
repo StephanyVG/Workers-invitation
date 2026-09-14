@@ -61,6 +61,7 @@ export type AppTab =
   | 'job_offer_detail'
   | 'offer_accepted_confirmation'
   | 'available_times'
+  | 'interview_scheduled_confirmation'
   | 'notifications'
   | 'home'
   | 'jobs'
@@ -70,6 +71,12 @@ export type AppTab =
   | 'apply_wizard';
 
 export type AppLanguage = 'es' | 'en';
+
+export interface ScheduledInterviewInfo {
+  date: string;
+  time: string;
+  farm: string;
+}
 
 interface AppContextType {
   worker: WorkerProfile;
@@ -82,6 +89,8 @@ interface AppContextType {
   showPushBanner: boolean;
   setShowPushBanner: React.Dispatch<React.SetStateAction<boolean>>;
   triggerPushBanner: () => void;
+  scheduledInterview: ScheduledInterviewInfo | null;
+  setScheduledInterview: (interview: ScheduledInterviewInfo | null) => void;
   language: AppLanguage;
   setLanguage: (lang: AppLanguage) => void;
   toasts: ToastMessage[];
@@ -140,6 +149,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const triggerPushBanner = () => {
     setShowPushBanner(true);
   };
+
+  const [scheduledInterview, setScheduledInterview] = useState<ScheduledInterviewInfo | null>(() => {
+    const saved = localStorage.getItem('zipmi_scheduled_interview');
+    return saved ? JSON.parse(saved) : null;
+  });
+
+  useEffect(() => {
+    if (scheduledInterview) {
+      localStorage.setItem('zipmi_scheduled_interview', JSON.stringify(scheduledInterview));
+    } else {
+      localStorage.removeItem('zipmi_scheduled_interview');
+    }
+  }, [scheduledInterview]);
 
   const [language, setLanguage] = useState<AppLanguage>('es');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -321,6 +343,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         showPushBanner,
         setShowPushBanner,
         triggerPushBanner,
+        scheduledInterview,
+        setScheduledInterview,
         language,
         setLanguage,
         toasts,

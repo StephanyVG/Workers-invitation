@@ -65,6 +65,7 @@ import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
 import { ConfirmationScreen } from './components/onboarding/ConfirmationScreen';
 import { AvailableTimesView } from './views/AvailableTimesView';
+import { InterviewScheduledConfirmationView } from './views/InterviewScheduledConfirmationView';
 import { NotificationsView } from './views/NotificationsView';
 import { PushNotificationBanner } from './components/PushNotificationBanner';
 
@@ -192,6 +193,7 @@ const MainContent: React.FC = () => {
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}
         {currentTab === 'available_times' && <AvailableTimesView />}
+        {currentTab === 'interview_scheduled_confirmation' && <InterviewScheduledConfirmationView />}
         {currentTab === 'notifications' && <NotificationsView />}
         {currentTab === 'jobs' && <JobsView />}
         {currentTab === 'calendar' && <CalendarView />}

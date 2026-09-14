@@ -157,6 +157,18 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
     - Botón de notificaciones en encabezado que abre la página dedicada `NotificationsView`.
     - Tarjeta 1 con botón `"Elegir horario"` / `"Pick a Time"`.
     - Tarjeta 2 con botón `"Ver empleo"` / `"View Job"`.
+15. **Confirmación de Entrevista Programada (`InterviewScheduledConfirmationView.tsx`, Nodo Figma `1004:4444`)**:
+    - Se despliega al pulsar `"Choose This Time"` en la selección de horario.
+    - Ilustración de Thumbs Up con sombra en el suelo y partículas circulares.
+    - Título: `"Your interview is scheduled!"` / `"¡Tu entrevista está programada!"` (`#0038D0`).
+    - Subtítulo: *"Check your calendar to see the date, time, and link to join the meeting."* / *"Revisa tu calendario para ver la fecha, hora y enlace para unirte a la reunión."*.
+    - Botón primario `"View Calendar"` / `"Ver Calendario"` y botón de regreso a inicio.
+16. **Sección de Calendario con Evento de Entrevista (`CalendarView.tsx`, Nodo Figma `1004:4185`)**:
+    - Tarjeta de evento de entrevista con franja vertical azul (`#2874FF`), hora del evento y botón `"Join"` / `"Unirse"` (`#D3EFFF`).
+    - Encabezado de fecha `"11 Apr • Today"` / `"11 Abr • Hoy"`.
+17. **Home Post-Programación de Entrevista (`HomeView.tsx`, Nodo Figma `1004:5285`)**:
+    - Sección superior **"Upcoming Appointments"** / **"Próximas Citas"** con tarjeta del evento programado y botón `"Join"` / `"Unirse"`.
+    - En la sección **"Job Invitations"**, la tarjeta 1 actualiza su banner a morado `"Your interview was scheduled"` / `"Tu entrevista fue programada"` y remueve el botón de elegir horario.
 
 ---
 
@@ -167,9 +179,12 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 | Empty State Home | `src/views/HomeView.tsx` | `631:28540` | `/BubbleZip.svg`, contenedor `631:28544` |
 | Home con Invitaciones | `src/views/HomeView.tsx` | `631:28431` | Tarjetas Entrevista pendiente y Nueva invitación |
 | Home Actualizado Entrevista | `src/views/HomeView.tsx` | `1004:5204` | Tarjeta Schedule your interview con botón Pick a Time |
+| Home Post-Programación | `src/views/HomeView.tsx` | `1004:5285` | Sección Upcoming Appointments y banner morado Your interview was scheduled |
 | Notificación Push In-App Centrada | `src/components/PushNotificationBanner.tsx` | `1004:4817` | Banner flotante centrado 8s con fondo difuminado |
 | Página Notificaciones | `src/views/NotificationsView.tsx` | - | Vista dedicada de notificaciones al presionar la campana del header |
 | Horarios Disponibles | `src/views/AvailableTimesView.tsx` | `1004:4515` | Icono back único, selector dinámico de mes y slots de horas por día |
+| Confirmación Entrevista | `src/views/InterviewScheduledConfirmationView.tsx` | `1004:4444` | Ilustración Thumbs Up, Your interview is scheduled! |
+| Calendario con Evento | `src/views/CalendarView.tsx` | `1004:4185` | Tarjeta de entrevista programada con botón Join videocall |
 | Modal Perfil Listo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28510` | Botón OK, secuencia inicial |
 | Modal Oferta Trabajo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28539` | `/JobCard2.svg` (148x164px centrado) |
 | Detalle de Oferta | `src/components/jobs/JobOfferDetailScreen.tsx` | `631:28603` | Header imagen, resumen 3 columnas, H-2A/H-2B, i18n |
