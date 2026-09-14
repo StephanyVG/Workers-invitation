@@ -75,12 +75,9 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 1. **Verificación SMS / Código**: El usuario selecciona "Tengo un código de invitación" e ingresa su código enviado por el empleador.
 2. **Términos de Servicio (`TermsOfServiceScreen.tsx`)**:
    - Al aceptar los términos y presionar **Continuar**, se abre el Bottom Sheet "¡Importante! El camino hacia tu visa" (`VisaPathBottomSheet.tsx`).
-3. **Modal "¡Código verificado!" (Nodo Figma `3654:9349`)**:
-   - Al presionar **Continuar** en el Bottom Sheet, se muestra el modal `3654:9349`.
-   - **Ilustración**: Muestra la imagen `/BubbleZip.svg` (120px x 120px) centrada en un banner superior azul (`bg-[#d8e3ff]`, alto 209px).
-   - **Título**: "¡Código verificado!" (`text-[28px] font-bold text-[#0038d0]`).
-   - **Texto**: "Tu empleador ha registrado tu invitación para el proceso de visa H-2. Completa tu información para continuar." (`text-[16px]`).
-   - **Acción**: Al presionar el botón **Continuar**, **redirige directamente a la pantalla Principal (`HomeView.tsx`)**. **NO pasa por la pantalla de "Comencemos" ni por ningún paso de creación de perfil (Pasos 1 al 25) ni por el bot de elegibilidad.**
+3. **Navegación Directa a Inicio**:
+   - Al presionar **Continuar** en el Bottom Sheet, **redirige DIRECTAMENTE a la pantalla Principal (`HomeView.tsx`)**.
+   - **NO requiere ningún modal intermedio ni pasa por la pantalla de "Comencemos", pasos de creación de perfil (1 al 25) ni bot de elegibilidad.**
 
 ---
 
