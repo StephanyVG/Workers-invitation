@@ -13,11 +13,11 @@ export const JobOfferDetailScreen: React.FC = () => {
     addToast(
       language === 'es' ? '¡Invitación Aceptada!' : 'Invitation Accepted!',
       language === 'es'
-        ? 'Aceptaste la invitación de Sunnydale Orchards farm. Tu proceso ha avanzado.'
+        ? 'Aceptaste la invitación de Granja Sunnydale Orchards. Tu proceso ha avanzado.'
         : 'You accepted the invitation from Sunnydale Orchards farm. Your process advanced.',
       'success'
     );
-    setCurrentTab('home');
+    setCurrentTab('offer_accepted_confirmation');
   };
 
   const handleDeclineOffer = () => {
@@ -41,7 +41,7 @@ export const JobOfferDetailScreen: React.FC = () => {
         <button
           onClick={() => setCurrentTab('home')}
           className="bg-[#fafafa] border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-md active:scale-90 transition-all duration-150 cursor-pointer"
-          aria-label="Regresar"
+          aria-label={language === 'es' ? 'Regresar' : 'Back'}
         >
           <span className="material-symbols-outlined text-[24px]">arrow_back</span>
         </button>
@@ -53,7 +53,7 @@ export const JobOfferDetailScreen: React.FC = () => {
         <div className="w-full h-[154px] bg-slate-200 relative shrink-0" data-node-id="631:28604">
           <img
             src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800&auto=format&fit=crop&q=80"
-            alt="Sunnydale Orchards farm"
+            alt={language === 'es' ? 'Granja Sunnydale Orchards' : 'Sunnydale Orchards farm'}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/15" />
@@ -64,13 +64,15 @@ export const JobOfferDetailScreen: React.FC = () => {
           {/* Job Summary Section (631:28606) */}
           <div className="space-y-2" data-node-id="631:28606">
             <h1 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#0038d0] tracking-[-0.072px]" data-node-id="631:28608">
-              Integrated Pest Management and Pollinator Conservation Coordinator
+              {language === 'es'
+                ? 'Coordinador de Manejo Integrado de Plagas y Conservación de Polinizadores'
+                : 'Integrated Pest Management and Pollinator Conservation Coordinator'}
             </h1>
             <p className="font-normal text-[14px] leading-[24px] text-[#171717] underline underline-offset-2" data-node-id="631:28609">
-              Sunnydale Orchards farm
+              {language === 'es' ? 'Granja Sunnydale Orchards' : 'Sunnydale Orchards farm'}
             </p>
             <p className="font-normal text-[14px] leading-[24px] text-[#171717]" data-node-id="631:28610">
-              City, State
+              {language === 'es' ? 'Ciudad, Estado' : 'City, State'}
             </p>
           </div>
 
@@ -95,7 +97,7 @@ export const JobOfferDetailScreen: React.FC = () => {
                   {language === 'es' ? 'Período' : 'Period'}
                 </span>
                 <span className="font-normal text-[14px] text-[#171717] tracking-[-0.056px]" data-node-id="631:28621">
-                  3 Months
+                  {language === 'es' ? '3 Meses' : '3 Months'}
                 </span>
               </div>
 
@@ -115,7 +117,9 @@ export const JobOfferDetailScreen: React.FC = () => {
                 {language === 'es' ? 'Descripción' : 'Description'}
               </h3>
               <p className="font-normal text-[14px] leading-[18px] text-[#171717]" data-node-id="631:28630">
-                A design system for enterprise-level products.
+                {language === 'es'
+                  ? 'Un sistema de diseño para productos a nivel empresarial.'
+                  : 'A design system for enterprise-level products.'}
               </p>
             </div>
 
@@ -132,7 +136,7 @@ export const JobOfferDetailScreen: React.FC = () => {
                     {language === 'es' ? 'Horario de trabajo' : 'Work Schedule'}
                   </p>
                   <div className="flex items-center justify-between font-normal" data-node-id="631:28636">
-                    <span>Monday - Friday</span>
+                    <span>{language === 'es' ? 'Lunes - Viernes' : 'Monday - Friday'}</span>
                     <span>09:00 - 18:00</span>
                   </div>
                 </div>
@@ -143,7 +147,7 @@ export const JobOfferDetailScreen: React.FC = () => {
                     {language === 'es' ? 'Educación/Capacitación mínima requerida' : 'Minimum Education/Training Required'}
                   </p>
                   <p className="font-normal" data-node-id="631:28642">
-                    Bachelor’s
+                    {language === 'es' ? 'Licenciatura' : 'Bachelor’s'}
                   </p>
                 </div>
 
@@ -153,7 +157,7 @@ export const JobOfferDetailScreen: React.FC = () => {
                     {language === 'es' ? 'Experiencia mínima requerida' : 'Minimum experience required'}
                   </p>
                   <p className="font-normal" data-node-id="631:28646">
-                    1 year
+                    {language === 'es' ? '1 año' : '1 year'}
                   </p>
                 </div>
 
@@ -163,7 +167,9 @@ export const JobOfferDetailScreen: React.FC = () => {
                     {language === 'es' ? 'Condiciones ambientales' : 'Environmental conditions'}
                   </p>
                   <p className="font-normal" data-node-id="631:28650">
-                    Chemicals, Heat,, Cold, Pushing, Pulling
+                    {language === 'es'
+                      ? 'Químicos, Calor, Frío, Empujar, Jalar'
+                      : 'Chemicals, Heat, Cold, Pushing, Pulling'}
                   </p>
                 </div>
 
@@ -173,8 +179,8 @@ export const JobOfferDetailScreen: React.FC = () => {
                     {language === 'es' ? 'Idioma y nivel' : 'Language and level'}
                   </p>
                   <div className="flex items-center justify-between font-normal" data-node-id="631:28653">
-                    <span>English</span>
-                    <span>B2-Intermediate</span>
+                    <span>{language === 'es' ? 'Inglés' : 'English'}</span>
+                    <span>{language === 'es' ? 'B2-Intermedio' : 'B2-Intermediate'}</span>
                   </div>
                 </div>
 
@@ -184,7 +190,7 @@ export const JobOfferDetailScreen: React.FC = () => {
                     {language === 'es' ? 'Requerido conducir' : 'Required to drive'}
                   </p>
                   <p className="font-normal" data-node-id="631:28659">
-                    Yes
+                    {language === 'es' ? 'Sí' : 'Yes'}
                   </p>
                 </div>
 
@@ -204,7 +210,7 @@ export const JobOfferDetailScreen: React.FC = () => {
                     {language === 'es' ? 'Requerido supervisar a otros' : 'Required to supervise others'}
                   </p>
                   <p className="font-normal" data-node-id="631:28667">
-                    No
+                    {language === 'es' ? 'No' : 'No'}
                   </p>
                 </div>
 
@@ -214,7 +220,7 @@ export const JobOfferDetailScreen: React.FC = () => {
                     {language === 'es' ? 'Comidas provistas' : 'Meals Provided'}
                   </p>
                   <p className="font-normal" data-node-id="631:28671">
-                    No
+                    {language === 'es' ? 'No' : 'No'}
                   </p>
                 </div>
               </div>

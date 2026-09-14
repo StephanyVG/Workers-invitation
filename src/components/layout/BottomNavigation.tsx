@@ -18,7 +18,7 @@ export const BottomNavigation: React.FC = () => {
     { id: 'home', labelEs: 'Home', labelEn: 'Home', icon: 'home' },
     { id: 'jobs', labelEs: 'Employer', labelEn: 'Employer', icon: 'chat_bubble_outline' },
     { id: 'documents', labelEs: 'Calendar', labelEn: 'Calendar', icon: 'calendar_today', badge: expiringCount },
-    { id: 'profile', labelEs: 'Profile', labelEn: 'Profile', icon: 'folder' },
+    { id: 'profile', labelEs: 'Documentos', labelEn: 'Documents', icon: 'folder' },
   ];
 
   if (currentTab === 'apply_wizard') {

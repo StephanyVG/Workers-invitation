@@ -62,6 +62,7 @@ import { Step25FinalReviewScreen } from './components/onboarding/Step25FinalRevi
 import { Step26FinishedProfileScreen } from './components/onboarding/Step26FinishedProfileScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
+import { ConfirmationScreen } from './components/onboarding/ConfirmationScreen';
 
 const MainContent: React.FC = () => {
   const { currentTab, showWelcomeModal } = useApp();
@@ -120,7 +121,8 @@ const MainContent: React.FC = () => {
     'step24_immigration_legal',
     'step25_final_review',
     'step26_finished_profile',
-    'job_offer_detail'
+    'job_offer_detail',
+    'offer_accepted_confirmation'
   ].includes(currentTab);
 
   return (
@@ -181,6 +183,7 @@ const MainContent: React.FC = () => {
         {currentTab === 'step25_final_review' && <Step25FinalReviewScreen />}
         {currentTab === 'step26_finished_profile' && <Step26FinishedProfileScreen />}
         {currentTab === 'job_offer_detail' && <JobOfferDetailScreen />}
+        {currentTab === 'offer_accepted_confirmation' && <ConfirmationScreen />}
 
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}

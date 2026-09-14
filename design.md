@@ -93,8 +93,41 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
    - **Modal 2 (Nodo Figma `631:28539`)**: Título *"¡Tienes ofertas de trabajo!"* / *"You have job invitations!"* (`text-[28px] font-semibold text-[#0038d0]`) y mensaje *"Mira el trabajo y decide si lo quieres."* (`text-[16px] regular`). Contiene la imagen `/JobCard2.svg` (148px x 164px) perfectamente centrada en el banner superior. Botón **Ver trabajo** / **View Job**.
 5. **Pantalla de Detalle de Oferta (`JobOfferDetailScreen.tsx`, Nodo Figma `631:28603`)**:
    - Al seleccionar **Ver trabajo**, se redirige a la vista de detalle de oferta (Nodo `631:28603`).
-   - Muestra el título *"Integrated Pest Management and Pollinator Conservation Coordinator"*, la empresa *"Sunnydale Orchards farm"*, ubicación *"City, State"*, tarjeta de 3 columnas (Start Date: 12/04/2025, Period: 3 Months, Pay Rate: 12 USD), sección de Descripción y lista de Requisitos completos (Horario, Educación, Experiencia, Condiciones ambientales, Idioma, Licencia de conducir, Carga física, Supervisión y Comidas).
+   - **Traducción Dinámica según Idioma Seleccionado**:
+     - **Título del trabajo**: `"Coordinador de Manejo Integrado de Plagas y Conservación de Polinizadores"` (`es`) / `"Integrated Pest Management and Pollinator Conservation Coordinator"` (`en`).
+     - **Empresa**: `"Granja Sunnydale Orchards"` (`es`) / `"Sunnydale Orchards farm"` (`en`).
+     - **Ubicación**: `"Ciudad, Estado"` (`es`) / `"City, State"` (`en`).
+     - **Resumen 3 Columnas**: Fecha Inicio (`12/04/2025`), Período (`"3 Meses"` / `"3 Months"`), Tarifa Pago (`"12 USD"`).
+     - **Sección de Descripción**: `"Un sistema de diseño para productos a nivel empresarial."` (`es`) / `"A design system for enterprise-level products."` (`en`).
+     - **Valores y Etiquetas de Requisitos**:
+       - Horario de trabajo: `"Lunes - Viernes"` (`es`) / `"Monday - Friday"` (`09:00 - 18:00`).
+       - Educación mínima: `"Licenciatura"` (`es`) / `"Bachelor’s"` (`en`).
+       - Experiencia mínima: `"1 año"` (`es`) / `"1 year"` (`en`).
+       - Condiciones ambientales: `"Químicos, Calor, Frío, Empujar, Jalar"` (`es`) / `"Chemicals, Heat, Cold, Pushing, Pulling"` (`en`).
+       - Idioma y nivel: `"Inglés / B2-Intermedio"` (`es`) / `"English / B2-Intermediate"` (`en`).
+       - Requerido conducir: `"Sí"` (`es`) / `"Yes"` (`en`).
+       - Carga mínima: `"50Kg"`.
+       - Requerido supervisar: `"No"`.
+       - Comidas provistas: `"No"`.
    - Botón Primario: **Aceptar invitación** / **Accept invitation**. Botón Secundario: **No quiero esta oferta** / **I don't want this job**.
+6. **Pantalla de Confirmación de Aceptación (`ConfirmationScreen.tsx`, Nodo Figma `631:28567`)**:
+   - Al presionar **Aceptar invitación** / **Accept invitation**, se muestra la pantalla de confirmación (Nodo `631:28567`).
+   - Ilustración superior de Thumbs Up con círculos decorativos sobre fondo con degradado suave.
+   - Título: `"¡Todo listo!"` (`es`) / `"All set!"` (`en`) (`text-[28px] font-semibold text-[#0038d0]`).
+   - Descripción: *"La empresa se pondrá en contacto contigo pronto para agendar tu entrevista de trabajo."* y *"¡Mantente al pendiente de las notificaciones!"*.
+   - Botón icono `X` superior izquierdo para cerrar o regresar.
+   - Botón Primario: **Regresar a mis invitaciones de trabajo** (`es`) / **Return to my job invitations** (`en`).
+7. **Pantalla Principal con Invitaciones (`HomeView.tsx`, Nodo Figma `631:28431`)**:
+   - Redirige a la vista Principal actualizada con el listado de invitaciones (`631:28431`).
+   - Título de Sección: `"Invitaciones de trabajo"` / `"Job Invitations"` y contador *"Mostrando 2 invitaciones"*.
+   - **Tarjeta 1 (Entrevista pendiente)**: Badge superior `bg-[#d4d4d4]` `"Entrevista pendiente"` / `"Interview Pending"`, banner de imagen, título de vacante, empresa, 3 columnas (Período, Tarifa pago, Ubicación) y fecha de recepción.
+   - **Tarjeta 2 (Nueva invitación)**: Badge superior `bg-[#ffd16e]` `"¡Nueva invitación de trabajo!"` / `"New job invitation!"`, banner de imagen, título de vacante, empresa, fecha y botón **Ver trabajo** / **View Job**.
+8. **Sección de Documentos / Empty State (`ProfileView.tsx`, Nodo Figma `2023:45431`)**:
+   - Pestaña de navegación etiquetada como **"Documentos"** (`es`) / **"Documents"** (`en`) (icono `folder`).
+   - Encabezado superior con título `"Documentos"` / `"Documents"` (`text-[24px] font-semibold text-[#0038d0]`).
+   - Ilustración central de documento/perfil con sombra en el suelo e iconos circulares flotantes.
+   - Título: `"Aún no hay documentos"` (`es`) / `"No documents yet"` (`en`) (`text-[18px] font-semibold text-[#171717]`).
+   - Subtítulo: *"Tus documentos aparecerán en este espacio. Podrás revisarlos a lo largo de tu proceso."* / *"Your documents will appear in this space. You can review them throughout your process"* (`text-[14px] text-[#737373]`).
 
 ---
 
@@ -103,7 +136,10 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 | Componente | Archivo | Nodo Figma | Descripción / Activos |
 | :--- | :--- | :--- | :--- |
 | Empty State Home | `src/components/home/HomeView.tsx` | `631:28540` | `/BubbleZip.svg`, contenedor `631:28544` |
+| Home con Invitaciones | `src/components/home/HomeView.tsx` | `631:28431` | Tarjetas Entrevista pendiente y Nueva invitación |
 | Modal Perfil Listo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28510` | Botón OK, secuencia inicial |
 | Modal Oferta Trabajo | `src/components/onboarding/WelcomeOfferModal.tsx` | `631:28539` | `/JobCard2.svg` (148x164px centrado) |
-| Detalle de Oferta | `src/components/jobs/JobOfferDetailScreen.tsx` | `631:28603` | Header imagen, resumen 3 columnas, H-2A/H-2B |
+| Detalle de Oferta | `src/components/jobs/JobOfferDetailScreen.tsx` | `631:28603` | Header imagen, resumen 3 columnas, H-2A/H-2B, i18n |
+| Confirmación Oferta | `src/components/onboarding/ConfirmationScreen.tsx` | `631:28567` | Thumbs Up, All set!, Regresar a invitaciones |
+| Empty State Documentos | `src/views/ProfileView.tsx` | `2023:45431` | Ilustración documento/perfil, No documents yet |
 | Bottom Sheet Visa | `src/components/onboarding/VisaPathBottomSheet.tsx` | - | ¡Importante! El camino hacia tu visa |

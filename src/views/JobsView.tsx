@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export const JobsView: React.FC = () => {
-  const { jobs, applyToJob, worker, selectedJobForDetail, setSelectedJobForDetail } = useApp();
+  const { jobs, applyToJob, worker, selectedJobForDetail, setSelectedJobForDetail, language } = useApp();
 
   const [confirmModalJob, setConfirmModalJob] = useState<JobOffer | null>(null);
 
@@ -36,10 +36,12 @@ export const JobsView: React.FC = () => {
       {/* Header */}
       <div>
         <h2 className="text-xl font-extrabold text-slate-900 leading-tight">
-          Ofertas de Empleo Disponibles
+          {language === 'es' ? 'Ofertas de Empleo Disponibles' : 'Available Job Offers'}
         </h2>
         <p className="text-xs text-slate-600 mt-1">
-          Vacantes legales de trabajo agrícola en EE. UU. con vivienda y transporte incluidos.
+          {language === 'es'
+            ? 'Vacantes legales de trabajo agrícola en EE. UU. con vivienda y transporte incluidos.'
+            : 'Legal agricultural job openings in the US with housing and transportation included.'}
         </p>
       </div>
 
@@ -70,7 +72,7 @@ export const JobsView: React.FC = () => {
                 {isApplied && (
                   <span className="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full flex items-center gap-1 shrink-0">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    Postulado
+                    {language === 'es' ? 'Postulado' : 'Applied'}
                   </span>
                 )}
               </div>
@@ -84,13 +86,13 @@ export const JobsView: React.FC = () => {
                 {job.housingIncluded && (
                   <span className="text-slate-700 bg-slate-100 px-2 py-1 rounded-lg flex items-center gap-1 font-medium">
                     <Home className="w-3.5 h-3.5 text-slate-500" />
-                    Casa gratis
+                    {language === 'es' ? 'Casa gratis' : 'Free housing'}
                   </span>
                 )}
                 {job.transportIncluded && (
                   <span className="text-slate-700 bg-slate-100 px-2 py-1 rounded-lg flex items-center gap-1 font-medium">
                     <Truck className="w-3.5 h-3.5 text-slate-500" />
-                    Transporte diario
+                    {language === 'es' ? 'Transporte diario' : 'Daily transport'}
                   </span>
                 )}
               </div>
@@ -101,7 +103,7 @@ export const JobsView: React.FC = () => {
                   onClick={() => setSelectedJobForDetail(job)}
                   className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1 transition-all"
                 >
-                  Ver Información
+                  {language === 'es' ? 'Ver Información' : 'View Details'}
                   <ChevronRight className="w-4 h-4" />
                 </button>
                 <button
@@ -113,7 +115,9 @@ export const JobsView: React.FC = () => {
                       : 'bg-sky-600 hover:bg-sky-700 active:scale-95 text-white'
                   }`}
                 >
-                  {isApplied ? 'Postulado' : 'Postularme Ahora'}
+                  {isApplied
+                    ? language === 'es' ? 'Postulado' : 'Applied'
+                    : language === 'es' ? 'Postularme Ahora' : 'Apply Now'}
                 </button>
               </div>
             </div>
@@ -127,7 +131,7 @@ export const JobsView: React.FC = () => {
           <div className="bg-white rounded-t-3xl sm:rounded-3xl p-5 w-full max-w-sm max-h-[85vh] overflow-y-auto custom-scrollbar border border-slate-100 shadow-2xl flex flex-col space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <span className="text-xs font-bold text-sky-700 bg-sky-100 px-3 py-1 rounded-full">
-                Detalles del Empleo
+                {language === 'es' ? 'Detalles del Empleo' : 'Job Details'}
               </span>
               <button
                 onClick={() => setSelectedJobForDetail(null)}
@@ -147,21 +151,29 @@ export const JobsView: React.FC = () => {
 
             <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 space-y-2 text-xs">
               <div className="flex items-center justify-between">
-                <span className="text-slate-500 font-medium">Pago ofrecido:</span>
+                <span className="text-slate-500 font-medium">
+                  {language === 'es' ? 'Pago ofrecido:' : 'Offered Pay:'}
+                </span>
                 <span className="font-extrabold text-emerald-700">{selectedJobForDetail.payRate}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-500 font-medium">Duración del trabajo:</span>
+                <span className="text-slate-500 font-medium">
+                  {language === 'es' ? 'Duración del trabajo:' : 'Job Duration:'}
+                </span>
                 <span className="font-bold text-slate-800">{selectedJobForDetail.duration}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-500 font-medium">Ubicación:</span>
+                <span className="text-slate-500 font-medium">
+                  {language === 'es' ? 'Ubicación:' : 'Location:'}
+                </span>
                 <span className="font-bold text-slate-800">{selectedJobForDetail.location}</span>
               </div>
             </div>
 
             <div>
-              <h4 className="text-xs font-bold text-slate-800 mb-2">Lo que necesitas para aplicar:</h4>
+              <h4 className="text-xs font-bold text-slate-800 mb-2">
+                {language === 'es' ? 'Lo que necesitas para aplicar:' : 'What you need to apply:'}
+              </h4>
               <ul className="space-y-1.5 text-xs text-slate-600">
                 {selectedJobForDetail.requirements.map((req: string, i: number) => (
                   <li key={i} className="flex items-center gap-2">
@@ -176,7 +188,7 @@ export const JobsView: React.FC = () => {
               onClick={() => handleApplyClick(selectedJobForDetail)}
               className="w-full py-3.5 bg-sky-600 hover:bg-sky-700 active:scale-95 text-white font-bold text-sm rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all mt-2"
             >
-              Postularme a este Empleo
+              {language === 'es' ? 'Postularme a este Empleo' : 'Apply for this Job'}
               <Sparkles className="w-4 h-4 text-amber-300" />
             </button>
           </div>
@@ -186,14 +198,16 @@ export const JobsView: React.FC = () => {
       {/* Confirmation Modal */}
       <ConfirmationModal
         isOpen={!!confirmModalJob}
-        title="¿Confirmas tu postulación?"
+        title={language === 'es' ? '¿Confirmas tu postulación?' : 'Confirm Application?'}
         message={
           confirmModalJob
-            ? `Enviarás tus documentos para apartar tu lugar en "${confirmModalJob.title}".`
+            ? language === 'es'
+              ? `Enviarás tus documentos para apartar tu lugar en "${confirmModalJob.title}".`
+              : `You will submit your documents to reserve your slot for "${confirmModalJob.title}".`
             : ''
         }
-        confirmText="Sí, quiero postularme"
-        cancelText="Regresar"
+        confirmText={language === 'es' ? 'Sí, quiero postularme' : 'Yes, apply now'}
+        cancelText={language === 'es' ? 'Regresar' : 'Go back'}
         onConfirm={confirmApply}
         onCancel={() => setConfirmModalJob(null)}
       />

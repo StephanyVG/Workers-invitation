@@ -59,6 +59,7 @@ export type AppTab =
   | 'step26_finished_profile'
   | 'welcome_offer'
   | 'job_offer_detail'
+  | 'offer_accepted_confirmation'
   | 'home'
   | 'jobs'
   | 'documents'

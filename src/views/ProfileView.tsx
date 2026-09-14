@@ -1,210 +1,86 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useApp } from '../context/AppContext';
-import { ConfirmationModal } from '../components/ui/ConfirmationModal';
-import { 
-  MessageSquare, 
-  RotateCcw, 
-  Globe, 
-  Check, 
-  Edit2,
-  FileCheck
-} from 'lucide-react';
+
+const imgLayer9 = "/assets/documents_empty/imgLayer9.svg";
+const imgLayer3 = "/assets/documents_empty/imgLayer3.svg";
+const imgEllipse311 = "/assets/documents_empty/imgEllipse311.svg";
+const imgEllipse317 = "/assets/documents_empty/imgEllipse317.svg";
+const imgEllipse318 = "/assets/documents_empty/imgEllipse318.svg";
+const imgEllipse319 = "/assets/documents_empty/imgEllipse319.svg";
+const imgEllipse316 = "/assets/documents_empty/imgEllipse316.svg";
 
 export const ProfileView: React.FC = () => {
-  const { worker, updateWorker, resetDemoData, addToast } = useApp();
-
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [fullName, setFullName] = useState<string>(worker.fullName);
-  const [phone, setPhone] = useState<string>(worker.phone);
-  const [location, setLocation] = useState<string>(worker.location);
-
-  const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
-
-  const handleSaveProfile = () => {
-    updateWorker({ fullName, phone, location });
-    setIsEditing(false);
-    addToast('Perfil Actualizado', 'Tus datos de contacto se guardaron correctamente.', 'success');
-  };
+  const { language } = useApp();
 
   return (
-    <div className="flex-1 flex flex-col bg-slate-50 overflow-y-auto custom-scrollbar p-4 space-y-4">
-      {/* Header */}
-      <div>
-        <h2 className="text-xl font-extrabold text-slate-900 leading-tight">
-          Mi Cuenta y Perfil
-        </h2>
-        <p className="text-xs text-slate-600 mt-1">
-          Tus datos de contacto y opciones de asistencia telefónica.
-        </p>
-      </div>
-
-      {/* User Card */}
-      <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          {worker.photoUrl ? (
-            <img
-              src={worker.photoUrl}
-              alt={worker.fullName}
-              className="w-14 h-14 rounded-2xl object-cover border-2 border-sky-400 shadow-sm"
-            />
-          ) : (
-            <div className="w-14 h-14 rounded-2xl bg-sky-600 font-bold text-xl text-white flex items-center justify-center shadow-sm">
-              {worker.fullName.charAt(0)}
-            </div>
-          )}
-
-          <div>
-            <h3 className="text-base font-extrabold text-slate-900">{worker.fullName}</h3>
-            <p className="text-xs text-slate-500 font-medium">{worker.phone}</p>
-            <span className="text-[10px] font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-md mt-1 inline-block">
-              {worker.location}
-            </span>
-          </div>
-        </div>
-
-        <button
-          onClick={() => setIsEditing(!isEditing)}
-          className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl transition-all"
-        >
-          <Edit2 className="w-4 h-4" />
-        </button>
-      </div>
-
-      {/* Edit Profile Form if Editing */}
-      {isEditing && (
-        <div className="bg-white p-4 rounded-3xl border border-sky-300 shadow-md space-y-3 animate-fadeIn">
-          <h4 className="text-xs font-extrabold text-sky-800">Modificar Datos de Contacto</h4>
-          
-          <div>
-            <label className="text-[11px] font-bold text-slate-700 block mb-1">Nombre Completo</label>
-            <input
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              className="w-full p-2.5 text-xs bg-slate-50 border rounded-xl"
-            />
-          </div>
-
-          <div>
-            <label className="text-[11px] font-bold text-slate-700 block mb-1">Teléfono</label>
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="w-full p-2.5 text-xs bg-slate-50 border rounded-xl"
-            />
-          </div>
-
-          <div>
-            <label className="text-[11px] font-bold text-slate-700 block mb-1">Lugar de Residencia</label>
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="w-full p-2.5 text-xs bg-slate-50 border rounded-xl"
-            />
-          </div>
-
-          <div className="flex gap-2 pt-1">
-            <button
-              onClick={() => setIsEditing(false)}
-              className="flex-1 py-2 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl"
-            >
-              Cancelar
-            </button>
-            <button
-              onClick={handleSaveProfile}
-              className="flex-1 py-2 bg-sky-600 text-white font-bold text-xs rounded-xl shadow-sm"
-            >
-              Guardar Cambios
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Contract Signature Card */}
-      <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm space-y-2">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-extrabold text-slate-800 flex items-center gap-2">
-            <FileCheck className="w-4 h-4 text-sky-600" />
-            Estado de tu Firma Digital
-          </span>
-          {worker.hasSignedContract ? (
-            <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
-              Firmado
-            </span>
-          ) : (
-            <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
-              Pendiente
-            </span>
-          )}
-        </div>
-
-        {worker.signatureUrl ? (
-          <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between">
-            <img src={worker.signatureUrl} alt="Firma registrada" className="h-10 object-contain" />
-            <span className="text-[11px] text-slate-400">Registrada en sistema</span>
-          </div>
-        ) : (
-          <p className="text-xs text-slate-500">
-            Aún no has firmado tu contrato para la temporada. Completa el flujo en la pestaña de inicio.
-          </p>
-        )}
-      </div>
-
-      {/* Support & WhatsApp Actions */}
-      <div className="space-y-2">
-        <a
-          href="https://wa.me/"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => {
-            e.preventDefault();
-            addToast('WhatsApp Abierto', 'Conectando con el coordinador de atención en español.', 'info');
-          }}
-          className="w-full p-4 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs rounded-2xl shadow-md flex items-center justify-between transition-all"
-        >
-          <div className="flex items-center gap-3">
-            <MessageSquare className="w-5 h-5" />
-            <span>Ayuda por WhatsApp en Español</span>
-          </div>
-          <Check className="w-4 h-4 opacity-80" />
-        </a>
-
-        <div className="p-4 bg-white rounded-2xl border border-slate-200 flex items-center justify-between text-xs text-slate-700 font-medium">
-          <span className="flex items-center gap-2">
-            <Globe className="w-4 h-4 text-sky-600" />
-            Idioma de la Aplicación:
-          </span>
-          <span className="font-bold text-slate-900 bg-slate-100 px-2.5 py-1 rounded-lg">
-            Español 🇲🇽
-          </span>
-        </div>
-      </div>
-
-      {/* Demo Reset Button */}
-      <button
-        onClick={() => setIsResetModalOpen(true)}
-        className="w-full py-3 px-4 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs rounded-2xl flex items-center justify-center gap-2 transition-all mt-4"
+    <div
+      className="bg-[#fafafa] flex-1 w-full flex flex-col items-center justify-between overflow-hidden animate-fade-in relative h-full min-h-0 select-none"
+      data-node-id="2023:45431"
+    >
+      {/* Sticky Top Header (2023:45524) */}
+      <div
+        className="w-full bg-white px-4 py-3 border-b border-[#e5e5e5] flex items-center justify-center shrink-0 shadow-2xs z-20"
+        data-node-id="2023:45524"
       >
-        <RotateCcw className="w-4 h-4 text-amber-600" />
-        Reiniciar Datos de la Demostración
-      </button>
+        <h1
+          className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] text-center tracking-[-0.096px]"
+          data-node-id="I2023:45524;3490:907"
+        >
+          {language === 'es' ? 'Documentos' : 'Documents'}
+        </h1>
+      </div>
 
-      {/* Confirmation Modal */}
-      <ConfirmationModal
-        isOpen={isResetModalOpen}
-        title="¿Reiniciar la Demostración?"
-        message="Esta acción restaurará los datos del prototipo a su estado inicial para una nueva presentación del CEO."
-        confirmText="Sí, reiniciar ahora"
-        cancelText="Cancelar"
-        type="warning"
-        onConfirm={() => {
-          resetDemoData();
-          setIsResetModalOpen(false);
-        }}
-        onCancel={() => setIsResetModalOpen(false)}
-      />
+      {/* Main Empty State Content Container (2023:45434 / 2023:45533) */}
+      <div
+        className="flex-1 flex flex-col items-center justify-center px-4 py-8 w-full my-auto"
+        data-node-id="2023:45434"
+      >
+        <div className="h-[309px] w-[328px] relative flex flex-col items-center justify-center" data-node-id="2023:45533">
+          {/* Document & Profile Badge Illustration (2023:45576) */}
+          <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 overflow-clip size-[100px] top-[calc(50%-67.5px)]" data-node-id="2023:45576">
+            <div className="absolute contents inset-[10.15%_17.35%_10.13%_17.35%]" data-node-id="2023:45577">
+              <div className="absolute inset-[12.34%_19.16%_12.38%_18.04%]" data-node-id="2023:45578">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgLayer9} />
+              </div>
+              <div className="absolute inset-[10.15%_17.35%_10.13%_17.35%]" data-node-id="2023:45581">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgLayer3} />
+              </div>
+            </div>
+          </div>
+
+          {/* Headline & Description (2023:45566) */}
+          <div className="-translate-x-1/2 absolute flex flex-col gap-3 items-center left-1/2 top-[154.5px] w-[296px] text-center" data-node-id="2023:45566">
+            <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#171717]" data-node-id="2023:45567">
+              {language === 'es' ? 'Aún no hay documentos' : 'No documents yet'}
+            </h3>
+            <p className="font-['Inter',sans-serif] font-normal text-[14px] leading-[22px] text-[#737373] text-center" data-node-id="2023:45568">
+              {language === 'es'
+                ? 'Tus documentos aparecerán en este espacio. Podrás revisarlos a lo largo de tu proceso.'
+                : 'Your documents will appear in this space. You can review them throughout your process'}
+            </p>
+          </div>
+
+          {/* Ground Shadow & Floating Accent Circles */}
+          <div className="-translate-x-1/2 absolute h-[9px] left-[calc(50%-0.5px)] top-[139px] w-[117px]" data-node-id="2023:45569">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse311} />
+          </div>
+          <div className="absolute inset-[8.09%_26.22%_87.06%_69.21%]" data-node-id="2023:45570">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse317} />
+          </div>
+          <div className="absolute inset-[33.66%_73.17%_63.11%_23.78%]" data-node-id="2023:45571">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse318} />
+          </div>
+          <div className="absolute inset-[34.95%_26.83%_61.49%_69.82%]" data-node-id="2023:45572">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse319} />
+          </div>
+          <div className="absolute inset-[15.86%_67.99%_80.58%_28.66%]" data-node-id="2023:45573">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse319} />
+          </div>
+          <div className="absolute left-[163px] size-[16px] top-[17px]" data-node-id="2023:45574">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse316} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
