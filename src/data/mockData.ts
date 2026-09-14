@@ -4,7 +4,7 @@ export const INITIAL_WORKER_PROFILE: WorkerProfile = {
   id: 'wrk-001',
   fullName: 'Mateo Hernández Ruiz',
   phone: '811-456-7890',
-  photoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=300&auto=format&fit=crop&q=80',
+  photoUrl: '/profile.png',
   passportNumber: 'G29481059',
   location: 'Saltillo, Coahuila',
   status: 'revision_documentos',

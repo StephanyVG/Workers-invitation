@@ -8,6 +8,7 @@ export const AppointmentDetailBottomSheet: React.FC = () => {
     selectedAppointmentDetail,
     setSelectedAppointmentDetail,
     setScheduledInterview,
+    setCurrentTab,
     addToast
   } = useApp();
 
@@ -18,14 +19,8 @@ export const AppointmentDetailBottomSheet: React.FC = () => {
   };
 
   const handleJoinCall = () => {
-    addToast(
-      language === 'es' ? 'Conectando a la videollamada...' : 'Joining video meeting...',
-      language === 'es'
-        ? `Iniciando sala virtual con ${selectedAppointmentDetail.farm}.`
-        : `Starting virtual room with ${selectedAppointmentDetail.farm}.`,
-      'info'
-    );
     setSelectedAppointmentDetail(null);
+    setCurrentTab('video_loader');
   };
 
   const handleCancelInterview = () => {

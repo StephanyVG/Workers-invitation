@@ -5,11 +5,14 @@ import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
 export const ToastContainer: React.FC = () => {
   const { toasts, removeToast } = useApp();
 
-  if (toasts.length === 0) return null;
+  // Filter out green confirmation tooltips/toasts ('success') as requested
+  const visibleToasts = toasts.filter((t) => t.type !== 'success');
+
+  if (visibleToasts.length === 0) return null;
 
   return (
     <div className="fixed top-14 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-xs flex flex-col gap-2 pointer-events-none">
-      {toasts.map((toast) => {
+      {visibleToasts.map((toast) => {
         let bgClass = 'bg-slate-900 border-slate-700 text-white';
         let IconComponent = Info;
         let iconColor = 'text-sky-400';

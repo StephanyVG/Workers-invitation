@@ -63,6 +63,7 @@ import { Step25FinalReviewScreen } from './components/onboarding/Step25FinalRevi
 import { Step26FinishedProfileScreen } from './components/onboarding/Step26FinishedProfileScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
+import { ViewSignedDocumentScreen } from './components/onboarding/ViewSignedDocumentScreen';
 import { ConfirmationScreen } from './components/onboarding/ConfirmationScreen';
 import { AvailableTimesView } from './views/AvailableTimesView';
 import { InterviewScheduledConfirmationView } from './views/InterviewScheduledConfirmationView';
@@ -70,8 +71,27 @@ import { NotificationsView } from './views/NotificationsView';
 import { PushNotificationBanner } from './components/PushNotificationBanner';
 import { AppointmentDetailBottomSheet } from './components/onboarding/AppointmentDetailBottomSheet';
 
+import { VideoCallLoaderScreen } from './components/onboarding/VideoCallLoaderScreen';
+import { VideoCallSimulationScreen } from './components/onboarding/VideoCallSimulationScreen';
+import { InterviewCompletedModal } from './components/onboarding/InterviewCompletedModal';
+
+import { ReviewInformationHubScreen } from './components/visa_review/ReviewInformationHubScreen';
+import { SocialSecurityReviewScreen } from './components/visa_review/SocialSecurityReviewScreen';
+import { ContactDetailsReviewScreen } from './components/visa_review/ContactDetailsReviewScreen';
+import { PreviousUsTravelReviewScreen } from './components/visa_review/PreviousUsTravelReviewScreen';
+import { FatherInfoReviewScreen } from './components/visa_review/FatherInfoReviewScreen';
+import { MotherInfoReviewScreen } from './components/visa_review/MotherInfoReviewScreen';
+import { MaritalStatusReviewScreen } from './components/visa_review/MaritalStatusReviewScreen';
+import { FamilyInUsReviewScreen } from './components/visa_review/FamilyInUsReviewScreen';
+import { EducationReviewScreen } from './components/visa_review/EducationReviewScreen';
+import { WorkReviewScreen } from './components/visa_review/WorkReviewScreen';
+import { FinalQuestionsReviewScreen } from './components/visa_review/FinalQuestionsReviewScreen';
+import { VisaApplicationConsentScreen } from './components/visa_review/VisaApplicationConsentScreen';
+import { VisaSubmittedSuccessScreen } from './components/visa_review/VisaSubmittedSuccessScreen';
+import { Ds160DocumentViewerScreen } from './components/documents/Ds160DocumentViewerScreen';
+
 const MainContent: React.FC = () => {
-  const { currentTab, showWelcomeModal } = useApp();
+  const { currentTab, showWelcomeModal, showInterviewCompletedModal } = useApp();
 
   const isOnboardingTab = [
     'splash',
@@ -128,7 +148,24 @@ const MainContent: React.FC = () => {
     'step25_final_review',
     'step26_finished_profile',
     'job_offer_detail',
-    'offer_accepted_confirmation'
+    'view_signed_document',
+    'offer_accepted_confirmation',
+    'video_loader',
+    'video_call',
+    'visa_review_hub',
+    'visa_review_ssn',
+    'visa_review_contact',
+    'visa_review_prev_travel',
+    'visa_review_father',
+    'visa_review_mother',
+    'visa_review_marital',
+    'visa_review_family_us',
+    'visa_review_education',
+    'visa_review_work',
+    'visa_review_final_questions',
+    'visa_review_consent',
+    'visa_review_success',
+    'view_ds160_document'
   ].includes(currentTab);
 
   return (
@@ -189,7 +226,26 @@ const MainContent: React.FC = () => {
         {currentTab === 'step25_final_review' && <Step25FinalReviewScreen />}
         {currentTab === 'step26_finished_profile' && <Step26FinishedProfileScreen />}
         {currentTab === 'job_offer_detail' && <JobOfferDetailScreen />}
+        {currentTab === 'view_signed_document' && <ViewSignedDocumentScreen />}
         {currentTab === 'offer_accepted_confirmation' && <ConfirmationScreen />}
+        {currentTab === 'video_loader' && <VideoCallLoaderScreen />}
+        {currentTab === 'video_call' && <VideoCallSimulationScreen />}
+
+        {/* Visa Review Flow (DS-160 Verification) */}
+        {currentTab === 'visa_review_hub' && <ReviewInformationHubScreen />}
+        {currentTab === 'visa_review_ssn' && <SocialSecurityReviewScreen />}
+        {currentTab === 'visa_review_contact' && <ContactDetailsReviewScreen />}
+        {currentTab === 'visa_review_prev_travel' && <PreviousUsTravelReviewScreen />}
+        {currentTab === 'visa_review_father' && <FatherInfoReviewScreen />}
+        {currentTab === 'visa_review_mother' && <MotherInfoReviewScreen />}
+        {currentTab === 'visa_review_marital' && <MaritalStatusReviewScreen />}
+        {currentTab === 'visa_review_family_us' && <FamilyInUsReviewScreen />}
+        {currentTab === 'visa_review_education' && <EducationReviewScreen />}
+        {currentTab === 'visa_review_work' && <WorkReviewScreen />}
+        {currentTab === 'visa_review_final_questions' && <FinalQuestionsReviewScreen />}
+        {currentTab === 'visa_review_consent' && <VisaApplicationConsentScreen />}
+        {currentTab === 'visa_review_success' && <VisaSubmittedSuccessScreen />}
+        {currentTab === 'view_ds160_document' && <Ds160DocumentViewerScreen />}
 
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}
@@ -210,6 +266,9 @@ const MainContent: React.FC = () => {
 
       {/* Welcome Offer Modal Overlay on Home (Covers whole screen including BottomNavigation) */}
       {(currentTab === 'home' || currentTab === 'welcome_offer') && showWelcomeModal && <WelcomeOfferModal />}
+
+      {/* Post-Interview Completed Modal Overlay (Figma Node 1004:4183) */}
+      {showInterviewCompletedModal && <InterviewCompletedModal />}
 
       {/* Appointment Detail Bottom Sheet Overlay */}
       <AppointmentDetailBottomSheet />

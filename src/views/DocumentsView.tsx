@@ -10,7 +10,157 @@ const imgEllipse319 = "/assets/documents_empty/imgEllipse319.svg";
 const imgEllipse316 = "/assets/documents_empty/imgEllipse316.svg";
 
 export const DocumentsView: React.FC = () => {
-  const { language } = useApp();
+  const { worker, language, setCurrentTab, setSelectedDocumentType } = useApp();
+
+  const isSigned = worker.hasSignedContract || worker.status === 'oferta_firmada';
+  const hasDocuments = isSigned || worker.status === 'solicitud_visa' || worker.status === 'visa_aprobada' || worker.status === 'listo_para_viaje';
+
+  if (hasDocuments) {
+    return (
+      <div
+        className="bg-[#f5f5f5] flex-1 w-full flex flex-col items-center justify-between overflow-y-auto custom-scrollbar animate-fade-in relative h-full min-h-0 text-left font-['Inter',sans-serif] select-none"
+        data-node-id="1241:16329"
+      >
+        {/* Sticky Top Header (1241:16329) */}
+        <div
+          className="sticky top-0 z-20 w-full bg-white px-6 py-3 border-b border-[#e5e5e5] flex items-center justify-between shrink-0 shadow-2xs"
+          data-node-id="1241:16330"
+        >
+          {/* Circular Back Arrow Button */}
+          <button
+            onClick={() => setCurrentTab('home')}
+            className="bg-white border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-2xs active:scale-95 transition-all cursor-pointer shrink-0"
+            aria-label={language === 'es' ? 'Regresar' : 'Back'}
+            data-node-id="1241:16331"
+          >
+            <span className="material-symbols-outlined text-[24px]">arrow_back</span>
+          </button>
+
+          <h1
+            className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] text-center tracking-[-0.096px] flex-1 mx-2"
+            data-node-id="1241:16332"
+          >
+            {language === 'es' ? 'Mis documentos' : 'My documents'}
+          </h1>
+
+          <div className="size-[44px] shrink-0" />
+        </div>
+
+        {/* Content Container Area with 24px container padding */}
+        <div className="flex-1 p-6 w-full flex flex-col items-start gap-6" data-node-id="1241:16335">
+          {/* Card 1: Job Offer */}
+          <div
+            onClick={() => setCurrentTab('view_signed_document')}
+            className="border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-[1px_0px_16px_0px_rgba(0,0,0,0.05)] bg-white w-full flex flex-col cursor-pointer active:scale-[0.99] transition-transform"
+            data-node-id="1241:16336"
+          >
+            <div className="h-[187px] relative w-full overflow-hidden bg-slate-50 border-b border-[#e5e5e5]">
+              <img
+                src="/Offer pdf.png"
+                alt={language === 'es' ? 'Oferta de trabajo' : 'Job offer'}
+                className="w-full h-full object-cover object-top block"
+              />
+            </div>
+
+            <div className="p-5 flex flex-col gap-2.5 text-left font-['Inter',sans-serif]">
+              <p className="font-['Inter',sans-serif] font-semibold text-[14px] leading-[18px] text-black tracking-[-0.028px]">
+                {language === 'es' ? 'Oferta de trabajo' : 'Job offer'}
+              </p>
+              <p className="font-['Inter',sans-serif] font-normal text-[12px] leading-[16px] text-[#525252] tracking-[-0.048px]">
+                {language === 'es' ? 'PDF • Recibido el 10 Apr, 2026' : 'PDF • Receive it on [10 Apr, 2026]'}
+              </p>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentTab('view_signed_document');
+                }}
+                className="w-full h-[36px] px-3 py-1.5 bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[13px] leading-[18px] text-center shadow-2xs transition-all duration-150 cursor-pointer flex items-center justify-center mt-1"
+              >
+                {language === 'es' ? 'Ver documento' : 'See document'}
+              </button>
+            </div>
+          </div>
+
+          {/* Card 2: DS-160 Bar code (uses bar code.png) */}
+          <div
+            onClick={() => {
+              setSelectedDocumentType('barcode');
+              setCurrentTab('view_ds160_document');
+            }}
+            className="border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-[1px_0px_16px_0px_rgba(0,0,0,0.05)] bg-white w-full flex flex-col cursor-pointer active:scale-[0.99] transition-transform"
+            data-node-id="1241:16345"
+          >
+            <div className="h-[187px] relative w-full overflow-hidden bg-slate-50 border-b border-[#e5e5e5]">
+              <img
+                src="/bar code.png"
+                alt={language === 'es' ? 'Código de barras DS-160' : 'DS-160 Bar code'}
+                className="w-full h-full object-cover object-top block"
+              />
+            </div>
+
+            <div className="p-5 flex flex-col gap-2.5 text-left font-['Inter',sans-serif]">
+              <p className="font-['Inter',sans-serif] font-semibold text-[14px] leading-[18px] text-black tracking-[-0.028px]">
+                {language === 'es' ? 'Código de barras DS-160' : 'DS-160 Bar code'}
+              </p>
+              <p className="font-['Inter',sans-serif] font-normal text-[12px] leading-[16px] text-[#525252] tracking-[-0.048px]">
+                {language === 'es' ? 'PDF • Subido el 11 Apr, 2026' : 'PDF • Uploaded on [11 Apr, 2026]'}
+              </p>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedDocumentType('barcode');
+                  setCurrentTab('view_ds160_document');
+                }}
+                className="w-full h-[36px] px-3 py-1.5 bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[13px] leading-[18px] text-center shadow-2xs transition-all duration-150 cursor-pointer flex items-center justify-center mt-1"
+              >
+                {language === 'es' ? 'Ver documento' : 'See document'}
+              </button>
+            </div>
+          </div>
+
+          {/* Card 3: DS-160 Document (uses bar code.png) */}
+          <div
+            onClick={() => {
+              setSelectedDocumentType('document');
+              setCurrentTab('view_ds160_document');
+            }}
+            className="border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-[1px_0px_16px_0px_rgba(0,0,0,0.05)] bg-white w-full flex flex-col cursor-pointer active:scale-[0.99] transition-transform"
+            data-node-id="1241:16355"
+          >
+            <div className="h-[187px] relative w-full overflow-hidden bg-slate-50 border-b border-[#e5e5e5]">
+              <img
+                src="/bar code.png"
+                alt={language === 'es' ? 'Documento DS-160' : 'DS-160 Document'}
+                className="w-full h-full object-cover object-top block"
+              />
+            </div>
+
+            <div className="p-5 flex flex-col gap-2.5 text-left font-['Inter',sans-serif]">
+              <p className="font-['Inter',sans-serif] font-semibold text-[14px] leading-[18px] text-black tracking-[-0.028px]">
+                {language === 'es' ? 'Documento DS-160' : 'DS-160 Document'}
+              </p>
+              <p className="font-['Inter',sans-serif] font-normal text-[12px] leading-[16px] text-[#525252] tracking-[-0.048px]">
+                {language === 'es' ? 'PDF • Subido el 11 Apr, 2026' : 'PDF • Uploaded on [11 Apr, 2026]'}
+              </p>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedDocumentType('document');
+                  setCurrentTab('view_ds160_document');
+                }}
+                className="w-full h-[36px] px-3 py-1.5 bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[13px] leading-[18px] text-center shadow-2xs transition-all duration-150 cursor-pointer flex items-center justify-center mt-1"
+              >
+                {language === 'es' ? 'Ver documento' : 'See document'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

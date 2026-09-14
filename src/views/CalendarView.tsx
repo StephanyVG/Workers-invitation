@@ -26,17 +26,11 @@ const imgEllipse319 = "/assets/calendar_empty/imgEllipse319.svg";
 const imgEllipse316 = "/assets/calendar_empty/imgEllipse316.svg";
 
 export const CalendarView: React.FC = () => {
-  const { language, scheduledInterview, addToast, setSelectedAppointmentDetail } = useApp();
+  const { language, scheduledInterview, setCurrentTab, setSelectedAppointmentDetail } = useApp();
 
   const handleJoinCall = (e: React.MouseEvent) => {
     e.stopPropagation();
-    addToast(
-      language === 'es' ? 'Conectando a la videollamada...' : 'Joining video meeting...',
-      language === 'es'
-        ? 'Iniciando sala virtual con Sunnydale Orchards Farm.'
-        : 'Starting virtual room with Sunnydale Orchards Farm.',
-      'info'
-    );
+    setCurrentTab('video_loader');
   };
 
   // Interview details (from state or default fallback matching Figma 1004:4185)

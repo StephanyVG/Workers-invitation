@@ -3,6 +3,8 @@ export type ApplicationStatusStage =
   | 'revision_documentos'
   | 'entrevista'
   | 'oferta_enviada'
+  | 'oferta_firmada'
+  | 'solicitud_visa'
   | 'visa_aprobada'
   | 'listo_para_viaje';
 

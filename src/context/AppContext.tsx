@@ -59,18 +59,43 @@ export type AppTab =
   | 'step26_finished_profile'
   | 'welcome_offer'
   | 'job_offer_detail'
+  | 'view_signed_document'
   | 'offer_accepted_confirmation'
   | 'available_times'
   | 'interview_scheduled_confirmation'
   | 'notifications'
+  | 'video_loader'
+  | 'video_call'
   | 'home'
   | 'jobs'
   | 'calendar'
   | 'documents'
   | 'profile'
-  | 'apply_wizard';
+  | 'apply_wizard'
+  | 'visa_review_hub'
+  | 'visa_review_ssn'
+  | 'visa_review_contact'
+  | 'visa_review_prev_travel'
+  | 'visa_review_father'
+  | 'visa_review_mother'
+  | 'visa_review_marital'
+  | 'visa_review_family_us'
+  | 'visa_review_education'
+  | 'visa_review_work'
+  | 'visa_review_final_questions'
+  | 'visa_review_consent'
+  | 'visa_review_success'
+  | 'view_ds160_document';
 
 export type AppLanguage = 'es' | 'en';
+
+export interface PushBannerNotification {
+  id?: string;
+  title: string;
+  description: string;
+  time: string;
+  targetTab: AppTab;
+}
 
 export interface ScheduledInterviewInfo {
   date: string;
@@ -86,9 +111,15 @@ interface AppContextType {
   setCurrentTab: (tab: AppTab) => void;
   showWelcomeModal: boolean;
   setShowWelcomeModal: (show: boolean) => void;
+  showInterviewCompletedModal: boolean;
+  setShowInterviewCompletedModal: (show: boolean) => void;
   showPushBanner: boolean;
   setShowPushBanner: React.Dispatch<React.SetStateAction<boolean>>;
-  triggerPushBanner: () => void;
+  pushBannerData: PushBannerNotification | null;
+  setPushBannerData: React.Dispatch<React.SetStateAction<PushBannerNotification | null>>;
+  triggerPushBanner: (customData?: PushBannerNotification) => void;
+  selectedDocumentType: 'barcode' | 'document';
+  setSelectedDocumentType: (type: 'barcode' | 'document') => void;
   scheduledInterview: ScheduledInterviewInfo | null;
   setScheduledInterview: (interview: ScheduledInterviewInfo | null) => void;
   selectedAppointmentDetail: ScheduledInterviewInfo | null;
@@ -115,6 +146,8 @@ interface AppContextType {
   onboardingPath: 'invite' | 'search' | null;
   setOnboardingPath: (path: 'invite' | 'search' | null) => void;
   triggerConfetti: () => void;
+  visaReviewSection: number;
+  setVisaReviewSection: (section: number) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -122,7 +155,8 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [worker, setWorker] = useState<WorkerProfile>(() => {
     const saved = localStorage.getItem('zipmi_worker_profile');
-    return saved ? JSON.parse(saved) : INITIAL_WORKER_PROFILE;
+    const parsed = saved ? JSON.parse(saved) : INITIAL_WORKER_PROFILE;
+    return { ...parsed, photoUrl: '/profile.png' };
   });
 
   const [documents, setDocuments] = useState<DocumentInfo[]>(() => {
@@ -146,11 +180,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved === 'true';
   });
 
-  const [showPushBanner, setShowPushBanner] = useState<boolean>(true);
+  const [showInterviewCompletedModal, setShowInterviewCompletedModal] = useState<boolean>(false);
 
-  const triggerPushBanner = () => {
+  const [showPushBanner, setShowPushBanner] = useState<boolean>(false);
+  const [pushBannerData, setPushBannerData] = useState<PushBannerNotification | null>(null);
+
+  const triggerPushBanner = (customData?: PushBannerNotification) => {
+    if (customData) {
+      setPushBannerData(customData);
+    }
     setShowPushBanner(true);
   };
+
+  const [selectedDocumentType, setSelectedDocumentType] = useState<'barcode' | 'document'>('barcode');
 
   const [scheduledInterview, setScheduledInterview] = useState<ScheduledInterviewInfo | null>(() => {
     const saved = localStorage.getItem('zipmi_scheduled_interview');
@@ -172,6 +214,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isOffline, setIsOffline] = useState<boolean>(false);
   const [isFullPhoneView, setIsFullPhoneView] = useState<boolean>(false);
   const [selectedJobForDetail, setSelectedJobForDetail] = useState<JobOffer | null>(null);
+  const [visaReviewSection, setVisaReviewSection] = useState<number>(0);
 
   useEffect(() => {
     localStorage.setItem('zipmi_worker_profile', JSON.stringify(worker));
@@ -344,9 +387,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentTab,
         showWelcomeModal,
         setShowWelcomeModal,
+        showInterviewCompletedModal,
+        setShowInterviewCompletedModal,
         showPushBanner,
         setShowPushBanner,
+        pushBannerData,
+        setPushBannerData,
         triggerPushBanner,
+        selectedDocumentType,
+        setSelectedDocumentType,
         scheduledInterview,
         setScheduledInterview,
         selectedAppointmentDetail,
@@ -372,7 +421,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setSelectedVisaType,
         onboardingPath,
         setOnboardingPath,
-        triggerConfetti
+        triggerConfetti,
+        visaReviewSection,
+        setVisaReviewSection
       }}
     >
       {children}
