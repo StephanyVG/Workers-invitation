@@ -32,23 +32,12 @@ export const Step26FinishedProfileScreen: React.FC = () => {
         </button>
 
         {/* Thumbs Up Illustration Graphic */}
-        <div className="relative size-[160px] flex items-center justify-center my-auto">
-          {/* Decorative Floating Circles */}
-          <div className="absolute top-2 left-6 size-[14px] rounded-full border-[3px] border-[#0045ff] bg-transparent" />
-          <div className="absolute top-8 right-4 size-[12px] rounded-full border-[2.5px] border-[#ffb703] bg-transparent" />
-          <div className="absolute bottom-6 left-3 size-[10px] rounded-full border-[2px] border-[#0045ff] bg-transparent" />
-          <div className="absolute bottom-8 right-8 size-[10px] rounded-full border-[2px] border-[#0045ff] bg-transparent" />
-          <div className="absolute top-1 right-12 size-[14px] rounded-full border-[3px] border-[#ffb703] bg-transparent" />
-
-          {/* Center Thumbs Up Icon Container */}
-          <div className="size-[110px] rounded-full bg-white/80 backdrop-blur-xs border border-[#d8e3ff] flex items-center justify-center shadow-md">
-            <span className="material-symbols-outlined text-[64px] text-[#0038d0]">
-              thumb_up
-            </span>
-          </div>
-
-          {/* Oval Shadow Line underneath */}
-          <div className="absolute bottom-0 w-[120px] h-[8px] bg-[#d8e3ff]/60 rounded-full blur-[2px]" />
+        <div className="relative w-full max-w-[220px] h-[180px] flex items-center justify-center my-auto">
+          <img
+            src="/thumb.svg"
+            alt="Thumbs up"
+            className="w-full h-full object-contain block select-none"
+          />
         </div>
       </div>
 
