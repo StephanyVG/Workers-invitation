@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 
 export const Step26FinishedProfileScreen: React.FC = () => {
   const { language, setCurrentTab, setShowWelcomeModal } = useApp();
-  const [showBottomSheet, setShowBottomSheet] = useState<boolean>(true);
+  const [showBottomSheet, setShowBottomSheet] = useState<boolean>(false);
 
   const handleBack = () => {
     setCurrentTab('step25_final_review');
@@ -90,20 +90,20 @@ export const Step26FinishedProfileScreen: React.FC = () => {
           onClick={() => setShowBottomSheet(true)}
           className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
         >
-          <span>{language === 'es' ? 'Pantalla de inicio' : 'Home Screen'}</span>
+          <span>{language === 'es' ? 'Entendido' : 'Got it'}</span>
         </button>
       </div>
 
-      {/* "Important!" Bottom Sheet Modal Overlay (Figma Node 1:4961) */}
+      {/* "Important!" Bottom Sheet Modal Overlay (Figma Node 1:4960) */}
       {showBottomSheet && (
         <div
-          className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center animate-fadeIn"
+          className="fixed inset-0 bg-black/25 z-50 flex items-end justify-center animate-fadeIn"
           onClick={() => setShowBottomSheet(false)}
         >
           <div
             className="bg-white rounded-t-[24px] p-6 w-full max-w-md space-y-6 animate-slideUp text-left shadow-2xl"
             onClick={(e) => e.stopPropagation()}
-            data-node-id="1:4961"
+            data-node-id="1:4960"
           >
             {/* Drag Handle Top Bar */}
             <div className="w-[36px] h-[4px] bg-[#171717] rounded-full mx-auto" />
@@ -128,7 +128,7 @@ export const Step26FinishedProfileScreen: React.FC = () => {
               )}
             </p>
 
-            {/* Got It Button */}
+            {/* Got It Button inside Bottom Sheet */}
             <div className="pt-2">
               <button
                 onClick={handleGotIt}
