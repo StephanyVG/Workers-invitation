@@ -12,7 +12,7 @@ export const HomeView: React.FC = () => {
   return (
     <div
       className="flex-1 flex flex-col bg-[#fafafa] overflow-y-auto custom-scrollbar px-[24px] pb-[40px] pt-0 space-y-5 animate-fade-in relative"
-      data-node-id="1997:39856"
+      data-node-id="631:28540"
     >
       {/* Fixed Sticky Top Header Row (Figma node 1997:39858) */}
       <div

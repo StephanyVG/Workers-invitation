@@ -43,7 +43,7 @@ export const JobOfferDetailScreen: React.FC = () => {
   return (
     <div
       className="bg-[#fafafa] overflow-hidden flex-1 w-full flex flex-col justify-between animate-slide-right relative"
-      data-node-id="2003:40004"
+      data-node-id="631:28603"
     >
       {/* Header Bar (Figma node 2003:40005) */}
       <div
