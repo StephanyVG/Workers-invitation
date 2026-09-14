@@ -51,7 +51,7 @@ export const WelcomeScreen: React.FC = () => {
               <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
             </div>
             <div className="flex flex-col justify-center min-w-0 flex-1">
-              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] leading-[24px] text-[#262626]">
+              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[16px] leading-[22px] text-[#262626]">
                 {language === 'es' ? 'Sí, volver a ingresar' : 'Yes, sign back in'}
               </h3>
               <div className="flex items-center gap-1 text-[16px] leading-[22px] font-['Inter',sans-serif] text-[#525252]">
@@ -71,7 +71,7 @@ export const WelcomeScreen: React.FC = () => {
               <span className="material-symbols-outlined text-[18px]">add</span>
             </div>
             <div className="flex flex-col justify-center min-w-0 flex-1">
-              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[18px] leading-[24px] text-[#262626]">
+              <h3 className="font-['DM_Sans',sans-serif] font-bold text-[16px] leading-[22px] text-[#262626]">
                 {language === 'es' ? 'No, soy nuevo aquí' : "No, I’m new here"}
               </h3>
               <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[22px] text-[#525252]">

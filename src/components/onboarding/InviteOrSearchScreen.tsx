@@ -45,7 +45,7 @@ export const InviteOrSearchScreen: React.FC = () => {
           />
 
           {/* Question Title */}
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-2xl sm:text-[28px] text-[#262626] text-center leading-snug sm:leading-[36px] tracking-[-0.112px]">
+          <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] leading-[36px] text-[#0038d0] text-center tracking-[-0.112px]">
             {language === 'es'
               ? '¿Tienes una invitación o buscas trabajo?'
               : 'Have an invite or looking for work?'}
@@ -63,13 +63,13 @@ export const InviteOrSearchScreen: React.FC = () => {
               }`}
               data-node-id="3645:36079"
             >
-              <h3 className={`font-['DM_Sans',sans-serif] font-semibold text-base sm:text-lg leading-snug ${
+              <h3 className={`font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] ${
                 selectedOption === 'invite' ? 'text-white' : 'text-[#262626]'
               }`}>
                 {language === 'es' ? 'Tengo un código de invitación' : 'I have an invitation code'}
               </h3>
-              <p className={`font-['Inter',sans-serif] font-normal text-xs sm:text-[14px] leading-snug mt-0.5 ${
-                selectedOption === 'invite' ? 'text-white/90' : 'text-[#262626]'
+              <p className={`font-['Inter',sans-serif] font-normal text-[16px] leading-[22px] mt-0.5 ${
+                selectedOption === 'invite' ? 'text-white/90' : 'text-[#525252]'
               }`}>
                 {language === 'es' ? 'Mi patrón me lo envió' : 'My employer sent it to me'}
               </p>
@@ -85,13 +85,13 @@ export const InviteOrSearchScreen: React.FC = () => {
               }`}
               data-node-id="3645:36085"
             >
-              <h3 className={`font-['DM_Sans',sans-serif] font-semibold text-base sm:text-lg leading-snug ${
+              <h3 className={`font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] ${
                 selectedOption === 'search' ? 'text-white' : 'text-[#262626]'
               }`}>
                 {language === 'es' ? 'Busco trabajo' : 'I’m looking for work'}
               </h3>
-              <p className={`font-['Inter',sans-serif] font-normal text-xs sm:text-[14px] leading-snug mt-0.5 ${
-                selectedOption === 'search' ? 'text-white/90' : 'text-[#262626]'
+              <p className={`font-['Inter',sans-serif] font-normal text-[16px] leading-[22px] mt-0.5 ${
+                selectedOption === 'search' ? 'text-white/90' : 'text-[#525252]'
               }`}>
                 {language === 'es'
                   ? 'Quiero encontrar empleo con visa H-2'

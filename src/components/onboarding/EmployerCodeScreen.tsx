@@ -76,10 +76,10 @@ export const EmployerCodeScreen: React.FC = () => {
 
         {/* Code Section (Full Width bounded by 24px padding) */}
         <div className="flex flex-col items-center text-center gap-4 w-full" data-node-id="3:64568">
-          <h2 className="font-['DM_Sans',sans-serif] font-semibold text-2xl sm:text-[28px] text-[#0038d0] leading-[36px] tracking-[-0.112px] w-full" data-node-id="3:64570">
+          <h2 className="font-['DM_Sans',sans-serif] font-bold text-[28px] text-[#0038d0] leading-[36px] tracking-[-0.112px] w-full" data-node-id="3:64570">
             {language === 'es' ? 'Ingresa tu código' : 'Enter your code'}
           </h2>
-          <p className="font-['Inter',sans-serif] font-normal text-sm sm:text-[16px] text-[#171717] leading-[22px] tracking-[-0.032px] w-full" data-node-id="3:64571">
+          <p className="font-['Inter',sans-serif] font-normal text-[16px] text-[#525252] leading-[24px] tracking-[-0.032px] w-full" data-node-id="3:64571">
             {language === 'es'
               ? 'Si recibiste un código por WhatsApp de tu empleador, por favor ingrésalo para acceder a la aplicación.'
               : 'If you received a code via WhatsApp from your employer, please enter it to access the application.'}
