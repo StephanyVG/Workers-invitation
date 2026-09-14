@@ -91,6 +91,8 @@ interface AppContextType {
   triggerPushBanner: () => void;
   scheduledInterview: ScheduledInterviewInfo | null;
   setScheduledInterview: (interview: ScheduledInterviewInfo | null) => void;
+  selectedAppointmentDetail: ScheduledInterviewInfo | null;
+  setSelectedAppointmentDetail: React.Dispatch<React.SetStateAction<ScheduledInterviewInfo | null>>;
   language: AppLanguage;
   setLanguage: (lang: AppLanguage) => void;
   toasts: ToastMessage[];
@@ -154,6 +156,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const saved = localStorage.getItem('zipmi_scheduled_interview');
     return saved ? JSON.parse(saved) : null;
   });
+
+  const [selectedAppointmentDetail, setSelectedAppointmentDetail] = useState<ScheduledInterviewInfo | null>(null);
 
   useEffect(() => {
     if (scheduledInterview) {
@@ -345,6 +349,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         triggerPushBanner,
         scheduledInterview,
         setScheduledInterview,
+        selectedAppointmentDetail,
+        setSelectedAppointmentDetail,
         language,
         setLanguage,
         toasts,

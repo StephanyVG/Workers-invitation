@@ -26,9 +26,10 @@ const imgEllipse319 = "/assets/calendar_empty/imgEllipse319.svg";
 const imgEllipse316 = "/assets/calendar_empty/imgEllipse316.svg";
 
 export const CalendarView: React.FC = () => {
-  const { language, scheduledInterview, addToast } = useApp();
+  const { language, scheduledInterview, addToast, setSelectedAppointmentDetail } = useApp();
 
-  const handleJoinCall = () => {
+  const handleJoinCall = (e: React.MouseEvent) => {
+    e.stopPropagation();
     addToast(
       language === 'es' ? 'Conectando a la videollamada...' : 'Joining video meeting...',
       language === 'es'
@@ -42,6 +43,14 @@ export const CalendarView: React.FC = () => {
   const interviewDate = scheduledInterview?.date || '11 Apr';
   const interviewTime = scheduledInterview?.time || '12:00 - 13:00';
   const interviewFarm = scheduledInterview?.farm || 'Sunnydale Orchards Farm';
+
+  const handleOpenDetail = () => {
+    setSelectedAppointmentDetail({
+      date: interviewDate,
+      time: interviewTime,
+      farm: interviewFarm
+    });
+  };
 
   return (
     <div
@@ -78,7 +87,8 @@ export const CalendarView: React.FC = () => {
         <div className="space-y-[16px]">
           {/* Card 1 */}
           <div
-            className="bg-white border border-[#e5e5e5] rounded-[12px] p-[16px] pl-[12px] flex gap-[12px] items-center shadow-xs"
+            onClick={handleOpenDetail}
+            className="bg-white border border-[#e5e5e5] rounded-[12px] p-[16px] pl-[12px] flex gap-[12px] items-center shadow-xs cursor-pointer hover:bg-slate-50 transition-colors"
             data-node-id="1465:27794"
           >
             {/* Left Vertical Blue Stripe */}
@@ -117,7 +127,8 @@ export const CalendarView: React.FC = () => {
 
           {/* Card 2 */}
           <div
-            className="bg-white border border-[#e5e5e5] rounded-[12px] p-[16px] pl-[12px] flex gap-[12px] items-center shadow-xs"
+            onClick={handleOpenDetail}
+            className="bg-white border border-[#e5e5e5] rounded-[12px] p-[16px] pl-[12px] flex gap-[12px] items-center shadow-xs cursor-pointer hover:bg-slate-50 transition-colors"
             data-node-id="1465:27810"
           >
             <div className="bg-[#2874ff] w-[3px] rounded-[12px] self-stretch shrink-0" />

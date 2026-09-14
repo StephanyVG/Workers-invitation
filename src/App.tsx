@@ -68,6 +68,7 @@ import { AvailableTimesView } from './views/AvailableTimesView';
 import { InterviewScheduledConfirmationView } from './views/InterviewScheduledConfirmationView';
 import { NotificationsView } from './views/NotificationsView';
 import { PushNotificationBanner } from './components/PushNotificationBanner';
+import { AppointmentDetailBottomSheet } from './components/onboarding/AppointmentDetailBottomSheet';
 
 const MainContent: React.FC = () => {
   const { currentTab, showWelcomeModal } = useApp();
@@ -209,6 +210,9 @@ const MainContent: React.FC = () => {
 
       {/* Welcome Offer Modal Overlay on Home (Covers whole screen including BottomNavigation) */}
       {(currentTab === 'home' || currentTab === 'welcome_offer') && showWelcomeModal && <WelcomeOfferModal />}
+
+      {/* Appointment Detail Bottom Sheet Overlay */}
+      <AppointmentDetailBottomSheet />
     </div>
   );
 };

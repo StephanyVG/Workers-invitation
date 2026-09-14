@@ -169,6 +169,12 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 17. **Home Post-Programación de Entrevista (`HomeView.tsx`, Nodo Figma `1004:5285`)**:
     - Sección superior **"Upcoming Appointments"** / **"Próximas Citas"** con tarjeta del evento programado y botón `"Join"` / `"Unirse"`.
     - En la sección **"Job Invitations"**, la tarjeta 1 actualiza su banner a morado `"Your interview was scheduled"` / `"Tu entrevista fue programada"` y remueve el botón de elegir horario.
+18. **Bottom Sheet de Detalle de Cita / Entrevista (`AppointmentDetailBottomSheet.tsx`, Nodo Figma `1004:4399`)**:
+    - Se abre al hacer clic en cualquier tarjeta de cita o evento en `HomeView` (`Upcoming Appointments`) o `CalendarView`.
+    - Encabezado con barra de arrastre superior, botón de cierre `X`, título `"Interview"` / `"Entrevista"` y badge de estado `"In 15 min"` / `"En 15 min"`.
+    - Información del evento: hora programada (`09:00 AM - 10:00 AM`), icono de reloj y nombre de la granja (`Sunnydale Orchards farm`).
+    - Sección de Participantes: Organizador (Granja con avatar/logo) y Trabajador (Usuario con avatar).
+    - Botón primario azul (`#0038D0`) `"Join"` / `"Unirse"` con icono de videollamada y botón ghost rojo (`#C7290E`) `"Cancel interview"` / `"Cancelar entrevista"` que cancela la cita.
 
 ---
 
@@ -180,6 +186,7 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
 | Home con Invitaciones | `src/views/HomeView.tsx` | `631:28431` | Tarjetas Entrevista pendiente y Nueva invitación |
 | Home Actualizado Entrevista | `src/views/HomeView.tsx` | `1004:5204` | Tarjeta Schedule your interview con botón Pick a Time |
 | Home Post-Programación | `src/views/HomeView.tsx` | `1004:5285` | Sección Upcoming Appointments y banner morado Your interview was scheduled |
+| Bottom Sheet Detalle Cita | `src/components/onboarding/AppointmentDetailBottomSheet.tsx` | `1004:4399` | Bottom sheet de detalle de entrevista con participantes, Join y Cancel interview |
 | Notificación Push In-App Centrada | `src/components/PushNotificationBanner.tsx` | `1004:4817` | Banner flotante centrado 8s con fondo difuminado |
 | Página Notificaciones | `src/views/NotificationsView.tsx` | - | Vista dedicada de notificaciones al presionar la campana del header |
 | Horarios Disponibles | `src/views/AvailableTimesView.tsx` | `1004:4515` | Icono back único, selector dinámico de mes y slots de horas por día |

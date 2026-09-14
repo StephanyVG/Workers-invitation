@@ -2,13 +2,21 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 
 export const HomeView: React.FC = () => {
-  const { worker, language, setCurrentTab, scheduledInterview, addToast } = useApp();
+  const { worker, language, setCurrentTab, scheduledInterview, addToast, setSelectedAppointmentDetail } = useApp();
   const workerFirstName = worker.fullName.split(' ')[0] || 'Guadalupe';
 
   const isScheduled = !!scheduledInterview;
   const interviewDate = scheduledInterview?.date || '11 Apr';
   const interviewTime = scheduledInterview?.time || '12:00 - 13:00';
   const interviewFarm = scheduledInterview?.farm || 'Sunnydale Orchards Farm';
+
+  const handleOpenAppointmentBottomSheet = () => {
+    setSelectedAppointmentDetail({
+      date: interviewDate,
+      time: interviewTime,
+      farm: interviewFarm
+    });
+  };
 
   const handleJoinCall = () => {
     addToast(
@@ -74,7 +82,8 @@ export const HomeView: React.FC = () => {
 
           {/* Event Card (1004:5293) */}
           <div
-            className="border border-[#e5e5e5] rounded-[8px] p-[16px] pl-[8px] flex gap-[12px] items-center"
+            onClick={handleOpenAppointmentBottomSheet}
+            className="border border-[#e5e5e5] rounded-[8px] p-[16px] pl-[8px] flex gap-[12px] items-center cursor-pointer hover:bg-slate-50 transition-colors"
             data-node-id="1004:5293"
           >
             <div className="bg-[#2874ff] w-[3px] rounded-[12px] self-stretch shrink-0" data-node-id="1004:5294" />
