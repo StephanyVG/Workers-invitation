@@ -92,7 +92,9 @@ La aplicación Zipmi Workers PWA cuenta con 2 caminos de entrada claramente deli
    - **Transición**: Al presionar **Okay**, el Modal 1 se cierra y despliega inmediatamente el **Modal 2 (Nodo Figma `631:28539`)**.
    - **Modal 2 (Nodo Figma `631:28539`)**: Título *"¡Tienes ofertas de trabajo!"* / *"You have job invitations!"* (`text-[28px] font-semibold text-[#0038d0]`) y mensaje *"Mira el trabajo y decide si lo quieres."* (`text-[16px] regular`). Contiene la imagen `/JobCard2.svg` (148px x 164px) perfectamente centrada en el banner superior. Botón **Ver trabajo** / **View Job**.
 5. **Pantalla de Detalle de Oferta (`JobOfferDetailScreen.tsx`, Nodo Figma `631:28603`)**:
-   - Al seleccionar **Ver trabajo**, se redirige a la vista de detalle de oferta (Nodo `631:28603`), con banner superior de la empresa, métricas principales (sueldo, ubicación, fechas), requisitos de visa y botones para Aceptar / Rechazar oferta.
+   - Al seleccionar **Ver trabajo**, se redirige a la vista de detalle de oferta (Nodo `631:28603`).
+   - Muestra el título *"Integrated Pest Management and Pollinator Conservation Coordinator"*, la empresa *"Sunnydale Orchards farm"*, ubicación *"City, State"*, tarjeta de 3 columnas (Start Date: 12/04/2025, Period: 3 Months, Pay Rate: 12 USD), sección de Descripción y lista de Requisitos completos (Horario, Educación, Experiencia, Condiciones ambientales, Idioma, Licencia de conducir, Carga física, Supervisión y Comidas).
+   - Botón Primario: **Aceptar invitación** / **Accept invitation**. Botón Secundario: **No quiero esta oferta** / **I don't want this job**.
 
 ---
 
