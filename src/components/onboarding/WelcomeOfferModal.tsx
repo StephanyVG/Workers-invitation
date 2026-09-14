@@ -1,30 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const WelcomeOfferModal: React.FC = () => {
   const { language, setCurrentTab, setShowWelcomeModal } = useApp();
   const [modalStep, setModalStep] = useState<1 | 2>(1); // 1 = Node 631:28510 (OK modal), 2 = Node 631:28539 (View job modal)
-  const [isDelayFinished, setIsDelayFinished] = useState<boolean>(false);
   const [isAnimatingOut, setIsAnimatingOut] = useState<boolean>(false);
-
-  // 2-second delay before displaying the first modal (Node 631:28510) over Home view (Node 631:28540)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsDelayFinished(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleStep1Ok = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsAnimatingOut(true);
 
-    // Close Modal 1 (631:28510) and open Modal 2 (631:28539)
+    // Transition immediately from Modal 1 (631:28510) to Modal 2 (631:28539)
     setTimeout(() => {
       setModalStep(2);
       setIsAnimatingOut(false);
-    }, 250);
+    }, 150);
   };
 
   const handleViewJob = (e: React.MouseEvent) => {
@@ -35,7 +25,7 @@ export const WelcomeOfferModal: React.FC = () => {
     setTimeout(() => {
       setShowWelcomeModal(false);
       setCurrentTab('job_offer_detail');
-    }, 300);
+    }, 200);
   };
 
   const handleDismiss = (e?: React.MouseEvent) => {
@@ -44,18 +34,14 @@ export const WelcomeOfferModal: React.FC = () => {
 
     setTimeout(() => {
       setShowWelcomeModal(false);
-    }, 300);
+    }, 200);
   };
 
-  if (!isDelayFinished) {
-    return null;
-  }
-
-  const isVisible = isDelayFinished && !isAnimatingOut;
+  const isVisible = !isAnimatingOut;
 
   return (
     <div
-      className={`fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center px-4 py-8 transition-opacity duration-300 ease-out ${
+      className={`fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center px-4 py-8 transition-opacity duration-200 ease-out ${
         isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
       onClick={() => handleDismiss()}
@@ -63,10 +49,10 @@ export const WelcomeOfferModal: React.FC = () => {
     >
       {/* Modal Container (Figma nodes 631:28510 / 631:28539 - Width 334px) */}
       <div
-        className={`w-full max-w-[334px] bg-white rounded-[24px] shadow-2xl overflow-hidden flex flex-col items-center border border-slate-100 relative z-10 transition-all duration-300 cubic-bezier(0.16, 1, 0.3, 1) transform ${
+        className={`w-full max-w-[334px] bg-white rounded-[24px] shadow-2xl overflow-hidden flex flex-col items-center border border-slate-100 relative z-10 transition-all duration-200 cubic-bezier(0.16, 1, 0.3, 1) transform ${
           isVisible
             ? 'translate-y-0 scale-100 opacity-100'
-            : 'translate-y-8 scale-95 opacity-0'
+            : 'translate-y-4 scale-95 opacity-0'
         }`}
         onClick={(e) => e.stopPropagation()}
         data-node-id={modalStep === 1 ? '631:28510' : '631:28539'}
