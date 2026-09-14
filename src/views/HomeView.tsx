@@ -34,9 +34,9 @@ export const HomeView: React.FC = () => {
           </h1>
         </div>
 
-        {/* Circular Bell Button - Triggers Push Notification Banner */}
+        {/* Circular Bell Button - Opens Notifications Page */}
         <button
-          onClick={triggerPushBanner}
+          onClick={() => setCurrentTab('notifications')}
           className="bg-white border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-sm active:scale-95 transition-transform cursor-pointer relative"
           aria-label="Notificaciones"
           data-node-id="4235:953"

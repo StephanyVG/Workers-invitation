@@ -61,6 +61,7 @@ export type AppTab =
   | 'job_offer_detail'
   | 'offer_accepted_confirmation'
   | 'available_times'
+  | 'notifications'
   | 'home'
   | 'jobs'
   | 'calendar'
