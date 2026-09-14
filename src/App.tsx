@@ -59,6 +59,7 @@ import { Step22SecurityTerrorismScreen } from './components/onboarding/Step22Sec
 import { Step23HumanRightsScreen } from './components/onboarding/Step23HumanRightsScreen';
 import { Step24ImmigrationLegalScreen } from './components/onboarding/Step24ImmigrationLegalScreen';
 import { Step25FinalReviewScreen } from './components/onboarding/Step25FinalReviewScreen';
+import { Step26FinishedProfileScreen } from './components/onboarding/Step26FinishedProfileScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
 
@@ -118,6 +119,7 @@ const MainContent: React.FC = () => {
     'step23_human_rights',
     'step24_immigration_legal',
     'step25_final_review',
+    'step26_finished_profile',
     'job_offer_detail'
   ].includes(currentTab);
 
@@ -177,6 +179,7 @@ const MainContent: React.FC = () => {
         {currentTab === 'step23_human_rights' && <Step23HumanRightsScreen />}
         {currentTab === 'step24_immigration_legal' && <Step24ImmigrationLegalScreen />}
         {currentTab === 'step25_final_review' && <Step25FinalReviewScreen />}
+        {currentTab === 'step26_finished_profile' && <Step26FinishedProfileScreen />}
         {currentTab === 'job_offer_detail' && <JobOfferDetailScreen />}
 
         {/* Worker Portal Views */}

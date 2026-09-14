@@ -56,6 +56,7 @@ export type AppTab =
   | 'step23_human_rights'
   | 'step24_immigration_legal'
   | 'step25_final_review'
+  | 'step26_finished_profile'
   | 'welcome_offer'
   | 'job_offer_detail'
   | 'home'

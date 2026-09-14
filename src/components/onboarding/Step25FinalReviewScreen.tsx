@@ -5,23 +5,23 @@ export const Step25FinalReviewScreen: React.FC = () => {
   const { language, setCurrentTab, setShowWelcomeModal } = useApp();
 
   const handleAllSet = () => {
-    setShowWelcomeModal(true);
-    setCurrentTab('home');
+    setCurrentTab('step26_finished_profile');
   };
 
   const handleEditPart = (part: 1 | 2 | 3 | 4) => {
     switch (part) {
       case 1:
-        setCurrentTab('step1_personal_intro');
+        // Direct to contact details with prefilled data (skipping passport/profile photo capture)
+        setCurrentTab('step2_contact_details');
         break;
       case 2:
-        setCurrentTab('step9_part2_intro');
+        setCurrentTab('step10_visa_preference');
         break;
       case 3:
-        setCurrentTab('step14_part3_intro');
+        setCurrentTab('step15_education_level');
         break;
       case 4:
-        setCurrentTab('step18_part4_intro');
+        setCurrentTab('step19_social_info');
         break;
     }
   };
