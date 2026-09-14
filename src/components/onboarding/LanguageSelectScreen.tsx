@@ -67,7 +67,7 @@ export const LanguageSelectScreen: React.FC = () => {
             >
               <div className="flex items-center gap-3">
                 <span className="text-xl">🇲🇽</span>
-                <span className={`font-['Inter',sans-serif] font-semibold text-sm leading-[18px] ${
+                <span className={`font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] ${
                   language === 'es' ? 'text-white' : 'text-[#262626]'
                 }`}>
                   Spanish
@@ -91,7 +91,7 @@ export const LanguageSelectScreen: React.FC = () => {
             >
               <div className="flex items-center gap-3">
                 <span className="text-xl">🇺🇸</span>
-                <span className={`font-['Inter',sans-serif] font-semibold text-sm leading-[18px] ${
+                <span className={`font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] ${
                   language === 'en' ? 'text-white' : 'text-[#262626]'
                 }`}>
                   English
