@@ -16,6 +16,7 @@ export const HomeView: React.FC = () => {
     hasConfirmedTravelItinerary,
     hasArrivedAtJob,
     hasCompletedI9Review,
+    refundsProgress,
     triggerPushBanner,
     showPushBanner,
     setSelectedDocumentType,
@@ -387,7 +388,7 @@ export const HomeView: React.FC = () => {
 
         {hasArrivedAtJob ? (
           /* Daily Reimbursements Dashboard (Figma Node 1859:32035 & 3537:2983) */
-          <div className="p-4 sm:p-6 flex flex-col gap-6 w-full text-left font-['Inter',sans-serif] animate-fade-in" data-node-id="1928:29876">
+          <div className="p-4 sm:p-6 flex flex-col gap-6 w-full text-left font-['Inter',sans-serif] animate-fade-in flex-1 min-h-0" data-node-id="1928:29876">
             {/* Yellow Notification Container: Review your I-9 information (Figma Node 3537:2983 / 3537:5910) */}
             {!hasCompletedI9Review && showYellowI9Card && (
               <div
@@ -421,91 +422,256 @@ export const HomeView: React.FC = () => {
               </div>
             )}
 
-            {/* Card 1: Daily Reimbursement */}
-            <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-4 w-full shadow-2xs" data-node-id="1928:29877">
-              <div className="flex items-center gap-2 w-full" data-node-id="1928:29878">
-                <div className="size-[32px] rounded-[4px] border border-[#e5e5e5] flex items-center justify-center text-[#2874ff] shrink-0" data-node-id="1928:29879">
-                  <span className="material-symbols-outlined text-[18px]">currency_exchange</span>
-                </div>
-                <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717] tracking-[-0.064px] flex-1 truncate" data-node-id="1928:29883">
-                  {language === 'es' ? 'Reembolso diario' : 'Daily Reimbursement'}
-                </p>
-              </div>
-
-              {/* Sub-card: Add all your receipts */}
-              <div className="bg-[#e7f6ff] rounded-[8px] p-4 flex flex-col gap-3 shadow-[3px_3px_8.7px_0px_rgba(38,38,38,0.05)] relative overflow-hidden" data-node-id="1928:29884">
-                {/* Background Watermark Accent */}
-                <div className="absolute -right-8 -top-8 text-[#0038d0]/5 select-none pointer-events-none font-bold text-[140px] leading-none -rotate-12">
-                  Z
-                </div>
-
-                <div className="flex flex-col gap-2 relative z-10">
-                  <h4 className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#0038d0] tracking-[-0.056px]" data-node-id="1928:29889">
-                    {language === 'es' ? 'Agrega todos tus recibos' : 'Add all your receipts'}
-                  </h4>
-                  <p className="font-['DM_Sans',sans-serif] font-normal text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px]" data-node-id="1928:29890">
-                    {language === 'es'
-                      ? 'Tu empleador tendrá un registro claro de tus gastos diarios, asegurando que recibas tu reembolso'
-                      : 'Your employer will have a clear record of your daily expenses, ensuring you get reimbursed'}
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    addToast(
-                      language === 'es' ? 'Subir recibo' : 'Upload Receipt',
-                      language === 'es'
-                        ? 'La función para subir recibos de gastos diarios estará disponible pronto.'
-                        : 'Daily expense receipt upload will be available soon.',
-                      'info'
-                    );
-                  }}
-                  className="w-full h-[32px] px-3 py-1.5 bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[12px] leading-[16px] flex items-center justify-center transition-all cursor-pointer drop-shadow-[0px_1px_1px_rgba(0,0,0,0.09)] relative z-10"
-                  data-node-id="1928:29891"
+            {/* When submitted: Render Figma Node 2308:53040 / 2308:53215 Status of your receipts card */}
+            {refundsProgress.submitted ? (() => {
+              const isRefunded = refundsProgress.status === 'refunded';
+              return (
+                <div
+                  className="bg-white border border-[#e5e5e5] rounded-[24px] p-5 sm:p-6 flex flex-col justify-between gap-6 w-full shadow-2xs text-left flex-1"
+                  data-node-id={isRefunded ? "2308:53350" : "2308:53148"}
+                  data-name="Card"
                 >
-                  {language === 'es' ? 'Agregar recibos' : 'Add receipts'}
-                </button>
-              </div>
-            </div>
-
-            {/* Card 2: Latest Receipts */}
-            <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-4 w-full shadow-2xs" data-node-id="1928:29892">
-              <div className="flex items-center justify-between gap-2 w-full" data-node-id="1928:29893">
-                <div className="flex items-center gap-2 flex-1">
-                  <div className="size-[32px] rounded-[4px] border border-[#e5e5e5] flex items-center justify-center text-[#525252] shrink-0" data-node-id="1928:29894">
-                    <span className="material-symbols-outlined text-[18px]">receipt_long</span>
+                  {/* Header */}
+                  <div className="flex gap-2.5 items-center w-full" data-node-id="2308:53149">
+                    <div
+                      className="size-[36px] rounded-[6px] border border-[#e5e5e5] flex items-center justify-center text-[#171717] shrink-0"
+                      data-node-id="2308:53151"
+                    >
+                      <span className="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+                    </div>
+                    <h3
+                      className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#171717] tracking-[-0.064px] flex-1"
+                      data-node-id="2308:53154"
+                    >
+                      {language === 'es' ? 'Estado de tus recibos' : 'Status of your receipts'}
+                    </h3>
                   </div>
-                  <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717] tracking-[-0.064px]" data-node-id="1928:29898">
-                    {language === 'es' ? 'Últimos recibos' : 'Latest Receipts'}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    addToast(
-                      language === 'es' ? 'Recibos' : 'Receipts',
-                      language === 'es' ? 'No hay recibos registrados aún.' : 'No receipts recorded yet.',
-                      'info'
-                    );
-                  }}
-                  className="font-['Inter',sans-serif] font-semibold text-[14px] leading-[18px] text-[#737373] hover:text-[#171717] cursor-pointer transition-colors"
-                  data-node-id="1928:29899"
-                >
-                  {language === 'es' ? 'Ver todos' : 'View all'}
-                </button>
-              </div>
 
-              {/* Empty State: No reimbursements yet */}
-              <div className="bg-white border border-[#e5e5e5] rounded-[8px] h-[136px] flex flex-col items-center justify-center p-4 relative w-full gap-3" data-node-id="1928:29900">
-                <div className="size-[46px] rounded-full bg-[#f5f5f5] border border-[#e5e5e5] flex items-center justify-center text-[#737373] shadow-2xs" data-node-id="1928:29902">
-                  <span className="material-symbols-outlined text-[24px]">currency_exchange</span>
+                  {/* Inner Bordered Card: 8px border-radius */}
+                  <div
+                    className="border border-[#d4d4d4] rounded-[8px] p-4 sm:p-5 flex flex-col gap-5 w-full bg-white flex-1"
+                    data-node-id={isRefunded ? "2308:53357" : "2308:53155"}
+                  >
+                    {/* Top content group (stays naturally together) */}
+                    <div className="flex flex-col gap-4 w-full">
+                      {/* Status & Date row */}
+                      <div className="flex gap-3 items-start w-full" data-node-id={isRefunded ? "2308:53358" : "2308:53156"}>
+                        <div
+                          className="size-[40px] sm:size-[44px] rounded-[6px] bg-[#b0deff] flex items-center justify-center shrink-0 text-[#0038d0]"
+                          data-node-id={isRefunded ? "2308:53360" : "2308:53158"}
+                        >
+                          <span className="material-symbols-outlined text-[22px] sm:text-[24px]">sync</span>
+                        </div>
+
+                        <div className="flex flex-col gap-1 flex-1 min-w-0" data-node-id={isRefunded ? "2308:53362" : "2308:53160"}>
+                          <p
+                            className="font-['Inter',sans-serif] font-semibold text-[15px] sm:text-[16px] leading-[20px] text-[#171717] tracking-[-0.028px]"
+                            data-node-id={isRefunded ? "2308:53364" : "2308:53162"}
+                          >
+                            {isRefunded
+                              ? (language === 'es' ? 'Monto total reembolsado:' : 'Total amount refunded:')
+                              : (language === 'es' ? 'Reembolso pendiente' : 'Pending reimbursement')}
+                          </p>
+                          {isRefunded && (
+                            <p className="font-['Inter',sans-serif] font-bold text-[18px] sm:text-[20px] leading-[24px] text-[#0038d0]" data-node-id="2308:53365">
+                              $317.00 USD
+                            </p>
+                          )}
+                          <div
+                            className="flex flex-wrap items-center gap-1.5 text-[13px] sm:text-[14px] leading-[18px]"
+                            data-node-id={isRefunded ? "2308:53366" : "2308:53163"}
+                          >
+                            <span className="font-['Inter',sans-serif] font-semibold text-[#404040]">
+                              {isRefunded
+                                ? (language === 'es' ? 'Fecha de aprobación:' : 'Approval date:')
+                                : (language === 'es' ? 'Fecha de envío de recibos:' : 'Receipt submission date:')}
+                            </span>
+                            <span className="font-['Inter',sans-serif] font-normal text-[#737373]">
+                              {isRefunded ? '06/04/2025' : '04/June/2025'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Employer review description: only shown when pending */}
+                      {!isRefunded && (
+                        <p
+                          className="font-['DM_Sans',sans-serif] font-normal text-[16px] leading-[22px] text-[#262626] tracking-[-0.056px] w-full"
+                          data-node-id="2308:53166"
+                        >
+                          {language === 'es'
+                            ? 'Tu empleador está revisando tus recibos. Te notificaremos cuando tengamos una respuesta.'
+                            : 'Your employer is reviewing your receipts. We will notify you when we have a response.'}
+                        </p>
+                      )}
+
+                      {/* Divider line */}
+                      <div className="border-t border-[#e5e5e5] w-full" data-node-id={isRefunded ? "2308:53369" : "2308:53167"} />
+                    </div>
+
+                    {/* Timeline Stepper - 24px separation between steps */}
+                    <div className="flex flex-col w-full flex-1 min-h-0 pt-1" data-node-id={isRefunded ? "2308:53370" : "2308:53168"}>
+                      {/* Step 1 */}
+                      <div className="flex gap-3 items-stretch w-full" data-node-id="2308:53173">
+                        <div className="flex flex-col items-center shrink-0 pt-1" data-node-id="2308:53169">
+                          {isRefunded ? (
+                            <div className="size-[16px] rounded-full bg-[#068f2a] flex items-center justify-center text-white shrink-0 shadow-xs">
+                              <span className="material-symbols-outlined text-[12px] font-bold">check</span>
+                            </div>
+                          ) : (
+                            <div className="size-[14px] rounded-full bg-[#0038d0] shrink-0" />
+                          )}
+                          <div className={`w-[2px] ${isRefunded ? 'bg-[#068f2a]' : 'bg-[#0038d0]'} flex-1 my-1`} />
+                        </div>
+                        {/* Step 1 Content with pb-6 (24px separation) */}
+                        <div className="flex flex-col gap-1.5 flex-1 min-w-0 pb-6">
+                          <p
+                            className={`font-['DM_Sans',sans-serif] font-semibold text-[16px] sm:text-[18px] leading-[24px] ${isRefunded ? 'text-[#0b38a4]' : 'text-[#0038d0]'} tracking-[-0.056px]`}
+                            data-node-id="2308:53176"
+                          >
+                            {language === 'es' ? 'Revisando tus recibos' : 'Checking your receipts'}
+                          </p>
+                          <p
+                            className="font-['Inter',sans-serif] font-normal text-[14px] sm:text-[16px] leading-[22px] text-[#262626] tracking-[-0.056px]"
+                            data-node-id="2308:53180"
+                          >
+                            {language === 'es'
+                              ? 'Recibimos las fotos de tus recibos y gastos. Te avisaremos por aquí si necesitamos algo más.'
+                              : 'We received the photos of your receipts and expenses. We will let you know here if we need anything else.'}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Step 2 */}
+                      <div className="flex gap-3 items-stretch w-full flex-1 min-h-0" data-node-id="2308:53181">
+                        <div className="flex flex-col items-center shrink-0 pt-1">
+                          {isRefunded ? (
+                            <div className="size-[16px] rounded-full bg-[#068f2a] flex items-center justify-center text-white shrink-0 shadow-xs">
+                              <span className="material-symbols-outlined text-[12px] font-bold">check</span>
+                            </div>
+                          ) : (
+                            <div className="size-[14px] rounded-full border-2 border-dashed border-[#737373] bg-white shrink-0" />
+                          )}
+                          <div className={`w-[2px] ${isRefunded ? 'bg-[#068f2a] flex-1 my-1 min-h-[48px]' : 'border-l-2 border-dashed border-[#737373] flex-1 my-1 min-h-[48px]'}`} />
+                        </div>
+                        {/* Step 2 Content */}
+                        <div className="flex flex-col gap-1.5 flex-1 min-w-0">
+                          <p
+                            className={`font-['DM_Sans',sans-serif] font-semibold text-[16px] sm:text-[18px] leading-[24px] ${isRefunded ? 'text-[#0b38a4]' : 'text-[#0038d0]'} tracking-[-0.056px]`}
+                            data-node-id="2308:53184"
+                          >
+                            {language === 'es' ? 'Pago enviado' : 'Payment sent'}
+                          </p>
+                          <p
+                            className="font-['Inter',sans-serif] font-normal text-[14px] sm:text-[16px] leading-[22px] text-[#262626] tracking-[-0.056px]"
+                            data-node-id="2308:53188"
+                          >
+                            {language === 'es'
+                              ? 'Tu dinero fue depositado en tu cuenta. Si tienes dudas sobre el pago, habla con tu empleador.'
+                              : 'Your money was deposited into your account. If you have questions about the payment, please talk to your employer.'}
+                          </p>
+                          {isRefunded && (
+                            <div className="flex gap-1.5 items-center text-[12px] leading-[16px] pt-1" data-node-id="2308:53393">
+                              <span className="font-['Inter',sans-serif] font-semibold text-[#404040]">
+                                {language === 'es' ? 'Fecha de aprobación:' : 'Approval date:'}
+                              </span>
+                              <span className="font-['Inter',sans-serif] font-normal text-[#737373]">
+                                06/04/2025
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* View Details CTA Button */}
+                  <button
+                    type="button"
+                    onClick={() => setCurrentTab(isRefunded ? 'refunds_breakdown' : 'refunds_status_details')}
+                    className="bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] drop-shadow-[0px_1px_1px_rgba(0,0,0,0.09)] flex items-center justify-center min-h-[48px] px-4 py-3 rounded-full w-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-[#f5f5f5] transition-all cursor-pointer"
+                    data-node-id={isRefunded ? "2308:53396" : "2308:53189"}
+                    data-name="Button"
+                  >
+                    <span>{language === 'es' ? 'Ver detalles' : 'View details'}</span>
+                  </button>
                 </div>
-                <p className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#171717] text-center" data-node-id="1928:29904">
-                  {language === 'es' ? 'Aún no hay reembolsos' : 'No reimbursements yet'}
-                </p>
-              </div>
-            </div>
+              );
+            })() : (
+              <>
+                {/* Card 1: Daily Reimbursement */}
+                <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-4 w-full shadow-2xs" data-node-id="1928:29877">
+                  <div className="flex items-center gap-2 w-full" data-node-id="1928:29878">
+                    <div className="size-[32px] rounded-[4px] border border-[#e5e5e5] flex items-center justify-center text-[#2874ff] shrink-0" data-node-id="1928:29879">
+                      <span className="material-symbols-outlined text-[18px]">currency_exchange</span>
+                    </div>
+                    <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717] tracking-[-0.064px] flex-1 truncate" data-node-id="1928:29883">
+                      {language === 'es' ? 'Reembolso diario' : 'Daily Reimbursement'}
+                    </p>
+                  </div>
+
+                  {/* Sub-card: Add all your receipts */}
+                  <div className="bg-[#e7f6ff] rounded-[8px] p-4 flex flex-col gap-3 shadow-[3px_3px_8.7px_0px_rgba(38,38,38,0.05)] relative overflow-hidden" data-node-id="1928:29884">
+                    {/* Background Watermark Accent */}
+                    <div className="absolute -right-8 -top-8 text-[#0038d0]/5 select-none pointer-events-none font-bold text-[140px] leading-none -rotate-12">
+                      Z
+                    </div>
+
+                    <div className="flex flex-col gap-2 relative z-10">
+                      <h4 className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#0038d0] tracking-[-0.056px]" data-node-id="1928:29889">
+                        {language === 'es' ? 'Agrega todos tus recibos' : 'Add all your receipts'}
+                      </h4>
+                      <p className="font-['DM_Sans',sans-serif] font-normal text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px]" data-node-id="1928:29890">
+                        {language === 'es'
+                          ? 'Tu empleador tendrá un registro claro de tus gastos diarios, asegurando que recibas tu reembolso'
+                          : 'Your employer will have a clear record of your daily expenses, ensuring you get reimbursed'}
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setCurrentTab('refunds_hub')}
+                      className="w-full h-[32px] px-3 py-1.5 bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[12px] leading-[16px] flex items-center justify-center transition-all cursor-pointer drop-shadow-[0px_1px_1px_rgba(0,0,0,0.09)] relative z-10"
+                      data-node-id="1928:29891"
+                    >
+                      {language === 'es' ? 'Agregar recibos' : 'Add receipts'}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Card 2: Latest Receipts */}
+                <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-4 w-full shadow-2xs" data-node-id="1928:29892">
+                  <div className="flex items-center justify-between gap-2 w-full" data-node-id="1928:29893">
+                    <div className="flex items-center gap-2 flex-1">
+                      <div className="size-[32px] rounded-[4px] border border-[#e5e5e5] flex items-center justify-center text-[#525252] shrink-0" data-node-id="1928:29894">
+                        <span className="material-symbols-outlined text-[18px]">receipt_long</span>
+                      </div>
+                      <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717] tracking-[-0.064px]" data-node-id="1928:29898">
+                        {language === 'es' ? 'Últimos recibos' : 'Latest Receipts'}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setCurrentTab('refunds_hub')}
+                      className="font-['Inter',sans-serif] font-semibold text-[14px] leading-[18px] text-[#0038d0] hover:underline cursor-pointer transition-colors"
+                      data-node-id="1928:29899"
+                    >
+                      {language === 'es' ? 'Ver todos' : 'View all'}
+                    </button>
+                  </div>
+
+                  {/* Empty State: No reimbursements yet */}
+                  <div className="bg-white border border-[#e5e5e5] rounded-[8px] h-[136px] flex flex-col items-center justify-center p-4 relative w-full gap-3" data-node-id="1928:29900">
+                    <div className="size-[46px] rounded-full bg-[#f5f5f5] border border-[#e5e5e5] flex items-center justify-center text-[#737373] shadow-2xs" data-node-id="1928:29902">
+                      <span className="material-symbols-outlined text-[24px]">currency_exchange</span>
+                    </div>
+                    <p className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#171717] text-center" data-node-id="1928:29904">
+                      {language === 'es' ? 'Aún no hay reembolsos' : 'No reimbursements yet'}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         ) : (
           /* Main Body Area: Consular Appointment Card OR Visa Photo Card with 24px Container Padding */

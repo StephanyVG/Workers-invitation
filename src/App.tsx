@@ -103,6 +103,18 @@ import { I9EditInformationScreen } from './components/i9/I9EditInformationScreen
 import { I9SignBottomSheet } from './components/i9/I9SignBottomSheet';
 import { I9ConfirmationSuccessScreen } from './components/i9/I9ConfirmationSuccessScreen';
 import { I9DocumentViewerScreen } from './components/documents/I9DocumentViewerScreen';
+import { RefundsHubScreen } from './components/refunds/RefundsHubScreen';
+import { RefundsVisaScreen } from './components/refunds/RefundsVisaScreen';
+import { RefundsTransportScreen } from './components/refunds/RefundsTransportScreen';
+import { RefundsAccommodationScreen } from './components/refunds/RefundsAccommodationScreen';
+import { RefundsFoodScreen } from './components/refunds/RefundsFoodScreen';
+import { RefundsCameraModal } from './components/refunds/RefundsCameraModal';
+import { RefundsFinishLaterModal } from './components/refunds/RefundsFinishLaterModal';
+import { RefundsConfirmModal } from './components/refunds/RefundsConfirmModal';
+import { RefundsSuccessScreen } from './components/refunds/RefundsSuccessScreen';
+import { RefundsStatusDetailsScreen } from './components/refunds/RefundsStatusDetailsScreen';
+import { RefundsBreakdownScreen } from './components/refunds/RefundsBreakdownScreen';
+import { RefundsCompletedSuccessScreen } from './components/refunds/RefundsCompletedSuccessScreen';
 
 const MainContent: React.FC = () => {
   const { currentTab, showWelcomeModal, showInterviewCompletedModal } = useApp();
@@ -188,7 +200,16 @@ const MainContent: React.FC = () => {
     'i9_review',
     'i9_edit',
     'i9_confirmation',
-    'view_i9_document'
+    'view_i9_document',
+    'refunds_hub',
+    'refunds_visa',
+    'refunds_transport',
+    'refunds_accommodation',
+    'refunds_food',
+    'refunds_success',
+    'refunds_status_details',
+    'refunds_breakdown',
+    'refunds_completed_success'
   ].includes(currentTab);
 
   return (
@@ -278,6 +299,15 @@ const MainContent: React.FC = () => {
         {currentTab === 'i9_edit' && <I9EditInformationScreen />}
         {currentTab === 'i9_confirmation' && <I9ConfirmationSuccessScreen />}
         {currentTab === 'view_i9_document' && <I9DocumentViewerScreen />}
+        {currentTab === 'refunds_hub' && <RefundsHubScreen />}
+        {currentTab === 'refunds_visa' && <RefundsVisaScreen />}
+        {currentTab === 'refunds_transport' && <RefundsTransportScreen />}
+        {currentTab === 'refunds_accommodation' && <RefundsAccommodationScreen />}
+        {currentTab === 'refunds_food' && <RefundsFoodScreen />}
+        {currentTab === 'refunds_success' && <RefundsSuccessScreen />}
+        {currentTab === 'refunds_status_details' && <RefundsStatusDetailsScreen />}
+        {currentTab === 'refunds_breakdown' && <RefundsBreakdownScreen />}
+        {currentTab === 'refunds_completed_success' && <RefundsCompletedSuccessScreen />}
 
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}
@@ -319,6 +349,15 @@ const MainContent: React.FC = () => {
 
       {/* I-9 Sign to Confirm Bottom Sheet (Figma Node 3520:37211) */}
       <I9SignBottomSheet />
+
+      {/* Refunds Camera & Photo Upload Modal (Figma Nodes 2308:50273, 2308:50354, 2308:50368) */}
+      <RefundsCameraModal />
+
+      {/* Refunds Finish Later Confirmation Modal (Figma Node 2308:50723 / 2308:50695) */}
+      <RefundsFinishLaterModal />
+
+      {/* Refunds Confirm Bottom Sheet Modal (Figma Node 2308:50949 / 2308:50977) */}
+      <RefundsConfirmModal />
     </div>
   );
 };

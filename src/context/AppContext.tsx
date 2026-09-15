@@ -94,7 +94,16 @@ export type AppTab =
   | 'i9_review'
   | 'i9_edit'
   | 'i9_confirmation'
-  | 'view_i9_document';
+  | 'view_i9_document'
+  | 'refunds_hub'
+  | 'refunds_visa'
+  | 'refunds_transport'
+  | 'refunds_accommodation'
+  | 'refunds_food'
+  | 'refunds_success'
+  | 'refunds_status_details'
+  | 'refunds_breakdown'
+  | 'refunds_completed_success';
 
 export type AppLanguage = 'es' | 'en';
 
@@ -124,7 +133,96 @@ export interface I9FormData {
   visaExpirationDate: string;
 }
 
+export interface RefundsProgress {
+  visa: {
+    completed: boolean;
+    notApplicable?: boolean;
+    appointmentFee: boolean;
+    borderFee: boolean;
+  };
+  transport: {
+    completed: boolean;
+    notApplicable?: boolean;
+    consulateTransport: boolean;
+    consulateAmount: string;
+    consulateCurrency: 'MXN' | 'USD';
+    consulateReceiptPhoto?: string;
+    workplaceTransport: boolean;
+    workplaceAmount?: string;
+    workplaceCurrency?: 'MXN' | 'USD';
+    workplaceReceiptPhoto?: string;
+  };
+  hotel: {
+    completed: boolean;
+    notApplicable?: boolean;
+    amount: string;
+    currency: 'MXN' | 'USD';
+    nights: number;
+    people: number;
+    receiptPhoto?: string;
+  };
+  food: {
+    completed: boolean;
+    notApplicable?: boolean;
+    foodAmount: string;
+    foodCurrency: 'MXN' | 'USD';
+    foodReceiptPhoto?: string;
+    othersAmount: string;
+    othersCurrency: 'MXN' | 'USD';
+    othersReceiptPhoto?: string;
+  };
+  submitted: boolean;
+  status?: 'pending' | 'refunded';
+}
+
+export const INITIAL_REFUNDS_PROGRESS: RefundsProgress = {
+  visa: {
+    completed: false,
+    notApplicable: false,
+    appointmentFee: false,
+    borderFee: false,
+  },
+  transport: {
+    completed: false,
+    consulateTransport: false,
+    consulateAmount: '25.00',
+    consulateCurrency: 'MXN',
+    workplaceTransport: false,
+    workplaceAmount: '0.00',
+    workplaceCurrency: 'USD',
+  },
+  hotel: {
+    completed: false,
+    amount: '0.00',
+    currency: 'USD',
+    nights: 1,
+    people: 1,
+  },
+  food: {
+    completed: false,
+    foodAmount: '12.00',
+    foodCurrency: 'USD',
+    othersAmount: '0.00',
+    othersCurrency: 'USD',
+  },
+  submitted: false,
+  status: 'pending',
+};
+
 interface AppContextType {
+  refundsProgress: RefundsProgress;
+  updateRefundsProgress: (updates: Partial<RefundsProgress>) => void;
+  markRefundCategoryDone: (category: 'visa' | 'transport' | 'hotel' | 'food', notApplicable?: boolean) => void;
+  submitAllRefunds: () => void;
+  setRefundStatus: (status: 'pending' | 'refunded') => void;
+  showRefundCameraModal: boolean;
+  setShowRefundCameraModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showRefundFinishLaterModal: boolean;
+  setShowRefundFinishLaterModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showRefundConfirmModal: boolean;
+  setShowRefundConfirmModal: React.Dispatch<React.SetStateAction<boolean>>;
+  refundCameraTarget: { category: 'transport' | 'hotel' | 'food' | 'others'; subField?: string } | null;
+  setRefundCameraTarget: React.Dispatch<React.SetStateAction<{ category: 'transport' | 'hotel' | 'food' | 'others'; subField?: string } | null>>;
   worker: WorkerProfile;
   jobs: JobOffer[];
   documents: DocumentInfo[];
@@ -342,6 +440,63 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.setItem('zipmi_i9_form_data', JSON.stringify(i9FormData));
   }, [i9FormData]);
 
+  const [refundsProgress, setRefundsProgress] = useState<RefundsProgress>(() => {
+    const saved = localStorage.getItem('zipmi_refunds_progress');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    return INITIAL_REFUNDS_PROGRESS;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_refunds_progress', JSON.stringify(refundsProgress));
+  }, [refundsProgress]);
+
+  const [showRefundCameraModal, setShowRefundCameraModal] = useState<boolean>(false);
+  const [showRefundFinishLaterModal, setShowRefundFinishLaterModal] = useState<boolean>(false);
+  const [showRefundConfirmModal, setShowRefundConfirmModal] = useState<boolean>(false);
+  const [refundCameraTarget, setRefundCameraTarget] = useState<{ category: 'transport' | 'hotel' | 'food' | 'others'; subField?: string } | null>(null);
+
+  const updateRefundsProgress = (updates: Partial<RefundsProgress>) => {
+    setRefundsProgress((prev) => ({
+      ...prev,
+      ...updates,
+      visa: { ...prev.visa, ...(updates.visa || {}) },
+      transport: { ...prev.transport, ...(updates.transport || {}) },
+      hotel: { ...prev.hotel, ...(updates.hotel || {}) },
+      food: { ...prev.food, ...(updates.food || {}) },
+    }));
+  };
+
+  const markRefundCategoryDone = (category: 'visa' | 'transport' | 'hotel' | 'food', notApplicable?: boolean) => {
+    setRefundsProgress((prev) => ({
+      ...prev,
+      [category]: {
+        ...prev[category],
+        completed: notApplicable === undefined ? true : false,
+        notApplicable: !!notApplicable,
+      },
+    }));
+  };
+
+  const submitAllRefunds = () => {
+    setRefundsProgress((prev) => ({ ...prev, submitted: true, status: 'pending' }));
+    triggerConfetti();
+    addToast(
+      language === 'es' ? 'Reembolsos Enviados' : 'Refunds Submitted',
+      language === 'es'
+        ? 'Tu solicitud de reembolso ha sido enviada con éxito a tu empleador.'
+        : 'Your refund request has been successfully submitted to your employer.',
+      'success'
+    );
+  };
+
+  const setRefundStatus = (status: 'pending' | 'refunded') => {
+    setRefundsProgress((prev) => ({ ...prev, status }));
+  };
+
   const [scheduledInterview, setScheduledInterview] = useState<ScheduledInterviewInfo | null>(() => {
     const saved = localStorage.getItem('zipmi_scheduled_interview');
     return saved ? JSON.parse(saved) : null;
@@ -506,6 +661,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.removeItem('zipmi_has_arrived_at_job');
     localStorage.removeItem('zipmi_has_completed_i9_review');
     localStorage.removeItem('zipmi_i9_form_data');
+    localStorage.removeItem('zipmi_refunds_progress');
     sessionStorage.removeItem('zipmi_i9_banner_dismissed');
     setHasConfirmedConsularDetails(false);
     setIsVisaApprovedConfirmed(false);
@@ -516,6 +672,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setHasCompletedI9Review(false);
     setShowI9SignBottomSheet(false);
     setShowI9SavedToast(false);
+    setRefundsProgress(INITIAL_REFUNDS_PROGRESS);
+    setShowRefundCameraModal(false);
+    setShowRefundFinishLaterModal(false);
+    setShowRefundConfirmModal(false);
+    setRefundCameraTarget(null);
     setWorker(INITIAL_WORKER_PROFILE);
     setDocuments(INITIAL_DOCUMENTS);
     setOnboardingPath(null);
@@ -546,6 +707,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   return (
     <AppContext.Provider
       value={{
+        refundsProgress,
+        updateRefundsProgress,
+        markRefundCategoryDone,
+        submitAllRefunds,
+        setRefundStatus,
+        showRefundCameraModal,
+        setShowRefundCameraModal,
+        showRefundFinishLaterModal,
+        setShowRefundFinishLaterModal,
+        showRefundConfirmModal,
+        setShowRefundConfirmModal,
+        refundCameraTarget,
+        setRefundCameraTarget,
         worker,
         jobs: MOCK_JOBS,
         documents,

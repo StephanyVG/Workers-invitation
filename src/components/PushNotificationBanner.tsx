@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 
 export const PushNotificationBanner: React.FC = () => {
-  const { showPushBanner, setShowPushBanner, setCurrentTab, language, worker, pushBannerData } = useApp();
+  const { showPushBanner, setShowPushBanner, setCurrentTab, language, worker, pushBannerData, setRefundStatus } = useApp();
 
   useEffect(() => {
     if (showPushBanner) {
@@ -18,6 +18,8 @@ export const PushNotificationBanner: React.FC = () => {
 
   if (!showPushBanner) return null;
 
+  const isRefundNotification =
+    pushBannerData?.title?.includes('Refund') || pushBannerData?.title?.includes('Reembolso');
   const isTravelNotification =
     pushBannerData?.targetTab === 'travel_itinerary';
   const isDs160Submitted =
@@ -57,7 +59,10 @@ export const PushNotificationBanner: React.FC = () => {
 
   const handleBannerClick = () => {
     setShowPushBanner(false);
-    if (pushBannerData?.targetTab) {
+    if (isRefundNotification) {
+      setRefundStatus('refunded');
+      setCurrentTab('home');
+    } else if (pushBannerData?.targetTab) {
       setCurrentTab(pushBannerData.targetTab);
     } else if (isTravelNotification) {
       setCurrentTab('travel_itinerary');
@@ -84,7 +89,7 @@ export const PushNotificationBanner: React.FC = () => {
     <div
       onClick={handleBannerClick}
       className="absolute top-[60px] left-1/2 -translate-x-1/2 z-50 w-[calc(100%-32px)] max-w-[345px] animate-push-move-in pointer-events-auto bg-[#e7f6ff] border border-[#b0deff] rounded-[16px] p-[16px] flex gap-[12px] items-start shadow-xl cursor-pointer active:scale-[0.99] transition-transform"
-      data-node-id={isI9ReadyNotification ? '3525:38030' : isI9Notification ? '3520:27415' : isTravelNotification ? '1712:43449' : isDs160Submitted ? '1241:16248' : isOfferSent ? '1082:17134' : '1004:4817'}
+      data-node-id={isRefundNotification ? '2308:50071' : isI9ReadyNotification ? '3525:38030' : isI9Notification ? '3520:27415' : isTravelNotification ? '1712:43449' : isDs160Submitted ? '1241:16248' : isOfferSent ? '1082:17134' : '1004:4817'}
     >
       {/* Left Zipmi Icon */}
       <div className="size-[28px] shrink-0 relative flex items-center justify-center">
