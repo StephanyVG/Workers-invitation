@@ -90,7 +90,11 @@ export type AppTab =
   | 'visa_photo_guide'
   | 'visa_camera_sim'
   | 'visa_review'
-  | 'travel_itinerary';
+  | 'travel_itinerary'
+  | 'i9_review'
+  | 'i9_edit'
+  | 'i9_confirmation'
+  | 'view_i9_document';
 
 export type AppLanguage = 'es' | 'en';
 
@@ -106,6 +110,18 @@ export interface ScheduledInterviewInfo {
   date: string;
   time: string;
   farm: string;
+}
+
+export interface I9FormData {
+  lastName: string;
+  firstName: string;
+  middleInitial: string;
+  dateOfBirth: string;
+  citizenshipStatus: string;
+  address: string;
+  passportNumber: string;
+  countryOfIssuance: string;
+  visaExpirationDate: string;
 }
 
 interface AppContextType {
@@ -135,10 +151,24 @@ interface AppContextType {
   setShowConsularDetailsModal: React.Dispatch<React.SetStateAction<boolean>>;
   showTransportBottomSheet: boolean;
   setShowTransportBottomSheet: React.Dispatch<React.SetStateAction<boolean>>;
+  showTravelDetailsModal: boolean;
+  setShowTravelDetailsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showArrivalCongratsModal: boolean;
+  setShowArrivalCongratsModal: React.Dispatch<React.SetStateAction<boolean>>;
   transportPreference: 'employer' | 'own' | null;
   setTransportPreference: React.Dispatch<React.SetStateAction<'employer' | 'own' | null>>;
   hasConfirmedTravelItinerary: boolean;
   setHasConfirmedTravelItinerary: React.Dispatch<React.SetStateAction<boolean>>;
+  hasArrivedAtJob: boolean;
+  setHasArrivedAtJob: React.Dispatch<React.SetStateAction<boolean>>;
+  hasCompletedI9Review: boolean;
+  setHasCompletedI9Review: React.Dispatch<React.SetStateAction<boolean>>;
+  showI9SignBottomSheet: boolean;
+  setShowI9SignBottomSheet: React.Dispatch<React.SetStateAction<boolean>>;
+  i9FormData: I9FormData;
+  setI9FormData: React.Dispatch<React.SetStateAction<I9FormData>>;
+  showI9SavedToast: boolean;
+  setShowI9SavedToast: React.Dispatch<React.SetStateAction<boolean>>;
   scheduledInterview: ScheduledInterviewInfo | null;
   setScheduledInterview: (interview: ScheduledInterviewInfo | null) => void;
   selectedAppointmentDetail: ScheduledInterviewInfo | null;
@@ -242,6 +272,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [showConsularDetailsModal, setShowConsularDetailsModal] = useState<boolean>(false);
   const [showTransportBottomSheet, setShowTransportBottomSheet] = useState<boolean>(false);
+  const [showTravelDetailsModal, setShowTravelDetailsModal] = useState<boolean>(false);
+  const [showArrivalCongratsModal, setShowArrivalCongratsModal] = useState<boolean>(false);
 
   const [transportPreference, setTransportPreference] = useState<'employer' | 'own' | null>(() => {
     const saved = localStorage.getItem('zipmi_transport_preference');
@@ -264,6 +296,51 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     localStorage.setItem('zipmi_confirmed_travel_itinerary', String(hasConfirmedTravelItinerary));
   }, [hasConfirmedTravelItinerary]);
+
+  const [hasArrivedAtJob, setHasArrivedAtJob] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_has_arrived_at_job');
+    return saved === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_has_arrived_at_job', String(hasArrivedAtJob));
+  }, [hasArrivedAtJob]);
+
+  const [hasCompletedI9Review, setHasCompletedI9Review] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_has_completed_i9_review');
+    return saved === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_has_completed_i9_review', String(hasCompletedI9Review));
+  }, [hasCompletedI9Review]);
+
+  const [showI9SignBottomSheet, setShowI9SignBottomSheet] = useState<boolean>(false);
+  const [showI9SavedToast, setShowI9SavedToast] = useState<boolean>(false);
+
+  const [i9FormData, setI9FormData] = useState<I9FormData>(() => {
+    const saved = localStorage.getItem('zipmi_i9_form_data');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    return {
+      lastName: 'García',
+      firstName: 'Francisco',
+      middleInitial: 'Francisco',
+      dateOfBirth: '24/12/1960',
+      citizenshipStatus: 'A noncitizen national of the United States',
+      address: '123 Farm Rd, Sunnyside, WA 98944',
+      passportNumber: '123213',
+      countryOfIssuance: 'Mexico',
+      visaExpirationDate: '12/12/2026',
+    };
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_i9_form_data', JSON.stringify(i9FormData));
+  }, [i9FormData]);
 
   const [scheduledInterview, setScheduledInterview] = useState<ScheduledInterviewInfo | null>(() => {
     const saved = localStorage.getItem('zipmi_scheduled_interview');
@@ -426,11 +503,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.removeItem('zipmi_has_uploaded_visa');
     localStorage.removeItem('zipmi_transport_preference');
     localStorage.removeItem('zipmi_confirmed_travel_itinerary');
+    localStorage.removeItem('zipmi_has_arrived_at_job');
+    localStorage.removeItem('zipmi_has_completed_i9_review');
+    localStorage.removeItem('zipmi_i9_form_data');
+    sessionStorage.removeItem('zipmi_i9_banner_dismissed');
     setHasConfirmedConsularDetails(false);
     setIsVisaApprovedConfirmed(false);
     setHasUploadedVisa(false);
     setTransportPreference('employer');
     setHasConfirmedTravelItinerary(false);
+    setHasArrivedAtJob(false);
+    setHasCompletedI9Review(false);
+    setShowI9SignBottomSheet(false);
+    setShowI9SavedToast(false);
     setWorker(INITIAL_WORKER_PROFILE);
     setDocuments(INITIAL_DOCUMENTS);
     setOnboardingPath(null);
@@ -487,10 +572,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setShowConsularDetailsModal,
         showTransportBottomSheet,
         setShowTransportBottomSheet,
+        showTravelDetailsModal,
+        setShowTravelDetailsModal,
+        showArrivalCongratsModal,
+        setShowArrivalCongratsModal,
         transportPreference,
         setTransportPreference,
         hasConfirmedTravelItinerary,
         setHasConfirmedTravelItinerary,
+        hasArrivedAtJob,
+        setHasArrivedAtJob,
+        hasCompletedI9Review,
+        setHasCompletedI9Review,
+        showI9SignBottomSheet,
+        setShowI9SignBottomSheet,
+        i9FormData,
+        setI9FormData,
+        showI9SavedToast,
+        setShowI9SavedToast,
         scheduledInterview,
         setScheduledInterview,
         selectedAppointmentDetail,

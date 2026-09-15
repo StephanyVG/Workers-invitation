@@ -6,14 +6,15 @@ export const PushNotificationBanner: React.FC = () => {
 
   useEffect(() => {
     if (showPushBanner) {
-      // Auto-hide push notification after at least 8 seconds (8000ms)
+      // Auto-hide push notification after 5 seconds for I-9 notification, 8 seconds for others
+      const duration = pushBannerData?.targetTab === 'i9_review' ? 5000 : 8000;
       const timer = setTimeout(() => {
         setShowPushBanner(false);
-      }, 8000);
+      }, duration);
 
       return () => clearTimeout(timer);
     }
-  }, [showPushBanner, setShowPushBanner]);
+  }, [showPushBanner, setShowPushBanner, pushBannerData]);
 
   if (!showPushBanner) return null;
 
@@ -51,6 +52,9 @@ export const PushNotificationBanner: React.FC = () => {
       : (language === 'es' ? 'Hace 2 h' : '2 hrs ago')
   );
 
+  const isI9Notification = pushBannerData?.targetTab === 'i9_review';
+  const isI9ReadyNotification = pushBannerData?.targetTab === 'documents';
+
   const handleBannerClick = () => {
     setShowPushBanner(false);
     if (pushBannerData?.targetTab) {
@@ -69,14 +73,18 @@ export const PushNotificationBanner: React.FC = () => {
   const handleDismiss = (e: React.MouseEvent) => {
     e.stopPropagation();
     setShowPushBanner(false);
-    sessionStorage.setItem('zipmi_travel_banner_dismissed', 'true');
+    if (isI9Notification) {
+      sessionStorage.setItem('zipmi_i9_banner_dismissed', 'true');
+    } else if (isTravelNotification) {
+      sessionStorage.setItem('zipmi_travel_banner_dismissed', 'true');
+    }
   };
 
   return (
     <div
       onClick={handleBannerClick}
       className="absolute top-[60px] left-1/2 -translate-x-1/2 z-50 w-[calc(100%-32px)] max-w-[345px] animate-push-move-in pointer-events-auto bg-[#e7f6ff] border border-[#b0deff] rounded-[16px] p-[16px] flex gap-[12px] items-start shadow-xl cursor-pointer active:scale-[0.99] transition-transform"
-      data-node-id={isTravelNotification ? '1712:43449' : isDs160Submitted ? '1241:16248' : isOfferSent ? '1082:17134' : '1004:4817'}
+      data-node-id={isI9ReadyNotification ? '3525:38030' : isI9Notification ? '3520:27415' : isTravelNotification ? '1712:43449' : isDs160Submitted ? '1241:16248' : isOfferSent ? '1082:17134' : '1004:4817'}
     >
       {/* Left Zipmi Icon */}
       <div className="size-[28px] shrink-0 relative flex items-center justify-center">

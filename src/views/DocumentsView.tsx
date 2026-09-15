@@ -10,10 +10,10 @@ const imgEllipse319 = "/assets/documents_empty/imgEllipse319.svg";
 const imgEllipse316 = "/assets/documents_empty/imgEllipse316.svg";
 
 export const DocumentsView: React.FC = () => {
-  const { worker, language, setCurrentTab, setSelectedDocumentType, hasUploadedVisa } = useApp();
+  const { worker, language, setCurrentTab, setSelectedDocumentType, hasUploadedVisa, hasCompletedI9Review } = useApp();
 
   const isSigned = worker.hasSignedContract || worker.status === 'oferta_firmada';
-  const hasDocuments = isSigned || worker.status === 'solicitud_visa' || worker.status === 'visa_aprobada' || worker.status === 'listo_para_viaje';
+  const hasDocuments = isSigned || worker.status === 'solicitud_visa' || worker.status === 'visa_aprobada' || worker.status === 'listo_para_viaje' || hasCompletedI9Review;
 
   if (hasDocuments) {
     return (
@@ -48,6 +48,42 @@ export const DocumentsView: React.FC = () => {
 
         {/* Content Container Area with 24px container padding */}
         <div className="flex-1 p-6 w-full flex flex-col items-start gap-6" data-node-id="1241:16335">
+          {/* Card 0: Formulario I-9 (Figma 3525:38102) */}
+          {hasCompletedI9Review && (
+            <div
+              onClick={() => setCurrentTab('view_i9_document')}
+              className="border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-[1px_0px_16px_0px_rgba(0,0,0,0.05)] bg-white w-full flex flex-col cursor-pointer active:scale-[0.99] transition-transform"
+              data-node-id="3525:38102"
+            >
+              <div className="h-[187px] relative w-full overflow-hidden bg-slate-50 border-b border-[#e5e5e5]">
+                <img
+                  src="/I9.png"
+                  alt={language === 'es' ? 'Formulario I-9' : 'Form I-9'}
+                  className="w-full h-full object-cover object-top block"
+                />
+              </div>
+
+              <div className="p-5 flex flex-col gap-2.5 text-left font-['Inter',sans-serif]">
+                <p className="font-['Inter',sans-serif] font-semibold text-[14px] leading-[18px] text-black tracking-[-0.028px]">
+                  {language === 'es' ? 'Formulario I-9' : 'Form I-9'}
+                </p>
+                <p className="font-['Inter',sans-serif] font-normal text-[12px] leading-[16px] text-[#525252] tracking-[-0.048px]">
+                  {language === 'es' ? 'PDF • Firmado el 15 Apr, 2026' : 'PDF • Signed on [15 Apr, 2026]'}
+                </p>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentTab('view_i9_document');
+                  }}
+                  className="w-full h-[36px] px-3 py-1.5 bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[13px] leading-[18px] text-center shadow-2xs transition-all duration-150 cursor-pointer flex items-center justify-center mt-1"
+                >
+                  {language === 'es' ? 'Ver documento' : 'See document'}
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Card 1: Job Offer */}
           <div
             onClick={() => setCurrentTab('view_signed_document')}

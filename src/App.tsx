@@ -96,6 +96,13 @@ import { VisaPhotoGuideScreen } from './components/visa/VisaPhotoGuideScreen';
 import { VisaCameraSimulator } from './components/visa/VisaCameraSimulator';
 import { VisaReviewScreen } from './components/visa/VisaReviewScreen';
 import { TravelItineraryScreen } from './components/travel/TravelItineraryScreen';
+import { TravelDetailsBottomSheet } from './components/travel/TravelDetailsBottomSheet';
+import { ArrivalCongratsModal } from './components/travel/ArrivalCongratsModal';
+import { I9InformationReviewScreen } from './components/i9/I9InformationReviewScreen';
+import { I9EditInformationScreen } from './components/i9/I9EditInformationScreen';
+import { I9SignBottomSheet } from './components/i9/I9SignBottomSheet';
+import { I9ConfirmationSuccessScreen } from './components/i9/I9ConfirmationSuccessScreen';
+import { I9DocumentViewerScreen } from './components/documents/I9DocumentViewerScreen';
 
 const MainContent: React.FC = () => {
   const { currentTab, showWelcomeModal, showInterviewCompletedModal } = useApp();
@@ -177,7 +184,11 @@ const MainContent: React.FC = () => {
     'visa_photo_guide',
     'visa_camera_sim',
     'visa_review',
-    'travel_itinerary'
+    'travel_itinerary',
+    'i9_review',
+    'i9_edit',
+    'i9_confirmation',
+    'view_i9_document'
   ].includes(currentTab);
 
   return (
@@ -263,6 +274,10 @@ const MainContent: React.FC = () => {
         {currentTab === 'visa_camera_sim' && <VisaCameraSimulator />}
         {currentTab === 'visa_review' && <VisaReviewScreen />}
         {currentTab === 'travel_itinerary' && <TravelItineraryScreen />}
+        {currentTab === 'i9_review' && <I9InformationReviewScreen />}
+        {currentTab === 'i9_edit' && <I9EditInformationScreen />}
+        {currentTab === 'i9_confirmation' && <I9ConfirmationSuccessScreen />}
+        {currentTab === 'view_i9_document' && <I9DocumentViewerScreen />}
 
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}
@@ -295,6 +310,15 @@ const MainContent: React.FC = () => {
 
       {/* Transport Confirmation Bottom Sheet (Figma Node 1628:50256) */}
       <TransportConfirmationBottomSheet />
+
+      {/* Travel Details Bottom Sheet (Figma Node 1712:44226) */}
+      <TravelDetailsBottomSheet />
+
+      {/* Arrival Congrats Modal (Figma Node 1712:45124) */}
+      <ArrivalCongratsModal />
+
+      {/* I-9 Sign to Confirm Bottom Sheet (Figma Node 3520:37211) */}
+      <I9SignBottomSheet />
     </div>
   );
 };

@@ -7,6 +7,7 @@ export const TravelItineraryScreen: React.FC = () => {
     setCurrentTab,
     transportPreference,
     setHasConfirmedTravelItinerary,
+    setShowArrivalCongratsModal,
     addToast
   } = useApp();
 
@@ -14,6 +15,7 @@ export const TravelItineraryScreen: React.FC = () => {
 
   const handleConfirm = () => {
     setHasConfirmedTravelItinerary(true);
+    setShowArrivalCongratsModal(true);
     addToast(
       language === 'es' ? '¡Itinerario Confirmado!' : 'Itinerary Confirmed!',
       language === 'es'

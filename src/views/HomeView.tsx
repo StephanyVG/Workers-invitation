@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 
 export const HomeView: React.FC = () => {
@@ -14,10 +14,14 @@ export const HomeView: React.FC = () => {
     setIsVisaApprovedConfirmed,
     hasUploadedVisa,
     hasConfirmedTravelItinerary,
+    hasArrivedAtJob,
+    hasCompletedI9Review,
     triggerPushBanner,
     showPushBanner,
     setSelectedDocumentType,
     setShowConsularDetailsModal,
+    setShowTravelDetailsModal,
+    setShowArrivalCongratsModal,
     advanceStage
   } = useApp();
   const workerFirstName = worker.fullName.split(' ')[0] || 'Guadalupe';
@@ -37,6 +41,47 @@ export const HomeView: React.FC = () => {
       }
     }
   }, [hasUploadedVisa, hasConfirmedTravelItinerary]);
+
+  // Show Arrival Congrats Modal ~4 seconds after viewing the confirmed travel details card (if not yet acknowledged)
+  useEffect(() => {
+    if (hasUploadedVisa && hasConfirmedTravelItinerary && !hasArrivedAtJob) {
+      const timer = setTimeout(() => {
+        setShowArrivalCongratsModal(true);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [hasUploadedVisa, hasConfirmedTravelItinerary, hasArrivedAtJob, setShowArrivalCongratsModal]);
+
+  const [showYellowI9Card, setShowYellowI9Card] = useState<boolean>(() => {
+    return sessionStorage.getItem('zipmi_yellow_i9_card_shown') === 'true';
+  });
+
+  // Trigger I-9 Push Notification Banner first, and reveal the yellow container 5 seconds later (after notification)
+  useEffect(() => {
+    if (hasArrivedAtJob && !hasCompletedI9Review) {
+      const dismissed = sessionStorage.getItem('zipmi_i9_banner_dismissed');
+      if (!dismissed && !showPushBanner && !showYellowI9Card) {
+        triggerPushBanner({
+          title: language === 'es' ? 'Revisa tu info para el formulario I-9.' : 'Review your info for the I-9 form.',
+          description: language === 'es'
+            ? 'Por favor completa tu formulario de Verificación de Elegibilidad de Empleo.'
+            : 'Please complete your Employment Eligibility Verification form.',
+          time: language === 'es' ? 'En 2 horas' : 'In 2 hours',
+          targetTab: 'i9_review',
+        });
+      }
+
+      if (!showYellowI9Card) {
+        const timer = setTimeout(() => {
+          setShowYellowI9Card(true);
+          sessionStorage.setItem('zipmi_yellow_i9_card_shown', 'true');
+        }, 5000);
+
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [hasArrivedAtJob, hasCompletedI9Review, showYellowI9Card, showPushBanner, language, triggerPushBanner]);
 
   const isScheduled = !!scheduledInterview;
   const interviewDate = scheduledInterview?.date || '11 Apr';
@@ -259,12 +304,13 @@ export const HomeView: React.FC = () => {
           </button>
         </div>
 
-        {/* Step Progress Tracker Bar */}
-        {!isVisaApprovedConfirmed ? (
-          <div
-            className="bg-white border-b border-[#e5e5e5] px-4 py-3 flex items-center justify-between gap-4 shrink-0 shadow-2xs"
-            data-node-id="2376:35791"
-          >
+        {/* Step Progress Tracker Bar (hidden once arrived at job) */}
+        {!hasArrivedAtJob && (
+          !isVisaApprovedConfirmed ? (
+            <div
+              className="bg-white border-b border-[#e5e5e5] px-4 py-3 flex items-center justify-between gap-4 shrink-0 shadow-2xs"
+              data-node-id="2376:35791"
+            >
             {/* Current Step: Consular Appointment (Now) */}
             <div className="flex-1 flex items-center gap-2 rounded-[12px]" data-node-id="2376:35792">
               <div className="size-[32px] rounded-[8px] bg-[#d3efff] flex items-center justify-center text-[#0038d0] shrink-0">
@@ -337,10 +383,133 @@ export const HomeView: React.FC = () => {
               </div>
             </div>
           </div>
-        )}
+        ))}
 
-        {/* Main Body Area: Consular Appointment Card OR Visa Photo Card with 24px Container Padding */}
-        <div className="p-6 flex flex-col gap-6 w-full" data-node-id={isVisaApprovedConfirmed ? "1683:55279" : "2376:35811"}>
+        {hasArrivedAtJob ? (
+          /* Daily Reimbursements Dashboard (Figma Node 1859:32035 & 3537:2983) */
+          <div className="p-4 sm:p-6 flex flex-col gap-6 w-full text-left font-['Inter',sans-serif] animate-fade-in" data-node-id="1928:29876">
+            {/* Yellow Notification Container: Review your I-9 information (Figma Node 3537:2983 / 3537:5910) */}
+            {!hasCompletedI9Review && showYellowI9Card && (
+              <div
+                className="bg-[#ffe5a6] border border-[#c79207] rounded-[24px] p-4 flex flex-col gap-4 w-full shadow-xs text-left"
+                data-node-id="3537:5910"
+              >
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className="size-[32px] rounded-full bg-[#704313] text-white flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[20px] text-white">priority_high</span>
+                    </div>
+                    <h3 className="font-['Inter',sans-serif] font-semibold text-[18px] leading-[24px] text-[#704313]">
+                      {language === 'es' ? 'Revisa tu información del I-9' : 'Review your I-9 information'}
+                    </h3>
+                  </div>
+                  <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[22px] text-[#0a0a0a] tracking-[-0.032px]">
+                    {language === 'es'
+                      ? 'Revisa y confirma que la información de tu formulario I-9 sea correcta.'
+                      : 'Review and confirm that the information on your I-9 form is correct.'}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setCurrentTab('i9_review')}
+                  className="w-full min-h-[44px] px-4 py-[10px] bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] drop-shadow-[0px_1px_1px_rgba(0,0,0,0.09)] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center transition-all cursor-pointer flex items-center justify-center"
+                  data-node-id="3537:5924"
+                >
+                  <span>{language === 'es' ? 'Revisar y Confirmar' : 'Review and Confirm'}</span>
+                </button>
+              </div>
+            )}
+
+            {/* Card 1: Daily Reimbursement */}
+            <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-4 w-full shadow-2xs" data-node-id="1928:29877">
+              <div className="flex items-center gap-2 w-full" data-node-id="1928:29878">
+                <div className="size-[32px] rounded-[4px] border border-[#e5e5e5] flex items-center justify-center text-[#2874ff] shrink-0" data-node-id="1928:29879">
+                  <span className="material-symbols-outlined text-[18px]">currency_exchange</span>
+                </div>
+                <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717] tracking-[-0.064px] flex-1 truncate" data-node-id="1928:29883">
+                  {language === 'es' ? 'Reembolso diario' : 'Daily Reimbursement'}
+                </p>
+              </div>
+
+              {/* Sub-card: Add all your receipts */}
+              <div className="bg-[#e7f6ff] rounded-[8px] p-4 flex flex-col gap-3 shadow-[3px_3px_8.7px_0px_rgba(38,38,38,0.05)] relative overflow-hidden" data-node-id="1928:29884">
+                {/* Background Watermark Accent */}
+                <div className="absolute -right-8 -top-8 text-[#0038d0]/5 select-none pointer-events-none font-bold text-[140px] leading-none -rotate-12">
+                  Z
+                </div>
+
+                <div className="flex flex-col gap-2 relative z-10">
+                  <h4 className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#0038d0] tracking-[-0.056px]" data-node-id="1928:29889">
+                    {language === 'es' ? 'Agrega todos tus recibos' : 'Add all your receipts'}
+                  </h4>
+                  <p className="font-['DM_Sans',sans-serif] font-normal text-[14px] leading-[18px] text-[#171717] tracking-[-0.056px]" data-node-id="1928:29890">
+                    {language === 'es'
+                      ? 'Tu empleador tendrá un registro claro de tus gastos diarios, asegurando que recibas tu reembolso'
+                      : 'Your employer will have a clear record of your daily expenses, ensuring you get reimbursed'}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    addToast(
+                      language === 'es' ? 'Subir recibo' : 'Upload Receipt',
+                      language === 'es'
+                        ? 'La función para subir recibos de gastos diarios estará disponible pronto.'
+                        : 'Daily expense receipt upload will be available soon.',
+                      'info'
+                    );
+                  }}
+                  className="w-full h-[32px] px-3 py-1.5 bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[12px] leading-[16px] flex items-center justify-center transition-all cursor-pointer drop-shadow-[0px_1px_1px_rgba(0,0,0,0.09)] relative z-10"
+                  data-node-id="1928:29891"
+                >
+                  {language === 'es' ? 'Agregar recibos' : 'Add receipts'}
+                </button>
+              </div>
+            </div>
+
+            {/* Card 2: Latest Receipts */}
+            <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-4 w-full shadow-2xs" data-node-id="1928:29892">
+              <div className="flex items-center justify-between gap-2 w-full" data-node-id="1928:29893">
+                <div className="flex items-center gap-2 flex-1">
+                  <div className="size-[32px] rounded-[4px] border border-[#e5e5e5] flex items-center justify-center text-[#525252] shrink-0" data-node-id="1928:29894">
+                    <span className="material-symbols-outlined text-[18px]">receipt_long</span>
+                  </div>
+                  <p className="font-['DM_Sans',sans-serif] font-semibold text-[16px] leading-[22px] text-[#171717] tracking-[-0.064px]" data-node-id="1928:29898">
+                    {language === 'es' ? 'Últimos recibos' : 'Latest Receipts'}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    addToast(
+                      language === 'es' ? 'Recibos' : 'Receipts',
+                      language === 'es' ? 'No hay recibos registrados aún.' : 'No receipts recorded yet.',
+                      'info'
+                    );
+                  }}
+                  className="font-['Inter',sans-serif] font-semibold text-[14px] leading-[18px] text-[#737373] hover:text-[#171717] cursor-pointer transition-colors"
+                  data-node-id="1928:29899"
+                >
+                  {language === 'es' ? 'Ver todos' : 'View all'}
+                </button>
+              </div>
+
+              {/* Empty State: No reimbursements yet */}
+              <div className="bg-white border border-[#e5e5e5] rounded-[8px] h-[136px] flex flex-col items-center justify-center p-4 relative w-full gap-3" data-node-id="1928:29900">
+                <div className="size-[46px] rounded-full bg-[#f5f5f5] border border-[#e5e5e5] flex items-center justify-center text-[#737373] shadow-2xs" data-node-id="1928:29902">
+                  <span className="material-symbols-outlined text-[24px]">currency_exchange</span>
+                </div>
+                <p className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#171717] text-center" data-node-id="1928:29904">
+                  {language === 'es' ? 'Aún no hay reembolsos' : 'No reimbursements yet'}
+                </p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* Main Body Area: Consular Appointment Card OR Visa Photo Card with 24px Container Padding */
+          <div className="p-6 flex flex-col gap-6 w-full" data-node-id={isVisaApprovedConfirmed ? "1683:55279" : "2376:35811"}>
           {!isVisaApprovedConfirmed ? (
             /* Step 3 of 6: Consular Appointment Card */
             <div
@@ -558,69 +727,69 @@ export const HomeView: React.FC = () => {
                   {/* Divider Line */}
                   <div className="border-b border-[#e5e5e5]" />
 
-                  {/* Travel Details Box */}
-                  <div className="bg-white border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="bg-[#d3efff] text-[#0045ff] font-semibold text-[12px] leading-[16px] rounded-[120px] px-2.5 py-1 flex flex-col items-center justify-center shrink-0 w-[48px]">
-                        <span>Apr</span>
+                  {/* Travel Details Box (Figma Node 2330:18840) */}
+                  <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-3 w-full" data-node-id="2330:18840">
+                    <div className="flex items-center gap-3 w-full">
+                      <div className="bg-[#e7f6ff] text-[#0045ff] font-semibold text-[12px] leading-[16px] rounded-[120px] p-2 flex flex-col items-center justify-center shrink-0 w-[48px]" data-node-id="2330:18842">
+                        <span>{language === 'es' ? 'Abr' : 'Apr'}</span>
                         <span>11</span>
                       </div>
                       <div className="flex flex-col flex-1 text-left">
-                        <p className="font-semibold text-[14px] leading-[18px] text-[#171717]">
+                        <p className="font-semibold text-[14px] leading-[18px] text-[#171717]" data-node-id="2330:18848">
                           {language === 'es' ? 'Detalles del viaje' : 'Travel details'}
                         </p>
-                        <p className="font-normal text-[14px] leading-[18px] text-[#404040]">
+                        <p className="font-normal text-[14px] leading-[18px] text-[#404040]" data-node-id="2330:18850">
                           12:00 - 13:00
                         </p>
                       </div>
                     </div>
                     <button
-                      onClick={() => {
-                        setCurrentTab('travel_itinerary');
-                      }}
-                      className="w-full h-[36px] bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[12px] leading-[16px] flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+                      type="button"
+                      onClick={() => setShowTravelDetailsModal(true)}
+                      className="w-full h-[32px] px-3 py-1.5 bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[12px] leading-[16px] flex items-center justify-center transition-all cursor-pointer drop-shadow-[0px_1px_1px_rgba(0,0,0,0.09)]"
+                      data-node-id="2330:18865"
                     >
                       {language === 'es' ? 'Ver más detalles' : 'See more details'}
                     </button>
                   </div>
 
-                  {/* Employer's Point of Contact Box */}
-                  <div className="bg-white border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-2.5 text-left font-['Inter',sans-serif]">
-                    <div>
-                      <p className="font-semibold text-[14px] leading-[18px] text-[#171717]">
+                  {/* Employer's Point of Contact Box (Figma Node 2338:19047) */}
+                  <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-3 text-left font-['Inter',sans-serif] w-full" data-node-id="2338:19047">
+                    <div className="flex flex-col gap-1 w-full">
+                      <p className="font-medium text-[14px] leading-[18px] text-[#171717]" data-node-id="2338:19051">
                         {language === 'es' ? 'Punto de contacto del empleador:' : "Employer’s point of contact:"}
                       </p>
-                      <p className="font-normal text-[14px] leading-[18px] text-[#404040]">
+                      <p className="font-normal text-[14px] leading-[18px] text-[#404040]" data-node-id="2338:19054">
                         {language === 'es'
                           ? 'Michael Anderson (Coordinador de Logística y Bienvenida)'
                           : 'Michael Anderson (Logistics & Welcome Coordinator)'}
                       </p>
                     </div>
-                    <div>
-                      <p className="font-semibold text-[14px] leading-[18px] text-[#171717]">
+                    <div className="flex flex-col gap-1 w-full">
+                      <p className="font-medium text-[14px] leading-[18px] text-[#171717]" data-node-id="2338:19058">
                         {language === 'es' ? 'Teléfono del contacto:' : 'Phone of point of contact:'}
                       </p>
-                      <p className="font-normal text-[14px] leading-[18px] text-[#404040]">
+                      <p className="font-normal text-[14px] leading-[18px] text-[#404040]" data-node-id="2338:19061">
                         +1 (509) 555-0148
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Confirm Trip Info Button (Node 2382:37620) */}
-                <button
-                  onClick={() => {
-                    setCurrentTab('travel_itinerary');
-                  }}
-                  className="w-full h-[52px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-md transition-all duration-150 cursor-pointer flex items-center justify-center mt-2"
-                  data-node-id="2382:37620"
-                >
-                  <span>
-                    {language === 'es'
-                      ? (hasConfirmedTravelItinerary ? 'Itinerario confirmado ✓' : 'Confirmar tus detalles')
-                      : (hasConfirmedTravelItinerary ? 'Itinerary confirmed ✓' : 'Confirm your details')}
-                  </span>
-                </button>
+                {/* Confirm Trip Info Button (Node 2382:37620) - Only shown before confirmation */}
+                {!hasConfirmedTravelItinerary && (
+                  <button
+                    onClick={() => {
+                      setCurrentTab('travel_itinerary');
+                    }}
+                    className="w-full h-[52px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-md transition-all duration-150 cursor-pointer flex items-center justify-center mt-2"
+                    data-node-id="2382:37620"
+                  >
+                    <span>
+                      {language === 'es' ? 'Confirmar itinerario' : 'Confirm itinerary'}
+                    </span>
+                  </button>
+                )}
               </div>
             </div>
           )}
@@ -652,9 +821,10 @@ export const HomeView: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
+}
 
   if (worker.status === 'oferta_enviada') {
     return (
