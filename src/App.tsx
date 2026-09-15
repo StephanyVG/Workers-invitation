@@ -89,6 +89,13 @@ import { FinalQuestionsReviewScreen } from './components/visa_review/FinalQuesti
 import { VisaApplicationConsentScreen } from './components/visa_review/VisaApplicationConsentScreen';
 import { VisaSubmittedSuccessScreen } from './components/visa_review/VisaSubmittedSuccessScreen';
 import { Ds160DocumentViewerScreen } from './components/documents/Ds160DocumentViewerScreen';
+import { ConsularDetailsScreen } from './components/consular/ConsularDetailsScreen';
+import { ConsularAppointmentDetailsBottomSheet } from './components/consular/ConsularAppointmentDetailsBottomSheet';
+import { TransportConfirmationBottomSheet } from './components/consular/TransportConfirmationBottomSheet';
+import { VisaPhotoGuideScreen } from './components/visa/VisaPhotoGuideScreen';
+import { VisaCameraSimulator } from './components/visa/VisaCameraSimulator';
+import { VisaReviewScreen } from './components/visa/VisaReviewScreen';
+import { TravelItineraryScreen } from './components/travel/TravelItineraryScreen';
 
 const MainContent: React.FC = () => {
   const { currentTab, showWelcomeModal, showInterviewCompletedModal } = useApp();
@@ -165,7 +172,12 @@ const MainContent: React.FC = () => {
     'visa_review_final_questions',
     'visa_review_consent',
     'visa_review_success',
-    'view_ds160_document'
+    'view_ds160_document',
+    'consular_details',
+    'visa_photo_guide',
+    'visa_camera_sim',
+    'visa_review',
+    'travel_itinerary'
   ].includes(currentTab);
 
   return (
@@ -246,6 +258,11 @@ const MainContent: React.FC = () => {
         {currentTab === 'visa_review_consent' && <VisaApplicationConsentScreen />}
         {currentTab === 'visa_review_success' && <VisaSubmittedSuccessScreen />}
         {currentTab === 'view_ds160_document' && <Ds160DocumentViewerScreen />}
+        {currentTab === 'consular_details' && <ConsularDetailsScreen />}
+        {currentTab === 'visa_photo_guide' && <VisaPhotoGuideScreen />}
+        {currentTab === 'visa_camera_sim' && <VisaCameraSimulator />}
+        {currentTab === 'visa_review' && <VisaReviewScreen />}
+        {currentTab === 'travel_itinerary' && <TravelItineraryScreen />}
 
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}
@@ -272,6 +289,12 @@ const MainContent: React.FC = () => {
 
       {/* Appointment Detail Bottom Sheet Overlay */}
       <AppointmentDetailBottomSheet />
+
+      {/* Consular Appointment Details Bottom Sheet (Figma Node 1628:50484) */}
+      <ConsularAppointmentDetailsBottomSheet />
+
+      {/* Transport Confirmation Bottom Sheet (Figma Node 1628:50256) */}
+      <TransportConfirmationBottomSheet />
     </div>
   );
 };

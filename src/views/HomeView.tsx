@@ -1,9 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 
 export const HomeView: React.FC = () => {
-  const { worker, language, setCurrentTab, scheduledInterview, addToast, setSelectedAppointmentDetail } = useApp();
+  const {
+    worker,
+    language,
+    setCurrentTab,
+    scheduledInterview,
+    addToast,
+    setSelectedAppointmentDetail,
+    hasConfirmedConsularDetails,
+    isVisaApprovedConfirmed,
+    setIsVisaApprovedConfirmed,
+    hasUploadedVisa,
+    hasConfirmedTravelItinerary,
+    triggerPushBanner,
+    showPushBanner,
+    setSelectedDocumentType,
+    setShowConsularDetailsModal,
+    advanceStage
+  } = useApp();
   const workerFirstName = worker.fullName.split(' ')[0] || 'Guadalupe';
+
+  useEffect(() => {
+    if (hasUploadedVisa && !hasConfirmedTravelItinerary) {
+      const dismissed = sessionStorage.getItem('zipmi_travel_banner_dismissed');
+      if (!dismissed && !showPushBanner) {
+        triggerPushBanner({
+          title: language === 'es' ? 'Revisa tu itinerario de viaje' : 'Review Your Travel Itinerary',
+          description: language === 'es'
+            ? 'Tu transporte ha sido asignado. Es importante que revises los horarios y puntos de encuentro.'
+            : 'Your transportation has been assigned. It’s important that you review the schedules and meeting points.',
+          time: 'Hace 2 horas',
+          targetTab: 'travel_itinerary',
+        });
+      }
+    }
+  }, [hasUploadedVisa, hasConfirmedTravelItinerary]);
 
   const isScheduled = !!scheduledInterview;
   const interviewDate = scheduledInterview?.date || '11 Apr';
@@ -187,13 +220,13 @@ export const HomeView: React.FC = () => {
   if (worker.status === 'solicitud_visa') {
     return (
       <div
-        className="flex-1 flex flex-col bg-[#f5f5f5] overflow-y-auto custom-scrollbar animate-fade-in relative h-full min-h-0 text-left font-['Inter',sans-serif] pb-6"
-        data-node-id="3002:3733"
+        className="flex-1 flex flex-col bg-[#f5f5f5] overflow-y-auto custom-scrollbar animate-fade-in relative h-full min-h-0 text-left font-['Inter',sans-serif] pb-6 select-none"
+        data-node-id={isVisaApprovedConfirmed ? "1683:55279" : hasConfirmedConsularDetails ? "1683:54718" : "2376:35788"}
       >
-        {/* Sticky Top Header Row (Node 2338:20308 / 3002:3734) */}
+        {/* Sticky Top Header Row */}
         <div
           className="sticky top-0 z-30 bg-white w-full px-4 py-3 border-b border-[#e5e5e5] flex items-center justify-between shadow-2xs shrink-0"
-          data-node-id="2338:20308"
+          data-node-id="2376:35790"
         >
           <div className="flex items-center gap-3">
             <img
@@ -219,112 +252,401 @@ export const HomeView: React.FC = () => {
             onClick={() => setCurrentTab('notifications')}
             className="bg-white border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-sm active:scale-95 transition-transform cursor-pointer relative shrink-0"
             aria-label="Notificaciones"
-            data-node-id="2338:20317"
+            data-node-id="2376:35790;4235:953"
           >
             <span className="material-symbols-outlined text-[24px]">notifications</span>
             <span className="absolute top-2 right-2 size-2 bg-[#ff9800] rounded-full border border-white" />
           </button>
         </div>
 
-        {/* Step Progress Tracker Bar (Node 3002:3736) */}
-        <div
-          className="bg-white border-b border-[#e5e5e5] px-4 py-3 flex items-center justify-between gap-4 shrink-0 shadow-2xs"
-          data-node-id="3002:3736"
-        >
-          {/* Current Step: Visa Application (Node 3002:3737) */}
-          <div className="flex-1 flex items-center gap-2 rounded-[12px]" data-node-id="3002:3737">
-            <div className="size-[32px] rounded-[8px] bg-[#d3efff] flex items-center justify-center text-[#0038d0] shrink-0">
-              <span className="material-symbols-outlined text-[18px]">description</span>
-            </div>
-            <div className="flex flex-col items-start gap-0.5">
-              <span className="bg-[#d3efff] text-[#0038d0] font-medium text-[10px] leading-[16px] px-2 py-0.5 rounded-[24px]">
-                {language === 'es' ? 'Ahora' : 'Current'}
-              </span>
-              <span className="font-semibold text-[12px] leading-[16px] text-[#0038d0]">
-                {language === 'es' ? 'Solicitud de Visa' : 'Visa Application'}
-              </span>
-            </div>
-          </div>
-
-          {/* Vertical Divider Line */}
-          <div className="w-[2px] h-[32px] bg-[#d9d9d9] rounded-full shrink-0" />
-
-          {/* Next Step: Consular Appointment (Node 3002:3747) */}
-          <div className="flex-1 flex items-center gap-2 rounded-[12px]" data-node-id="3002:3747">
-            <div className="size-[32px] rounded-[8px] bg-[#e5e5e5] flex items-center justify-center text-[#525252] shrink-0">
-              <span className="material-symbols-outlined text-[18px]">calendar_today</span>
-            </div>
-            <div className="flex flex-col items-start gap-0.5">
-              <span className="bg-[#f5f5f5] text-[#262626] font-medium text-[10px] leading-[16px] px-2 py-0.5 rounded-[24px]">
-                {language === 'es' ? 'Siguiente' : 'Next'}
-              </span>
-              <span className="font-semibold text-[12px] leading-[16px] text-[#404040]">
-                {language === 'es' ? 'Cita Consular' : 'Consular Appoint.'}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Main Body Area: Submit Visa Application Card (Node 3002:3756 / 3002:3758) */}
-        <div className="p-6 flex flex-col gap-6 w-full" data-node-id="3002:3756">
+        {/* Step Progress Tracker Bar */}
+        {!isVisaApprovedConfirmed ? (
           <div
-            className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm w-full min-h-[444px] flex flex-col justify-between"
-            data-node-id="3002:3758"
+            className="bg-white border-b border-[#e5e5e5] px-4 py-3 flex items-center justify-between gap-4 shrink-0 shadow-2xs"
+            data-node-id="2376:35791"
           >
-            {/* Header Banner (Node 3002:3759) */}
-            <div className="bg-[#b0deff] px-4 py-3 text-center" data-node-id="3002:3759">
-              <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#0038d0] tracking-[-0.08px]" data-node-id="3002:3760">
-                {language === 'es' ? 'Enviar Solicitud de Visa' : 'Submit Visa Application'}
-              </h2>
+            {/* Current Step: Consular Appointment (Now) */}
+            <div className="flex-1 flex items-center gap-2 rounded-[12px]" data-node-id="2376:35792">
+              <div className="size-[32px] rounded-[8px] bg-[#d3efff] flex items-center justify-center text-[#0038d0] shrink-0">
+                <span className="material-symbols-outlined text-[18px]">calendar_today</span>
+              </div>
+              <div className="flex flex-col items-start gap-0.5">
+                <span className="bg-[#d3efff] text-[#0038d0] font-medium text-[10px] leading-[16px] px-2 py-0.5 rounded-[24px]">
+                  {language === 'es' ? 'Ahora' : 'Current'}
+                </span>
+                <span className="font-semibold text-[12px] leading-[16px] text-[#0038d0]">
+                  {language === 'es' ? 'Cita Consular' : 'Consular Appoint.'}
+                </span>
+              </div>
             </div>
 
-            {/* Card Body Container (Node 3002:3761) */}
-            <div className="p-6 flex-1 flex flex-col justify-start gap-6 text-left font-['Inter',sans-serif]" data-node-id="3002:3761">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <p className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#262626] tracking-[-0.056px]" data-node-id="3002:3763">
-                    {language === 'es' ? 'Paso 2 de 6' : 'Step 2 of 6'}
-                  </p>
-                  <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] tracking-[-0.096px]" data-node-id="3002:3766">
-                    {language === 'es' ? 'Mi Solicitud de Visa DS-160' : 'My DS-160 Visa Application'}
-                  </h3>
-                </div>
+            {/* Vertical Divider Line */}
+            <div className="w-[2px] h-[32px] bg-[#d9d9d9] rounded-full shrink-0" />
 
-                {/* Divider Line (Node 3002:3767) */}
-                <div className="border-b border-[#e5e5e5]" />
-
-                {/* Body Text (Node 3002:3772) */}
-                <p className="font-['DM_Sans',sans-serif] font-medium text-[18px] leading-[26px] text-[#262626] tracking-[-0.072px]" data-node-id="3002:3772">
-                  {language === 'es'
-                    ? 'Tu DS-160 se está procesando actualmente. Te notificaremos una vez que esté listo para su revisión.'
-                    : "Your DS-160 is currently being processed. We'll notify you once it's ready for review."}
-                </p>
+            {/* Next Step: Visa Upload (Next) */}
+            <div className="flex-1 flex items-center gap-2 rounded-[12px]" data-node-id="2376:35802">
+              <div className="size-[32px] rounded-[8px] bg-[#e5e5e5] flex items-center justify-center text-[#525252] shrink-0">
+                <span className="material-symbols-outlined text-[18px]">badge</span>
+              </div>
+              <div className="flex flex-col items-start gap-0.5">
+                <span className="bg-[#f5f5f5] text-[#262626] font-medium text-[10px] leading-[16px] px-2 py-0.5 rounded-[24px]">
+                  {language === 'es' ? 'Siguiente' : 'Next'}
+                </span>
+                <span className="font-semibold text-[12px] leading-[16px] text-[#404040]">
+                  {language === 'es' ? 'Carga de Visa' : 'Visa Upload'}
+                </span>
               </div>
             </div>
           </div>
+        ) : (
+          /* Step Progress Tracker Bar for Step 4 (Figma 1683:55279) */
+          <div
+            className="bg-white border-b border-[#e5e5e5] px-4 py-3 flex items-center justify-between gap-4 shrink-0 shadow-2xs"
+            data-node-id="1683:55280"
+          >
+            {/* Current Step: Upload Visa (Now) */}
+            <div className="flex-1 flex items-center gap-2 rounded-[12px]">
+              <div className="size-[32px] rounded-[8px] bg-[#d3efff] flex items-center justify-center text-[#0038d0] shrink-0">
+                <span className="material-symbols-outlined text-[18px]">badge</span>
+              </div>
+              <div className="flex flex-col items-start gap-0.5">
+                <span className="bg-[#d3efff] text-[#0038d0] font-medium text-[10px] leading-[16px] px-2 py-0.5 rounded-[24px]">
+                  {language === 'es' ? 'Ahora' : 'Current'}
+                </span>
+                <span className="font-semibold text-[12px] leading-[16px] text-[#0038d0]">
+                  {language === 'es' ? 'Carga de Visa' : 'Upload Visa'}
+                </span>
+              </div>
+            </div>
 
-          {/* Section: Documents Section (Node 3002:3774) */}
-          <div className="flex flex-col gap-3 text-left w-full" data-node-id="3002:3774">
-            <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]" data-node-id="3002:3775">
+            {/* Vertical Divider Line */}
+            <div className="w-[2px] h-[32px] bg-[#d9d9d9] rounded-full shrink-0" />
+
+            {/* Next Step: Travel Details (Next) */}
+            <div className="flex-1 flex items-center gap-2 rounded-[12px]">
+              <div className="size-[32px] rounded-[8px] bg-[#e5e5e5] flex items-center justify-center text-[#525252] shrink-0">
+                <span className="material-symbols-outlined text-[18px]">directions_bus</span>
+              </div>
+              <div className="flex flex-col items-start gap-0.5">
+                <span className="bg-[#f5f5f5] text-[#262626] font-medium text-[10px] leading-[16px] px-2 py-0.5 rounded-[24px]">
+                  {language === 'es' ? 'Siguiente' : 'Next'}
+                </span>
+                <span className="font-semibold text-[12px] leading-[16px] text-[#404040]">
+                  {language === 'es' ? 'Detalles de Viaje' : 'Travel Details'}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Main Body Area: Consular Appointment Card OR Visa Photo Card with 24px Container Padding */}
+        <div className="p-6 flex flex-col gap-6 w-full" data-node-id={isVisaApprovedConfirmed ? "1683:55279" : "2376:35811"}>
+          {!isVisaApprovedConfirmed ? (
+            /* Step 3 of 6: Consular Appointment Card */
+            <div
+              className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm w-full flex flex-col justify-between"
+              data-node-id="2376:35813"
+            >
+              {/* Header Banner */}
+              <div className="bg-[#b0deff] px-4 py-2 text-center" data-node-id="2376:35814">
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#0038d0] tracking-[-0.08px]">
+                  {language === 'es' ? 'Cita Consular' : 'Consular Appointment'}
+                </h2>
+              </div>
+
+              {/* Card Body Container with 24px Container Padding */}
+              <div className="p-6 flex-1 flex flex-col justify-between gap-4 text-left font-['Inter',sans-serif]" data-node-id="2376:35816">
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-1">
+                    <p className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#262626] tracking-[-0.056px]">
+                      {language === 'es' ? 'Paso 3 de 6' : 'Step 3 of 6'}
+                    </p>
+                    <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[24px] leading-[32px] text-[#0038d0] tracking-[-0.096px]">
+                      {language === 'es' ? 'Cita Consular' : 'Consular Appointment'}
+                    </h3>
+                  </div>
+
+                  {/* Divider Line */}
+                  <div className="border-b border-[#e5e5e5]" />
+
+                  {/* Amber Warning Notice: Mail your passport first */}
+                  <div className="bg-[#ffd16e] border border-[#ff970c] rounded-[8px] px-4 py-2.5 flex items-center gap-3">
+                    <span className="material-symbols-outlined text-[20px] text-[#813d0d] shrink-0">mail</span>
+                    <p className="font-semibold text-[14px] leading-[18px] text-[#813d0d]">
+                      {language === 'es' ? 'Envía tu pasaporte primero' : 'Mail your passport first'}
+                    </p>
+                  </div>
+
+                  {/* Inner Appointment Box */}
+                  <div className="bg-white border border-[#e5e5e5] rounded-[8px] p-4 flex flex-col gap-3">
+                    {/* Row 1: Consular Interview */}
+                    <div className="flex items-center gap-3">
+                      <div className="bg-[#e7f6ff] text-[#0045ff] font-semibold text-[12px] leading-[16px] rounded-[120px] px-2.5 py-1 flex flex-col items-center justify-center shrink-0 w-[48px]">
+                        <span>Apr</span>
+                        <span>11</span>
+                      </div>
+                      <div className="flex flex-col flex-1 text-left">
+                        <p className="font-semibold text-[14px] leading-[18px] text-[#171717]">
+                          {language === 'es' ? 'Entrevista Consular' : 'Consular Interview'}
+                        </p>
+                        <p className="font-normal text-[14px] leading-[18px] text-[#404040]">
+                          12:00 - 13:00
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="border-b border-[#e5e5e5]" />
+
+                    {/* Row 2: CAS Appointment */}
+                    <div className="flex items-center gap-3">
+                      <div className="bg-[#e7f6ff] text-[#0045ff] font-semibold text-[12px] leading-[16px] rounded-[120px] px-2.5 py-1 flex flex-col items-center justify-center shrink-0 w-[48px]">
+                        <span>Apr</span>
+                        <span>11</span>
+                      </div>
+                      <div className="flex flex-col flex-1 text-left">
+                        <p className="font-semibold text-[14px] leading-[18px] text-[#171717]">
+                          {language === 'es' ? 'Cita en CAS' : 'CAS Appointment'}
+                        </p>
+                        <p className="font-normal text-[14px] leading-[18px] text-[#404040]">
+                          12:00 - 13:00
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* See more details button */}
+                    <button
+                      onClick={() => setShowConsularDetailsModal(true)}
+                      className="w-full h-[32px] bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[12px] leading-[16px] flex items-center justify-center transition-all cursor-pointer shadow-2xs mt-1"
+                    >
+                      {language === 'es' ? 'Ver más detalles' : 'See more details'}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Action Button: Confirm your details (Blue) or My visa was approved (Green) */}
+                {!hasConfirmedConsularDetails ? (
+                  <button
+                    onClick={() => setCurrentTab('consular_details')}
+                    className="w-full h-[52px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] border border-[#2874ff] hover:bg-[#0030b3] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-md transition-all duration-150 cursor-pointer flex items-center justify-center mt-2"
+                    data-node-id="2376:35959"
+                  >
+                    {language === 'es' ? 'Confirmar tus detalles' : 'Confirm your details'}
+                  </button>
+                ) : (
+                  <div className="flex flex-col gap-2.5 w-full mt-2">
+                    <button
+                      onClick={() => {
+                        setIsVisaApprovedConfirmed(true);
+                        addToast(
+                          language === 'es' ? '¡Visa Aprobada!' : 'Visa Approved!',
+                          language === 'es'
+                            ? 'Felicidades, tu visa ha sido aprobada.'
+                            : 'Congratulations, your visa has been approved.',
+                          'success'
+                        );
+                      }}
+                      className="w-full h-[52px] min-h-[44px] px-4 py-[10px] bg-[#068f2a] hover:bg-[#057a24] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-md transition-all duration-150 cursor-pointer flex items-center justify-center gap-2"
+                      data-node-id="2376:35991"
+                    >
+                      <span className="material-symbols-outlined text-[22px]">check</span>
+                      <span>{language === 'es' ? 'Mi visa fue aprobada' : 'My visa was approved'}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        addToast(
+                          language === 'es' ? 'Cita Consular' : 'Consular Appointment',
+                          language === 'es'
+                            ? 'Nos pondremos en contacto contigo para reprogramar tu cita.'
+                            : 'We will contact you to reschedule your appointment.',
+                          'info'
+                        );
+                      }}
+                      className="w-full h-[48px] min-h-[44px] px-4 py-[10px] bg-white border border-[#e5e5e5] hover:bg-slate-50 active:scale-[0.98] text-[#525252] rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-2xs transition-all duration-150 cursor-pointer flex items-center justify-center"
+                      data-node-id="3302:31074"
+                    >
+                      <span>{language === 'es' ? 'No puedo asistir a mi cita' : "I can't attend my appointment"}</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : !hasUploadedVisa ? (
+            /* Step 4 of 6: Take a Photo of Your Visa (Figma 1683:55279) with 24px Container Padding */
+            <div
+              className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm w-full flex flex-col justify-between"
+              data-node-id="1683:55279"
+            >
+              {/* Header Banner */}
+              <div className="bg-[#bce5ff] px-4 py-2.5 text-center">
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#0038d0] tracking-[-0.08px]">
+                  {language === 'es' ? '¿Fue aprobada tu visa?' : 'Was Your Visa Approved?'}
+                </h2>
+              </div>
+
+              {/* Card Body Container with 24px Container Padding */}
+              <div className="p-6 flex-1 flex flex-col justify-between gap-5 text-left font-['Inter',sans-serif]">
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-1">
+                    <p className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#262626] tracking-[-0.056px]">
+                      {language === 'es' ? 'Paso 4 de 6' : 'Step 4 of 6'}
+                    </p>
+                    <h3 className="font-['DM_Sans',sans-serif] font-bold text-[24px] leading-[32px] text-[#0038d0] tracking-[-0.096px]">
+                      {language === 'es' ? 'Toma una foto de tu visa' : 'Take a Photo of Your Visa'}
+                    </h3>
+                  </div>
+
+                  {/* Divider Line */}
+                  <div className="border-b border-[#e5e5e5]" />
+
+                  <p className="font-normal text-[15px] leading-[22px] text-[#404040]">
+                    {language === 'es'
+                      ? 'Toma una foto clara de tu visa. Tu empleador necesita verla.'
+                      : 'Take a clear photo of your visa. Your employer needs to see it.'}
+                  </p>
+
+                  {/* Green Visa Status Box */}
+                  <div className="bg-[#f0fdf4] border border-[#16a34a] rounded-[16px] p-4 flex flex-col gap-1 text-left">
+                    <h4 className="font-semibold text-[16px] leading-[22px] text-[#0038d0]">
+                      {language === 'es' ? 'Estado de la Visa' : 'Visa Status'}
+                    </h4>
+                    <p className="font-medium text-[14px] leading-[20px] text-[#171717]">
+                      {language === 'es'
+                        ? '¡Felicidades! tu visa ha sido aprobada'
+                        : 'Congrats! your visa has been approved'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Blue Button: Upload Visa Photo */}
+                <button
+                  onClick={() => setCurrentTab('visa_photo_guide')}
+                  className="w-full h-[52px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-md transition-all duration-150 cursor-pointer flex items-center justify-center mt-2"
+                  data-node-id="1683:55320"
+                >
+                  <span>{language === 'es' ? 'Subir foto de la visa' : 'Upload Visa Photo'}</span>
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* Step 5 of 6: Travel Details and Employer's Contact Info (Figma 2382:37588) with 24px Container Padding */
+            <div
+              className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm w-full flex flex-col justify-between"
+              data-node-id="2382:37588"
+            >
+              {/* Header Banner */}
+              <div className="bg-[#bce5ff] px-4 py-2.5 text-center" data-node-id="2382:37589">
+                <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#0038d0] tracking-[-0.08px]">
+                  {language === 'es' ? '¡Llegando a tu trabajo!' : 'Getting to Your Job!'}
+                </h2>
+              </div>
+
+              {/* Card Body Container with 24px Container Padding */}
+              <div className="p-6 flex-1 flex flex-col justify-between gap-5 text-left font-['Inter',sans-serif]" data-node-id="2382:37591">
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-1">
+                    <p className="font-['DM_Sans',sans-serif] font-semibold text-[14px] leading-[18px] text-[#262626] tracking-[-0.056px]">
+                      {language === 'es' ? 'Paso 5 de 6' : 'Step 5 of 6'}
+                    </p>
+                    <h3 className="font-['DM_Sans',sans-serif] font-bold text-[24px] leading-[32px] text-[#0038d0] tracking-[-0.096px]">
+                      {language === 'es'
+                        ? 'Detalles del viaje e información de contacto del empleador'
+                        : 'Travel Details and Employer’s Contact Info'}
+                    </h3>
+                  </div>
+
+                  {/* Divider Line */}
+                  <div className="border-b border-[#e5e5e5]" />
+
+                  {/* Travel Details Box */}
+                  <div className="bg-white border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="bg-[#d3efff] text-[#0045ff] font-semibold text-[12px] leading-[16px] rounded-[120px] px-2.5 py-1 flex flex-col items-center justify-center shrink-0 w-[48px]">
+                        <span>Apr</span>
+                        <span>11</span>
+                      </div>
+                      <div className="flex flex-col flex-1 text-left">
+                        <p className="font-semibold text-[14px] leading-[18px] text-[#171717]">
+                          {language === 'es' ? 'Detalles del viaje' : 'Travel details'}
+                        </p>
+                        <p className="font-normal text-[14px] leading-[18px] text-[#404040]">
+                          12:00 - 13:00
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setCurrentTab('travel_itinerary');
+                      }}
+                      className="w-full h-[36px] bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[12px] leading-[16px] flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+                    >
+                      {language === 'es' ? 'Ver más detalles' : 'See more details'}
+                    </button>
+                  </div>
+
+                  {/* Employer's Point of Contact Box */}
+                  <div className="bg-white border border-[#e5e5e5] rounded-[12px] p-4 flex flex-col gap-2.5 text-left font-['Inter',sans-serif]">
+                    <div>
+                      <p className="font-semibold text-[14px] leading-[18px] text-[#171717]">
+                        {language === 'es' ? 'Punto de contacto del empleador:' : "Employer’s point of contact:"}
+                      </p>
+                      <p className="font-normal text-[14px] leading-[18px] text-[#404040]">
+                        {language === 'es'
+                          ? 'Michael Anderson (Coordinador de Logística y Bienvenida)'
+                          : 'Michael Anderson (Logistics & Welcome Coordinator)'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-[14px] leading-[18px] text-[#171717]">
+                        {language === 'es' ? 'Teléfono del contacto:' : 'Phone of point of contact:'}
+                      </p>
+                      <p className="font-normal text-[14px] leading-[18px] text-[#404040]">
+                        +1 (509) 555-0148
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Confirm Trip Info Button (Node 2382:37620) */}
+                <button
+                  onClick={() => {
+                    setCurrentTab('travel_itinerary');
+                  }}
+                  className="w-full h-[52px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] hover:bg-[#0030b3] active:scale-[0.98] text-[#f5f5f5] rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-md transition-all duration-150 cursor-pointer flex items-center justify-center mt-2"
+                  data-node-id="2382:37620"
+                >
+                  <span>
+                    {language === 'es'
+                      ? (hasConfirmedTravelItinerary ? 'Itinerario confirmado ✓' : 'Confirmar tus detalles')
+                      : (hasConfirmedTravelItinerary ? 'Itinerary confirmed ✓' : 'Confirm your details')}
+                  </span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Section: Documents Section */}
+          <div className="flex flex-col gap-3 text-left w-full" data-node-id="2376:35854">
+            <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
               {language === 'es' ? 'Mis documentos' : 'My documents'}
             </h3>
 
-            {/* Document Item Container (Node 3002:3776) */}
+            {/* General Document Item Container */}
             <div
-              onClick={() => setCurrentTab('view_signed_document')}
-              className="bg-white border border-[#e5e5e5] rounded-[12px] p-6 flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#0038d0]/30 transition-colors"
-              data-node-id="3002:3776"
+              onClick={() => setCurrentTab('documents')}
+              className="bg-white border border-[#e5e5e5] rounded-[12px] p-6 flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#0038d0]/30 transition-colors active:scale-[0.99]"
+              data-node-id="2376:35856"
             >
               <div className="flex items-center gap-3 flex-1">
-                <div className="size-[32px] rounded-[8px] bg-[#d3efff] flex items-center justify-center text-[#0038d0] shrink-0" data-node-id="3002:3778">
+                <div className="size-[32px] rounded-[8px] bg-[#d3efff] flex items-center justify-center text-[#0038d0] shrink-0">
                   <span className="material-symbols-outlined text-[18px]">description</span>
                 </div>
-                <p className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#525252] tracking-[-0.056px]" data-node-id="3002:3783">
+                <p className="font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] text-[#404040] tracking-[-0.056px]">
                   {language === 'es' ? 'Ej: Oferta de trabajo, formularios de visa' : 'Ex: Job offer, visa forms'}
                 </p>
               </div>
 
-              <div className="size-[32px] rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#262626] shrink-0" data-node-id="3002:3784">
+              <div className="size-[32px] rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#262626] shrink-0">
                 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
               </div>
             </div>

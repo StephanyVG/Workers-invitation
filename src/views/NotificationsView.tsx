@@ -2,7 +2,14 @@ import React from 'react';
 import { useApp, AppTab } from '../context/AppContext';
 
 export const NotificationsView: React.FC = () => {
-  const { worker, language, setCurrentTab, showPushBanner } = useApp();
+  const {
+    worker,
+    language,
+    setCurrentTab,
+    showPushBanner,
+    hasUploadedVisa,
+    hasConfirmedTravelItinerary
+  } = useApp();
 
   const isSigned = worker.hasSignedContract || worker.status === 'oferta_firmada';
   const isOfferSent = worker.status === 'oferta_enviada' || isSigned;
@@ -18,6 +25,25 @@ export const NotificationsView: React.FC = () => {
     isRead: boolean;
     actionTab: AppTab;
   }> = [
+    ...(hasUploadedVisa
+      ? [
+          {
+            id: 'notif-travel-itinerary',
+            title:
+              language === 'es'
+                ? 'Revisa tu itinerario de viaje'
+                : 'Review Your Travel Itinerary',
+            description:
+              language === 'es'
+                ? 'Tu transporte ha sido asignado. Es importante que revises los horarios y puntos de encuentro.'
+                : 'Your transportation has been assigned. It’s important that you review the schedules and meeting points.',
+            time: 'Hace 2 horas',
+            type: 'visa' as const,
+            isRead: hasConfirmedTravelItinerary,
+            actionTab: 'travel_itinerary' as AppTab,
+          },
+        ]
+      : []),
     ...(isDs160Submitted
       ? [
           {

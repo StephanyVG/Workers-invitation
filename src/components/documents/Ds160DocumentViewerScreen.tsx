@@ -9,15 +9,27 @@ export const Ds160DocumentViewerScreen: React.FC = () => {
       ? language === 'es'
         ? 'Código de barras DS-160'
         : 'DS-160 Bar code'
+      : selectedDocumentType === 'visa'
+      ? language === 'es'
+        ? 'Visa de EE. UU.'
+        : 'US Visa'
       : language === 'es'
       ? 'Documento DS-160'
       : 'DS-160 Document';
 
+  const docImage = selectedDocumentType === 'visa' ? '/visa.png' : '/bar code file.png';
+  const downloadFileName =
+    selectedDocumentType === 'visa'
+      ? 'US-Visa.png'
+      : selectedDocumentType === 'barcode'
+      ? 'DS-160-barcode.png'
+      : 'DS-160-document.png';
+
   const handleDownload = () => {
     // Trigger download of the document file
     const link = document.createElement('a');
-    link.href = '/bar code file.png';
-    link.download = selectedDocumentType === 'barcode' ? 'DS-160-barcode.png' : 'DS-160-document.png';
+    link.href = docImage;
+    link.download = downloadFileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -74,7 +86,7 @@ export const Ds160DocumentViewerScreen: React.FC = () => {
           data-node-id="1241:16306"
         >
           <img
-            src="/bar code file.png"
+            src={docImage}
             alt={title}
             className="w-full h-auto object-contain block rounded-[16px]"
             data-node-id="1241:16307"

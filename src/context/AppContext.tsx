@@ -85,7 +85,12 @@ export type AppTab =
   | 'visa_review_final_questions'
   | 'visa_review_consent'
   | 'visa_review_success'
-  | 'view_ds160_document';
+  | 'view_ds160_document'
+  | 'consular_details'
+  | 'visa_photo_guide'
+  | 'visa_camera_sim'
+  | 'visa_review'
+  | 'travel_itinerary';
 
 export type AppLanguage = 'es' | 'en';
 
@@ -118,8 +123,22 @@ interface AppContextType {
   pushBannerData: PushBannerNotification | null;
   setPushBannerData: React.Dispatch<React.SetStateAction<PushBannerNotification | null>>;
   triggerPushBanner: (customData?: PushBannerNotification) => void;
-  selectedDocumentType: 'barcode' | 'document';
-  setSelectedDocumentType: (type: 'barcode' | 'document') => void;
+  selectedDocumentType: 'barcode' | 'document' | 'visa';
+  setSelectedDocumentType: (type: 'barcode' | 'document' | 'visa') => void;
+  hasConfirmedConsularDetails: boolean;
+  setHasConfirmedConsularDetails: React.Dispatch<React.SetStateAction<boolean>>;
+  isVisaApprovedConfirmed: boolean;
+  setIsVisaApprovedConfirmed: React.Dispatch<React.SetStateAction<boolean>>;
+  hasUploadedVisa: boolean;
+  setHasUploadedVisa: React.Dispatch<React.SetStateAction<boolean>>;
+  showConsularDetailsModal: boolean;
+  setShowConsularDetailsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showTransportBottomSheet: boolean;
+  setShowTransportBottomSheet: React.Dispatch<React.SetStateAction<boolean>>;
+  transportPreference: 'employer' | 'own' | null;
+  setTransportPreference: React.Dispatch<React.SetStateAction<'employer' | 'own' | null>>;
+  hasConfirmedTravelItinerary: boolean;
+  setHasConfirmedTravelItinerary: React.Dispatch<React.SetStateAction<boolean>>;
   scheduledInterview: ScheduledInterviewInfo | null;
   setScheduledInterview: (interview: ScheduledInterviewInfo | null) => void;
   selectedAppointmentDetail: ScheduledInterviewInfo | null;
@@ -192,7 +211,59 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setShowPushBanner(true);
   };
 
-  const [selectedDocumentType, setSelectedDocumentType] = useState<'barcode' | 'document'>('barcode');
+  const [selectedDocumentType, setSelectedDocumentType] = useState<'barcode' | 'document' | 'visa'>('barcode');
+
+  const [hasConfirmedConsularDetails, setHasConfirmedConsularDetails] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_confirmed_consular');
+    return saved === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_confirmed_consular', String(hasConfirmedConsularDetails));
+  }, [hasConfirmedConsularDetails]);
+
+  const [isVisaApprovedConfirmed, setIsVisaApprovedConfirmed] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_visa_approved_confirmed');
+    return saved === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_visa_approved_confirmed', String(isVisaApprovedConfirmed));
+  }, [isVisaApprovedConfirmed]);
+
+  const [hasUploadedVisa, setHasUploadedVisa] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_has_uploaded_visa');
+    return saved === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_has_uploaded_visa', String(hasUploadedVisa));
+  }, [hasUploadedVisa]);
+
+  const [showConsularDetailsModal, setShowConsularDetailsModal] = useState<boolean>(false);
+  const [showTransportBottomSheet, setShowTransportBottomSheet] = useState<boolean>(false);
+
+  const [transportPreference, setTransportPreference] = useState<'employer' | 'own' | null>(() => {
+    const saved = localStorage.getItem('zipmi_transport_preference');
+    return (saved as 'employer' | 'own' | null) || 'employer';
+  });
+
+  useEffect(() => {
+    if (transportPreference) {
+      localStorage.setItem('zipmi_transport_preference', transportPreference);
+    } else {
+      localStorage.removeItem('zipmi_transport_preference');
+    }
+  }, [transportPreference]);
+
+  const [hasConfirmedTravelItinerary, setHasConfirmedTravelItinerary] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_confirmed_travel_itinerary');
+    return saved === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_confirmed_travel_itinerary', String(hasConfirmedTravelItinerary));
+  }, [hasConfirmedTravelItinerary]);
 
   const [scheduledInterview, setScheduledInterview] = useState<ScheduledInterviewInfo | null>(() => {
     const saved = localStorage.getItem('zipmi_scheduled_interview');
@@ -350,6 +421,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.removeItem('zipmi_show_welcome_modal');
     localStorage.removeItem('zipmi_current_tab');
     localStorage.removeItem('zipmi_onboarding_path');
+    localStorage.removeItem('zipmi_confirmed_consular');
+    localStorage.removeItem('zipmi_visa_approved_confirmed');
+    localStorage.removeItem('zipmi_has_uploaded_visa');
+    localStorage.removeItem('zipmi_transport_preference');
+    localStorage.removeItem('zipmi_confirmed_travel_itinerary');
+    setHasConfirmedConsularDetails(false);
+    setIsVisaApprovedConfirmed(false);
+    setHasUploadedVisa(false);
+    setTransportPreference('employer');
+    setHasConfirmedTravelItinerary(false);
     setWorker(INITIAL_WORKER_PROFILE);
     setDocuments(INITIAL_DOCUMENTS);
     setOnboardingPath(null);
@@ -396,6 +477,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         triggerPushBanner,
         selectedDocumentType,
         setSelectedDocumentType,
+        hasConfirmedConsularDetails,
+        setHasConfirmedConsularDetails,
+        isVisaApprovedConfirmed,
+        setIsVisaApprovedConfirmed,
+        hasUploadedVisa,
+        setHasUploadedVisa,
+        showConsularDetailsModal,
+        setShowConsularDetailsModal,
+        showTransportBottomSheet,
+        setShowTransportBottomSheet,
+        transportPreference,
+        setTransportPreference,
+        hasConfirmedTravelItinerary,
+        setHasConfirmedTravelItinerary,
         scheduledInterview,
         setScheduledInterview,
         selectedAppointmentDetail,

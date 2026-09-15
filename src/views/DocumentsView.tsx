@@ -10,7 +10,7 @@ const imgEllipse319 = "/assets/documents_empty/imgEllipse319.svg";
 const imgEllipse316 = "/assets/documents_empty/imgEllipse316.svg";
 
 export const DocumentsView: React.FC = () => {
-  const { worker, language, setCurrentTab, setSelectedDocumentType } = useApp();
+  const { worker, language, setCurrentTab, setSelectedDocumentType, hasUploadedVisa } = useApp();
 
   const isSigned = worker.hasSignedContract || worker.status === 'oferta_firmada';
   const hasDocuments = isSigned || worker.status === 'solicitud_visa' || worker.status === 'visa_aprobada' || worker.status === 'listo_para_viaje';
@@ -157,6 +157,46 @@ export const DocumentsView: React.FC = () => {
               </button>
             </div>
           </div>
+
+          {/* Card 4: US Visa */}
+          {hasUploadedVisa && (
+            <div
+              onClick={() => {
+                setSelectedDocumentType('visa');
+                setCurrentTab('view_ds160_document');
+              }}
+              className="border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-[1px_0px_16px_0px_rgba(0,0,0,0.05)] bg-white w-full flex flex-col cursor-pointer active:scale-[0.99] transition-transform"
+              data-node-id="documents-visa-card"
+            >
+              <div className="h-[187px] relative w-full overflow-hidden bg-slate-50 border-b border-[#e5e5e5] flex items-center justify-center p-3">
+                <img
+                  src="/visa.png"
+                  alt={language === 'es' ? 'Visa de EE. UU.' : 'US Visa'}
+                  className="w-full h-full object-contain block"
+                />
+              </div>
+
+              <div className="p-5 flex flex-col gap-2.5 text-left font-['Inter',sans-serif]">
+                <p className="font-['Inter',sans-serif] font-semibold text-[14px] leading-[18px] text-black tracking-[-0.028px]">
+                  {language === 'es' ? 'Visa de EE. UU.' : 'US Visa'}
+                </p>
+                <p className="font-['Inter',sans-serif] font-normal text-[12px] leading-[16px] text-[#525252] tracking-[-0.048px]">
+                  {language === 'es' ? 'PDF • Subido el 12 Apr, 2026' : 'PDF • Uploaded on [12 Apr, 2026]'}
+                </p>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedDocumentType('visa');
+                    setCurrentTab('view_ds160_document');
+                  }}
+                  className="w-full h-[36px] px-3 py-1.5 bg-[#d3efff] hover:bg-[#b0deff] active:scale-[0.98] text-[#0045ff] rounded-full font-['Inter',sans-serif] font-semibold text-[13px] leading-[18px] text-center shadow-2xs transition-all duration-150 cursor-pointer flex items-center justify-center mt-1"
+                >
+                  {language === 'es' ? 'Ver documento' : 'See document'}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );

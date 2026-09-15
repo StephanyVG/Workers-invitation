@@ -17,11 +17,16 @@ export const PushNotificationBanner: React.FC = () => {
 
   if (!showPushBanner) return null;
 
-  const isDs160Submitted = worker.status === 'solicitud_visa' || pushBannerData?.targetTab === 'documents';
-  const isOfferSent = worker.status === 'oferta_enviada';
+  const isTravelNotification =
+    pushBannerData?.targetTab === 'travel_itinerary';
+  const isDs160Submitted =
+    !isTravelNotification && (worker.status === 'solicitud_visa' || pushBannerData?.targetTab === 'documents');
+  const isOfferSent = !isTravelNotification && worker.status === 'oferta_enviada';
 
   const title = pushBannerData?.title || (
-    isDs160Submitted
+    isTravelNotification
+      ? (language === 'es' ? 'Revisa tu itinerario de viaje' : 'Review Your Travel Itinerary')
+      : isDs160Submitted
       ? (language === 'es' ? 'Tu DS-160 ha sido enviado' : 'Your DS-160 has been submitted')
       : isOfferSent
       ? (language === 'es' ? 'Sunnydale Orchards te envió una oferta' : 'Sunnydale Orchards sent you an offer')
@@ -29,7 +34,11 @@ export const PushNotificationBanner: React.FC = () => {
   );
 
   const description = pushBannerData?.description || (
-    isDs160Submitted
+    isTravelNotification
+      ? (language === 'es'
+          ? 'Tu transporte ha sido asignado. Es importante que revises los horarios y puntos de encuentro.'
+          : 'Your transportation has been assigned. It’s important that you review the schedules and meeting points.')
+      : isDs160Submitted
       ? (language === 'es' ? 'Puedes ver los detalles de tu DS-160 en “Solicitar Visa de Trabajo de EE. UU.”' : 'You can view the details of your DS-160 in the “Apply for US Work Visa”')
       : isOfferSent
       ? (language === 'es' ? 'Por favor revisa el contrato e infórmale al empleador si deseas aceptar el trabajo.' : 'Please review the contract and let the employer know if you wish to accept the job.')
@@ -37,13 +46,17 @@ export const PushNotificationBanner: React.FC = () => {
   );
 
   const time = pushBannerData?.time || (
-    language === 'es' ? 'Hace 2 h' : '2 hrs ago'
+    isTravelNotification
+      ? 'Hace 2 horas'
+      : (language === 'es' ? 'Hace 2 h' : '2 hrs ago')
   );
 
   const handleBannerClick = () => {
     setShowPushBanner(false);
     if (pushBannerData?.targetTab) {
       setCurrentTab(pushBannerData.targetTab);
+    } else if (isTravelNotification) {
+      setCurrentTab('travel_itinerary');
     } else if (isDs160Submitted) {
       setCurrentTab('documents');
     } else if (isOfferSent) {
@@ -56,13 +69,14 @@ export const PushNotificationBanner: React.FC = () => {
   const handleDismiss = (e: React.MouseEvent) => {
     e.stopPropagation();
     setShowPushBanner(false);
+    sessionStorage.setItem('zipmi_travel_banner_dismissed', 'true');
   };
 
   return (
     <div
       onClick={handleBannerClick}
       className="absolute top-[60px] left-1/2 -translate-x-1/2 z-50 w-[calc(100%-32px)] max-w-[345px] animate-push-move-in pointer-events-auto bg-[#e7f6ff] border border-[#b0deff] rounded-[16px] p-[16px] flex gap-[12px] items-start shadow-xl cursor-pointer active:scale-[0.99] transition-transform"
-      data-node-id={isDs160Submitted ? '1241:16248' : isOfferSent ? '1082:17134' : '1004:4817'}
+      data-node-id={isTravelNotification ? '1712:43449' : isDs160Submitted ? '1241:16248' : isOfferSent ? '1082:17134' : '1004:4817'}
     >
       {/* Left Zipmi Icon */}
       <div className="size-[28px] shrink-0 relative flex items-center justify-center">
