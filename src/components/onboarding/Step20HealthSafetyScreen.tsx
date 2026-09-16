@@ -28,6 +28,15 @@ export const Step20HealthSafetyScreen: React.FC = () => {
     setCurrentTab('step21_criminal_history');
   };
 
+  const handleSelectNoForAll = () => {
+    setContagiousDisease('no');
+    setDangerousIllness('no');
+    setDrugAddiction('no');
+    setTimeout(() => {
+      handleCompletePart4();
+    }, 400);
+  };
+
   const handleBack = () => {
     setCurrentTab('step19_social_info');
   };
@@ -251,10 +260,10 @@ export const Step20HealthSafetyScreen: React.FC = () => {
 
         <button
           type="button"
-          onClick={handleCompletePart4}
-          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] hover:underline cursor-pointer py-1"
+          onClick={handleSelectNoForAll}
+          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
         >
-          {language === 'es' ? 'Guardar y continuar más tarde' : 'Save and Continue Later'}
+          {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
         </button>
       </div>
     </div>

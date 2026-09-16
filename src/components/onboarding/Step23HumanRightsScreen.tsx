@@ -22,6 +22,17 @@ export const Step23HumanRightsScreen: React.FC = () => {
     setCurrentTab('step24_immigration_legal');
   };
 
+  const handleSelectNoForAll = () => {
+    setQ1('no');
+    setQ2('no');
+    setQ3('no');
+    setQ4('no');
+    setQ5('no');
+    setTimeout(() => {
+      handleContinue();
+    }, 400);
+  };
+
   const handleBack = () => {
     setCurrentTab('step22_security_terrorism');
   };
@@ -194,25 +205,24 @@ export const Step23HumanRightsScreen: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Save and Continue Later Link */}
-        <button
-          type="button"
-          onClick={() => setCurrentTab('home')}
-          className="w-full text-center text-[#0045ff] font-['Inter',sans-serif] font-semibold text-[15px] leading-[22px] hover:underline cursor-pointer py-2 block"
-        >
-          {language === 'es' ? 'Guardar y continuar después' : 'Save and Continue Later'}
-        </button>
       </div>
 
       {/* Sticky Bottom Action Bar */}
-      <div className="fixed-bottom-bar w-full flex flex-col items-center shrink-0">
+      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-3 shrink-0">
         <button
           onClick={handleContinue}
           className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
         >
           <span>{language === 'es' ? 'Seleccionar para continuar' : 'Select to Continue'}</span>
           <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleSelectNoForAll}
+          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
+        >
+          {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
         </button>
       </div>
     </div>

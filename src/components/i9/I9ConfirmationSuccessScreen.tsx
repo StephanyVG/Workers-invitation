@@ -50,52 +50,13 @@ export const I9ConfirmationSuccessScreen: React.FC = () => {
           </button>
         </div>
 
-        {/* Thumbs-up Illustration Container */}
-        <div className="relative w-[180px] h-[180px] flex items-center justify-center mt-2" data-node-id="3523:37783">
-          {/* Floor Shadow Ellipse */}
-          <div className="absolute bottom-2 w-[120px] h-[10px] bg-blue-900/10 rounded-full blur-[2px]" />
-
-          {/* Radiating Motion Lines */}
-          <div className="absolute top-3 right-5 w-4 h-1.5 bg-[#0038d0] rounded-full rotate-45" />
-          <div className="absolute top-9 right-2 w-5 h-1.5 bg-[#0038d0] rounded-full rotate-12" />
-          <div className="absolute top-1 right-12 w-1.5 h-4 bg-[#0038d0] rounded-full" />
-
-          {/* Stylized SVG Thumbs Up */}
-          <svg
-            className="w-[120px] h-[120px] text-[#0038d0] drop-shadow-sm"
-            viewBox="0 0 100 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Hand shape */}
-            <path
-              d="M32 44V76C32 77.1 32.9 78 34 78H72C75.3 78 78 75.3 78 72C78 70.8 77.6 69.7 77 68.8C79.4 67.5 81 64.9 81 62C81 60.3 80.4 58.8 79.3 57.7C81 56.1 82 53.9 82 51.5C82 48.6 80.4 46.1 78.1 44.8C78.7 43.8 79 42.7 79 41.5C79 38.2 76.3 35.5 73 35.5H53.5C54.8 32.5 56 28.5 56 24C56 18.5 53.5 16 50 16C46.5 16 45 19 45 23C45 30 38 39 33 43.5C32.4 44.1 32 44 32 44Z"
-              fill="#d8e3ff"
-              fillOpacity="0.4"
-            />
-            {/* Outline and details */}
-            <path
-              d="M32 44V78H72C75.3 78 78 75.3 78 72C78 70.8 77.6 69.7 77 68.8C79.4 67.5 81 64.9 81 62C81 60.3 80.4 58.8 79.3 57.7C81 56.1 82 53.9 82 51.5C82 48.6 80.4 46.1 78.1 44.8C78.7 43.8 79 42.7 79 41.5C79 38.2 76.3 35.5 73 35.5H53.5C54.8 32.5 56 28.5 56 24C56 18.5 53.5 16 50 16C46.5 16 45 19 45 23C45 30 38 39 33 43.5"
-              stroke="#0038d0"
-              strokeWidth="4.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {/* Finger dividers */}
-            <path d="M50 44H78" stroke="#0038d0" strokeWidth="4.5" strokeLinecap="round" />
-            <path d="M52 52.5H79" stroke="#0038d0" strokeWidth="4.5" strokeLinecap="round" />
-            <path d="M54 61H78" stroke="#0038d0" strokeWidth="4.5" strokeLinecap="round" />
-            <path d="M53 69.5H75" stroke="#0038d0" strokeWidth="4.5" strokeLinecap="round" />
-            {/* Cuff / Wrist Base */}
-            <path
-              d="M18 44H32V78H18C15.8 78 14 76.2 14 74V48C14 45.8 15.8 44 18 44Z"
-              fill="#2874ff"
-              fillOpacity="0.2"
-              stroke="#0038d0"
-              strokeWidth="4.5"
-              strokeLinejoin="round"
-            />
-          </svg>
+        {/* Thumbs-up Illustration Container (thumb.svg) */}
+        <div className="relative w-[180px] h-[190px] flex items-center justify-center mt-2" data-node-id="3523:37783">
+          <img
+            src="/thumb.svg"
+            alt="I-9 Confirmed"
+            className="w-full h-full object-contain select-none"
+          />
         </div>
       </div>
 

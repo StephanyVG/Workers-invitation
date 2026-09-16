@@ -25,10 +25,7 @@ export const ArrivalCongratsModal: React.FC = () => {
       >
         {/* Top Gradient Illustration Header (Height 208px) */}
         <div
-          className="h-[208px] w-full relative flex items-center justify-center shrink-0 overflow-hidden"
-          style={{
-            background: 'linear-gradient(180deg, #d8e3ff 0%, rgba(216, 227, 255, 0) 100%)'
-          }}
+          className="h-[208px] w-full relative flex items-center justify-center shrink-0 overflow-hidden bg-[#d8e3ff]"
           data-node-id="1712:45157"
         >
           {/* Top Left Close 'X' Button (Figma Node 1712:45169) */}
@@ -41,28 +38,11 @@ export const ArrivalCongratsModal: React.FC = () => {
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>
 
-          {/* Center Zipmi Logo Bubble with Floating Accent Rings */}
-          <div className="relative size-[160px] flex items-center justify-center">
-            {/* Top Blue Ring */}
-            <div className="absolute top-2 left-[50px] size-[16px] rounded-full border-[3px] border-[#2874ff]" />
-
-            {/* Right Small Blue Ring */}
-            <div className="absolute top-[48px] -right-2 size-[9px] rounded-full border-[2px] border-[#2874ff]" />
-
-            {/* Left Orange Ring */}
-            <div className="absolute top-[52px] -left-3 size-[12px] rounded-full border-[3px] border-[#ff9800]" />
-
-            {/* Bottom Left Orange Ring */}
-            <div className="absolute bottom-[24px] left-[18px] size-[12px] rounded-full border-[3px] border-[#ff9800]" />
-
-            {/* Bottom Right Orange Ring */}
-            <div className="absolute bottom-[20px] right-[12px] size-[15px] rounded-full border-[3.5px] border-[#ff9800]" />
-
-            {/* Central Zipmi Blue Z Circle */}
-            <div className="size-[99px] rounded-full bg-[#0038d0] text-white flex items-center justify-center font-['DM_Sans',sans-serif] font-bold text-[52px] shadow-lg select-none">
-              Z
-            </div>
-          </div>
+          <img
+            src="/modal.svg"
+            alt="Modal illustration"
+            className="w-full h-full object-cover select-none"
+          />
         </div>
 
         {/* Modal Body Container (Figma Node 1712:45170) */}

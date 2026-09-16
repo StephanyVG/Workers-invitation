@@ -24,36 +24,13 @@ export const RefundsSuccessScreen: React.FC = () => {
           </button>
         </div>
 
-        {/* Thumbs Up Illustration with Celebration Sparkles */}
-        <div className="relative size-[180px] flex items-center justify-center my-4" data-node-id="2308:49786">
-          {/* Background Decorative Rings/Dots */}
-          <div className="absolute top-2 left-6 size-[14px] rounded-full border-2 border-[#0045ff] bg-transparent opacity-80" />
-          <div className="absolute top-8 right-6 size-[16px] rounded-full border-2 border-[#f59e0b] bg-transparent opacity-80" />
-          <div className="absolute bottom-6 left-4 size-[12px] rounded-full border-2 border-[#0045ff] bg-transparent opacity-80" />
-          <div className="absolute bottom-4 right-10 size-[10px] rounded-full border-2 border-[#0045ff] bg-transparent opacity-80" />
-          <div className="absolute top-1 right-20 size-[6px] rounded-full bg-[#f59e0b]" />
-          <div className="absolute bottom-12 left-10 size-[6px] rounded-full bg-[#0045ff]" />
-
-          {/* Sparkle lines around thumbs up */}
-          <div className="absolute top-0 right-14 w-[3px] h-[12px] bg-[#0045ff] rounded-full -rotate-12" />
-          <div className="absolute top-5 right-8 w-[3px] h-[12px] bg-[#0045ff] rounded-full rotate-45" />
-          <div className="absolute top-12 right-6 w-[3px] h-[12px] bg-[#0045ff] rounded-full rotate-90" />
-
-          {/* Main Thumbs Up Vector */}
-          <svg
-            className="w-[120px] h-[120px] text-[#0038d0] drop-shadow-md relative z-10"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
-          </svg>
-
-          {/* Oval shadow under hand */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110px] h-[10px] bg-[#0038d0]/10 rounded-full blur-[2px]" />
+        {/* Thumbs Up Graphic (thumb.svg) */}
+        <div className="relative w-[180px] h-[190px] flex items-center justify-center my-4" data-node-id="2308:49786">
+          <img
+            src="/thumb.svg"
+            alt="Receipts Submitted"
+            className="w-full h-full object-contain select-none"
+          />
         </div>
       </div>
 

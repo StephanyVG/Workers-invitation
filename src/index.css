@@ -133,11 +133,11 @@
 /* Push Notification Move-In (Top to Bottom Entrance) */
 @keyframes pushNotificationMoveIn {
   0% {
-    transform: translate(-50%, -120%) scale(0.95);
+    transform: translateY(-120%) scale(0.95);
     opacity: 0;
   }
   100% {
-    transform: translate(-50%, 0) scale(1);
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
@@ -177,7 +177,7 @@
 }
 
 .fixed-bottom-bar button.hover\:underline,
-.fixed-bottom-bar button.text-\[\#0038d0\]:not(.bg-\[\#0038d0\]) {
+.fixed-bottom-bar button.text-\[\#0038d0\]:not(.bg-\[\#0038d0\]):not([class*="border"]) {
   padding-top: 4px;
   padding-bottom: 4px;
   min-height: auto;

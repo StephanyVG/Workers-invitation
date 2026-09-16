@@ -23,10 +23,10 @@ export const WelcomeOfferModal: React.FC = () => {
     e.stopPropagation();
     setIsAnimatingOut(true);
 
-    // Close Modal 2 and navigate to Job Offer Detail screen (Node 631:28603)
+    // Close Modal 2 and navigate to Job Details screen (Node 631:28603)
     setTimeout(() => {
       setShowWelcomeModal(false);
-      setCurrentTab('job_offer_detail');
+      setCurrentTab('job_details');
     }, 200);
   };
 
@@ -71,23 +71,16 @@ export const WelcomeOfferModal: React.FC = () => {
         {modalStep === 1 ? (
           /* Step 1: Figma Node 631:28510 - Confirmation Modal with OK button */
           <div className="w-full flex flex-col items-center" data-node-id="631:28510">
-            {/* Top Image Frame (393:30993) - Height 209px with centered BubbleZip */}
+            {/* Top Image Frame (393:30993) - Height 209px with modal.svg */}
             <div
-              className="w-full h-[209px] bg-[#d8e3ff] relative overflow-hidden flex items-center justify-center"
+              className="w-full h-[209px] relative overflow-hidden flex items-center justify-center bg-[#d8e3ff]"
               data-node-id="393:30993"
             >
-              {/* Centered BubbleZip Graphic (393:30997) */}
               <img
-                src="/BubbleZip.svg"
-                alt="BubbleZip"
-                className="w-[120px] h-[120px] object-contain relative z-10 mx-auto my-auto"
-                data-node-id="393:30997"
+                src="/modal.svg"
+                alt="Modal illustration"
+                className="w-full h-full object-cover select-none"
               />
-              {/* Decorative Accent Dots */}
-              <div className="absolute size-4 bg-[#0038d0]/20 rounded-full top-6 left-12" />
-              <div className="absolute size-5 bg-[#0038d0]/30 rounded-full top-10 right-10" />
-              <div className="absolute size-3 bg-[#0038d0]/20 rounded-full bottom-8 left-16" />
-              <div className="absolute size-4 bg-[#0038d0]/25 rounded-full bottom-10 right-14" />
             </div>
 
             {/* Body Container (390:32501) */}

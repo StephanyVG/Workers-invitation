@@ -28,27 +28,13 @@ export const InterviewScheduledConfirmationView: React.FC = () => {
           </button>
         </div>
 
-        {/* Thumbs Up Illustration Container */}
-        <div className="relative size-[160px] flex items-center justify-center mt-6">
-          {/* Floating Accent Circles */}
-          <div className="absolute top-2 left-6 size-3 rounded-full border-2 border-[#ff9800]" />
-          <div className="absolute top-0 right-10 size-3 rounded-full border-2 border-[#0045ff]" />
-          <div className="absolute bottom-6 right-2 size-4 rounded-full border-2 border-[#ff9800]" />
-          <div className="absolute bottom-4 left-2 size-3 rounded-full border-2 border-[#0045ff]" />
-
-          {/* Central Blue Thumbs Up Icon */}
-          <div className="size-[100px] text-[#0038d0] flex items-center justify-center animate-bounce-short">
-            <span className="material-symbols-outlined text-[96px] text-[#0038d0]">thumb_up</span>
-          </div>
-
-          {/* Ground Shadow Ellipse */}
-          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[126px] h-[9px]">
-            <img
-              src="/assets/interview_scheduled/ground_shadow.svg"
-              alt=""
-              className="w-full h-full object-contain"
-            />
-          </div>
+        {/* Thumbs Up Graphic (thumb.svg) */}
+        <div className="relative w-[180px] h-[190px] flex items-center justify-center mt-6">
+          <img
+            src="/thumb.svg"
+            alt="Interview Scheduled"
+            className="w-full h-full object-contain select-none"
+          />
         </div>
       </div>
 

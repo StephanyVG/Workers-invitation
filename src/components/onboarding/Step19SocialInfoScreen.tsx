@@ -64,6 +64,18 @@ export const Step19SocialInfoScreen: React.FC = () => {
     setCurrentTab('step20_health_safety');
   };
 
+  const handleSelectNoForAll = () => {
+    setMilitaryServed('no');
+    setClanMember('no');
+    setTraveledCountries('no');
+    setBelongedGroups('no');
+    setWeaponsTraining('no');
+    setRebelGroup('no');
+    setTimeout(() => {
+      handleContinue();
+    }, 400);
+  };
+
   const handleBack = () => {
     setCurrentTab('step18_part4_intro');
   };
@@ -587,10 +599,10 @@ export const Step19SocialInfoScreen: React.FC = () => {
 
         <button
           type="button"
-          onClick={handleContinue}
-          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[14px] leading-[18px] hover:underline cursor-pointer py-1"
+          onClick={handleSelectNoForAll}
+          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
         >
-          {language === 'es' ? 'Guardar y continuar más tarde' : 'Save and Continue Later'}
+          {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
         </button>
       </div>
     </div>

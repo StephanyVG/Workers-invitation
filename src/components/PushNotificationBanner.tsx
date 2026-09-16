@@ -88,7 +88,7 @@ export const PushNotificationBanner: React.FC = () => {
   return (
     <div
       onClick={handleBannerClick}
-      className="absolute top-[60px] left-1/2 -translate-x-1/2 z-50 w-[calc(100%-32px)] max-w-[345px] animate-push-move-in pointer-events-auto bg-[#e7f6ff] border border-[#b0deff] rounded-[16px] p-[16px] flex gap-[12px] items-start shadow-xl cursor-pointer active:scale-[0.99] transition-transform"
+      className="absolute top-[60px] left-[24px] right-[24px] z-50 animate-push-move-in pointer-events-auto bg-[#e7f6ff] border border-[#b0deff] rounded-[16px] p-[16px] flex gap-[12px] items-start shadow-xl cursor-pointer active:scale-[0.99] transition-transform"
       data-node-id={isRefundNotification ? '2308:50071' : isI9ReadyNotification ? '3525:38030' : isI9Notification ? '3520:27415' : isTravelNotification ? '1712:43449' : isDs160Submitted ? '1241:16248' : isOfferSent ? '1082:17134' : '1004:4817'}
     >
       {/* Left Zipmi Icon */}

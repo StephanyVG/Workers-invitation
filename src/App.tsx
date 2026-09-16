@@ -62,6 +62,8 @@ import { Step24ImmigrationLegalScreen } from './components/onboarding/Step24Immi
 import { Step25FinalReviewScreen } from './components/onboarding/Step25FinalReviewScreen';
 import { Step26FinishedProfileScreen } from './components/onboarding/Step26FinishedProfileScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
+import { JobInvitationDetailScreen } from './components/onboarding/JobInvitationDetailScreen';
+import { JobInvitationAcceptedConfirmationScreen } from './components/onboarding/JobInvitationAcceptedConfirmationScreen';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
 import { ViewSignedDocumentScreen } from './components/onboarding/ViewSignedDocumentScreen';
 import { ConfirmationScreen } from './components/onboarding/ConfirmationScreen';
@@ -173,6 +175,8 @@ const MainContent: React.FC = () => {
     'step24_immigration_legal',
     'step25_final_review',
     'step26_finished_profile',
+    'job_details',
+    'job_invitation_accepted',
     'job_offer_detail',
     'view_signed_document',
     'offer_accepted_confirmation',
@@ -269,6 +273,8 @@ const MainContent: React.FC = () => {
         {currentTab === 'step24_immigration_legal' && <Step24ImmigrationLegalScreen />}
         {currentTab === 'step25_final_review' && <Step25FinalReviewScreen />}
         {currentTab === 'step26_finished_profile' && <Step26FinishedProfileScreen />}
+        {currentTab === 'job_details' && <JobInvitationDetailScreen />}
+        {currentTab === 'job_invitation_accepted' && <JobInvitationAcceptedConfirmationScreen />}
         {currentTab === 'job_offer_detail' && <JobOfferDetailScreen />}
         {currentTab === 'view_signed_document' && <ViewSignedDocumentScreen />}
         {currentTab === 'offer_accepted_confirmation' && <ConfirmationScreen />}

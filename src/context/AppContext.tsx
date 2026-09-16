@@ -58,6 +58,8 @@ export type AppTab =
   | 'step25_final_review'
   | 'step26_finished_profile'
   | 'welcome_offer'
+  | 'job_details'
+  | 'job_invitation_accepted'
   | 'job_offer_detail'
   | 'view_signed_document'
   | 'offer_accepted_confirmation'

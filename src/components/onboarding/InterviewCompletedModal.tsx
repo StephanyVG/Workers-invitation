@@ -24,10 +24,7 @@ export const InterviewCompletedModal: React.FC = () => {
       >
         {/* Top Gradient Illustration Header (Node I1004:4184;393:30993 - Height 209px) */}
         <div
-          className="h-[209px] w-full relative flex items-center justify-center shrink-0 overflow-hidden"
-          style={{
-            background: 'linear-gradient(180deg, #d8e3ff 0%, rgba(216, 227, 255, 0) 100%)'
-          }}
+          className="h-[209px] w-full relative flex items-center justify-center shrink-0 overflow-hidden bg-[#d8e3ff]"
           data-node-id="I1004:4184;393:30993"
         >
           {/* Top Left Close 'X' Button (Node I1004:4184;542:44899) */}
@@ -40,24 +37,11 @@ export const InterviewCompletedModal: React.FC = () => {
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>
 
-          {/* Center Zipmi Logo Bubble with Floating Accent Circles */}
-          <div className="relative size-[160px] flex items-center justify-center">
-            {/* Top Blue Circle */}
-            <div className="absolute top-3 size-[14px] rounded-full border-[3px] border-[#0038d0]" />
-            {/* Top Left Orange Circle */}
-            <div className="absolute top-8 left-4 size-[16px] rounded-full border-[3px] border-[#ff9800]" />
-            {/* Top Right Orange Circle */}
-            <div className="absolute top-[38px] right-[18px] size-[16px] rounded-full border-[3px] border-[#ff9800]" />
-            {/* Bottom Right Blue Circle */}
-            <div className="absolute bottom-[28px] right-[24px] size-[16px] rounded-full border-[3px] border-[#0038d0]" />
-            {/* Bottom Left Blue Circle */}
-            <div className="absolute bottom-[20px] left-[32px] size-[10px] rounded-full border-[2px] border-[#0038d0]" />
-
-            {/* Central Zipmi Blue Z Circle */}
-            <div className="size-[99px] rounded-full bg-[#0038d0] text-white flex items-center justify-center font-['DM_Sans',sans-serif] font-bold text-[52px] shadow-lg select-none">
-              Z
-            </div>
-          </div>
+          <img
+            src="/modal.svg"
+            alt="Modal illustration"
+            className="w-full h-full object-cover select-none"
+          />
         </div>
 
         {/* Content Body (Node I1004:4184;390:32501 - p-4 flex flex-col gap-6) */}

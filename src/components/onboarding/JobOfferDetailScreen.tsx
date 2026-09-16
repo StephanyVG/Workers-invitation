@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { CongratulationsJobModal } from './CongratulationsJobModal';
 
 export const JobOfferDetailScreen: React.FC = () => {
-  const { worker, language, setCurrentTab, updateWorker, triggerConfetti, addToast } = useApp();
+  const { worker, language, setCurrentTab, updateWorker, addToast } = useApp();
   const [showSignModal, setShowSignModal] = useState<boolean>(false);
   const [showCongratsModal, setShowCongratsModal] = useState<boolean>(false);
   const workerFullName = worker.fullName || 'Guadalupe Ramírez';
@@ -27,7 +27,6 @@ export const JobOfferDetailScreen: React.FC = () => {
       hasSignedContract: true,
       status: 'oferta_firmada'
     });
-    triggerConfetti();
     addToast(
       language === 'es' ? '¡Solicitud de visa iniciada!' : 'Visa Application Started!',
       language === 'es'
@@ -36,7 +35,7 @@ export const JobOfferDetailScreen: React.FC = () => {
       'success'
     );
     setShowCongratsModal(false);
-    setCurrentTab('visa_review_hub');
+    setCurrentTab('home');
   };
 
   const handleDeclineOffer = () => {

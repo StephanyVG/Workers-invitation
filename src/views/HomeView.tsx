@@ -1222,24 +1222,24 @@ export const HomeView: React.FC = () => {
           </div>
 
           <div className="space-y-6 w-full">
-            {/* Card 1: Your interview was scheduled (Figma Node 1008:2674) */}
+            {/* Card 1: Interview Pending (Figma Node 631:28439) */}
             <div
               className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm flex flex-col text-left font-['Inter',sans-serif]"
-              data-node-id="1008:2674"
+              data-node-id="631:28439"
             >
-              {/* Header Purple Badge (1008:2675) */}
-              <div className="bg-[#9e89c6] py-2 px-4 text-center" data-node-id="1008:2675">
-                <span className="font-semibold text-[16px] leading-[22px] text-white" data-node-id="1008:2676">
-                  {language === 'es' ? 'Tu entrevista fue programada' : 'Your interview was scheduled'}
+              {/* Header Neutral Grey Badge (Figma Node 631:28440) */}
+              <div className="bg-[#d4d4d4] py-2 px-4 text-center" data-node-id="631:28440">
+                <span className="font-semibold text-[16px] leading-[22px] text-[#404040]" data-node-id="631:28441">
+                  {language === 'es' ? 'Entrevista Pendiente' : 'Interview Pending'}
                 </span>
               </div>
 
               {/* Card Body */}
-              <div className="p-4 space-y-4" data-node-id="1008:2677">
-                {/* Cover Image */}
-                <div className="w-full h-[68px] rounded-[8px] overflow-hidden relative" data-node-id="1008:2679">
+              <div className="p-4 space-y-4" data-node-id="631:28442">
+                {/* Cover Image (Figma Node 631:28444) */}
+                <div className="w-full h-[68px] rounded-[8px] overflow-hidden relative" data-node-id="631:28444">
                   <img
-                    src="/assets/home_updated/apples_cover.png"
+                    src="/apples_orchard.png"
                     alt="Sunnydale Orchards farm"
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -1317,7 +1317,7 @@ export const HomeView: React.FC = () => {
                 {/* Cover Image */}
                 <div className="w-full h-[68px] rounded-[8px] overflow-hidden relative">
                   <img
-                    src="/assets/home_updated/apples_cover.png"
+                    src="/apples_orchard.png"
                     alt="Sunnydale Orchards farm"
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -1346,7 +1346,7 @@ export const HomeView: React.FC = () => {
 
                 {/* Primary Button */}
                 <button
-                  onClick={() => setCurrentTab('job_offer_detail')}
+                  onClick={() => setCurrentTab('job_details')}
                   className="w-full h-[44px] min-h-[44px] px-4 py-[10px] bg-[#0038d0] text-white rounded-full font-semibold text-[16px] leading-[22px] text-center shadow-md active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center"
                 >
                   {language === 'es' ? 'Ver empleo' : 'View Job'}

@@ -115,7 +115,11 @@ export const NotificationsView: React.FC = () => {
       time: language === 'es' ? 'Enviado hace 1 día' : 'Sent 1 day ago',
       type: 'job' as const,
       isRead: true,
-      actionTab: isSigned ? ('view_signed_document' as AppTab) : ('job_offer_detail' as AppTab),
+      actionTab: isSigned
+        ? ('view_signed_document' as AppTab)
+        : worker.status === 'oferta_enviada'
+        ? ('job_offer_detail' as AppTab)
+        : ('job_details' as AppTab),
     },
   ];
 
