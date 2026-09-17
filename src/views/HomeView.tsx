@@ -188,10 +188,10 @@ export const HomeView: React.FC = () => {
 
         {/* Main Body Area: Submit Visa Application Card (Node 1590:16886 / 1590:16888) */}
         <div className="p-6 flex flex-col gap-6 w-full" data-node-id="1590:16886">
-          {/* Action Required Container (Figma node 1628:54217) */}
-          {hasEmployerVisaChanges && !employerVisaChangesReviewed && (
+          {/* Action Required Container (Figma node 1628:54217) - Oculto */}
+          {/* {hasEmployerVisaChanges && !employerVisaChangesReviewed && (
             <ActionRequiredNotificationCard />
-          )}
+          )} */}
 
           <div
             className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm w-full min-h-[444px] flex flex-col justify-between"

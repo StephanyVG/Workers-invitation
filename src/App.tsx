@@ -325,10 +325,13 @@ const MainContent: React.FC = () => {
         {currentTab === 'refunds_status_details' && <RefundsStatusDetailsScreen />}
         {currentTab === 'refunds_breakdown' && <RefundsBreakdownScreen />}
         {currentTab === 'refunds_completed_success' && <RefundsCompletedSuccessScreen />}
+        {/* Flujo de revisión de cambios del empleador - Oculto */}
+        {/*
         {currentTab === 'visa_employer_changes_review' && <EmployerChangesReviewScreen />}
         {currentTab === 'visa_employer_change_edit_job1' && <EditJob1ChangesScreen />}
         {currentTab === 'visa_employer_change_edit_job2' && <EditJob2RequiredScreen />}
         {currentTab === 'visa_employer_changes_confirmation' && <InformationSentConfirmationScreen />}
+        */}
 
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}

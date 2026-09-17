@@ -520,6 +520,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const tab = params.get('tab') as AppTab;
     if (tab) return tab;
     const saved = localStorage.getItem('zipmi_current_tab') as AppTab;
+    if (saved && saved.startsWith('visa_employer_change')) {
+      return 'home';
+    }
     return saved || 'splash';
   });
 
@@ -661,10 +664,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [showRefundConfirmModal, setShowRefundConfirmModal] = useState<boolean>(false);
   const [refundCameraTarget, setRefundCameraTarget] = useState<{ category: 'transport' | 'hotel' | 'food' | 'others'; subField?: string } | null>(null);
 
-  // Employer Visa Changes State (Figma nodes 1628:54217, 17:32148 - 17:33453)
+  // Employer Visa Changes State (Figma nodes 1628:54217, 17:32148 - 17:33453) - Oculto por defecto
   const [hasEmployerVisaChanges, setHasEmployerVisaChanges] = useState<boolean>(() => {
     const saved = localStorage.getItem('zipmi_has_employer_visa_changes');
-    return saved !== null ? saved === 'true' : true;
+    return saved === 'true';
   });
 
   useEffect(() => {
