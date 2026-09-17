@@ -117,6 +117,12 @@ import { RefundsSuccessScreen } from './components/refunds/RefundsSuccessScreen'
 import { RefundsStatusDetailsScreen } from './components/refunds/RefundsStatusDetailsScreen';
 import { RefundsBreakdownScreen } from './components/refunds/RefundsBreakdownScreen';
 import { RefundsCompletedSuccessScreen } from './components/refunds/RefundsCompletedSuccessScreen';
+import {
+  EmployerChangesReviewScreen,
+  EditJob1ChangesScreen,
+  EditJob2RequiredScreen,
+  InformationSentConfirmationScreen,
+} from './components/visa_review/employer_changes';
 
 const MainContent: React.FC = () => {
   const { currentTab, showWelcomeModal, showInterviewCompletedModal } = useApp();
@@ -213,7 +219,11 @@ const MainContent: React.FC = () => {
     'refunds_success',
     'refunds_status_details',
     'refunds_breakdown',
-    'refunds_completed_success'
+    'refunds_completed_success',
+    'visa_employer_changes_review',
+    'visa_employer_change_edit_job1',
+    'visa_employer_change_edit_job2',
+    'visa_employer_changes_confirmation'
   ].includes(currentTab);
 
   return (
@@ -314,6 +324,10 @@ const MainContent: React.FC = () => {
         {currentTab === 'refunds_status_details' && <RefundsStatusDetailsScreen />}
         {currentTab === 'refunds_breakdown' && <RefundsBreakdownScreen />}
         {currentTab === 'refunds_completed_success' && <RefundsCompletedSuccessScreen />}
+        {currentTab === 'visa_employer_changes_review' && <EmployerChangesReviewScreen />}
+        {currentTab === 'visa_employer_change_edit_job1' && <EditJob1ChangesScreen />}
+        {currentTab === 'visa_employer_change_edit_job2' && <EditJob2RequiredScreen />}
+        {currentTab === 'visa_employer_changes_confirmation' && <InformationSentConfirmationScreen />}
 
         {/* Worker Portal Views */}
         {(currentTab === 'home' || currentTab === 'welcome_offer') && <HomeView />}

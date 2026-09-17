@@ -105,9 +105,61 @@ export type AppTab =
   | 'refunds_success'
   | 'refunds_status_details'
   | 'refunds_breakdown'
-  | 'refunds_completed_success';
+  | 'refunds_completed_success'
+  | 'visa_employer_changes_review'
+  | 'visa_employer_change_edit_job1'
+  | 'visa_employer_change_edit_job2'
+  | 'visa_employer_changes_confirmation';
 
 export type AppLanguage = 'es' | 'en';
+
+export interface EmployerJobChangeData {
+  employerName: string;
+  streetAddress1: string;
+  streetAddress2: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  telephone: string;
+  jobTitle: string;
+  supervisorSurname: string;
+  supervisorGivenNames: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+}
+
+export const INITIAL_JOB1_DATA: EmployerJobChangeData = {
+  employerName: 'Green Valley Farms',
+  streetAddress1: '123 Orchard Lane',
+  streetAddress2: 'Suite B',
+  city: 'Yakima',
+  state: 'Washington',
+  zipCode: '98901',
+  telephone: '(509) 555-0143',
+  jobTitle: 'Farm Hand',
+  supervisorSurname: 'Smith',
+  supervisorGivenNames: 'John',
+  startDate: '01/2021',
+  endDate: '12/2022',
+  description: 'Pruning apple trees, harvesting fruit, general orchard maintenance.'
+};
+
+export const INITIAL_JOB2_DATA: EmployerJobChangeData = {
+  employerName: 'Sunny Acres',
+  streetAddress1: '456 Valley Road',
+  streetAddress2: '',
+  city: 'Fresno',
+  state: 'California',
+  zipCode: '93722',
+  telephone: '(559) 555-0189',
+  jobTitle: 'Field Supervisor',
+  supervisorSurname: 'Rodriguez',
+  supervisorGivenNames: 'Carlos',
+  startDate: '03/2023',
+  endDate: '11/2023',
+  description: 'Irrigation management, supervising picking crews.'
+};
 
 export interface PushBannerNotification {
   id?: string;
@@ -297,6 +349,27 @@ interface AppContextType {
   triggerConfetti: () => void;
   visaReviewSection: number;
   setVisaReviewSection: (section: number) => void;
+  hasEmployerVisaChanges: boolean;
+  setHasEmployerVisaChanges: React.Dispatch<React.SetStateAction<boolean>>;
+  employerVisaChangesReviewed: boolean;
+  setEmployerVisaChangesReviewed: React.Dispatch<React.SetStateAction<boolean>>;
+  dontShowFinalReviewAgain: boolean;
+  setDontShowFinalReviewAgain: React.Dispatch<React.SetStateAction<boolean>>;
+  job1Status: 'pending' | 'resolved' | 'approved' | 'rejected';
+  setJob1Status: React.Dispatch<React.SetStateAction<'pending' | 'resolved' | 'approved' | 'rejected'>>;
+  job2Status: 'pending' | 'resolved' | 'approved' | 'rejected';
+  setJob2Status: React.Dispatch<React.SetStateAction<'pending' | 'resolved' | 'approved' | 'rejected'>>;
+  job3Status: 'pending' | 'accepted' | 'rejected';
+  setJob3Status: React.Dispatch<React.SetStateAction<'pending' | 'accepted' | 'rejected'>>;
+  job1Data: EmployerJobChangeData;
+  setJob1Data: React.Dispatch<React.SetStateAction<EmployerJobChangeData>>;
+  updateJob1Data: (updates: Partial<EmployerJobChangeData>) => void;
+  job2Data: EmployerJobChangeData;
+  setJob2Data: React.Dispatch<React.SetStateAction<EmployerJobChangeData>>;
+  updateJob2Data: (updates: Partial<EmployerJobChangeData>) => void;
+  showEmployerChangesSuccessToast: boolean;
+  setShowEmployerChangesSuccessToast: React.Dispatch<React.SetStateAction<boolean>>;
+  resetEmployerChanges: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -460,6 +533,119 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [showRefundFinishLaterModal, setShowRefundFinishLaterModal] = useState<boolean>(false);
   const [showRefundConfirmModal, setShowRefundConfirmModal] = useState<boolean>(false);
   const [refundCameraTarget, setRefundCameraTarget] = useState<{ category: 'transport' | 'hotel' | 'food' | 'others'; subField?: string } | null>(null);
+
+  // Employer Visa Changes State (Figma nodes 1628:54217, 17:32148 - 17:33453)
+  const [hasEmployerVisaChanges, setHasEmployerVisaChanges] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_has_employer_visa_changes');
+    return saved !== null ? saved === 'true' : true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_has_employer_visa_changes', String(hasEmployerVisaChanges));
+  }, [hasEmployerVisaChanges]);
+
+  const [employerVisaChangesReviewed, setEmployerVisaChangesReviewed] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_employer_changes_reviewed');
+    return saved === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_employer_changes_reviewed', String(employerVisaChangesReviewed));
+  }, [employerVisaChangesReviewed]);
+
+  const [dontShowFinalReviewAgain, setDontShowFinalReviewAgain] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_dont_show_final_review');
+    return saved === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_dont_show_final_review', String(dontShowFinalReviewAgain));
+  }, [dontShowFinalReviewAgain]);
+
+  const [job1Status, setJob1Status] = useState<'pending' | 'resolved' | 'approved' | 'rejected'>(() => {
+    const saved = localStorage.getItem('zipmi_job1_status');
+    return (saved as any) || 'pending';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_job1_status', job1Status);
+  }, [job1Status]);
+
+  const [job2Status, setJob2Status] = useState<'pending' | 'resolved' | 'approved' | 'rejected'>(() => {
+    const saved = localStorage.getItem('zipmi_job2_status');
+    return (saved as any) || 'pending';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_job2_status', job2Status);
+  }, [job2Status]);
+
+  const [job3Status, setJob3Status] = useState<'pending' | 'accepted' | 'rejected'>(() => {
+    const saved = localStorage.getItem('zipmi_job3_status');
+    return (saved as any) || 'pending';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_job3_status', job3Status);
+  }, [job3Status]);
+
+  const [job1Data, setJob1Data] = useState<EmployerJobChangeData>(() => {
+    const saved = localStorage.getItem('zipmi_job1_data');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    return INITIAL_JOB1_DATA;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_job1_data', JSON.stringify(job1Data));
+  }, [job1Data]);
+
+  const [job2Data, setJob2Data] = useState<EmployerJobChangeData>(() => {
+    const saved = localStorage.getItem('zipmi_job2_data');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    return INITIAL_JOB2_DATA;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_job2_data', JSON.stringify(job2Data));
+  }, [job2Data]);
+
+  const [showEmployerChangesSuccessToast, setShowEmployerChangesSuccessToast] = useState<boolean>(false);
+
+  const updateJob1Data = (updates: Partial<EmployerJobChangeData>) => {
+    setJob1Data((prev) => ({ ...prev, ...updates }));
+  };
+
+  const updateJob2Data = (updates: Partial<EmployerJobChangeData>) => {
+    setJob2Data((prev) => ({ ...prev, ...updates }));
+  };
+
+  const resetEmployerChanges = () => {
+    localStorage.removeItem('zipmi_has_employer_visa_changes');
+    localStorage.removeItem('zipmi_employer_changes_reviewed');
+    localStorage.removeItem('zipmi_dont_show_final_review');
+    localStorage.removeItem('zipmi_job1_status');
+    localStorage.removeItem('zipmi_job2_status');
+    localStorage.removeItem('zipmi_job3_status');
+    localStorage.removeItem('zipmi_job1_data');
+    localStorage.removeItem('zipmi_job2_data');
+    setHasEmployerVisaChanges(true);
+    setEmployerVisaChangesReviewed(false);
+    setDontShowFinalReviewAgain(false);
+    setJob1Status('pending');
+    setJob2Status('pending');
+    setJob3Status('pending');
+    setJob1Data(INITIAL_JOB1_DATA);
+    setJob2Data(INITIAL_JOB2_DATA);
+    setShowEmployerChangesSuccessToast(false);
+  };
 
   const updateRefundsProgress = (updates: Partial<RefundsProgress>) => {
     setRefundsProgress((prev) => ({
@@ -685,6 +871,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setCurrentTab('splash');
     setShowWelcomeModal(false);
     setSelectedJobForDetail(null);
+    resetEmployerChanges();
     addToast(
       language === 'es' ? 'Flujo Reiniciado al Inicio' : 'Flow Reset to Start',
       language === 'es' ? 'Regresaste a la pantalla inicial de bienvenida.' : 'Returned to initial welcome screen.',
@@ -793,7 +980,28 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setOnboardingPath,
         triggerConfetti,
         visaReviewSection,
-        setVisaReviewSection
+        setVisaReviewSection,
+        hasEmployerVisaChanges,
+        setHasEmployerVisaChanges,
+        employerVisaChangesReviewed,
+        setEmployerVisaChangesReviewed,
+        dontShowFinalReviewAgain,
+        setDontShowFinalReviewAgain,
+        job1Status,
+        setJob1Status,
+        job2Status,
+        setJob2Status,
+        job3Status,
+        setJob3Status,
+        job1Data,
+        setJob1Data,
+        updateJob1Data,
+        job2Data,
+        setJob2Data,
+        updateJob2Data,
+        showEmployerChangesSuccessToast,
+        setShowEmployerChangesSuccessToast,
+        resetEmployerChanges
       }}
     >
       {children}

@@ -1,3 +1,5 @@
+import '@babel/types';
+import '@babel/core';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
