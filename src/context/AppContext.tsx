@@ -376,6 +376,13 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+// Ensure URL is immediately forced to root '/' upon entry
+if (typeof window !== 'undefined') {
+  if (window.location.pathname !== '/' || window.location.search || window.location.hash) {
+    window.history.replaceState(null, '', '/');
+  }
+}
+
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [worker, setWorker] = useState<WorkerProfile>(() => {
     const saved = localStorage.getItem('zipmi_worker_profile');
@@ -388,27 +395,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : INITIAL_DOCUMENTS;
   });
 
-  const [currentTab, setCurrentTab] = useState<AppTab>(() => {
-    // URL query check: ?reset=true resets flow to splash immediately
-    if (typeof window !== 'undefined' && window.location.search.includes('reset')) {
-      localStorage.removeItem('zipmi_current_tab');
-      localStorage.removeItem('zipmi_onboarding_path');
-      return 'splash';
-    }
-    const savedTab = localStorage.getItem('zipmi_current_tab');
-    return (savedTab as AppTab) || 'splash';
-  });
+  // Always force first screen to 'splash' on initial application load
+  const [currentTab, setCurrentTab] = useState<AppTab>('splash');
 
-  const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(() => {
-    const saved = localStorage.getItem('zipmi_show_welcome_modal');
-    return saved === 'true';
-  });
-
-  const [showCodeOfferModal, setShowCodeOfferModal] = useState<boolean>(() => {
-    const saved = localStorage.getItem('zipmi_show_code_offer_modal');
-    return saved === 'true';
-  });
-
+  const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
+  const [showCodeOfferModal, setShowCodeOfferModal] = useState<boolean>(false);
   const [showInterviewCompletedModal, setShowInterviewCompletedModal] = useState<boolean>(false);
 
   const [showPushBanner, setShowPushBanner] = useState<boolean>(false);
