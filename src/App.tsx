@@ -62,6 +62,7 @@ import { Step24ImmigrationLegalScreen } from './components/onboarding/Step24Immi
 import { Step25FinalReviewScreen } from './components/onboarding/Step25FinalReviewScreen';
 import { Step26FinishedProfileScreen } from './components/onboarding/Step26FinishedProfileScreen';
 import { WelcomeOfferModal } from './components/onboarding/WelcomeOfferModal';
+import { CodeWelcomeOfferModal } from './components/onboarding/CodeWelcomeOfferModal';
 import { JobInvitationDetailScreen } from './components/onboarding/JobInvitationDetailScreen';
 import { JobInvitationAcceptedConfirmationScreen } from './components/onboarding/JobInvitationAcceptedConfirmationScreen';
 import { JobOfferDetailScreen } from './components/onboarding/JobOfferDetailScreen';
@@ -125,7 +126,7 @@ import {
 } from './components/visa_review/employer_changes';
 
 const MainContent: React.FC = () => {
-  const { currentTab, showWelcomeModal, showInterviewCompletedModal } = useApp();
+  const { currentTab, showWelcomeModal, showCodeOfferModal, showInterviewCompletedModal } = useApp();
 
   const isOnboardingTab = [
     'splash',
@@ -348,6 +349,9 @@ const MainContent: React.FC = () => {
 
       {/* Welcome Offer Modal Overlay on Home (Covers whole screen including BottomNavigation) */}
       {(currentTab === 'home' || currentTab === 'welcome_offer') && showWelcomeModal && <WelcomeOfferModal />}
+
+      {/* Code Welcome Offer Modal Overlay (Figma Node 1981:17377) */}
+      {(currentTab === 'home' || currentTab === 'welcome_offer') && showCodeOfferModal && <CodeWelcomeOfferModal />}
 
       {/* Post-Interview Completed Modal Overlay (Figma Node 1004:4183) */}
       {showInterviewCompletedModal && <InterviewCompletedModal />}

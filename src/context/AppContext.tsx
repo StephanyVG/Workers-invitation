@@ -284,6 +284,8 @@ interface AppContextType {
   setCurrentTab: (tab: AppTab) => void;
   showWelcomeModal: boolean;
   setShowWelcomeModal: (show: boolean) => void;
+  showCodeOfferModal: boolean;
+  setShowCodeOfferModal: (show: boolean) => void;
   showInterviewCompletedModal: boolean;
   setShowInterviewCompletedModal: (show: boolean) => void;
   showPushBanner: boolean;
@@ -399,6 +401,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(() => {
     const saved = localStorage.getItem('zipmi_show_welcome_modal');
+    return saved === 'true';
+  });
+
+  const [showCodeOfferModal, setShowCodeOfferModal] = useState<boolean>(() => {
+    const saved = localStorage.getItem('zipmi_show_code_offer_modal');
     return saved === 'true';
   });
 
@@ -723,6 +730,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.setItem('zipmi_show_welcome_modal', String(showWelcomeModal));
   }, [showWelcomeModal]);
 
+  useEffect(() => {
+    localStorage.setItem('zipmi_show_code_offer_modal', String(showCodeOfferModal));
+  }, [showCodeOfferModal]);
+
   const addToast = (title: string, description?: string, type: ToastMessage['type'] = 'info') => {
     const id = Date.now().toString() + Math.random().toString().slice(2, 5);
     const newToast: ToastMessage = { id, title, description, type };
@@ -839,6 +850,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.removeItem('zipmi_worker_profile');
     localStorage.removeItem('zipmi_worker_docs');
     localStorage.removeItem('zipmi_show_welcome_modal');
+    localStorage.removeItem('zipmi_show_code_offer_modal');
     localStorage.removeItem('zipmi_current_tab');
     localStorage.removeItem('zipmi_onboarding_path');
     localStorage.removeItem('zipmi_confirmed_consular');
@@ -870,13 +882,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setOnboardingPath(null);
     setCurrentTab('splash');
     setShowWelcomeModal(false);
+    setShowCodeOfferModal(false);
     setSelectedJobForDetail(null);
     resetEmployerChanges();
-    addToast(
-      language === 'es' ? 'Flujo Reiniciado al Inicio' : 'Flow Reset to Start',
-      language === 'es' ? 'Regresaste a la pantalla inicial de bienvenida.' : 'Returned to initial welcome screen.',
-      'info'
-    );
+    setToasts([]);
   };
 
   const [selectedVisaType, setSelectedVisaType] = useState<'h2a' | 'h2b'>('h2a');
@@ -916,6 +925,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentTab,
         showWelcomeModal,
         setShowWelcomeModal,
+        showCodeOfferModal,
+        setShowCodeOfferModal,
         showInterviewCompletedModal,
         setShowInterviewCompletedModal,
         showPushBanner,

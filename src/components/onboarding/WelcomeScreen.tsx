@@ -2,9 +2,10 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const WelcomeScreen: React.FC = () => {
-  const { language, setCurrentTab } = useApp();
+  const { language, setCurrentTab, setOnboardingPath } = useApp();
 
   const handleSignIn = () => {
+    setOnboardingPath('invite');
     setCurrentTab('employer_code');
   };
 

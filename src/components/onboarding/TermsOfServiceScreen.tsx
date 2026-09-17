@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { VisaPathBottomSheet } from './VisaPathBottomSheet';
 
 export const TermsOfServiceScreen: React.FC = () => {
-  const { language, setCurrentTab, updateWorker, onboardingPath } = useApp();
+  const { language, setCurrentTab, updateWorker, onboardingPath, setShowWelcomeModal, setShowCodeOfferModal } = useApp();
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState<boolean>(false);
   const [showVisaBottomSheet, setShowVisaBottomSheet] = useState<boolean>(false);
 
@@ -19,7 +19,9 @@ export const TermsOfServiceScreen: React.FC = () => {
       hasSignedContract: false
     });
     if (onboardingPath === 'invite') {
-      // Path 1 ("Tengo un código de invitación"): Confirming bottom sheet takes user DIRECTLY to Home
+      // Path 1 ("Tengo un código de invitación"): Confirming bottom sheet shows CodeWelcomeOfferModal before entering Home
+      setShowWelcomeModal(false);
+      setShowCodeOfferModal(true);
       setCurrentTab('home');
     } else {
       // Path 2 ("Busco trabajo"): Proceed to eligibility bot and profile wizard steps
