@@ -1,5 +1,5 @@
-// Simple Service Worker for Zipmi Workers PWA Demo
-const CACHE_NAME = 'zipmi-workers-v1';
+// Simple Service Worker for Zipmi PWA Demo
+const CACHE_NAME = 'zipmi-v1';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
