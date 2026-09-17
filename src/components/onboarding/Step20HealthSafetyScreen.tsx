@@ -2,18 +2,33 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const Step20HealthSafetyScreen: React.FC = () => {
-  const { setCurrentTab, setShowWelcomeModal, triggerConfetti, language } = useApp();
+  const {
+    setCurrentTab,
+    setShowWelcomeModal,
+    language,
+    addToast,
+    finalQuestionsData,
+    updateFinalQuestions,
+    editingFinalQuestionFromReview,
+    setEditingFinalQuestionFromReview,
+  } = useApp();
 
   // 1. Contagious disease state
-  const [contagiousDisease, setContagiousDisease] = useState<'yes' | 'no' | null>(null);
+  const [contagiousDisease, setContagiousDisease] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.health.contagiousDisease
+  );
   const [contagiousDetails, setContagiousDetails] = useState<string>('');
 
   // 2. Dangerous physical/mental illness state
-  const [dangerousIllness, setDangerousIllness] = useState<'yes' | 'no' | null>(null);
+  const [dangerousIllness, setDangerousIllness] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.health.dangerousIllness
+  );
   const [illnessDetails, setIllnessDetails] = useState<string>('');
 
   // 3. Drug addiction state
-  const [drugAddiction, setDrugAddiction] = useState<'yes' | 'no' | null>(null);
+  const [drugAddiction, setDrugAddiction] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.health.drugAddiction
+  );
   const [drugDetails, setDrugDetails] = useState<string>('');
 
   const toggleOption = (current: 'yes' | 'no' | null, setter: (val: 'yes' | 'no' | null) => void, choice: 'yes' | 'no') => {
@@ -25,7 +40,29 @@ export const Step20HealthSafetyScreen: React.FC = () => {
   };
 
   const handleCompletePart4 = () => {
+    if (editingFinalQuestionFromReview) {
+      updateFinalQuestions({
+        health: {
+          contagiousDisease,
+          dangerousIllness,
+          drugAddiction,
+        },
+      });
+      setEditingFinalQuestionFromReview(false);
+      addToast(
+        language === 'es' ? 'Cambios guardados' : 'Changes saved',
+        language === 'es' ? 'Se guardaron los cambios correctamente.' : 'Changes have been saved successfully.',
+        'success'
+      );
+      setCurrentTab('visa_review_final_questions');
+      return;
+    }
     setCurrentTab('step21_criminal_history');
+  };
+
+  const handleCancel = () => {
+    setEditingFinalQuestionFromReview(false);
+    setCurrentTab('visa_review_final_questions');
   };
 
   const handleSelectNoForAll = () => {
@@ -38,6 +75,11 @@ export const Step20HealthSafetyScreen: React.FC = () => {
   };
 
   const handleBack = () => {
+    if (editingFinalQuestionFromReview) {
+      setEditingFinalQuestionFromReview(false);
+      setCurrentTab('visa_review_final_questions');
+      return;
+    }
     setCurrentTab('step19_social_info');
   };
 
@@ -64,16 +106,20 @@ export const Step20HealthSafetyScreen: React.FC = () => {
           </button>
 
           <span className="font-['Inter',sans-serif] font-semibold text-[15px] text-[#0038d0]">
-            {language === 'es' ? 'Preguntas Finales' : 'Final Questions'}
+            {editingFinalQuestionFromReview
+              ? (language === 'es' ? 'Modificar Salud y Seguridad' : 'Edit Health and Safety')
+              : (language === 'es' ? 'Preguntas Finales' : 'Final Questions')}
           </span>
 
           <div className="w-[40px]" />
         </div>
 
         {/* Step Progress Bar (Part 4 Step 2 of 2 - 100% complete) */}
-        <div className="w-full h-[4px] bg-[#e5e5e5]">
-          <div className="h-full bg-[#0038d0] transition-all duration-300 w-[100%]" />
-        </div>
+        {!editingFinalQuestionFromReview && (
+          <div className="w-full h-[4px] bg-[#e5e5e5]">
+            <div className="h-full bg-[#0038d0] transition-all duration-300 w-[100%]" />
+          </div>
+        )}
       </div>
 
       {/* Main Content Area */}
@@ -249,22 +295,45 @@ export const Step20HealthSafetyScreen: React.FC = () => {
       </div>
 
       {/* Fixed Bottom Action Bar */}
-      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-3">
-        <button
-          onClick={handleCompletePart4}
-          className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
-        >
-          <span>{language === 'es' ? 'Seleccionar para continuar' : 'Select to Continue'}</span>
-          <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-        </button>
+      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-2.5">
+        {editingFinalQuestionFromReview ? (
+          <>
+            <button
+              type="button"
+              onClick={handleCompletePart4}
+              className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] hover:bg-[#002bb0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{language === 'es' ? 'Guardar cambios' : 'Save changes'}</span>
+              <span className="material-symbols-outlined text-[20px]">check</span>
+            </button>
 
-        <button
-          type="button"
-          onClick={handleSelectNoForAll}
-          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
-        >
-          {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
-        </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full min-h-[44px] h-auto px-4 py-2.5 bg-white border border-[#e5e5e5] hover:bg-[#f5f5f5] active:scale-[0.98] text-[#525252] rounded-[100px] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] text-center transition-all cursor-pointer"
+            >
+              {language === 'es' ? 'Cancelar' : 'Cancel'}
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={handleCompletePart4}
+              className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{language === 'es' ? 'Seleccionar para continuar' : 'Select to Continue'}</span>
+              <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleSelectNoForAll}
+              className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
+            >
+              {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

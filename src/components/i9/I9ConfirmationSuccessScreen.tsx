@@ -2,11 +2,10 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const I9ConfirmationSuccessScreen: React.FC = () => {
-  const { language, setCurrentTab, setHasCompletedI9Review, triggerConfetti, addToast, triggerPushBanner } = useApp();
+  const { language, setCurrentTab, setHasCompletedI9Review, addToast, triggerPushBanner } = useApp();
 
   const handleGotIt = () => {
     setHasCompletedI9Review(true);
-    triggerConfetti();
     addToast(
       language === 'es' ? 'I-9 Confirmado' : 'I-9 Confirmed',
       language === 'es'

@@ -51,7 +51,7 @@ const MONTHS_DATA: MonthData[] = [
 ];
 
 export const AvailableTimesView: React.FC = () => {
-  const { language, setCurrentTab, addToast, triggerConfetti, setScheduledInterview } = useApp();
+  const { language, setCurrentTab, addToast, setScheduledInterview } = useApp();
   const [monthIndex, setMonthIndex] = useState<number>(1); // Default to April 2025 (index 1)
   const currentMonth = MONTHS_DATA[monthIndex] || MONTHS_DATA[1];
 
@@ -95,7 +95,6 @@ export const AvailableTimesView: React.FC = () => {
       time: selectedTimeSlot,
       farm: 'Sunnydale Orchards Farm'
     });
-    triggerConfetti();
     addToast(
       language === 'es' ? '¡Entrevista Programada!' : 'Interview Scheduled!',
       language === 'es'

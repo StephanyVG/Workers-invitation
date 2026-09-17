@@ -7,36 +7,80 @@ interface VisitedCountry {
 }
 
 export const Step19SocialInfoScreen: React.FC = () => {
-  const { setCurrentTab, language } = useApp();
+  const {
+    setCurrentTab,
+    language,
+    addToast,
+    finalQuestionsData,
+    updateFinalQuestions,
+    editingFinalQuestionFromReview,
+    setEditingFinalQuestionFromReview,
+  } = useApp();
 
   // 1. Military service state
-  const [militaryServed, setMilitaryServed] = useState<'yes' | 'no' | null>(null);
-  const [militaryCountry, setMilitaryCountry] = useState<string>('');
-  const [militaryBranch, setMilitaryBranch] = useState<string>('');
-  const [militaryRank, setMilitaryRank] = useState<string>('');
-  const [militarySpecialty, setMilitarySpecialty] = useState<string>('');
-  const [militaryFromDate, setMilitaryFromDate] = useState<string>('');
-  const [militaryToDate, setMilitaryToDate] = useState<string>('');
+  const [militaryServed, setMilitaryServed] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.social.militaryServed
+  );
+  const [militaryCountry, setMilitaryCountry] = useState<string>(
+    finalQuestionsData.social.militaryCountry
+  );
+  const [militaryBranch, setMilitaryBranch] = useState<string>(
+    finalQuestionsData.social.militaryBranch
+  );
+  const [militaryRank, setMilitaryRank] = useState<string>(
+    finalQuestionsData.social.militaryRank
+  );
+  const [militarySpecialty, setMilitarySpecialty] = useState<string>(
+    finalQuestionsData.social.militarySpecialty
+  );
+  const [militaryFromDate, setMilitaryFromDate] = useState<string>(
+    finalQuestionsData.social.militaryFromDate
+  );
+  const [militaryToDate, setMilitaryToDate] = useState<string>(
+    finalQuestionsData.social.militaryToDate
+  );
 
   // 2. Clan or tribe state
-  const [clanMember, setClanMember] = useState<'yes' | 'no' | null>(null);
-  const [clanName, setClanName] = useState<string>('');
+  const [clanMember, setClanMember] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.social.clanMember
+  );
+  const [clanName, setClanName] = useState<string>(
+    finalQuestionsData.social.clanName || ''
+  );
 
   // 3. Travel history state
-  const [traveledCountries, setTraveledCountries] = useState<'yes' | 'no' | null>(null);
-  const [visitedCountries, setVisitedCountries] = useState<VisitedCountry[]>([{ id: 1, country: '' }]);
+  const [traveledCountries, setTraveledCountries] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.social.traveledCountries
+  );
+  const [visitedCountries, setVisitedCountries] = useState<VisitedCountry[]>(
+    finalQuestionsData.social.visitedCountries && finalQuestionsData.social.visitedCountries.length > 0
+      ? finalQuestionsData.social.visitedCountries
+      : [{ id: 1, country: '' }]
+  );
 
   // 4. Groups/Clubs state
-  const [belongedGroups, setBelongedGroups] = useState<'yes' | 'no' | null>(null);
-  const [organizationName, setOrganizationName] = useState<string>('');
+  const [belongedGroups, setBelongedGroups] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.social.belongedGroups
+  );
+  const [organizationName, setOrganizationName] = useState<string>(
+    finalQuestionsData.social.organizationName || ''
+  );
 
   // 5. Weapons training state
-  const [weaponsTraining, setWeaponsTraining] = useState<'yes' | 'no' | null>(null);
-  const [weaponsDetails, setWeaponsDetails] = useState<string>('');
+  const [weaponsTraining, setWeaponsTraining] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.social.weaponsTraining
+  );
+  const [weaponsDetails, setWeaponsDetails] = useState<string>(
+    finalQuestionsData.social.weaponsDetails || ''
+  );
 
   // 6. Rebel group state
-  const [rebelGroup, setRebelGroup] = useState<'yes' | 'no' | null>(null);
-  const [rebelDetails, setRebelDetails] = useState<string>('');
+  const [rebelGroup, setRebelGroup] = useState<'yes' | 'no' | null>(
+    finalQuestionsData.social.rebelGroup
+  );
+  const [rebelDetails, setRebelDetails] = useState<string>(
+    finalQuestionsData.social.rebelDetails || ''
+  );
 
   const toggleOption = (current: 'yes' | 'no' | null, setter: (val: 'yes' | 'no' | null) => void, choice: 'yes' | 'no') => {
     if (current === choice) {
@@ -61,7 +105,43 @@ export const Step19SocialInfoScreen: React.FC = () => {
   };
 
   const handleContinue = () => {
+    if (editingFinalQuestionFromReview) {
+      updateFinalQuestions({
+        social: {
+          militaryServed,
+          militaryCountry,
+          militaryBranch,
+          militaryRank,
+          militarySpecialty,
+          militaryFromDate,
+          militaryToDate,
+          traveledCountries,
+          visitedCountries,
+          clanMember,
+          clanName,
+          belongedGroups,
+          organizationName,
+          weaponsTraining,
+          weaponsDetails,
+          rebelGroup,
+          rebelDetails,
+        },
+      });
+      setEditingFinalQuestionFromReview(false);
+      addToast(
+        language === 'es' ? 'Cambios guardados' : 'Changes saved',
+        language === 'es' ? 'Se guardaron los cambios correctamente.' : 'Changes have been saved successfully.',
+        'success'
+      );
+      setCurrentTab('visa_review_final_questions');
+      return;
+    }
     setCurrentTab('step20_health_safety');
+  };
+
+  const handleCancel = () => {
+    setEditingFinalQuestionFromReview(false);
+    setCurrentTab('visa_review_final_questions');
   };
 
   const handleSelectNoForAll = () => {
@@ -77,6 +157,11 @@ export const Step19SocialInfoScreen: React.FC = () => {
   };
 
   const handleBack = () => {
+    if (editingFinalQuestionFromReview) {
+      setEditingFinalQuestionFromReview(false);
+      setCurrentTab('visa_review_final_questions');
+      return;
+    }
     setCurrentTab('step18_part4_intro');
   };
 
@@ -117,16 +202,20 @@ export const Step19SocialInfoScreen: React.FC = () => {
           </button>
 
           <span className="font-['Inter',sans-serif] font-semibold text-[15px] text-[#0038d0]">
-            {language === 'es' ? 'Preguntas Finales' : 'Final Questions'}
+            {editingFinalQuestionFromReview
+              ? (language === 'es' ? 'Modificar Información Social' : 'Edit Social Information')
+              : (language === 'es' ? 'Preguntas Finales' : 'Final Questions')}
           </span>
 
           <div className="w-[40px]" />
         </div>
 
         {/* Step Progress Bar (Part 4 Step 1 of 2) */}
-        <div className="w-full h-[4px] bg-[#e5e5e5]">
-          <div className="h-full bg-[#0038d0] transition-all duration-300 w-[50%]" />
-        </div>
+        {!editingFinalQuestionFromReview && (
+          <div className="w-full h-[4px] bg-[#e5e5e5]">
+            <div className="h-full bg-[#0038d0] transition-all duration-300 w-[50%]" />
+          </div>
+        )}
       </div>
 
       {/* Main Content Area */}
@@ -588,22 +677,45 @@ export const Step19SocialInfoScreen: React.FC = () => {
       </div>
 
       {/* Fixed Bottom Action Bar */}
-      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-3">
-        <button
-          onClick={handleContinue}
-          className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
-        >
-          <span>{language === 'es' ? 'Seleccionar para continuar' : 'Select to Continue'}</span>
-          <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-        </button>
+      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-2.5">
+        {editingFinalQuestionFromReview ? (
+          <>
+            <button
+              type="button"
+              onClick={handleContinue}
+              className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] hover:bg-[#002bb0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{language === 'es' ? 'Guardar cambios' : 'Save changes'}</span>
+              <span className="material-symbols-outlined text-[20px]">check</span>
+            </button>
 
-        <button
-          type="button"
-          onClick={handleSelectNoForAll}
-          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
-        >
-          {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
-        </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full min-h-[44px] h-auto px-4 py-2.5 bg-white border border-[#e5e5e5] hover:bg-[#f5f5f5] active:scale-[0.98] text-[#525252] rounded-[100px] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] text-center transition-all cursor-pointer"
+            >
+              {language === 'es' ? 'Cancelar' : 'Cancel'}
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={handleContinue}
+              className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{language === 'es' ? 'Seleccionar para continuar' : 'Select to Continue'}</span>
+              <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleSelectNoForAll}
+              className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
+            >
+              {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

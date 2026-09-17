@@ -6,13 +6,8 @@ export const InformationSentConfirmationScreen: React.FC = () => {
     language,
     setCurrentTab,
     setEmployerVisaChangesReviewed,
-    triggerConfetti,
     addToast,
   } = useApp();
-
-  useEffect(() => {
-    triggerConfetti();
-  }, [triggerConfetti]);
 
   const handleReturnHome = () => {
     setEmployerVisaChangesReviewed(true);

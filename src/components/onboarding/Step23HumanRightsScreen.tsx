@@ -2,13 +2,21 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const Step23HumanRightsScreen: React.FC = () => {
-  const { language, setCurrentTab } = useApp();
+  const {
+    language,
+    setCurrentTab,
+    addToast,
+    finalQuestionsData,
+    updateFinalQuestions,
+    editingFinalQuestionFromReview,
+    setEditingFinalQuestionFromReview,
+  } = useApp();
 
-  const [q1, setQ1] = useState<'yes' | 'no' | null>(null);
-  const [q2, setQ2] = useState<'yes' | 'no' | null>(null);
-  const [q3, setQ3] = useState<'yes' | 'no' | null>(null);
-  const [q4, setQ4] = useState<'yes' | 'no' | null>(null);
-  const [q5, setQ5] = useState<'yes' | 'no' | null>(null);
+  const [q1, setQ1] = useState<'yes' | 'no' | null>(finalQuestionsData.humanRights.q1);
+  const [q2, setQ2] = useState<'yes' | 'no' | null>(finalQuestionsData.humanRights.q2);
+  const [q3, setQ3] = useState<'yes' | 'no' | null>(finalQuestionsData.humanRights.q3);
+  const [q4, setQ4] = useState<'yes' | 'no' | null>(finalQuestionsData.humanRights.q4);
+  const [q5, setQ5] = useState<'yes' | 'no' | null>(finalQuestionsData.humanRights.q5);
 
   const toggleYesNo = (
     currentVal: 'yes' | 'no' | null,
@@ -19,7 +27,25 @@ export const Step23HumanRightsScreen: React.FC = () => {
   };
 
   const handleContinue = () => {
+    if (editingFinalQuestionFromReview) {
+      updateFinalQuestions({
+        humanRights: { q1, q2, q3, q4, q5 },
+      });
+      setEditingFinalQuestionFromReview(false);
+      addToast(
+        language === 'es' ? 'Cambios guardados' : 'Changes saved',
+        language === 'es' ? 'Se guardaron los cambios correctamente.' : 'Changes have been saved successfully.',
+        'success'
+      );
+      setCurrentTab('visa_review_final_questions');
+      return;
+    }
     setCurrentTab('step24_immigration_legal');
+  };
+
+  const handleCancel = () => {
+    setEditingFinalQuestionFromReview(false);
+    setCurrentTab('visa_review_final_questions');
   };
 
   const handleSelectNoForAll = () => {
@@ -34,6 +60,11 @@ export const Step23HumanRightsScreen: React.FC = () => {
   };
 
   const handleBack = () => {
+    if (editingFinalQuestionFromReview) {
+      setEditingFinalQuestionFromReview(false);
+      setCurrentTab('visa_review_final_questions');
+      return;
+    }
     setCurrentTab('step22_security_terrorism');
   };
 
@@ -60,16 +91,20 @@ export const Step23HumanRightsScreen: React.FC = () => {
           </button>
 
           <span className="font-['Inter',sans-serif] font-semibold text-[15px] text-[#0038d0]">
-            {language === 'es' ? 'Preguntas Finales' : 'Final Questions'}
+            {editingFinalQuestionFromReview
+              ? (language === 'es' ? 'Modificar Derechos Humanos' : 'Edit Human Rights')
+              : (language === 'es' ? 'Preguntas Finales' : 'Final Questions')}
           </span>
 
           <div className="w-[40px]" />
         </div>
 
         {/* Step Progress Bar (60% progress into Final Questions sequence) */}
-        <div className="w-full h-[4px] bg-[#e5e5e5]">
-          <div className="h-full bg-[#0038d0] transition-all duration-300 w-[60%]" />
-        </div>
+        {!editingFinalQuestionFromReview && (
+          <div className="w-full h-[4px] bg-[#e5e5e5]">
+            <div className="h-full bg-[#0038d0] transition-all duration-300 w-[60%]" />
+          </div>
+        )}
       </div>
 
       {/* Main Scrollable Content */}
@@ -208,22 +243,45 @@ export const Step23HumanRightsScreen: React.FC = () => {
       </div>
 
       {/* Sticky Bottom Action Bar */}
-      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-3 shrink-0">
-        <button
-          onClick={handleContinue}
-          className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
-        >
-          <span>{language === 'es' ? 'Seleccionar para continuar' : 'Select to Continue'}</span>
-          <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-        </button>
+      <div className="fixed-bottom-bar w-full flex flex-col items-center gap-2.5 shrink-0">
+        {editingFinalQuestionFromReview ? (
+          <>
+            <button
+              type="button"
+              onClick={handleContinue}
+              className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] hover:bg-[#002bb0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{language === 'es' ? 'Guardar cambios' : 'Save changes'}</span>
+              <span className="material-symbols-outlined text-[20px]">check</span>
+            </button>
 
-        <button
-          type="button"
-          onClick={handleSelectNoForAll}
-          className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
-        >
-          {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
-        </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full min-h-[44px] h-auto px-4 py-2.5 bg-white border border-[#e5e5e5] hover:bg-[#f5f5f5] active:scale-[0.98] text-[#525252] rounded-[100px] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] text-center transition-all cursor-pointer"
+            >
+              {language === 'es' ? 'Cancelar' : 'Cancel'}
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={handleContinue}
+              className="w-full min-h-[48px] h-auto px-4 py-3 bg-[#0038d0] active:scale-[0.98] text-[#f5f5f5] rounded-[100px] font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] text-center shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <span>{language === 'es' ? 'Seleccionar para continuar' : 'Select to Continue'}</span>
+              <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleSelectNoForAll}
+              className="text-[#0038d0] font-['Inter',sans-serif] font-medium text-[15px] leading-[20px] hover:underline cursor-pointer py-1 text-center"
+            >
+              {language === 'es' ? 'Seleccionar "No" para todo' : 'Select "No" for all'}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

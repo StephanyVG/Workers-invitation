@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const Step17WorkExperienceScreen: React.FC = () => {
-  const { language, setCurrentTab, setShowWelcomeModal, triggerConfetti } = useApp();
+  const { language, setCurrentTab, setShowWelcomeModal } = useApp();
 
   // Form Fields State (Figma Node 1:5156)
   const [companyName, setCompanyName] = useState<string>('');

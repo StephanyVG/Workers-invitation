@@ -1,7 +1,122 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { WorkerProfile, JobOffer, DocumentInfo, ToastMessage, ApplicationStatusStage } from '../types';
 import { INITIAL_WORKER_PROFILE, MOCK_JOBS, INITIAL_DOCUMENTS } from '../data/mockData';
-import confetti from 'canvas-confetti';
+export interface FinalQuestionsData {
+  social: {
+    militaryServed: 'yes' | 'no' | null;
+    militaryCountry: string;
+    militaryBranch: string;
+    militaryRank: string;
+    militarySpecialty: string;
+    militaryFromDate: string;
+    militaryToDate: string;
+    traveledCountries: 'yes' | 'no' | null;
+    visitedCountries: Array<{ id: number; country: string }>;
+    clanMember: 'yes' | 'no' | null;
+    clanName?: string;
+    belongedGroups: 'yes' | 'no' | null;
+    organizationName?: string;
+    weaponsTraining: 'yes' | 'no' | null;
+    weaponsDetails?: string;
+    rebelGroup: 'yes' | 'no' | null;
+    rebelDetails?: string;
+  };
+  health: {
+    contagiousDisease: 'yes' | 'no' | null;
+    dangerousIllness: 'yes' | 'no' | null;
+    drugAddiction: 'yes' | 'no' | null;
+  };
+  criminal: {
+    q1: 'yes' | 'no' | null;
+    q2: 'yes' | 'no' | null;
+    q3: 'yes' | 'no' | null;
+    q4: 'yes' | 'no' | null;
+    q5: 'yes' | 'no' | null;
+    q6: 'yes' | 'no' | null;
+    q7: 'yes' | 'no' | null;
+  };
+  security: {
+    q1: 'yes' | 'no' | null;
+    q2: 'yes' | 'no' | null;
+    q3: 'yes' | 'no' | null;
+    q4: 'yes' | 'no' | null;
+    q5: 'yes' | 'no' | null;
+  };
+  humanRights: {
+    q1: 'yes' | 'no' | null;
+    q2: 'yes' | 'no' | null;
+    q3: 'yes' | 'no' | null;
+    q4: 'yes' | 'no' | null;
+    q5: 'yes' | 'no' | null;
+  };
+  immigration: {
+    q1: 'yes' | 'no' | null;
+    q2: 'yes' | 'no' | null;
+    q3: 'yes' | 'no' | null;
+    q4: 'yes' | 'no' | null;
+    q5: 'yes' | 'no' | null;
+    q6: 'yes' | 'no' | null;
+    q7: 'yes' | 'no' | null;
+  };
+}
+
+export const INITIAL_FINAL_QUESTIONS: FinalQuestionsData = {
+  social: {
+    militaryServed: 'yes',
+    militaryCountry: 'USA',
+    militaryBranch: 'Branch of service',
+    militaryRank: 'Rank/Position',
+    militarySpecialty: 'Military Speciality',
+    militaryFromDate: 'MM/YYYY',
+    militaryToDate: 'MM/YYYY',
+    traveledCountries: 'yes',
+    visitedCountries: [
+      { id: 1, country: 'USA' },
+      { id: 2, country: 'Panamá' },
+    ],
+    clanMember: 'no',
+    belongedGroups: 'no',
+    weaponsTraining: 'no',
+    rebelGroup: 'no',
+  },
+  health: {
+    contagiousDisease: 'no',
+    dangerousIllness: 'no',
+    drugAddiction: 'no',
+  },
+  criminal: {
+    q1: 'no',
+    q2: 'no',
+    q3: 'no',
+    q4: 'no',
+    q5: 'no',
+    q6: 'no',
+    q7: 'no',
+  },
+  security: {
+    q1: 'no',
+    q2: 'no',
+    q3: 'no',
+    q4: 'no',
+    q5: 'no',
+  },
+  humanRights: {
+    q1: 'no',
+    q2: 'no',
+    q3: 'no',
+    q4: 'no',
+    q5: 'no',
+  },
+  immigration: {
+    q1: 'no',
+    q2: 'no',
+    q3: 'no',
+    q4: 'no',
+    q5: 'no',
+    q6: 'no',
+    q7: 'no',
+  },
+};
 
 export type AppTab = 
   | 'splash'
@@ -349,6 +464,10 @@ interface AppContextType {
   onboardingPath: 'invite' | 'search' | null;
   setOnboardingPath: (path: 'invite' | 'search' | null) => void;
   triggerConfetti: () => void;
+  finalQuestionsData: FinalQuestionsData;
+  updateFinalQuestions: (updated: Partial<FinalQuestionsData>) => void;
+  editingFinalQuestionFromReview: boolean;
+  setEditingFinalQuestionFromReview: React.Dispatch<React.SetStateAction<boolean>>;
   visaReviewSection: number;
   setVisaReviewSection: (section: number) => void;
   hasEmployerVisaChanges: boolean;
@@ -395,8 +514,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : INITIAL_DOCUMENTS;
   });
 
-  // Always force first screen to 'splash' on initial application load
-  const [currentTab, setCurrentTab] = useState<AppTab>('splash');
+  // Preserve current screen across browser refreshes
+  const [currentTab, setCurrentTab] = useState<AppTab>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab') as AppTab;
+    if (tab) return tab;
+    const saved = localStorage.getItem('zipmi_current_tab') as AppTab;
+    return saved || 'splash';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('zipmi_current_tab', currentTab);
+  }, [currentTab]);
 
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
   const [showCodeOfferModal, setShowCodeOfferModal] = useState<boolean>(false);
@@ -669,7 +798,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const submitAllRefunds = () => {
     setRefundsProgress((prev) => ({ ...prev, submitted: true, status: 'pending' }));
-    triggerConfetti();
     addToast(
       language === 'es' ? 'Reembolsos Enviados' : 'Refunds Submitted',
       language === 'es'
@@ -740,15 +868,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const triggerConfetti = () => {
-    try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-    } catch (e) {
-      console.log('Confetti effect fired');
-    }
+    // Confetti animation disabled
+  };
+
+  const [finalQuestionsData, setFinalQuestionsData] = useState<FinalQuestionsData>(() => {
+    const saved = localStorage.getItem('zipmi_final_questions');
+    return saved ? JSON.parse(saved) : INITIAL_FINAL_QUESTIONS;
+  });
+
+  const [editingFinalQuestionFromReview, setEditingFinalQuestionFromReview] = useState<boolean>(false);
+
+  const updateFinalQuestions = (updated: Partial<FinalQuestionsData>) => {
+    setFinalQuestionsData((prev) => {
+      const next = { ...prev, ...updated };
+      localStorage.setItem('zipmi_final_questions', JSON.stringify(next));
+      return next;
+    });
   };
 
   const updateWorker = (updated: Partial<WorkerProfile>) => {
@@ -762,7 +897,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       appliedJobId: jobId,
       status: 'revision_documentos'
     }));
-    triggerConfetti();
     addToast(
       language === 'es' ? '¡Solicitud Enviada!' : 'Application Sent!',
       language === 'es' 
@@ -798,7 +932,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       signatureUrl,
       status: 'visa_aprobada'
     }));
-    triggerConfetti();
     addToast(
       language === 'es' ? '¡Contrato Firmado!' : 'Contract Signed!',
       language === 'es'
@@ -822,7 +955,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (currentIndex < STAGES_ORDER.length - 1) {
       const nextStage = STAGES_ORDER[currentIndex + 1];
       setWorker((prev) => ({ ...prev, status: nextStage }));
-      triggerConfetti();
       addToast(
         language === 'es' ? '¡Avanzaste en tu Proceso!' : 'Stage Advanced!',
         language === 'es' ? 'El equipo de Zipmi actualizó tu estado.' : 'Zipmi team updated your status.',
@@ -870,7 +1002,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setRefundCameraTarget(null);
     setWorker(INITIAL_WORKER_PROFILE);
     setDocuments(INITIAL_DOCUMENTS);
-    setOnboardingPath(null);
+    localStorage.removeItem('zipmi_current_tab');
+    localStorage.removeItem('zipmi_final_questions');
+    setFinalQuestionsData(INITIAL_FINAL_QUESTIONS);
+    setEditingFinalQuestionFromReview(false);
     setCurrentTab('splash');
     setShowWelcomeModal(false);
     setShowCodeOfferModal(false);
@@ -981,6 +1116,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         onboardingPath,
         setOnboardingPath,
         triggerConfetti,
+        finalQuestionsData,
+        updateFinalQuestions,
+        editingFinalQuestionFromReview,
+        setEditingFinalQuestionFromReview,
         visaReviewSection,
         setVisaReviewSection,
         hasEmployerVisaChanges,
