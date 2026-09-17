@@ -5,8 +5,11 @@
 @layer base {
   :root {
     --vh: 1vh;
-    --app-width: 375px;
-    --app-height: 812px;
+    --app-width: 390px;
+    --app-height: 844px;
+    --scale: min(calc(100dvh / 844), calc(100vw / 390), calc(100vh / 844));
+    --app-h: calc(844px * var(--scale, 1));
+    --app-w: calc(390px * var(--scale, 1));
   }
 
   html, body {
