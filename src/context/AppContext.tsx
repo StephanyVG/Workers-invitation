@@ -119,6 +119,9 @@ export const INITIAL_FINAL_QUESTIONS: FinalQuestionsData = {
 };
 
 export type AppTab = 
+  | 'phone_lockscreen'
+  | 'sms_invitation'
+  | 'play_store'
   | 'splash'
   | 'language'
   | 'welcome'
@@ -523,7 +526,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (saved && saved.startsWith('visa_employer_change')) {
       return 'home';
     }
-    return saved || 'splash';
+    return saved || 'phone_lockscreen';
   });
 
   useEffect(() => {
@@ -1009,7 +1012,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.removeItem('zipmi_final_questions');
     setFinalQuestionsData(INITIAL_FINAL_QUESTIONS);
     setEditingFinalQuestionFromReview(false);
-    setCurrentTab('splash');
+    setCurrentTab('phone_lockscreen');
     setShowWelcomeModal(false);
     setShowCodeOfferModal(false);
     setSelectedJobForDetail(null);

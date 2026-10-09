@@ -12,7 +12,6 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
   const [q5, setQ5] = useState<'yes' | 'no' | null>(null);
   const [q6, setQ6] = useState<'yes' | 'no' | null>(null);
   const [q7, setQ7] = useState<'yes' | 'no' | null>(null);
-  const [q8, setQ8] = useState<'yes' | 'no' | null>(null);
   const [q9, setQ9] = useState<'no' | 'family' | 'agent' | null>(null);
   const [q10, setQ10] = useState<'yes' | 'no' | null>(null);
   const [q11, setQ11] = useState<'yes' | 'no' | null>(null);
@@ -653,36 +652,6 @@ export const Step4BackgroundSurveyScreen: React.FC = () => {
             </div>
           </div>
 
-          {/* Question 8 */}
-          <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">
-            <h2 className="font-['DM_Sans',sans-serif] font-bold text-[20px] leading-[28px] text-[#171717] tracking-[-0.08px]">
-              {language === 'es'
-                ? '¿Alguien ha solicitado alguna vez una Green Card de EE. UU. para ti?'
-                : 'Has anyone ever applied for a U.S. green card for you?'}
-            </h2>
-            <div className="flex gap-3 w-full">
-              <button
-                type="button"
-                onClick={() => toggleYesNo(q8, setQ8, 'yes')}
-                className={q8 === 'yes'
-                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
-                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
-                }
-              >
-                {language === 'es' ? 'Sí' : 'Yes'}
-              </button>
-              <button
-                type="button"
-                onClick={() => toggleYesNo(q8, setQ8, 'no')}
-                className={q8 === 'no'
-                  ? 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-[#0045ff] text-white shadow-[0px_0px_12px_rgba(4,71,255,0.4)] border border-[#0045ff]'
-                  : 'flex-1 min-h-[48px] px-4 py-3 rounded-[12px] font-["Inter",sans-serif] font-medium text-[16px] leading-[22px] flex items-center justify-center transition-all cursor-pointer bg-white border border-[#d4d4d4] text-[#171717] hover:border-[#0045ff]'
-                }
-              >
-                No
-              </button>
-            </div>
-          </div>
 
           {/* Question 9 - 3 Stacked Options */}
           <div className="bg-white border border-[#e5e5e5] rounded-[16px] p-5 shadow-2xs space-y-4 text-left">

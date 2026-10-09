@@ -8,6 +8,9 @@ import { DocumentsView } from './views/DocumentsView';
 import { ProfileView } from './views/ProfileView';
 import { CalendarView } from './views/CalendarView';
 import { MultiStepRegistration } from './components/workflow/MultiStepRegistration';
+import { PhoneLockScreen } from './components/onboarding/PhoneLockScreen';
+import { SmsInvitationScreen } from './components/onboarding/SmsInvitationScreen';
+import { GooglePlayStoreScreen } from './components/onboarding/GooglePlayStoreScreen';
 import { SplashScreen } from './components/onboarding/SplashScreen';
 import { LanguageSelectScreen } from './components/onboarding/LanguageSelectScreen';
 import { WelcomeScreen } from './components/onboarding/WelcomeScreen';
@@ -129,6 +132,9 @@ const MainContent: React.FC = () => {
   const { currentTab, showWelcomeModal, showCodeOfferModal, showInterviewCompletedModal } = useApp();
 
   const isOnboardingTab = [
+    'phone_lockscreen',
+    'sms_invitation',
+    'play_store',
     'splash',
     'language',
     'welcome',
@@ -230,6 +236,11 @@ const MainContent: React.FC = () => {
   return (
     <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative w-full h-full">
       <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
+        {/* Mobile Lockscreen, SMS Simulation & Google Play Store */}
+        {currentTab === 'phone_lockscreen' && <PhoneLockScreen />}
+        {currentTab === 'sms_invitation' && <SmsInvitationScreen />}
+        {currentTab === 'play_store' && <GooglePlayStoreScreen />}
+
         {/* Figma Onboarding Screens */}
         {currentTab === 'splash' && <SplashScreen />}
         {currentTab === 'language' && <LanguageSelectScreen />}

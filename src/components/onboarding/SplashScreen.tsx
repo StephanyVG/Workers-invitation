@@ -14,7 +14,7 @@ export const SplashScreen: React.FC = () => {
   return (
     <div
       onClick={() => setCurrentTab('language')}
-      className="bg-white overflow-hidden relative flex-1 w-full flex flex-col items-center justify-center cursor-pointer select-none p-6"
+      className="bg-white overflow-hidden relative flex-1 w-full flex flex-col items-center justify-center cursor-pointer select-none p-6 animate-app-switch-enter"
       data-node-id="3645:34617"
     >
       <div className="flex flex-col items-center gap-4 animate-fadeIn">

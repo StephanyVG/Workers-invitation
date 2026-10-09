@@ -45,7 +45,7 @@ export const MobileContainer: React.FC<MobileContainerProps> = ({ children }) =>
       <button
         onClick={resetDemoData}
         className="fixed top-3 right-3 z-50 bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 hover:text-[#0038d0] hover:border-[#0038d0] px-3 py-1.5 rounded-full font-['Inter',sans-serif] font-medium text-xs shadow-lg flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all duration-150 select-none"
-        title="Reset flow from the start (Splash)"
+        title="Reset flow from the start (Lock Screen)"
       >
         <span className="material-symbols-outlined text-[16px]">refresh</span>
         <span>Reset flow</span>
