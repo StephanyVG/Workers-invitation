@@ -16,13 +16,14 @@ export const TermsOfServiceScreen: React.FC = () => {
     setShowVisaBottomSheet(false);
     updateWorker({
       status: 'revision_documentos',
-      hasSignedContract: false
+      hasSignedContract: false,
+      appliedJobId: '1'
     });
     if (onboardingPath === 'invite') {
-      // Path 1 ("Tengo un código de invitación"): Confirming bottom sheet shows CodeWelcomeOfferModal before entering Home
+      // Path 1 ("Tengo un código de invitación"): Takes user directly to the job details screen before the job offer!
       setShowWelcomeModal(false);
-      setShowCodeOfferModal(true);
-      setCurrentTab('home');
+      setShowCodeOfferModal(false);
+      setCurrentTab('job_details');
     } else {
       // Path 2 ("Busco trabajo"): Proceed to eligibility bot and profile wizard steps
       setCurrentTab('h2_intro');

@@ -2,12 +2,11 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const JobInvitationDetailScreen: React.FC = () => {
-  const { language, setCurrentTab, addToast, updateWorker } = useApp();
+  const { language, setCurrentTab, addToast, updateWorker, onboardingPath } = useApp();
 
-  const handleAcceptInvitation = () => {
-    // Transition worker towards interview pending and show confirmation screen (Figma node 631:28567)
-    updateWorker({ status: 'entrevista' });
-    setCurrentTab('job_invitation_accepted');
+  const handleSeeJobOffer = () => {
+    updateWorker({ appliedJobId: '1' });
+    setCurrentTab('job_offer_detail');
   };
 
   const handleDeclineJob = () => {
@@ -19,6 +18,14 @@ export const JobInvitationDetailScreen: React.FC = () => {
       'info'
     );
     setCurrentTab('home');
+  };
+
+  const handleBack = () => {
+    if (onboardingPath === 'invite') {
+      setCurrentTab('terms_service');
+    } else {
+      setCurrentTab('home');
+    }
   };
 
   return (
@@ -45,7 +52,7 @@ export const JobInvitationDetailScreen: React.FC = () => {
 
           {/* Circular Back Button (Figma node 631:28678) */}
           <button
-            onClick={() => setCurrentTab('home')}
+            onClick={handleBack}
             className="absolute top-4 left-4 z-20 bg-[#fafafa]/95 hover:bg-white border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-md active:scale-95 transition-all cursor-pointer"
             aria-label={language === 'es' ? 'Regresar' : 'Back'}
             data-node-id="631:28678"
@@ -250,13 +257,13 @@ export const JobInvitationDetailScreen: React.FC = () => {
         data-node-id="631:28673"
       >
         <div className="w-full flex flex-col gap-[12px] items-center px-[16px] pt-[12px] pb-[16px]">
-          {/* Primary Action Button: Accept invitation (Figma node 631:28675) */}
+          {/* Primary Action Button: See job offer (Figma node 631:28675) */}
           <button
-            onClick={handleAcceptInvitation}
+            onClick={handleSeeJobOffer}
             className="w-full bg-[#0038d0] border border-[#2874ff] hover:bg-[#0030b3] active:scale-[0.98] drop-shadow-[0px_1px_1px_rgba(0,0,0,0.09)] flex items-center justify-center min-h-[44px] px-[16px] py-[10px] rounded-[100px] text-[#f5f5f5] font-semibold text-[16px] leading-[22px] transition-all cursor-pointer"
             data-node-id="631:28675"
           >
-            {language === 'es' ? 'Aceptar invitación' : 'Accept invitation'}
+            {language === 'es' ? 'Ver oferta de trabajo' : 'See job offer'}
           </button>
 
           {/* Ghost Action Button: I don't want this job (Figma node 631:28676) */}
