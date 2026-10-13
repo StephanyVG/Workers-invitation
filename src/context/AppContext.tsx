@@ -402,6 +402,7 @@ interface AppContextType {
   welcomeModalStep: 1 | 2;
   setWelcomeModalStep: (step: 1 | 2) => void;
   dismissWelcomeModalAndQueueOffer: () => void;
+  queueJobOfferModal: (delayMs?: number) => void;
   showCodeOfferModal: boolean;
   setShowCodeOfferModal: (show: boolean) => void;
   showInterviewCompletedModal: boolean;
@@ -517,33 +518,40 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : INITIAL_DOCUMENTS;
   });
 
-  // Always start at phone_lockscreen on local launch so the SMS invitation flow is always shown
+  // Restore currentTab from localStorage across reloads, defaulting to phone_lockscreen on first visit
   const [currentTab, setCurrentTab] = useState<AppTab>(() => {
     const params = new URLSearchParams(window.location.search);
     const tab = params.get('tab') as AppTab;
     if (tab) return tab;
+    const saved = localStorage.getItem('zipmi_current_tab') as AppTab;
+    if (saved) return saved;
     return 'phone_lockscreen';
   });
 
-  // Clear any previously persisted tab and screening questions so reopening local always starts fresh
+  // Persist currentTab whenever it changes so page refresh keeps user on current screen
   useEffect(() => {
     try {
-      localStorage.removeItem('zipmi_current_tab');
-      localStorage.removeItem('zipmi_final_questions');
+      if (currentTab) {
+        localStorage.setItem('zipmi_current_tab', currentTab);
+      }
     } catch {
       // ignore
     }
-  }, []);
+  }, [currentTab]);
 
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
-  const [welcomeModalStep, setWelcomeModalStep] = useState<1 | 2>(1);
+  const [welcomeModalStep, setWelcomeModalStep] = useState<1 | 2>(2);
+
+  const queueJobOfferModal = (delayMs: number = 2000) => {
+    setShowWelcomeModal(false);
+    setWelcomeModalStep(2);
+    setTimeout(() => {
+      setShowWelcomeModal(true);
+    }, delayMs);
+  };
 
   const dismissWelcomeModalAndQueueOffer = () => {
-    setShowWelcomeModal(false);
-    setTimeout(() => {
-      setWelcomeModalStep(2);
-      setShowWelcomeModal(true);
-    }, 2000);
+    queueJobOfferModal(2000);
   };
 
   const [showCodeOfferModal, setShowCodeOfferModal] = useState<boolean>(false);
@@ -1069,6 +1077,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         welcomeModalStep,
         setWelcomeModalStep,
         dismissWelcomeModalAndQueueOffer,
+        queueJobOfferModal,
         showCodeOfferModal,
         setShowCodeOfferModal,
         showInterviewCompletedModal,

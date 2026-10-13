@@ -7,9 +7,7 @@ export const HomeView: React.FC = () => {
     worker,
     language,
     setCurrentTab,
-    scheduledInterview,
     addToast,
-    setSelectedAppointmentDetail,
     hasConfirmedConsularDetails,
     isVisaApprovedConfirmed,
     setIsVisaApprovedConfirmed,
@@ -86,24 +84,6 @@ export const HomeView: React.FC = () => {
       }
     }
   }, [hasArrivedAtJob, hasCompletedI9Review, showYellowI9Card, showPushBanner, language, triggerPushBanner]);
-
-  const isScheduled = !!scheduledInterview;
-  const interviewDate = scheduledInterview?.date || '11 Apr';
-  const interviewTime = scheduledInterview?.time || '12:00 - 13:00';
-  const interviewFarm = scheduledInterview?.farm || 'Sunnydale Orchards Farm';
-
-  const handleOpenAppointmentBottomSheet = () => {
-    setSelectedAppointmentDetail({
-      date: interviewDate,
-      time: interviewTime,
-      farm: interviewFarm
-    });
-  };
-
-  const handleJoinCall = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentTab('video_loader');
-  };
 
   if (worker.status === 'oferta_firmada') {
     return (
@@ -1166,58 +1146,6 @@ export const HomeView: React.FC = () => {
       </div>
 
       <div className="flex-1 flex flex-col space-y-[24px]" data-node-id="1004:5288">
-        {/* Section 1: Upcoming Appointments (Figma Node 1004:5289) */}
-        {isScheduled && (
-          <div
-            className="bg-white border border-[#e5e5e5] rounded-[24px] p-[16px] space-y-[16px] shadow-sm"
-            data-node-id="1004:5289"
-          >
-            <h2
-              className="font-['DM_Sans',sans-serif] font-semibold text-[20px] leading-[28px] text-[#0038d0] tracking-[-0.08px]"
-              data-node-id="1004:5292"
-            >
-              {language === 'es' ? 'Próximas Citas' : 'Upcoming Appointments'}
-            </h2>
-
-            {/* Event Card (1004:5293) */}
-            <div
-              onClick={handleOpenAppointmentBottomSheet}
-              className="border border-[#e5e5e5] rounded-[8px] p-[16px] pl-[8px] flex gap-[12px] items-center cursor-pointer hover:border-[#0038d0]/30 transition-colors"
-              data-node-id="1004:5293"
-            >
-              <div className="bg-[#2874ff] w-[3px] rounded-[12px] self-stretch shrink-0" data-node-id="1004:5294" />
-
-              <div className="flex-1 flex flex-col gap-[16px]" data-node-id="1004:5295">
-                <div className="flex flex-col gap-[8px]" data-node-id="1004:5296">
-                  <div className="flex items-center justify-between" data-node-id="1004:5297">
-                    <span className="font-semibold text-[16px] text-[#171717]">
-                      {interviewDate}
-                    </span>
-                    <span className="font-normal text-[14px] text-[#404040]">
-                      {interviewTime}
-                    </span>
-                  </div>
-                  <p className="font-semibold text-[14px] leading-[18px] text-[#171717] tracking-[-0.028px]">
-                    {language === 'es'
-                      ? `Entrevista con ${interviewFarm}`
-                      : `Interview with ${interviewFarm}`}
-                  </p>
-                </div>
-
-                {/* Join Action Button */}
-                <button
-                  onClick={handleJoinCall}
-                  className="bg-[#d3efff] hover:bg-[#b0deff] text-[#0045ff] rounded-full h-[32px] px-[12px] flex items-center justify-center gap-[6px] font-semibold text-[12px] leading-[16px] cursor-pointer active:scale-[0.98] transition-all shadow-xs w-full"
-                  data-node-id="1004:5302"
-                >
-                  <span className="material-symbols-outlined text-[18px]">videocam</span>
-                  <span>{language === 'es' ? 'Unirse' : 'Join'}</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Section 2: Job Invitations List (Figma Node 1399:29003) */}
         <div className="space-y-[16px]">
           <div className="flex items-center justify-between w-full" data-node-id="1399:29003">
