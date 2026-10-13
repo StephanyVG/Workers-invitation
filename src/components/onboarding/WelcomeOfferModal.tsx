@@ -30,11 +30,11 @@ export const WelcomeOfferModal: React.FC = () => {
     e.stopPropagation();
     setIsAnimatingOut(true);
 
-    // Close Modal 2 and navigate to Job Details screen (Node 631:28603)
+    // Close Modal 2 and navigate directly to Job Offer Detail screen (signing)
     setTimeout(() => {
       setShowWelcomeModal(false);
       updateWorker({ appliedJobId: '1' });
-      setCurrentTab('job_details');
+      setCurrentTab('job_offer_detail');
     }, 200);
   };
 
@@ -150,14 +150,14 @@ export const WelcomeOfferModal: React.FC = () => {
               <div className="space-y-2" data-node-id="341:32256">
                 {/* Title (341:32257) - 28px semibold */}
                 <h2 className="font-['DM_Sans',sans-serif] font-semibold text-[28px] leading-[36px] text-[#0038d0] tracking-[-0.112px]" data-node-id="341:32257">
-                  {language === 'es' ? '¡Tienes ofertas de trabajo!' : 'You have job invitations!'}
+                  {language === 'es' ? '¡Tienes una oferta de trabajo!' : 'You have a job offer!'}
                 </h2>
 
                 {/* Subtitle Text (341:32258 / 341:32259) - 16px content */}
                 <p className="font-['Inter',sans-serif] font-normal text-[16px] leading-[22px] text-[#0a0a0a] tracking-[-0.032px]" data-node-id="341:32259">
                   {language === 'es'
-                    ? 'Mira el trabajo y decide si lo quieres.'
-                    : 'See the job and decide if you want it.'}
+                    ? '¡Buenas noticias! Tienes una oferta de trabajo de Granja Sunnydale Orchards. Toca abajo para verla y firmarla.'
+                    : 'Great news! You have a job offer from Sunnydale Orchards Farm. Tap below to see and sign it.'}
                 </p>
               </div>
 
@@ -167,7 +167,7 @@ export const WelcomeOfferModal: React.FC = () => {
                 className="w-full h-[44px] min-h-[44px] px-5 py-[10px] bg-[#0038d0] active:scale-[0.98] text-white rounded-full font-['Inter',sans-serif] font-semibold text-[16px] leading-[22px] shadow-md flex items-center justify-center transition-all duration-150 cursor-pointer"
                 data-node-id="341:32262"
               >
-                <span>{language === 'es' ? 'Ver trabajo' : 'View Job'}</span>
+                <span>{language === 'es' ? 'Ver oferta de trabajo' : 'View Job Offer'}</span>
               </button>
             </div>
           </div>

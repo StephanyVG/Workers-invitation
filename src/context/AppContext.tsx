@@ -62,59 +62,56 @@ export interface FinalQuestionsData {
 
 export const INITIAL_FINAL_QUESTIONS: FinalQuestionsData = {
   social: {
-    militaryServed: 'yes',
-    militaryCountry: 'USA',
-    militaryBranch: 'Branch of service',
-    militaryRank: 'Rank/Position',
-    militarySpecialty: 'Military Speciality',
-    militaryFromDate: 'MM/YYYY',
-    militaryToDate: 'MM/YYYY',
-    traveledCountries: 'yes',
-    visitedCountries: [
-      { id: 1, country: 'USA' },
-      { id: 2, country: 'Panamá' },
-    ],
-    clanMember: 'no',
-    belongedGroups: 'no',
-    weaponsTraining: 'no',
-    rebelGroup: 'no',
+    militaryServed: null,
+    militaryCountry: '',
+    militaryBranch: '',
+    militaryRank: '',
+    militarySpecialty: '',
+    militaryFromDate: '',
+    militaryToDate: '',
+    traveledCountries: null,
+    visitedCountries: [],
+    clanMember: null,
+    belongedGroups: null,
+    weaponsTraining: null,
+    rebelGroup: null,
   },
   health: {
-    contagiousDisease: 'no',
-    dangerousIllness: 'no',
-    drugAddiction: 'no',
+    contagiousDisease: null,
+    dangerousIllness: null,
+    drugAddiction: null,
   },
   criminal: {
-    q1: 'no',
-    q2: 'no',
-    q3: 'no',
-    q4: 'no',
-    q5: 'no',
-    q6: 'no',
-    q7: 'no',
+    q1: null,
+    q2: null,
+    q3: null,
+    q4: null,
+    q5: null,
+    q6: null,
+    q7: null,
   },
   security: {
-    q1: 'no',
-    q2: 'no',
-    q3: 'no',
-    q4: 'no',
-    q5: 'no',
+    q1: null,
+    q2: null,
+    q3: null,
+    q4: null,
+    q5: null,
   },
   humanRights: {
-    q1: 'no',
-    q2: 'no',
-    q3: 'no',
-    q4: 'no',
-    q5: 'no',
+    q1: null,
+    q2: null,
+    q3: null,
+    q4: null,
+    q5: null,
   },
   immigration: {
-    q1: 'no',
-    q2: 'no',
-    q3: 'no',
-    q4: 'no',
-    q5: 'no',
-    q6: 'no',
-    q7: 'no',
+    q1: null,
+    q2: null,
+    q3: null,
+    q4: null,
+    q5: null,
+    q6: null,
+    q7: null,
   },
 };
 
@@ -528,10 +525,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return 'phone_lockscreen';
   });
 
-  // Clear any previously persisted tab so reopening local always shows the lockscreen/SMS flow
+  // Clear any previously persisted tab and screening questions so reopening local always starts fresh
   useEffect(() => {
     try {
       localStorage.removeItem('zipmi_current_tab');
+      localStorage.removeItem('zipmi_final_questions');
     } catch {
       // ignore
     }
