@@ -2,8 +2,15 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const WelcomeOfferModal: React.FC = () => {
-  const { language, setCurrentTab, setShowWelcomeModal, worker } = useApp();
-  const [modalStep, setModalStep] = useState<1 | 2>(1); // 1 = Node 631:28510 (OK modal), 2 = Node 631:28539 (View job modal)
+  const {
+    language,
+    setCurrentTab,
+    setShowWelcomeModal,
+    welcomeModalStep,
+    dismissWelcomeModalAndQueueOffer,
+    worker,
+    updateWorker,
+  } = useApp();
   const [isAnimatingOut, setIsAnimatingOut] = useState<boolean>(false);
 
   const workerFirstName = worker?.fullName?.split(' ')[0] || 'Guadalupe';
@@ -12,10 +19,10 @@ export const WelcomeOfferModal: React.FC = () => {
     e.stopPropagation();
     setIsAnimatingOut(true);
 
-    // Transition immediately from Modal 1 (631:28510) to Modal 2 (631:28539)
+    // Close Modal 1 to let worker enter Home, wait 2 seconds, then trigger the Job Offer Modal (Step 2)
     setTimeout(() => {
-      setModalStep(2);
       setIsAnimatingOut(false);
+      dismissWelcomeModalAndQueueOffer();
     }, 150);
   };
 
@@ -26,6 +33,7 @@ export const WelcomeOfferModal: React.FC = () => {
     // Close Modal 2 and navigate to Job Details screen (Node 631:28603)
     setTimeout(() => {
       setShowWelcomeModal(false);
+      updateWorker({ appliedJobId: '1' });
       setCurrentTab('job_details');
     }, 200);
   };
@@ -47,7 +55,7 @@ export const WelcomeOfferModal: React.FC = () => {
         isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
       onClick={() => handleDismiss()}
-      data-node-id={modalStep === 1 ? '631:28510' : '631:28539'}
+      data-node-id={welcomeModalStep === 1 ? '631:28510' : '631:28539'}
     >
       {/* Modal Container (Figma nodes 631:28510 / 631:28539 - Width 334px) */}
       <div
@@ -57,7 +65,7 @@ export const WelcomeOfferModal: React.FC = () => {
             : 'translate-y-4 scale-95 opacity-0'
         }`}
         onClick={(e) => e.stopPropagation()}
-        data-node-id={modalStep === 1 ? '631:28510' : '631:28539'}
+        data-node-id={welcomeModalStep === 1 ? '631:28510' : '631:28539'}
       >
         {/* Top Close Button (container btn 542:44899) */}
         <button
@@ -68,7 +76,7 @@ export const WelcomeOfferModal: React.FC = () => {
           <span className="material-symbols-outlined text-[20px]">close</span>
         </button>
 
-        {modalStep === 1 ? (
+        {welcomeModalStep === 1 ? (
           /* Step 1: Figma Node 631:28510 - Confirmation Modal with OK button */
           <div className="w-full flex flex-col items-center" data-node-id="631:28510">
             {/* Top Image Frame (393:30993) - Height 209px with modal.svg */}

@@ -2,12 +2,13 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const Step25FinalReviewScreen: React.FC = () => {
-  const { language, setCurrentTab, setShowWelcomeModal, updateWorker } = useApp();
+  const { language, setCurrentTab, setShowWelcomeModal, setWelcomeModalStep, updateWorker } = useApp();
 
   const handleAllSet = () => {
     updateWorker({ appliedJobId: '1' });
-    setShowWelcomeModal(false);
-    setCurrentTab('job_details');
+    setWelcomeModalStep(1);
+    setShowWelcomeModal(true);
+    setCurrentTab('home');
   };
 
   const handleEditPart = (part: 1 | 2 | 3 | 4) => {

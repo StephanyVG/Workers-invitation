@@ -402,6 +402,9 @@ interface AppContextType {
   setCurrentTab: (tab: AppTab) => void;
   showWelcomeModal: boolean;
   setShowWelcomeModal: (show: boolean) => void;
+  welcomeModalStep: 1 | 2;
+  setWelcomeModalStep: (step: 1 | 2) => void;
+  dismissWelcomeModalAndQueueOffer: () => void;
   showCodeOfferModal: boolean;
   setShowCodeOfferModal: (show: boolean) => void;
   showInterviewCompletedModal: boolean;
@@ -535,6 +538,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, []);
 
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
+  const [welcomeModalStep, setWelcomeModalStep] = useState<1 | 2>(1);
+
+  const dismissWelcomeModalAndQueueOffer = () => {
+    setShowWelcomeModal(false);
+    setTimeout(() => {
+      setWelcomeModalStep(2);
+      setShowWelcomeModal(true);
+    }, 2000);
+  };
+
   const [showCodeOfferModal, setShowCodeOfferModal] = useState<boolean>(false);
   const [showInterviewCompletedModal, setShowInterviewCompletedModal] = useState<boolean>(false);
 
@@ -1011,6 +1024,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setEditingFinalQuestionFromReview(false);
     setCurrentTab('phone_lockscreen');
     setShowWelcomeModal(false);
+    setWelcomeModalStep(1);
     setShowCodeOfferModal(false);
     setSelectedJobForDetail(null);
     resetEmployerChanges();
@@ -1054,6 +1068,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentTab,
         showWelcomeModal,
         setShowWelcomeModal,
+        welcomeModalStep,
+        setWelcomeModalStep,
+        dismissWelcomeModalAndQueueOffer,
         showCodeOfferModal,
         setShowCodeOfferModal,
         showInterviewCompletedModal,

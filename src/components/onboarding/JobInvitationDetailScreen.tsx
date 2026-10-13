@@ -24,7 +24,7 @@ export const JobInvitationDetailScreen: React.FC = () => {
     if (onboardingPath === 'invite') {
       setCurrentTab('terms_service');
     } else {
-      setCurrentTab('step25_final_review');
+      setCurrentTab('home');
     }
   };
 
