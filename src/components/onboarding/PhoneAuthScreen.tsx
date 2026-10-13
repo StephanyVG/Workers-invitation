@@ -33,7 +33,7 @@ export const PhoneAuthScreen: React.FC = () => {
         {/* Header Back Button */}
         <div className="w-full flex items-center justify-start mb-[32px]">
           <button
-            onClick={() => setCurrentTab('invite_choice')}
+            onClick={() => setCurrentTab('language')}
             className="bg-white border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-xs active:scale-90 transition-all duration-150 cursor-pointer"
             aria-label="Regresar"
           >

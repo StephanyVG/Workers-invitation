@@ -2,14 +2,15 @@ import React from 'react';
 import { useApp, AppLanguage } from '../../context/AppContext';
 
 export const LanguageSelectScreen: React.FC = () => {
-  const { language, setLanguage, setCurrentTab } = useApp();
+  const { language, setLanguage, setCurrentTab, setOnboardingPath } = useApp();
 
   const handleSelectLanguage = (lang: AppLanguage) => {
     setLanguage(lang);
   };
 
   const handleContinue = () => {
-    setCurrentTab('welcome');
+    setOnboardingPath('search');
+    setCurrentTab('phone_auth');
   };
 
   return (

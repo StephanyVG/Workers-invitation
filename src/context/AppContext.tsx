@@ -517,21 +517,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : INITIAL_DOCUMENTS;
   });
 
-  // Preserve current screen across browser refreshes
+  // Always start at phone_lockscreen on local launch so the SMS invitation flow is always shown
   const [currentTab, setCurrentTab] = useState<AppTab>(() => {
     const params = new URLSearchParams(window.location.search);
     const tab = params.get('tab') as AppTab;
     if (tab) return tab;
-    const saved = localStorage.getItem('zipmi_current_tab') as AppTab;
-    if (saved && saved.startsWith('visa_employer_change')) {
-      return 'home';
-    }
-    return saved || 'phone_lockscreen';
+    return 'phone_lockscreen';
   });
 
+  // Clear any previously persisted tab so reopening local always shows the lockscreen/SMS flow
   useEffect(() => {
-    localStorage.setItem('zipmi_current_tab', currentTab);
-  }, [currentTab]);
+    try {
+      localStorage.removeItem('zipmi_current_tab');
+    } catch {
+      // ignore
+    }
+  }, []);
 
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
   const [showCodeOfferModal, setShowCodeOfferModal] = useState<boolean>(false);
@@ -846,10 +847,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     localStorage.setItem('zipmi_worker_docs', JSON.stringify(documents));
   }, [documents]);
-
-  useEffect(() => {
-    localStorage.setItem('zipmi_current_tab', currentTab);
-  }, [currentTab]);
 
   useEffect(() => {
     localStorage.setItem('zipmi_show_welcome_modal', String(showWelcomeModal));
