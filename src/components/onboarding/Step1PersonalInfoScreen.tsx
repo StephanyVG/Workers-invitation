@@ -9,7 +9,7 @@ export const Step1PersonalInfoScreen: React.FC = () => {
   };
 
   const handleBack = () => {
-    setCurrentTab('great_news_h2');
+    setCurrentTab('terms_service');
   };
 
   return (

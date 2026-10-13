@@ -25,8 +25,10 @@ export const TermsOfServiceScreen: React.FC = () => {
       setShowCodeOfferModal(false);
       setCurrentTab('job_details');
     } else {
-      // Path 2 ("Busco trabajo"): Proceed to eligibility bot and profile wizard steps
-      setCurrentTab('h2_intro');
+      // Path 2 ("Busco trabajo"): Proceed directly to Part 1 of the profile
+      setShowWelcomeModal(false);
+      setShowCodeOfferModal(false);
+      setCurrentTab('step1_personal_intro');
     }
   };
 

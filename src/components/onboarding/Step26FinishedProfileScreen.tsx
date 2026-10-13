@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 
 export const Step26FinishedProfileScreen: React.FC = () => {
-  const { language, setCurrentTab, setShowWelcomeModal } = useApp();
+  const { language, setCurrentTab, setShowWelcomeModal, updateWorker } = useApp();
   const [showBottomSheet, setShowBottomSheet] = useState<boolean>(false);
 
   const handleBack = () => {
@@ -11,8 +11,9 @@ export const Step26FinishedProfileScreen: React.FC = () => {
 
   const handleGotIt = () => {
     setShowBottomSheet(false);
-    setShowWelcomeModal(true);
-    setCurrentTab('home');
+    setShowWelcomeModal(false);
+    updateWorker({ appliedJobId: '1' });
+    setCurrentTab('job_details');
   };
 
   return (
