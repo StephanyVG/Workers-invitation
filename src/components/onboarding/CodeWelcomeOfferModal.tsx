@@ -22,8 +22,8 @@ export const CodeWelcomeOfferModal: React.FC = () => {
       updateWorker({
         appliedJobId: '1'
       });
-      // Navigate directly to the Job Offer screen
-      setCurrentTab('job_offer_detail');
+      // Navigate to the Job Details screen with requirements
+      setCurrentTab('job_details');
     }, 180);
   };
 

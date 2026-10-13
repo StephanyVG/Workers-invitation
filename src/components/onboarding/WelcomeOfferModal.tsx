@@ -14,11 +14,11 @@ export const WelcomeOfferModal: React.FC = () => {
     e.stopPropagation();
     setIsAnimatingOut(true);
 
-    // Close Modal and navigate directly to Job Offer Detail screen (signing)
+    // Close Modal and navigate to Job Details screen with requirements
     setTimeout(() => {
       setShowWelcomeModal(false);
       updateWorker({ appliedJobId: '1' });
-      setCurrentTab('job_offer_detail');
+      setCurrentTab('job_details');
     }, 200);
   };
 

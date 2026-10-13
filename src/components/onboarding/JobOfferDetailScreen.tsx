@@ -61,7 +61,7 @@ export const JobOfferDetailScreen: React.FC = () => {
       >
         {/* Circular Back Icon Button */}
         <button
-          onClick={() => setCurrentTab('home')}
+          onClick={() => setCurrentTab('job_details')}
           className="bg-white border border-[#e5e5e5] rounded-full size-[44px] flex items-center justify-center text-[#191c1b] shadow-2xs active:scale-95 transition-all cursor-pointer shrink-0"
           aria-label={language === 'es' ? 'Regresar' : 'Back'}
           data-node-id="I1082:16843;3529:1306"

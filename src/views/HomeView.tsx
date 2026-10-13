@@ -1153,90 +1153,12 @@ export const HomeView: React.FC = () => {
               {language === 'es' ? 'Invitaciones de trabajo' : 'Job Invitations'}
             </h2>
             <span className="font-normal text-[12px] text-[#404040] tracking-[-0.048px]">
-              {language === 'es' ? 'Mostrando 2 invitaciones' : 'Showing 2 invitations'}
+              {language === 'es' ? 'Mostrando 1 invitación' : 'Showing 1 invitation'}
             </span>
           </div>
 
           <div className="space-y-6 w-full">
-            {/* Card 1: Interview Pending (Figma Node 631:28439) */}
-            <div
-              className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm flex flex-col text-left font-['Inter',sans-serif]"
-              data-node-id="631:28439"
-            >
-              {/* Header Neutral Grey Badge (Figma Node 631:28440) */}
-              <div className="bg-[#d4d4d4] py-2 px-4 text-center" data-node-id="631:28440">
-                <span className="font-semibold text-[16px] leading-[22px] text-[#404040]" data-node-id="631:28441">
-                  {language === 'es' ? 'Entrevista Pendiente' : 'Interview Pending'}
-                </span>
-              </div>
-
-              {/* Card Body */}
-              <div className="p-4 space-y-4" data-node-id="631:28442">
-                {/* Cover Image (Figma Node 631:28444) */}
-                <div className="w-full h-[68px] rounded-[8px] overflow-hidden relative" data-node-id="631:28444">
-                  <img
-                    src="/apples_orchard.png"
-                    alt="Sunnydale Orchards farm"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800&auto=format&fit=crop&q=80";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-black/15" />
-                </div>
-
-                {/* Job Title & Farm */}
-                <div className="space-y-1" data-node-id="1008:2681">
-                  <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#262626] tracking-[-0.072px]">
-                    {language === 'es'
-                      ? 'Coordinador de Manejo Integrado de Plagas y Conservación de Polinizadores'
-                      : 'Integrated Pest Management and Pollinator Conservation Coordinator'}
-                  </h3>
-                  <p className="font-normal text-[14px] leading-[18px] text-[#525252]">
-                    {language === 'es' ? 'Granja Sunnydale Orchards' : 'Sunnydale Orchards Farm'}
-                  </p>
-                </div>
-
-                {/* Divider Line */}
-                <div className="border-t border-[#e5e5e5]" data-node-id="1008:2686" />
-
-                {/* 3 Columns Job Summary */}
-                <div className="flex items-start justify-between text-left" data-node-id="1008:2687">
-                  <div className="flex-1 space-y-1">
-                    <p className="font-normal text-[14px] text-[#525252]">
-                      {language === 'es' ? 'Período' : 'Period'}
-                    </p>
-                    <p className="font-semibold text-[14px] text-[#171717]">
-                      {language === 'es' ? '1 años' : '1 years'}
-                    </p>
-                  </div>
-
-                  <div className="flex-1 space-y-1 text-center">
-                    <p className="font-normal text-[14px] text-[#525252]">
-                      {language === 'es' ? 'Tarifa pago' : 'Pay rate'}
-                    </p>
-                    <p className="font-semibold text-[14px] text-[#171717]">
-                      12 USD
-                    </p>
-                  </div>
-
-                  <div className="flex-1 space-y-1 text-right">
-                    <p className="font-normal text-[14px] text-[#525252]">
-                      {language === 'es' ? 'Ciudad, Estado' : 'City, State'}
-                    </p>
-                    <p className="font-semibold text-[14px] text-[#171717]">
-                      Texas
-                    </p>
-                  </div>
-                </div>
-
-                <p className="font-normal text-[12px] text-[#737373]">
-                  {language === 'es' ? 'Recibido hace 1 día' : 'Received 1 day ago'}
-                </p>
-              </div>
-            </div>
-
-            {/* Card 2: New Job Invitation (Figma Node 1004:5334) */}
+            {/* Card 1: Job Invitation (Figma Node 1004:5334) */}
             <div
               className="bg-white border border-[#e5e5e5] rounded-[24px] overflow-hidden shadow-sm flex flex-col text-left font-['Inter',sans-serif]"
               data-node-id="1004:5334"
@@ -1265,7 +1187,14 @@ export const HomeView: React.FC = () => {
 
                 {/* Job Title & Farm */}
                 <div className="space-y-2">
-                  <h3 className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#262626] tracking-[-0.072px]">
+                  <h3
+                    title={
+                      language === 'es'
+                        ? 'Coordinador de Manejo Integrado de Plagas y Conservación de Polinizadores'
+                        : 'Integrated Pest Management and Pollinator Conservation Coordinator'
+                    }
+                    className="font-['DM_Sans',sans-serif] font-semibold text-[18px] leading-[24px] text-[#262626] tracking-[-0.072px] truncate block w-full whitespace-nowrap overflow-hidden text-ellipsis"
+                  >
                     {language === 'es'
                       ? 'Coordinador de Manejo Integrado de Plagas y Conservación de Polinizadores'
                       : 'Integrated Pest Management and Pollinator Conservation Coordinator'}
